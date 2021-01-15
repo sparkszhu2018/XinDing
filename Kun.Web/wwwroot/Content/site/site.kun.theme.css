@@ -1,0 +1,7 @@
+﻿/*.s-TemplatedDialog .s-DataGrid {
+    height: 250px;
+}*/
+
+.s-InStockDialog .s-DataGrid {
+    height: 250px;
+}

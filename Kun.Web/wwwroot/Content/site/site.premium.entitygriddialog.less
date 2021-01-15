@@ -1,0 +1,75 @@
+.s-GridWithDialog .s-GridDialogPane {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    outline: 0;
+    overflow: hidden;
+    display: none;
+    border-left: 2px solid #999;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.s-GridWithDialog .panel-titlebar {
+    display: none;
+}
+
+.s-GridWithDialog.dialog-open .panel-titlebar {
+    display: block;
+}
+
+.s-GridWithDialog .dialog-button-separator {
+    display: none;
+}
+
+.s-GridWithDialog.dialog-open .dialog-button-separator {
+    display: block;
+}
+
+.s-GridWithDialog.dialog-open .s-GridDialogPane {
+    display: block;
+}
+
+.s-GridWithDialog.dialog-open .slick-pane-left {
+    width: 50% !important;
+}
+
+.slick-row.editing-item {
+    background-color: lightgoldenrodyellow;
+}
+
+@media(max-width: 767px) {
+    .s-GridWithDialog.dialog-open {
+        .slick-pane-left {
+            display: none !important;
+        }
+
+        .quick-filters-bar {
+            display: none;
+        }
+
+        .s-QuickSearchBar {
+            display: none;
+        }
+
+        .s-GridDialogPane {
+            width: 100% !important;
+            height: auto !important;
+            position: initial !important;
+            border-left: none;
+        }
+
+        .add-button, .column-picker-button, .refresh-button, .dialog-button-separator {
+            display: none !important;
+        }
+
+        .grid-title {
+            display: none;
+        }
+
+        .s-SlickPager {
+            display: none !important;
+        }
+    }
+}

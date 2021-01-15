@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Administration.Translation.EntityPlural");
+}
+
+<div id="PanelDiv"></div>
+
+@section Head {
+    @Html.Script("~/Scripts/vue.js")
+}
+
+<script type="text/javascript">
+    jQuery(function () {
+        new Kun.Administration.SergenPanel($('#PanelDiv'), {}).init();
+    });
+</script>

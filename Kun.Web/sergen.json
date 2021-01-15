@@ -1,0 +1,174 @@
+{
+  "RootNamespace": "Kun",
+  "ServerTypings": {
+    "Assemblies": [],
+    "LocalTexts": true
+  },
+  "Connections": [
+    {
+      "Key": "Kun",
+      "Tables": [
+        {
+          "Tablename": "dbo.Basic_Customer",
+          "Identifier": "Customer",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Lot",
+          "Identifier": "Lot",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Material",
+          "Identifier": "Material",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Material_Group",
+          "Identifier": "MaterialGroup",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Position",
+          "Identifier": "Position",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Supplier",
+          "Identifier": "Supplier",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Unit",
+          "Identifier": "Unit",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Vendor",
+          "Identifier": "Vendor",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_Warehouse",
+          "Identifier": "Warehouse",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.OPS_Maintenance",
+          "Identifier": "Maintenance",
+          "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.OPS_Maintenance_Manhours",
+          "Identifier": "MaintenanceManhours",
+          "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.OPS_Maintenance_Materials",
+          "Identifier": "MaintenanceMaterials",
+          "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.OPS_Maintenance_Type",
+          "Identifier": "MaintenanceType",
+          "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.OPS_Manhour_Price",
+          "Identifier": "ManhourPrice",
+          "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Sell_SaleOrder",
+          "Identifier": "SaleOrder",
+          "Module": "Sell",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Sell_SaleOrder_Item",
+          "Identifier": "SaleOrderItem",
+          "Module": "Sell",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_Data",
+          "Identifier": "StockData",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_InStock",
+          "Identifier": "InStock",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_InStock_Item",
+          "Identifier": "InStockItem",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_MoveRecord",
+          "Identifier": "MoveRecord",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Sys_DocumentCodeConfig",
+          "Identifier": "DocumentCodeConfig",
+          "Module": "Sys",
+          "PermissionKey": "*"
+        }
+      ]
+    }
+  ],
+  "BaseRowClasses": [
+    {
+      "ClassName": "Kun.Administration.Entities.LoggingRow",
+      "Fields": [
+        "InsertUserId",
+        "UpdateUserId",
+        "InsertDate",
+        "UpdateDate"
+      ]
+    },
+    {
+      "ClassName": "Kun.Administration.Entities.LoggingAllRow",
+      "Fields": [
+        "InsertUserId",
+        "UpdateUserId",
+        "InsertDate",
+        "UpdateDate",
+        "DeleteDate",
+        "DeleteUserId",
+        "IsActive"
+      ]
+    }
+  ],
+  "RemoveForeignFields": [
+    "InsertUserId",
+    "UpdateUserId",
+    "InsertDate",
+    "UpdateDate",
+    "DeleteDate",
+    "DeleteUserId",
+    "IsActive"
+  ],
+  "CustomGenerate": {},
+  "CustomSettings": {}
+}

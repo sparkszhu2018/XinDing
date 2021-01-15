@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = Texts.Site.EmailClient.PageTitle;
+}
+
+@section Head {
+    @Html.Script("~/Scripts/serenity/Serenity.Pro.EmailClient.js")
+}
+
+@if (Kun.Administration.Repositories.UserRepository.isPublicDemo)
+{
+<div class="alert alert-info alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p>
+        This is a full featured e-mail client (IMAP protocol) written using React and MailKit.
+    </p>
+    <p>
+        Your login information is stored in a secure encrypted cookie in your browser.
+    </p>
+    <p>
+        Please note that if you would like to try this with Gmail, you'll need to allow "less secure apps" in
+        your Gmail settings (temporarily, don't forget to turn it off after testing.). As our servers in NZ is not close
+        to your location, you may also get some security warnings from your mail provider during login.
+    </p>
+</div>
+}
+
+<div id="MailboxDiv">
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        ReactDOM.render(React.createElement(Serenity.EmailClient.MailboxView), document.getElementById('MailboxDiv'));
+    });
+</script>

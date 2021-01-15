@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Administration.DataAuditLog.EntityPlural");
+}
+
+@section ContentHeader {
+    <h1>@ViewData["Title"]<small></small></h1>
+}
+
+@if (Kun.Administration.Repositories.UserRepository.isPublicDemo)
+{
+<div class="alert alert-info alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <p>Kun provides a zero configuration data logging system that allows auditing changes made to an entity by simply adding a [DataAuditLog] attribute.
+    Make any change to an order and you'll see that its details are logged here.</p>    
+</div>
+}
+
+<div id="GridDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new Kun.Administration.DataAuditLogGrid($('#GridDiv'), {}).init();
+
+        Q.initFullHeightGridPage($('#GridDiv'));
+    });
+</script>

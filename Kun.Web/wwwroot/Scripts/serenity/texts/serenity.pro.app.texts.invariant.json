@@ -1,0 +1,7 @@
+﻿{
+  "Controls.IdleTimeout.WarningTitle": "Session Expiration Warning!",
+  "Controls.IdleTimeout.WarningMessage": "Your session is about to expire.",
+  "Controls.IdleTimeout.SignoutButton": "Signout",
+  "Controls.IdleTimeout.KeepAliveButton": "Stay Logged In",
+  "Controls.IdleTimeout.CountdownMessage": "You will be logged off in <span id='idle-timeout-seconds'></span>&nbsp;seconds due to inactivity."
+}

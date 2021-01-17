@@ -15,6 +15,12 @@
         WarehouseId?: string;
         PositionId?: string;
         Specification?: string;
+        BillNo?: string;
+        HeadStatus?: Sell.Enums.BillStatus;
+        MaterialCode?: string;
+        LotCode?: string;
+        WarehouseName?: string;
+        PositionName?: string;
     }
 
     export namespace SaleOrderItemRow {
@@ -42,7 +48,13 @@
             LotId = "LotId",
             WarehouseId = "WarehouseId",
             PositionId = "PositionId",
-            Specification = "Specification"
+            Specification = "Specification",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            MaterialCode = "MaterialCode",
+            LotCode = "LotCode",
+            WarehouseName = "WarehouseName",
+            PositionName = "PositionName"
         }
     }
 }

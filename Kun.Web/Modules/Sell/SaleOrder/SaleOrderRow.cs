@@ -1,13 +1,17 @@
 ﻿
 namespace Kun.Sell.Entities
 {
+    using Kun.Administration.Entities;
+    using Kun.Basic.Entities;
     using Serenity;
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Data.Mapping;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
+    using static Kun.Sell.Enums.SellEnums;
 
     [ConnectionKey("Kun"), Module("Sell"), TableName("[dbo].[Sell_SaleOrder]")]
     [DisplayName("销售订单"), InstanceName("销售订单")]
@@ -22,67 +26,104 @@ namespace Kun.Sell.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("Bill No"), Size(50), QuickSearch]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("Bill Type"), NotNull]
-        public Int32? BillType
+        [DisplayName("单据类型"), NotNull]
+        [DefaultValue(SaleOrderBillType.NormalSaleOrder)]
+        public SaleOrderBillType? BillType
         {
-            get { return Fields.BillType[this]; }
-            set { Fields.BillType[this] = value; }
+            get { return (SaleOrderBillType?)Fields.BillType[this]; }
+            set { Fields.BillType[this] = (Int32)value; }
         }
 
-        [DisplayName("Status"), NotNull]
-        public Int32? Status
+        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true)]
+        public BillStatus? Status
         {
-            get { return Fields.Status[this]; }
-            set { Fields.Status[this] = value; }
-        }
+            get { return (BillStatus?)Fields.Status[this]; }
+            set { Fields.Status[this] = (Int32)value; }
+        } 
 
-        [DisplayName("Date"), NotNull]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
             get { return Fields.Date[this]; }
             set { Fields.Date[this] = value; }
         }
 
-        [DisplayName("Customer Id"), NotNull]
+        [DisplayName("客户"), NotNull, LookupEditor(typeof(CustomerRow)),
+     ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName") ]
         public Guid? CustomerId
         {
             get { return Fields.CustomerId[this]; }
             set { Fields.CustomerId[this] = value; }
         }
+ 
+        [DisplayName("客户"), Expression("jCustomer.[Name]"), ReadOnly(true)]
+        public String CustomerName
+        {
+            get { return Fields.CustomerName[this]; }
+            set { Fields.CustomerName[this] = value; }
+        }
 
-        [DisplayName("Settle Customer Id"), NotNull]
+        [DisplayName("结算客户"), NotNull, LookupEditor(typeof(CustomerRow)),
+    ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jSettleCustomer"), TextualField("SettleCustomerName")]
         public Guid? SettleCustomerId
         {
             get { return Fields.SettleCustomerId[this]; }
             set { Fields.SettleCustomerId[this] = value; }
         }
 
-        [DisplayName("Note"), Size(500)]
+        [DisplayName("结算客户"), Expression("jSettleCustomer.[Name]"), ReadOnly(true)]
+        public String SettleCustomerName
+        {
+            get { return Fields.SettleCustomerName[this]; }
+            set { Fields.SettleCustomerName[this] = value; }
+        }
+
+        [DisplayName("备注"), Size(500)]
         public String Note
         {
             get { return Fields.Note[this]; }
             set { Fields.Note[this] = value; }
         }
 
-        [DisplayName("Approver Id")]
+        [DisplayName("审核人"), LookupEditor(typeof(UserRow)), ReadOnly(true),
+               ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jApprover"), TextualField("ApproverName")
+             ]
         public Int64? ApproverId
         {
             get { return Fields.ApproverId[this]; }
             set { Fields.ApproverId[this] = value; }
         }
 
-        [DisplayName("Approver Date")]
+        [DisplayName("审核人"), Expression("jApprover.[DisplayName]"), ReadOnly(true)]
+        public String ApproverName
+        {
+            get { return Fields.ApproverName[this]; }
+            set { Fields.ApproverName[this] = value; }
+        }
+
+        [DisplayName("审核日期"), ReadOnly(true)]
+        [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd HH:mm")]
         public DateTime? ApproverDate
         {
             get { return Fields.ApproverDate[this]; }
             set { Fields.ApproverDate[this] = value; }
+        }
+
+
+        [DisplayName("销售明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
+            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")] 
+        public List<SaleOrderItemRow> Materials
+        {
+            get { return Fields.Materials[this]; }
+            set { Fields.Materials[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -114,6 +155,16 @@ namespace Kun.Sell.Entities
             public StringField Note;
             public Int64Field ApproverId;
             public DateTimeField ApproverDate;
+            public StringField CustomerName;
+            public StringField SettleCustomerName;
+            public StringField ApproverName;
+            public RowListField<SaleOrderItemRow> Materials;
+
+
+
+
+
+
         }
     }
 }

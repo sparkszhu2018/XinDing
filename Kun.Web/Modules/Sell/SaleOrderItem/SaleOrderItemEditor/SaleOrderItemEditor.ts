@@ -1,24 +1,20 @@
 ﻿/// <reference path="../../../Common/Helpers/GridEditorBase.ts" />
 
-namespace Kun.Ops {
+namespace Kun.Sell {
 
     @Serenity.Decorators.registerClass()
-    export class MaintenanceMaterialsEditor extends Common.GridEditorBase<MaintenanceMaterialsRow> {
-        protected getColumnsKey() { return "Ops.MaintenanceMaterials"; } 
-        protected getDialogType() { return MaintenanceMaterialsDialog; }
-        protected getLocalTextPrefix() { return MaintenanceMaterialsRow.localTextPrefix; }
-         
+    export class SaleOrderItemEditor extends Common.GridEditorBase<SaleOrderItemRow> {
+        protected getColumnsKey() { return "Sell.SaleOrderItem"; } 
+        protected getDialogType() { return SaleOrderItemDialog; }
+        protected getLocalTextPrefix() { return SaleOrderItemRow.localTextPrefix; }
 
         constructor(container: JQuery) {
-            super(container);
-             
+            super(container); 
         } 
 
         validateEntity(row, id) { 
-            var material = Basic.MaterialRow.getLookup().itemById[row.MaterialId];
-            //row.UnitName = Basic.UnitRow.getLookup().itemById[row.UnitId].Name;
-            row.MaterialCode = material.Code;
-            //row.MaterialName = material.Name;
+            var material = Basic.MaterialRow.getLookup().itemById[row.MaterialId]; 
+            row.MaterialCode = material.Code; 
             if (!Q.isEmptyOrNull(row.LotId)) {
                 row.LotCode = Basic.LotRow.getLookup().itemById[row.LotId].Code;
             }
@@ -51,7 +47,7 @@ namespace Kun.Ops {
                             i = this.view.getItems()[this.view.getLength() - 1].Serial + 10;
                         }
                         for (var sel of selected) {
-                            var item = <MaintenanceMaterialsRow>{
+                            var item = <SaleOrderItemRow>{
                                 Serial: i,
                                 StockDataId: sel.Id,
                                 MaterialId: sel.MaterialId,
@@ -80,38 +76,7 @@ namespace Kun.Ops {
                     };
                     dlg.dialogOpen();
                 }
-            });
-            buttons.push({
-                title: "",
-                icon: "fa-paperclip",
-                onClick: () => {
-                    var i = 0;
-                    if (this.view.getLength() == 0) {
-                        i = 10;
-                    } else {
-                        i = this.view.getItems()[this.view.getLength() - 1].Serial + 10;
-                    } 
-                    var item = <MaintenanceMaterialsRow>{
-                        Serial: i,
-                        StockDataId: null,
-                        MaterialId: 'd0a674ec-551c-449a-8eb7-57a6edcf26e0',
-                        MaterialName: '',
-                        UnitId: 'b18339d0-ed34-4fdc-88eb-5e16a8b42a2b',
-                        UnitName: '个',
-                        Qty: 1,
-                        SalePrice: 0,
-                        SaleAmount: 0, 
-                        MaterialCode: '1000000', 
-                    };
-                    var id = this.getNextId();
-                    item[this.getIdProperty()] = id;
-                    this.view.addItem(item);
-                    i = i + 10;
-
-                    return true;
-
-                }
-            });
+            }); 
             return buttons;
         }
          

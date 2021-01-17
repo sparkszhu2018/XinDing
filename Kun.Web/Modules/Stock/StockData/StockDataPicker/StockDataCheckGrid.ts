@@ -54,6 +54,8 @@ namespace Kun.Stock {
             var request = this.view.params as Serenity.ListRequest;
             request.Criteria = Serenity.Criteria.and(request.Criteria,
                 [[StockDataRow.Fields.AvailableQty], '>', 0]);
+            request.Criteria = Serenity.Criteria.and(request.Criteria,
+                [[StockDataRow.Fields.MaterialCode], '!=', '10000000']);
             return true;
         }
     }

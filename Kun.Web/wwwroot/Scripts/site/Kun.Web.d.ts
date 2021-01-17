@@ -1886,19 +1886,33 @@ declare namespace Kun {
         };
     }
 }
+declare namespace Kun.Sell.Enums {
+    enum BillStatus {
+        Edit = 10,
+        Reject = 20,
+        Commited = 30,
+        Audited = 50
+    }
+}
+declare namespace Kun.Sell.Enums {
+    enum SaleOrderBillType {
+        NormalSaleOrder = 1
+    }
+}
 declare namespace Kun.Sell {
 }
 declare namespace Kun.Sell {
     interface SaleOrderForm {
         BillNo: Serenity.StringEditor;
-        BillType: Serenity.IntegerEditor;
-        Status: Serenity.IntegerEditor;
+        BillType: Serenity.EnumEditor;
+        Status: Serenity.EnumEditor;
         Date: Serenity.DateEditor;
-        CustomerId: Serenity.StringEditor;
-        SettleCustomerId: Serenity.StringEditor;
-        Note: Serenity.StringEditor;
-        ApproverId: Serenity.StringEditor;
+        ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
+        CustomerId: Serenity.LookupEditor;
+        SettleCustomerId: Serenity.LookupEditor;
+        Note: Serenity.StringEditor;
+        Materials: SaleOrderItemEditor;
     }
     class SaleOrderForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -1910,20 +1924,18 @@ declare namespace Kun.Sell {
 }
 declare namespace Kun.Sell {
     interface SaleOrderItemForm {
-        HeadId: Serenity.StringEditor;
-        Serial: Serenity.IntegerEditor;
-        StockDataId: Serenity.StringEditor;
-        MaterialId: Serenity.StringEditor;
+        MaterialId: Serenity.LookupEditor;
         MaterialName: Serenity.StringEditor;
-        UnitId: Serenity.StringEditor;
+        Serial: Serenity.IntegerEditor;
+        UnitId: Serenity.LookupEditor;
         UnitName: Serenity.StringEditor;
         Qty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
-        LotId: Serenity.StringEditor;
-        WarehouseId: Serenity.StringEditor;
-        PositionId: Serenity.StringEditor;
         Specification: Serenity.StringEditor;
+        LotId: Serenity.LookupEditor;
+        WarehouseId: Serenity.LookupEditor;
+        PositionId: Serenity.LookupEditor;
     }
     class SaleOrderItemForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -1948,6 +1960,12 @@ declare namespace Kun.Sell {
         WarehouseId?: string;
         PositionId?: string;
         Specification?: string;
+        BillNo?: string;
+        HeadStatus?: Sell.Enums.BillStatus;
+        MaterialCode?: string;
+        LotCode?: string;
+        WarehouseName?: string;
+        PositionName?: string;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -1973,7 +1991,13 @@ declare namespace Kun.Sell {
             LotId = "LotId",
             WarehouseId = "WarehouseId",
             PositionId = "PositionId",
-            Specification = "Specification"
+            Specification = "Specification",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            MaterialCode = "MaterialCode",
+            LotCode = "LotCode",
+            WarehouseName = "WarehouseName",
+            PositionName = "PositionName"
         }
     }
 }
@@ -1998,14 +2022,18 @@ declare namespace Kun.Sell {
     interface SaleOrderRow {
         Id?: string;
         BillNo?: string;
-        BillType?: number;
-        Status?: number;
+        BillType?: Sell.Enums.SaleOrderBillType;
+        Status?: Sell.Enums.BillStatus;
         Date?: string;
         CustomerId?: string;
         SettleCustomerId?: string;
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        CustomerName?: string;
+        SettleCustomerName?: string;
+        ApproverName?: string;
+        Materials?: SaleOrderItemRow[];
     }
     namespace SaleOrderRow {
         const idProperty = "Id";
@@ -2026,19 +2054,29 @@ declare namespace Kun.Sell {
             SettleCustomerId = "SettleCustomerId",
             Note = "Note",
             ApproverId = "ApproverId",
-            ApproverDate = "ApproverDate"
+            ApproverDate = "ApproverDate",
+            CustomerName = "CustomerName",
+            SettleCustomerName = "SettleCustomerName",
+            ApproverName = "ApproverName",
+            Materials = "Materials"
         }
     }
 }
 declare namespace Kun.Sell {
     namespace SaleOrderService {
         const baseUrl = "Sell/SaleOrder";
+        function Commit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Audit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Reject(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Create(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<SaleOrderRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<SaleOrderRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
+            Commit = "Sell/SaleOrder/Commit",
+            Audit = "Sell/SaleOrder/Audit",
+            Reject = "Sell/SaleOrder/Reject",
             Create = "Sell/SaleOrder/Create",
             Update = "Sell/SaleOrder/Update",
             Delete = "Sell/SaleOrder/Delete",
@@ -3534,6 +3572,9 @@ declare namespace Kun.Sell {
         protected getInsertPermission(): string;
         protected getUpdatePermission(): string;
         protected form: SaleOrderForm;
+        constructor();
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected updateInterface(): void;
     }
 }
 declare namespace Kun.Sell {
@@ -3545,19 +3586,16 @@ declare namespace Kun.Sell {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Sell {
-    class SaleOrderItemDialog extends Serenity.EntityDialog<SaleOrderItemRow, any> {
+    class SaleOrderItemDialog extends Common.GridEditorDialog<SaleOrderItemRow> {
         protected getFormKey(): string;
-        protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected getDeletePermission(): string;
-        protected getInsertPermission(): string;
-        protected getUpdatePermission(): string;
         protected form: SaleOrderItemForm;
+        constructor();
+        protected save(): boolean;
     }
 }
 declare namespace Kun.Sell {
@@ -3733,5 +3771,15 @@ declare namespace Kun.Sys {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Sell {
+    class SaleOrderItemEditor extends Common.GridEditorBase<SaleOrderItemRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof SaleOrderItemDialog;
+        protected getLocalTextPrefix(): string;
+        constructor(container: JQuery);
+        validateEntity(row: any, id: any): boolean;
+        protected getButtons(): Serenity.ToolButton[];
     }
 }

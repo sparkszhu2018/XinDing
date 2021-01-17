@@ -26,7 +26,7 @@ namespace Kun.Ops.Enums
         [EnumKey("OpsEnums.MaintenanceBillType")]
         public enum MaintenanceBillType
         {
-            [Description("一般维保单")]
+            [Description("普通维保单")]
             NormalMaintenance = 1
         }
 

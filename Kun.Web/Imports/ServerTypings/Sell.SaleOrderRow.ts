@@ -2,14 +2,18 @@
     export interface SaleOrderRow {
         Id?: string;
         BillNo?: string;
-        BillType?: number;
-        Status?: number;
+        BillType?: Sell.Enums.SaleOrderBillType;
+        Status?: Sell.Enums.BillStatus;
         Date?: string;
         CustomerId?: string;
         SettleCustomerId?: string;
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        CustomerName?: string;
+        SettleCustomerName?: string;
+        ApproverName?: string;
+        Materials?: SaleOrderItemRow[];
     }
 
     export namespace SaleOrderRow {
@@ -32,7 +36,11 @@
             SettleCustomerId = "SettleCustomerId",
             Note = "Note",
             ApproverId = "ApproverId",
-            ApproverDate = "ApproverDate"
+            ApproverDate = "ApproverDate",
+            CustomerName = "CustomerName",
+            SettleCustomerName = "SettleCustomerName",
+            ApproverName = "ApproverName",
+            Materials = "Materials"
         }
     }
 }

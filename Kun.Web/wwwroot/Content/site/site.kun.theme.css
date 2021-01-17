@@ -5,3 +5,9 @@
 .s-InStockDialog .s-DataGrid {
     height: 250px;
 }
+
+
+
+.s-Sell-SaleOrderDialog .s-DataGrid {
+    height: 300px;
+}

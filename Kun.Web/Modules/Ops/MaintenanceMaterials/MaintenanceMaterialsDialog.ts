@@ -14,6 +14,17 @@ namespace Kun.Ops {
         //protected getUpdatePermission() { return MaintenanceMaterialsRow.updatePermission; }
 
         protected form = new MaintenanceMaterialsForm(this.idPrefix);
+        private _head: MaintenanceRow;
+        get Head() { return this._head; }
+
+        set Head(value: MaintenanceRow) {
+            this._head = value;
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+                this.toolbar.findButton('save-and-close-button').hide();
+                this.toolbar.findButton('apply-changes-button').hide();
+                this.toolbar.findButton('delete-button').hide();
+            }
+        } 
 
         constructor() {
             super();
@@ -27,6 +38,24 @@ namespace Kun.Ops {
                     this.form.SaleAmount.value = this.form.Qty.value * this.form.SalePrice.value;
                 }
             });
+        }
+
+        protected updateInterface() {
+            super.updateInterface();
+            if (this.entity.Id != null) {
+                if (this.entity.HeadStatus == Enums.BillStatus.Edit || this.entity.HeadStatus == Enums.BillStatus.Reject) {
+                    this.toolbar.findButton('save-and-close-button').show();
+                    this.toolbar.findButton('apply-changes-button').show();
+                    this.toolbar.findButton('delete-button').show();
+                }
+                else {
+                    Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
+                    this.toolbar.findButton('save-and-close-button').hide();
+                    this.toolbar.findButton('apply-changes-button').hide();
+                    this.toolbar.findButton('delete-button').hide();
+
+                }
+            }
         }
 
         protected save() {

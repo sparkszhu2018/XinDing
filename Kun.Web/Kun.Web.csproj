@@ -12,6 +12,7 @@
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
     <None Remove="Modules\AdvancedSamples\Forms\EntityGridDialog\EntityGridDialog.ts" />
     <None Remove="Modules\Sell\SaleOrderItem\SaleOrderItemEditor\SaleOrderItemEditor.ts" />
+    <None Remove="Modules\Stock\InStockItem\InStockItemEditor\InStockItemEditorDialog.ts" />
     <TypeScriptCompile Remove="Modules\Basic\Material\MaterialImportDialog.ts" />
     <TypeScriptCompile Remove="Modules\Common\Scripts\DefaultNotifyOptions.ts" />
     <TypeScriptCompile Remove="Modules\Stock\StockData\StockDataPicker\StockDataCheckGrid.ts" />

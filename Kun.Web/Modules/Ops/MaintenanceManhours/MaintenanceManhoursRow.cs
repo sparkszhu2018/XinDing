@@ -8,6 +8,7 @@ namespace Kun.Ops.Entities
     using System;
     using System.ComponentModel;
     using System.IO;
+    using static Kun.Ops.Enums.OpsEnums;
 
     [ConnectionKey("Kun"), Module("Ops"), TableName("[dbo].[OPS_Maintenance_Manhours]")]
     [DisplayName("Maintenance Manhours"), InstanceName("Maintenance Manhours")]
@@ -22,11 +23,25 @@ namespace Kun.Ops.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("Head Id"), NotNull]
+        [DisplayName("Head Id"), NotNull, ForeignKey("[dbo].[OPS_Maintenance]", "Id"), LeftJoin("jHead"), Updatable(false)]
         public Guid? HeadId
         {
             get { return Fields.HeadId[this]; }
             set { Fields.HeadId[this] = value; }
+        }
+
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        public String BillNo
+        {
+            get { return Fields.BillNo[this]; }
+            set { Fields.BillNo[this] = value; }
+        }
+
+        [DisplayName("状态"), Expression("jHead.[Status]")]
+        public BillStatus? HeadStatus
+        {
+            get { return (BillStatus?)Fields.HeadStatus[this]; }
+            set { Fields.HeadStatus[this] = (Int32)value; }
         }
 
         [DisplayName("行号"), NotNull]
@@ -108,7 +123,9 @@ namespace Kun.Ops.Entities
             public StringField Note;
             public StringField ManhourName;
 
-            
+            public StringField BillNo;
+            public Int32Field HeadStatus;
+
         }
     }
 }

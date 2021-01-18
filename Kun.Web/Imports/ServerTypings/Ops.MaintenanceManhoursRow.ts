@@ -9,6 +9,8 @@
         Amount?: number;
         Note?: string;
         ManhourName?: string;
+        BillNo?: string;
+        HeadStatus?: Ops.Enums.BillStatus;
     }
 
     export namespace MaintenanceManhoursRow {
@@ -30,7 +32,9 @@
             Price = "Price",
             Amount = "Amount",
             Note = "Note",
-            ManhourName = "ManhourName"
+            ManhourName = "ManhourName",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus"
         }
     }
 }

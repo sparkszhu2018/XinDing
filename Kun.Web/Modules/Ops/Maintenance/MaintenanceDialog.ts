@@ -17,6 +17,7 @@ namespace Kun.Ops {
 
         constructor() {
             super();
+
             this.form.ChangeDevice.change(e => {
                 if (this.form.ChangeDevice.value == true) {
                     this.byId('Materials').parent().css({
@@ -33,7 +34,15 @@ namespace Kun.Ops {
                 if (Q.isEmptyOrNull(this.form.SettleCustomerId.value)) {
                     this.form.SettleCustomerId.value  = this.form.ReportCustomerId.value;
                 } 
-            });
+            }); 
+
+        }
+
+        protected afterLoadEntity() {
+            super.afterLoadEntity();
+             
+            this.form.Manhours.Head = this.entity;
+            this.form.Materials.Head = this.entity;
         }
 
         protected getToolbarButtons() {
@@ -44,6 +53,7 @@ namespace Kun.Ops {
                 cssClass: "submit-button",
                 onClick: () => {
                     this.save((r) => {
+                        this.entityId = r.EntityId;
                         if (!this.validateBeforeSave()) return;
                         Ops.MaintenanceService.Commit({
                             EntityId: this.entityId

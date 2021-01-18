@@ -8,6 +8,17 @@ namespace Kun.Sell {
         protected getDialogType() { return SaleOrderItemDialog; }
         protected getLocalTextPrefix() { return SaleOrderItemRow.localTextPrefix; }
 
+        private _head: SaleOrderRow;
+        get Head() { return this._head; }
+        set Head(value: SaleOrderRow) {
+            this._head = value; 
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+                this.toolbar.findButton('add-button').hide();
+            } else {
+                this.toolbar.findButton('add-button').show();
+            }
+        }
+
         constructor(container: JQuery) {
             super(container); 
         } 

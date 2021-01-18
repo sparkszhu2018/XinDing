@@ -8,6 +8,17 @@ namespace Kun.Ops {
         protected getDialogType() { return MaintenanceMaterialsDialog; }
         protected getLocalTextPrefix() { return MaintenanceMaterialsRow.localTextPrefix; }
          
+        private _head: MaintenanceRow;
+        get Head() { return this._head; }
+        set Head(value: MaintenanceRow) { 
+            this._head = value; 
+
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+                this.toolbar.findButton('add-button').hide();
+            } else {
+                this.toolbar.findButton('add-button').show();
+            }
+        }
 
         constructor(container: JQuery) {
             super(container);
@@ -29,7 +40,7 @@ namespace Kun.Ops {
                 row.PositionName = Basic.PositionRow.getLookup().itemById[row.PositionId].Name;
             }
             return true;
-        }
+        } 
 
         protected getButtons(): Serenity.ToolButton[] {
             var buttons = super.getButtons();
@@ -40,7 +51,7 @@ namespace Kun.Ops {
                 onClick: () => {
                     var dlg = new Stock.StockDataPickerDialog({
                         hideStockData: null
-                    });
+                    }); 
                     dlg.onSuccess = (selected) => {
                         // filter already existing stocks
                         //selected = selected.filter(x => !Q.any(this.view.getItems(), y => y.ProductID == x.ProductID));

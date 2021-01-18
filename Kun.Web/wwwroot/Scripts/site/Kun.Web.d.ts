@@ -1513,6 +1513,8 @@ declare namespace Kun.Ops {
         Amount?: number;
         Note?: string;
         ManhourName?: string;
+        BillNo?: string;
+        HeadStatus?: Ops.Enums.BillStatus;
     }
     namespace MaintenanceManhoursRow {
         const idProperty = "Id";
@@ -1532,7 +1534,9 @@ declare namespace Kun.Ops {
             Price = "Price",
             Amount = "Amount",
             Note = "Note",
-            ManhourName = "ManhourName"
+            ManhourName = "ManhourName",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus"
         }
     }
 }
@@ -3412,6 +3416,7 @@ declare namespace Kun.Ops {
         protected getUpdatePermission(): string;
         protected form: MaintenanceForm;
         constructor();
+        protected afterLoadEntity(): void;
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected updateInterface(): void;
     }
@@ -3433,7 +3438,11 @@ declare namespace Kun.Ops {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
         protected form: MaintenanceManhoursForm;
+        private _head;
+        get Head(): MaintenanceRow;
+        set Head(value: MaintenanceRow);
         constructor();
+        protected updateInterface(): void;
     }
 }
 declare namespace Kun.Ops {
@@ -3452,6 +3461,9 @@ declare namespace Kun.Ops {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof MaintenanceManhoursDialog;
         protected getLocalTextPrefix(): string;
+        private _head;
+        get Head(): MaintenanceRow;
+        set Head(value: MaintenanceRow);
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
@@ -3462,7 +3474,11 @@ declare namespace Kun.Ops {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
         protected form: MaintenanceMaterialsForm;
+        private _head;
+        get Head(): MaintenanceRow;
+        set Head(value: MaintenanceRow);
         constructor();
+        protected updateInterface(): void;
         protected save(): boolean;
     }
 }
@@ -3482,6 +3498,9 @@ declare namespace Kun.Ops {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof MaintenanceMaterialsDialog;
         protected getLocalTextPrefix(): string;
+        private _head;
+        get Head(): MaintenanceRow;
+        set Head(value: MaintenanceRow);
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
@@ -3573,6 +3592,7 @@ declare namespace Kun.Sell {
         protected getUpdatePermission(): string;
         protected form: SaleOrderForm;
         constructor();
+        protected afterLoadEntity(): void;
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected updateInterface(): void;
     }
@@ -3594,7 +3614,11 @@ declare namespace Kun.Sell {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
         protected form: SaleOrderItemForm;
+        private _head;
+        get Head(): SaleOrderRow;
+        set Head(value: SaleOrderRow);
         constructor();
+        protected updateInterface(): void;
         protected save(): boolean;
     }
 }
@@ -3609,6 +3633,19 @@ declare namespace Kun.Sell {
         constructor(container: JQuery);
     }
 }
+declare namespace Kun.Sell {
+    class SaleOrderItemEditor extends Common.GridEditorBase<SaleOrderItemRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof SaleOrderItemDialog;
+        protected getLocalTextPrefix(): string;
+        private _head;
+        get Head(): SaleOrderRow;
+        set Head(value: SaleOrderRow);
+        constructor(container: JQuery);
+        validateEntity(row: any, id: any): boolean;
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
 declare namespace Kun.Stock {
     class InStockDialog extends Serenity.EntityDialog<InStockRow, any> {
         protected getFormKey(): string;
@@ -3620,6 +3657,8 @@ declare namespace Kun.Stock {
         protected getInsertPermission(): string;
         protected getUpdatePermission(): string;
         protected form: InStockForm;
+        constructor();
+        protected afterLoadEntity(): void;
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected updateInterface(): void;
     }
@@ -3662,12 +3701,28 @@ declare namespace Kun.Stock {
 declare namespace Kun.Stock {
     class InStockItemEditor extends Common.GridEditorBase<InStockItemRow> {
         protected getColumnsKey(): string;
-        protected getDialogType(): typeof InStockItemDialog;
+        protected getDialogType(): typeof InStockItemEditorDialog;
         protected getLocalTextPrefix(): string;
         protected status: Stock.Enums.BillStatus;
+        private _head;
+        get Head(): InStockRow;
+        set Head(value: InStockRow);
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace Kun.Stock {
+    class InStockItemEditorDialog extends Common.GridEditorDialog<InStockItemRow> {
+        protected getFormKey(): string;
+        protected getLocalTextPrefix(): string;
+        protected form: InStockItemForm;
+        private _head;
+        get Head(): InStockRow;
+        set Head(value: InStockRow);
+        constructor();
+        protected updateInterface(): void;
+        protected save(): boolean;
     }
 }
 declare namespace Kun.Stock {
@@ -3771,15 +3826,5 @@ declare namespace Kun.Sys {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
-    }
-}
-declare namespace Kun.Sell {
-    class SaleOrderItemEditor extends Common.GridEditorBase<SaleOrderItemRow> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof SaleOrderItemDialog;
-        protected getLocalTextPrefix(): string;
-        constructor(container: JQuery);
-        validateEntity(row: any, id: any): boolean;
-        protected getButtons(): Serenity.ToolButton[];
     }
 }

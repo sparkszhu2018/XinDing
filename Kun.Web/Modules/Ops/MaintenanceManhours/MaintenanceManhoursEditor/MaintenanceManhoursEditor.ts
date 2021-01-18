@@ -7,7 +7,17 @@ namespace Kun.Ops {
         protected getColumnsKey() { return "Ops.MaintenanceManhours"; } 
         protected getDialogType() { return MaintenanceManhoursDialog; }
         protected getLocalTextPrefix() { return MaintenanceManhoursRow.localTextPrefix; }
-         
+
+        private _head: MaintenanceRow;
+        get Head() { return this._head; }
+        set Head(value: MaintenanceRow) { 
+            this._head = value;
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+                this.toolbar.findButton('add-button').hide();
+            } else {
+                this.toolbar.findButton('add-button').show();
+            }
+        }
 
         constructor(container: JQuery) {
             super(container);

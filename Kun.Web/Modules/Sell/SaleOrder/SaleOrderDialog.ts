@@ -22,6 +22,11 @@ namespace Kun.Sell {
             }); 
         }
 
+        protected afterLoadEntity() {
+            super.afterLoadEntity(); 
+            this.form.Materials.Head = this.entity;
+        }
+
         protected getToolbarButtons() {
             var buttons = super.getToolbarButtons();
             buttons.push({
@@ -30,6 +35,7 @@ namespace Kun.Sell {
                 cssClass: "submit-button",
                 onClick: () => {
                     this.save((r) => {
+                        this.entityId = r.EntityId;
                         if (!this.validateBeforeSave()) return;
                         Sell.SaleOrderService.Commit({
                             EntityId: this.entityId

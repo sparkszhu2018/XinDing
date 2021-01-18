@@ -14,7 +14,21 @@ namespace Kun.Stock {
         protected getUpdatePermission() { return InStockRow.updatePermission; }
 
         protected form = new InStockForm(this.idPrefix);
-        
+
+        constructor() {
+            super();
+            this.form.BillType.change(e => { 
+                this.entity.BillType = Q.toId(this.form.BillType.value);
+                this.form.Items.Head = this.entity;
+            });  
+        }
+
+        protected afterLoadEntity() {
+            super.afterLoadEntity();
+            this.form.Items.Head = this.entity;
+        }
+
+
         protected getToolbarButtons() {
             var buttons = super.getToolbarButtons();
             buttons.push({
@@ -23,6 +37,7 @@ namespace Kun.Stock {
                 cssClass: "submit-button",
                 onClick: () => {
                     this.save((r) => {
+                        this.entityId = r.EntityId;
                         if (!this.validateBeforeSave()) return; 
                         Stock.InStockService.Commit({
                             EntityId: this.entityId

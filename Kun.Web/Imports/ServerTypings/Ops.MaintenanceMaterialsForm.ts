@@ -8,6 +8,8 @@
         Qty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
+        BuyPrice: Serenity.DecimalEditor;
+        BuyAmount: Serenity.DecimalEditor;
         Specification: Serenity.StringEditor;
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
@@ -39,6 +41,8 @@
                     'Qty', w3,
                     'SalePrice', w3,
                     'SaleAmount', w3,
+                    'BuyPrice', w3,
+                    'BuyAmount', w3,
                     'Specification', w1,
                     'LotId', w0,
                     'WarehouseId', w0,

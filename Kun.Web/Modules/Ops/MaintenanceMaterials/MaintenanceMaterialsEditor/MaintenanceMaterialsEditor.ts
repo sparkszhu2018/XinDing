@@ -15,8 +15,10 @@ namespace Kun.Ops {
 
             if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
                 this.toolbar.findButton('add-button').hide();
+                this.toolbar.findButton('attach-button').hide();
             } else {
                 this.toolbar.findButton('add-button').show();
+                this.toolbar.findButton('attach-button').hide();
             }
         }
 
@@ -72,6 +74,8 @@ namespace Kun.Ops {
                                 Qty: 1,
                                 SalePrice: sel.SalePrice,
                                 SaleAmount: sel.SalePrice * 1,
+                                BuyPrice: sel.BuyPrice,
+                                BuyAmount: sel.BuyPrice * 1,
                                 LotId: sel.LotId,
                                 WarehouseId: sel.WarehouseId,
                                 PositionId: sel.PositionId,
@@ -95,6 +99,7 @@ namespace Kun.Ops {
             buttons.push({
                 title: "",
                 icon: "fa-paperclip",
+                cssClass: "attach-button",
                 onClick: () => {
                     var i = 0;
                     if (this.view.getLength() == 0) {

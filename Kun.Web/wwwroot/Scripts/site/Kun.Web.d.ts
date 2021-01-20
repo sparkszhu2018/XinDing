@@ -1569,6 +1569,8 @@ declare namespace Kun.Ops {
         Qty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
+        BuyPrice: Serenity.DecimalEditor;
+        BuyAmount: Serenity.DecimalEditor;
         Specification: Serenity.StringEditor;
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
@@ -1603,6 +1605,8 @@ declare namespace Kun.Ops {
         LotCode?: string;
         WarehouseName?: string;
         PositionName?: string;
+        BuyPrice?: number;
+        BuyAmount?: number;
     }
     namespace MaintenanceMaterialsRow {
         const idProperty = "Id";
@@ -1634,7 +1638,9 @@ declare namespace Kun.Ops {
             MaterialName = "MaterialName",
             LotCode = "LotCode",
             WarehouseName = "WarehouseName",
-            PositionName = "PositionName"
+            PositionName = "PositionName",
+            BuyPrice = "BuyPrice",
+            BuyAmount = "BuyAmount"
         }
     }
 }
@@ -1936,6 +1942,8 @@ declare namespace Kun.Sell {
         Qty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
+        BuyPrice: Serenity.DecimalEditor;
+        BuyAmount: Serenity.DecimalEditor;
         Specification: Serenity.StringEditor;
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
@@ -1970,6 +1978,8 @@ declare namespace Kun.Sell {
         LotCode?: string;
         WarehouseName?: string;
         PositionName?: string;
+        BuyPrice?: number;
+        BuyAmount?: number;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -2001,7 +2011,9 @@ declare namespace Kun.Sell {
             MaterialCode = "MaterialCode",
             LotCode = "LotCode",
             WarehouseName = "WarehouseName",
-            PositionName = "PositionName"
+            PositionName = "PositionName",
+            BuyPrice = "BuyPrice",
+            BuyAmount = "BuyAmount"
         }
     }
 }
@@ -3431,6 +3443,8 @@ declare namespace Kun.Ops {
         protected getService(): string;
         constructor(container: JQuery);
         protected getSlickOptions(): Slick.GridOptions;
+        protected getColumns(): Slick.Column[];
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Ops {

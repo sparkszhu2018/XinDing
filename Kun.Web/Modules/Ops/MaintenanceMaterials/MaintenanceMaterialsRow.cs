@@ -124,6 +124,20 @@ namespace Kun.Ops.Entities
             set { Fields.SaleAmount[this] = value; }
         }
 
+        [DisplayName("成本单价"), Size(18), Scale(2)]
+        public Decimal? BuyPrice
+        {
+            get { return Fields.BuyPrice[this]; }
+            set { Fields.BuyPrice[this] = value; }
+        }
+
+        [DisplayName("成本"), Size(18), Scale(2)]
+        public Decimal? BuyAmount
+        {
+            get { return Fields.BuyAmount[this]; }
+            set { Fields.BuyAmount[this] = value; }
+        }
+
         [DisplayName("批次"), LookupEditor(typeof(LotRow)), ReadOnly(true),
              ForeignKey("[dbo].[Basic_Lot]", "Id"), LeftJoin("jLot"), TextualField("LotCode")]
         public Guid? LotId
@@ -211,6 +225,8 @@ namespace Kun.Ops.Entities
             public StringField LotCode;
             public StringField WarehouseName; 
             public StringField PositionName;
+            public DecimalField BuyPrice;
+            public DecimalField BuyAmount;
         }
     }
 }

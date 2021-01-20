@@ -24,6 +24,8 @@ namespace Kun.Sell.Columns
         public StringField PositionName { get; set; }
         public Decimal SalePrice { get; set; }
         public Decimal SaleAmount { get; set; }
-        public String Specification { get; set; }
+        public String Specification { get; set; } 
+        public Decimal BuyPrice { get; set; }
+        public Decimal BuyAmount { get; set; }
     }
 }

@@ -159,7 +159,7 @@ namespace Kun.Ops.Entities
             set { Fields.Description[this] = value; }
         }
 
-        [DisplayName("具体内容"), Size(500)]
+        [DisplayName("处理结果"), Size(500)]
         public String Content
         {
             get { return Fields.Content[this]; }

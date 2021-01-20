@@ -1,0 +1,27 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+            function subst() {
+                var d = new Date();
+                var n = (d.getDate() < 10 ? "0" + d.getDate() : d.getDate()) + "/";
+                n += (d.getMonth() + 1 < 10 ? "0" + (d.getMonth()+1) : (d.getMonth()+1)) + "/";
+                n += d.getFullYear() + " ";
+                n += (d.getHours() < 10 ? "0"+ d.getHours() : d.getHours()) + ":";
+                n += (d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes());
+                document.getElementById("date").innerHTML = n;
+            }
+    </script>
+</head>
+<body style="border:0; margin: 0;" onload="subst()">
+    <table style="width: 100%; font-size: 10px">
+        <tr>
+            <td style="text-align:left"><img src="/Content/site/mom/logo/logo.png" /> 南方轴承</td>
+            <td class="section"></td>
+            <td style="text-align:right">
+                 <span id="date"></span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

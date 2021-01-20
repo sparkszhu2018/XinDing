@@ -24,5 +24,52 @@ namespace Kun.Ops {
             opt.enableTextSelectionOnCells = true;
             return opt;
         }
+
+
+
+        protected getColumns() {
+            var columns = super.getColumns();
+
+            columns.splice(1, 0, {
+                field: '打印',
+                name: '',
+                format: ctx => '<a class="inline-action print" title="打印">' +
+                    '<i class="fa fa-file-pdf-o text-blue"></i></a>',
+                width: 24,
+                minWidth: 24,
+                maxWidth: 24
+            });
+             
+            return columns;
+        }
+
+
+        protected onClick(e: JQueryEventObject, row: number, cell: number) {
+            super.onClick(e, row, cell);
+
+            if (e.isDefaultPrevented())
+                return;
+
+            var item: MaintenanceRow = this.itemAt(row);
+            var target = $(e.target);
+
+            // if user clicks "i" element, e.g. icon
+            if (target.parent().hasClass('inline-action'))
+                target = target.parent();
+
+            if (target.hasClass('inline-action')) {
+                e.preventDefault();
+
+                if (target.hasClass('print')) {
+                    console.log(item);
+                    Kun.Common.ReportHelper.execute({
+                        reportKey: 'Ops.Maintenance',
+                        params: {
+                            Id: item.Id
+                        }
+                    });
+                } 
+            }
+        }
     }
 }

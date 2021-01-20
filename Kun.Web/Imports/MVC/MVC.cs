@@ -151,6 +151,10 @@ namespace MVC
             public static class Maintenance
             {
                 public const string MaintenanceIndex = "~/Modules/Ops/Maintenance/MaintenanceIndex.cshtml";
+                public static class Print
+                {
+                    public const string MaintenanceReport = "~/Modules/Ops/Maintenance/Print/MaintenanceReport.cshtml";
+                }
             }
 
             public static class MaintenanceManhours

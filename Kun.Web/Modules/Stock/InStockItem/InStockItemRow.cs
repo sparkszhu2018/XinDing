@@ -135,7 +135,7 @@ namespace Kun.Stock.Entities
             set { Fields.UnitName[this] = value; }
         }
 
-        [DisplayName("到货数量"), Size(18), Scale(2), NotNull]
+        [DisplayName("到货数量"), Size(18), Scale(2), DefaultValue(0.0)]
         public Decimal? DeliveryQty
         {
             get { return Fields.DeliveryQty[this]; }

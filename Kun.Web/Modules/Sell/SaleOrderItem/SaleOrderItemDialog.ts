@@ -32,6 +32,10 @@ namespace Kun.Sell {
                 if (this.form.SalePrice.value != null) {
                     this.form.SaleAmount.value = this.form.Qty.value * this.form.SalePrice.value;
                 }
+                if (this.form.BuyPrice.value != null) {
+                    this.form.BuyAmount.value = this.form.Qty.value * this.form.BuyPrice.value;
+                }
+            
             });
             this.form.SalePrice.change(e => {
                 if (this.form.Qty.value != null) {

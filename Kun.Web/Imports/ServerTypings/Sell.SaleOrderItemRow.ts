@@ -21,6 +21,8 @@
         LotCode?: string;
         WarehouseName?: string;
         PositionName?: string;
+        BuyPrice?: number;
+        BuyAmount?: number;
     }
 
     export namespace SaleOrderItemRow {
@@ -54,7 +56,9 @@
             MaterialCode = "MaterialCode",
             LotCode = "LotCode",
             WarehouseName = "WarehouseName",
-            PositionName = "PositionName"
+            PositionName = "PositionName",
+            BuyPrice = "BuyPrice",
+            BuyAmount = "BuyAmount"
         }
     }
 }

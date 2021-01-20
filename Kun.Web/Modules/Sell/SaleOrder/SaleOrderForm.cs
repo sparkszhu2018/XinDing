@@ -22,11 +22,11 @@ namespace Kun.Sell.Forms
         public DateTime Date { get; set; }
         public Int64 ApproverId { get; set; }
         public DateTime ApproverDate { get; set; }
-
+        [TwoThirdWidth]
         public Int64 CustomerId { get; set; }
         [Hidden]
         public Int64 SettleCustomerId { get; set; }
-        [TwoThirdWidth]
+        [OneThirdWidth]
         public String Note { get; set; }
 
         [Category("明细信息")] 

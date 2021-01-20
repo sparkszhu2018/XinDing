@@ -28,6 +28,10 @@ namespace Kun.Ops.Forms
         [ReadOnly(true)]
         public Decimal SaleAmount { get; set; }
         [ReadOnly(true)]
+        public Decimal BuyPrice { get; set; }
+        [ReadOnly(true)]
+        public Decimal BuyAmount { get; set; }
+        [ReadOnly(true)]
         public String Specification { get; set; }
         [ReadOnly(true)]
         public Guid LotId { get; set; }

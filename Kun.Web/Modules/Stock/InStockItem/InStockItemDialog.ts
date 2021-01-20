@@ -24,9 +24,9 @@ namespace Kun.Stock {
                 var materail = Basic.MaterialRow.getLookup().itemById[this.form.MaterialId.value];
                 this.form.UnitId.value = materail.UnitId;
             });
-            //this.form.DeliveryQty.change(e => {
-            //    if (this.form.ConfirmQty.value == null) {
-            //        this.form.ConfirmQty.value = this.form.DeliveryQty.value;
+            //this.form.ConfirmQty.change(e => {
+            //    if (this.form.DeliveryQty.value == null) {
+            //        this.form.DeliveryQty.value = this.form.ConfirmQty.value;
             //    }
             //});
             this.form.BuyPrice.change(e => {

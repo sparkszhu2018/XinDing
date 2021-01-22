@@ -105,9 +105,9 @@ namespace Kun
         }
 
         private byte[] RenderAsPdf(IReport report, string key, string opt)
-        {
+        {  
             var externalUrl = Config.Get<EnvironmentSettings>().SiteExternalUrl ??
-                Request.GetBaseUri().ToString();
+               Request.GetBaseUri().ToString();
 
             var renderUrl = UriHelper.Combine(externalUrl, "Report/Render?" +
                 "key=" + Uri.EscapeDataString(key));

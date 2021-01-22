@@ -205,6 +205,16 @@ namespace MVC
 
         public static class Stock
         {
+            public static class ChangeStock
+            {
+                public const string ChangeStockIndex = "~/Modules/Stock/ChangeStock/ChangeStockIndex.cshtml";
+            }
+
+            public static class ChangeStockItem
+            {
+                public const string ChangeStockItemIndex = "~/Modules/Stock/ChangeStockItem/ChangeStockItemIndex.cshtml";
+            }
+
             public static class InStock
             {
                 public const string InStockIndex = "~/Modules/Stock/InStock/InStockIndex.cshtml";

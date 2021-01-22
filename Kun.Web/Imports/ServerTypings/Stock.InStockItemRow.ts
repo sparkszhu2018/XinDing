@@ -17,7 +17,6 @@
         InvoiceType?: Stock.Enums.InvoiceType;
         Specification?: string;
         BillNo?: string;
-        HeadType?: Stock.Enums.InStockBillType;
         HeadStatus?: Stock.Enums.BillStatus;
         HeadDate?: string;
         ApproverId?: number;
@@ -62,7 +61,6 @@
             InvoiceType = "InvoiceType",
             Specification = "Specification",
             BillNo = "BillNo",
-            HeadType = "HeadType",
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
             ApproverId = "ApproverId",

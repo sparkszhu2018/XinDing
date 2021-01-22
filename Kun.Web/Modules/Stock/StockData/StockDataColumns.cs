@@ -22,10 +22,14 @@ namespace Kun.Stock.Columns
         public Decimal AvailableQty { get; set; } 
         public String Specification { get; set; } 
         public Decimal BuyPrice { get; set; } 
-        public Decimal SalePrice { get; set; } 
+        public Decimal SalePrice { get; set; }
          
+        public String PositionId { get; set; }
+        public String PositionName { get; set; }
+        public String WarehouseName { get; set; }
 
-      
+
+
 
     }
 }

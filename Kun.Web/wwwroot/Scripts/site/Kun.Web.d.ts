@@ -1980,6 +1980,7 @@ declare namespace Kun.Sell {
         PositionName?: string;
         BuyPrice?: number;
         BuyAmount?: number;
+        HeadDate?: string;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -2013,7 +2014,8 @@ declare namespace Kun.Sell {
             WarehouseName = "WarehouseName",
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
-            BuyAmount = "BuyAmount"
+            BuyAmount = "BuyAmount",
+            HeadDate = "HeadDate"
         }
     }
 }
@@ -2101,6 +2103,227 @@ declare namespace Kun.Sell {
         }
     }
 }
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
+    interface ChangeStockForm {
+        BillNo: Serenity.StringEditor;
+        InsertUserId: Serenity.LookupEditor;
+        InsertDate: Serenity.DateEditor;
+        Status: Serenity.EnumEditor;
+        UpdateUserId: Serenity.LookupEditor;
+        UpdateDate: Serenity.DateEditor;
+        Date: Serenity.DateEditor;
+        ApproverId: Serenity.LookupEditor;
+        ApproverDate: Serenity.DateEditor;
+        Note: Serenity.StringEditor;
+        Items: ChangeStockItemEditor;
+    }
+    class ChangeStockForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
+    interface ChangeStockItemForm {
+        FromMaterialId: Serenity.LookupEditor;
+        ToMaterialId: Serenity.LookupEditor;
+        Serial: Serenity.IntegerEditor;
+        Qty: Serenity.DecimalEditor;
+        FromUnitId: Serenity.LookupEditor;
+        ToUnitId: Serenity.LookupEditor;
+        FromWarehouseId: Serenity.LookupEditor;
+        ToWarehouseId: Serenity.LookupEditor;
+        FromPositionId: Serenity.LookupEditor;
+        ToPositionId: Serenity.LookupEditor;
+        FromLotId: Serenity.LookupEditor;
+        ToLotId: Serenity.LookupEditor;
+        FromBuyPrice: Serenity.DecimalEditor;
+        ToBuyPrice: Serenity.DecimalEditor;
+        FromSalePrice: Serenity.DecimalEditor;
+        ToSalePrice: Serenity.DecimalEditor;
+        FromSpecification: Serenity.StringEditor;
+        ToSpecification: Serenity.StringEditor;
+    }
+    class ChangeStockItemForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Stock {
+    interface ChangeStockItemRow {
+        Id?: string;
+        Serial?: number;
+        HeadId?: string;
+        Status?: string;
+        ChangeCode?: string;
+        FromStockId?: string;
+        FromMaterialId?: string;
+        FromUnitId?: string;
+        FromWarehouseId?: string;
+        FromPositionId?: string;
+        FromLotId?: string;
+        FromBuyPrice?: number;
+        FromSalePrice?: number;
+        FromSpecification?: string;
+        Qty?: number;
+        ToStockId?: string;
+        ToMaterialId?: string;
+        ToUnitId?: string;
+        ToWarehouseId?: string;
+        ToPositionId?: string;
+        ToLotId?: string;
+        ToBuyPrice?: number;
+        ToSalePrice?: number;
+        ToSpecification?: string;
+        FromMaterialCode?: string;
+        FromMaterialName?: string;
+        FromUnitName?: string;
+        FromWarehouseName?: string;
+        FromPositionName?: string;
+        FromLotCode?: string;
+        ToMaterialCode?: string;
+        ToMaterialName?: string;
+        ToUnitName?: string;
+        ToWarehouseName?: string;
+        ToPositionName?: string;
+        ToLotCode?: string;
+        BillNo?: string;
+        HeadStatus?: Stock.Enums.BillStatus;
+        HeadDate?: string;
+    }
+    namespace ChangeStockItemRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Status";
+        const localTextPrefix = "Stock.ChangeStockItem";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            Serial = "Serial",
+            HeadId = "HeadId",
+            Status = "Status",
+            ChangeCode = "ChangeCode",
+            FromStockId = "FromStockId",
+            FromMaterialId = "FromMaterialId",
+            FromUnitId = "FromUnitId",
+            FromWarehouseId = "FromWarehouseId",
+            FromPositionId = "FromPositionId",
+            FromLotId = "FromLotId",
+            FromBuyPrice = "FromBuyPrice",
+            FromSalePrice = "FromSalePrice",
+            FromSpecification = "FromSpecification",
+            Qty = "Qty",
+            ToStockId = "ToStockId",
+            ToMaterialId = "ToMaterialId",
+            ToUnitId = "ToUnitId",
+            ToWarehouseId = "ToWarehouseId",
+            ToPositionId = "ToPositionId",
+            ToLotId = "ToLotId",
+            ToBuyPrice = "ToBuyPrice",
+            ToSalePrice = "ToSalePrice",
+            ToSpecification = "ToSpecification",
+            FromMaterialCode = "FromMaterialCode",
+            FromMaterialName = "FromMaterialName",
+            FromUnitName = "FromUnitName",
+            FromWarehouseName = "FromWarehouseName",
+            FromPositionName = "FromPositionName",
+            FromLotCode = "FromLotCode",
+            ToMaterialCode = "ToMaterialCode",
+            ToMaterialName = "ToMaterialName",
+            ToUnitName = "ToUnitName",
+            ToWarehouseName = "ToWarehouseName",
+            ToPositionName = "ToPositionName",
+            ToLotCode = "ToLotCode",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            HeadDate = "HeadDate"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    namespace ChangeStockItemService {
+        const baseUrl = "Stock/ChangeStockItem";
+        function Create(request: Serenity.SaveRequest<ChangeStockItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<ChangeStockItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ChangeStockItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ChangeStockItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Stock/ChangeStockItem/Create",
+            Update = "Stock/ChangeStockItem/Update",
+            Delete = "Stock/ChangeStockItem/Delete",
+            Retrieve = "Stock/ChangeStockItem/Retrieve",
+            List = "Stock/ChangeStockItem/List"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    interface ChangeStockRow {
+        Id?: string;
+        BillNo?: string;
+        BillType?: number;
+        Status?: Stock.Enums.BillStatus;
+        Date?: string;
+        Note?: string;
+        ApproverId?: number;
+        ApproverDate?: string;
+        ApproverName?: string;
+        Items?: ChangeStockItemRow[];
+    }
+    namespace ChangeStockRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "BillNo";
+        const localTextPrefix = "Stock.ChangeStock";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            BillNo = "BillNo",
+            BillType = "BillType",
+            Status = "Status",
+            Date = "Date",
+            Note = "Note",
+            ApproverId = "ApproverId",
+            ApproverDate = "ApproverDate",
+            ApproverName = "ApproverName",
+            Items = "Items"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    namespace ChangeStockService {
+        const baseUrl = "Stock/ChangeStock";
+        function Commit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Audit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Reject(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Create(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ChangeStockRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ChangeStockRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Commit = "Stock/ChangeStock/Commit",
+            Audit = "Stock/ChangeStock/Audit",
+            Reject = "Stock/ChangeStock/Reject",
+            Create = "Stock/ChangeStock/Create",
+            Update = "Stock/ChangeStock/Update",
+            Delete = "Stock/ChangeStock/Delete",
+            Retrieve = "Stock/ChangeStock/Retrieve",
+            List = "Stock/ChangeStock/List"
+        }
+    }
+}
 declare namespace Kun.Stock.Enums {
     enum BillStatus {
         Edit = 10,
@@ -2128,7 +2351,7 @@ declare namespace Kun.Stock.Enums {
         Purchase = 10,
         Sale = 30,
         Maint = 31,
-        MovStock = 50
+        ChangeStock = 50
     }
 }
 declare namespace Kun.Stock.Enums {
@@ -2200,7 +2423,6 @@ declare namespace Kun.Stock {
         InvoiceType?: Stock.Enums.InvoiceType;
         Specification?: string;
         BillNo?: string;
-        HeadType?: Stock.Enums.InStockBillType;
         HeadStatus?: Stock.Enums.BillStatus;
         HeadDate?: string;
         ApproverId?: number;
@@ -2243,7 +2465,6 @@ declare namespace Kun.Stock {
             InvoiceType = "InvoiceType",
             Specification = "Specification",
             BillNo = "BillNo",
-            HeadType = "HeadType",
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
             ApproverId = "ApproverId",
@@ -2619,7 +2840,8 @@ declare namespace Kun.Sys.Enum {
         Supplier = 3,
         InStockBill = 10,
         MaintBill = 20,
-        SaleOrderBill = 30
+        SaleOrderBill = 30,
+        ChangeStockBill = 40
     }
 }
 declare namespace Kun.Texts {
@@ -3645,6 +3867,9 @@ declare namespace Kun.Sell {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+        protected getSlickOptions(): Slick.GridOptions;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Sell {
@@ -3658,6 +3883,86 @@ declare namespace Kun.Sell {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockDialog extends Serenity.EntityDialog<ChangeStockRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: ChangeStockForm;
+        constructor();
+        protected afterLoadEntity(): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected updateInterface(): void;
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockGrid extends Serenity.EntityGrid<ChangeStockRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ChangeStockDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getSlickOptions(): Slick.GridOptions;
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockItemDialog extends Serenity.EntityDialog<ChangeStockItemRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: ChangeStockItemForm;
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockItemGrid extends Serenity.EntityGrid<ChangeStockItemRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ChangeStockItemDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockItemEditor extends Common.GridEditorBase<ChangeStockItemRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ChangeStockItemEditorDialog;
+        protected getLocalTextPrefix(): string;
+        protected status: Stock.Enums.BillStatus;
+        private _head;
+        get Head(): ChangeStockRow;
+        set Head(value: ChangeStockRow);
+        constructor(container: JQuery);
+        validateEntity(row: any, id: any): boolean;
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace Kun.Stock {
+    class ChangeStockItemEditorDialog extends Common.GridEditorDialog<ChangeStockItemRow> {
+        protected getFormKey(): string;
+        protected getLocalTextPrefix(): string;
+        protected form: ChangeStockItemForm;
+        private _head;
+        get Head(): ChangeStockItemRow;
+        set Head(value: ChangeStockItemRow);
+        constructor();
+        protected updateInterface(): void;
+        protected save(): boolean;
     }
 }
 declare namespace Kun.Stock {
@@ -3710,6 +4015,7 @@ declare namespace Kun.Stock {
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
         protected getSlickOptions(): Slick.GridOptions;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Stock {

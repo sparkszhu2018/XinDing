@@ -43,7 +43,18 @@ namespace Kun.Sell.Entities
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
+        } 
+
+        [DisplayName("单据日期"), Expression("jHead.[Date]")]
+        [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
+        public DateTime? HeadDate
+        {
+            get { return Fields.HeadDate[this]; }
+            set { Fields.HeadDate[this] = value; }
         }
+
+
+
 
         [DisplayName("行号"), NotNull, SortOrder(1)]
         public Int32? Serial
@@ -226,6 +237,9 @@ namespace Kun.Sell.Entities
             public StringField PositionName;
             public DecimalField BuyPrice;
             public DecimalField BuyAmount;
+            public DateTimeField HeadDate;
+
+            
         }
     }
 }

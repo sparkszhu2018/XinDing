@@ -18,7 +18,7 @@ namespace Kun.Ops {
                 this.toolbar.findButton('attach-button').hide();
             } else {
                 this.toolbar.findButton('add-button').show();
-                this.toolbar.findButton('attach-button').hide();
+                this.toolbar.findButton('attach-button').show();
             }
         }
 

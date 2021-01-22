@@ -13,8 +13,13 @@ namespace Kun.Sell.Columns
     [BasedOnRow(typeof(Entities.SaleOrderItemRow), CheckNames = true)]
     public class SaleOrderItemColumns
     {
-        [EditLink]
+        
+        public StringField BillNo { get; set; }
+        public DateTimeField HeadDate { get; set; }
+
+        public StringField  HeadStatus { get; set; }
         public Int32Field Serial { get; set; }
+        [EditLink]
         public StringField MaterialCode { get; set; }
         public StringField MaterialName { get; set; }
         public StringField UnitName { get; set; }

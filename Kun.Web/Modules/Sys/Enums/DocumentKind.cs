@@ -18,6 +18,8 @@ namespace Kun.Sys.Enum
         MaintBill = 20,
         [Description("销售订单")]
         SaleOrderBill = 30,
+        [Description("移库单")]
+        ChangeStockBill = 40,
 
         [Description("物料主数据")]
         Material = 1,

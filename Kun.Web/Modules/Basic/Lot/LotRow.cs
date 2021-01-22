@@ -31,6 +31,7 @@ namespace Kun.Basic.Entities
         }
 
         [DisplayName("Material Id"), NotNull]
+        [LookupInclude]
         public Guid? MaterialId
         {
             get { return Fields.MaterialId[this]; }

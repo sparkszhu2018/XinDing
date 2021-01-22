@@ -37,14 +37,7 @@ namespace Kun.Stock.Entities
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
-        } 
-
-        [DisplayName("单据类型"), Expression("jHead.[BillNo]")]
-        public InStockBillType? HeadType
-        {
-            get { return (InStockBillType?)Fields.HeadType[this]; }
-            set { Fields.HeadType[this] = (Int32)value; }
-        }
+        }  
 
         [DisplayName("状态"), Expression("jHead.[Status]")]
         public BillStatus? HeadStatus
@@ -286,8 +279,7 @@ namespace Kun.Stock.Entities
             public Int32Field InvoiceType;
             public StringField Specification;
 
-            public StringField BillNo;
-            public Int32Field HeadType;
+            public StringField BillNo; 
             public Int32Field HeadStatus;
             public DateTimeField HeadDate;
             public Int64Field ApproverId;

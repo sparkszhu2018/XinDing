@@ -5,7 +5,8 @@
         Supplier = 3,
         InStockBill = 10,
         MaintBill = 20,
-        SaleOrderBill = 30
+        SaleOrderBill = 30,
+        ChangeStockBill = 40
     }
     Serenity.Decorators.registerEnumType(DocumentKind, 'Kun.Sys.Enum.DocumentKind', 'Sys.DocumentKind');
 }

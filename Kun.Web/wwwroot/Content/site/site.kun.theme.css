@@ -11,3 +11,11 @@
 .s-Sell-SaleOrderDialog .s-DataGrid {
     height: 300px;
 }
+
+.s-ChangeStockDialog .s-DataGrid {
+    height: 300px;
+}
+
+.s-Stock-StockDataCheckGrid   {
+    height: 300px;
+}

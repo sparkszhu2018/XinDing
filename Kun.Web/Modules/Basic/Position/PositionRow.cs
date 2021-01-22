@@ -25,6 +25,7 @@ namespace Kun.Basic.Entities
 
         [DisplayName("仓库"), NotNull, LookupEditor(typeof(WarehouseRow)),
            ForeignKey("[dbo].[Basic_Warehouse]", "Id"), LeftJoin("jWarehouse"), TextualField("WarehouseName")]
+        [LookupInclude]
         public Guid? WarehouseId
         {
             get { return Fields.WarehouseId[this]; }

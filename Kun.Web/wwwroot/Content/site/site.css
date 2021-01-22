@@ -10234,6 +10234,18 @@ button.ui-button {
 .s-Stock-MoveRecordDialog .caption {
   width: 150px;
 }
+.s-Stock-ChangeStockDialog > .size {
+  width: 650px;
+}
+.s-Stock-ChangeStockDialog .caption {
+  width: 150px;
+}
+.s-Stock-ChangeStockItemDialog > .size {
+  width: 650px;
+}
+.s-Stock-ChangeStockItemDialog .caption {
+  width: 150px;
+}
 .s-Sys-DocumentCodeConfigDialog > .size {
   width: 650px;
 }

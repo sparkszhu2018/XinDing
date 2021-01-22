@@ -15,7 +15,7 @@ namespace Kun.Stock.Enums
             [Description("维保领料")]
             Maint = 31,
             [Description("移库")]
-            MovStock = 50
+            ChangeStock = 50
         }
 
         [EnumKey("MoveRecordEnums.Status")]

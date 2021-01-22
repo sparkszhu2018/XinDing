@@ -105,6 +105,18 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Stock_ChangeStock",
+          "Identifier": "ChangeStock",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_ChangeStock_Item",
+          "Identifier": "ChangeStockItem",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.Stock_Data",
           "Identifier": "StockData",
           "Module": "Stock",

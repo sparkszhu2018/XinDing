@@ -270,7 +270,7 @@ namespace Kun.Ops.Entities
             set { Fields.Materials[this] = value; }
         }
 
-        [DisplayName("劳务明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId", IncludeColumns = "ManhourName")]
+        [DisplayName("劳务明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId", IncludeColumns = "ManhourName,HeadStatus")]
         [ReadPermission(PermissionKeys.MaintenanceResponsible)]
         public List<MaintenanceManhoursRow> Manhours
         {

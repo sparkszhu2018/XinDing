@@ -56,7 +56,7 @@ namespace Kun.Sell.Repositories
                     var mov = new MoveRecordRow
                     {
                         MovCode = MoveType.Sale,
-                        Qty = m.Qty * -1,
+                        Qty = m.Qty,
                         FromStockId = stock.Id,
                         FromMaterialId = m.MaterialId,
                         FromUnitId = m.UnitId,

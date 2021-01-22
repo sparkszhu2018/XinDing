@@ -7,6 +7,9 @@
 @{ 
     var reportDate = ((DateTime)Model.ReportDate).ToString("yyyy-MM-dd");
     var billDate = ((DateTime)Model.Date).ToString("yyyy-MM-dd");
+    var materialAmount = Model.Materials.Sum(c => c.SaleAmount);
+    var manFee = Model.Manhours.Sum(c => c.Amount);
+    var totalAmount = manFee + materialAmount;
 }
 <section class="invoice">
     <div class="row">
@@ -25,8 +28,8 @@
                     <tr>
                         <td>单据编号:</td>
                         <td>@Model.BillNo</td>
-                        <td>状态:</td>
-                        <td>@Serenity.EnumMapper.GetText(Model.Status)</td>
+                        <td>分类:</td>
+                        <td>@Model.TypeName</td>
                         <td>维保单位:</td>
                         <td>@Model.VendorName</td>
                     </tr>
@@ -38,11 +41,9 @@
                         <td>报修部门:</td>
                         <td>@Model.ReportCustomerName</td>
                     </tr>
-                    <tr>
-                        <td>分类:</td>
-                        <td>@Model.TypeName</td>
+                    <tr> 
                         <td>地址:</td>
-                        <td colspan="3">@Model.Address</td>
+                        <td colspan="5">@Model.Address</td>
                     </tr>
 
                 </tbody>
@@ -88,7 +89,7 @@
                                 change = "否";
                             }
                         }
-                        <td colspan="6">@change</td>
+                        <td colspan="5">@change</td>
                     </tr>
                     @if ((bool)Model.ChangeDevice)
                     {
@@ -96,42 +97,47 @@
                             <td colspan="7">物料列表:</td>
                         </tr>
                         <tr>
-                            <td>行号</td>
-                            <td>名称</td>
-                            <td>数量</td>
-                            <td>单位</td>
-                            <td>单价</td>
-                            <td>金额</td>
+                            <td style="min-width:200px;">名称</td>
                             <td>规格</td>
+                            <td width="65px">数量</td>
+                            <td width="55px">单位</td>
+                            <td width="70px">单价</td>
+                            <td width="70px">金额(元)</td>
                         </tr>
                         @foreach (var m in Model.Materials)
                         {
+                            var qty = ((decimal)m.Qty).ToString("f2");
                             <tr>
-                                <td>@m.Serial</td>
                                 <td>@m.MaterialName</td>
-                                <td>@m.Qty</td>
+                                <td>@m.Specification</td>
+                                <td>@qty</td>
                                 <td>@m.UnitName</td>
                                 <td>@m.SalePrice</td>
                                 <td>@m.SaleAmount</td>
-                                <td>@m.Specification</td>
                             </tr>
                         }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>合计:</td>
+                            <td>@materialAmount</td>
+                        </tr>
                     }
 
                 </tbody>
             </table>
         </div>
-        @{
-            var manFee = Model.Manhours.Sum(c => c.Amount);
-        }
+       
         <div class="col-sm-12">
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <td width="15%">劳务费:</td>
-                        <td width="35%">@manFee</td>
-                        <td width="15%">服务商费用:</td>
-                        <td width="35%">@Model.ServicerCost</td>
+                        <td width="15%">技术服务费:</td>
+                        <td width="35%">@manFee (元)</td>
+                        <td width="15%">总计金额:</td>
+                        <td width="35%">@totalAmount (元)</td>
                     </tr>
 
                 </tbody>

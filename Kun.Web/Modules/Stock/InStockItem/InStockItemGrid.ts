@@ -29,5 +29,35 @@ namespace Kun.Stock {
             opt.enableTextSelectionOnCells = true;
             return opt;
         }
+
+        protected onClick(e: JQueryEventObject, row: number, cell: number) {
+            // super.onClick(e, row, cell);
+
+            if (e.isDefaultPrevented())
+                return;
+
+            var item: InStockItemRow = this.itemAt(row);
+            var target = $(e.target);
+
+            // if user clicks "i" element, e.g. icon
+            //if (target.parent().hasClass('s-EditLink'))
+            //    target = target.parent();
+
+            if (target.hasClass('s-EditLink')) {
+                e.preventDefault();
+                InStockService.Retrieve({
+                    EntityId: item.HeadId
+                }, r => {
+                    let dlg = new InStockDialog();
+                    dlg.loadEntityAndOpenDialog(r.Entity, true);
+                    dlg.element.on('dialogclose', () => {
+                        this.refresh();
+                        dlg = null;
+                    });
+                }, { async: false });
+
+
+            }
+        }
     }
 }

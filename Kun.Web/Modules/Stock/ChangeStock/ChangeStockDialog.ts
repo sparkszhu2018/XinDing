@@ -45,32 +45,51 @@ namespace Kun.Stock {
                     });
                 }
             });
-            buttons.push({
-                title: "审核",
-                icon: "fa-star",
-                cssClass: "audit-button",
-                onClick: () => {
-                    Stock.ChangeStockService.Audit({
-                        EntityId: this.entityId
-                    }, r => {
-                        Q.notifySuccess("审核成功!");
-                        this.dialogClose();
-                    });
-                }
-            });
-            buttons.push({
-                title: "驳回",
-                icon: "fa-star-o",
-                cssClass: "reject-button",
-                onClick: () => {
-                    Stock.ChangeStockService.Reject({
-                        EntityId: this.entityId
-                    }, r => {
-                        Q.notifySuccess("驳回成功!");
-                        this.dialogClose();
-                    });
-                }
-            });
+
+            if (Q.Authorization.hasPermission("Stock:ChangeOrder:Approve")) {
+                buttons.push({
+                    title: "审核",
+                    icon: "fa-star",
+                    cssClass: "audit-button",
+                    onClick: () => {
+                        Stock.ChangeStockService.Audit({
+                            EntityId: this.entityId
+                        }, r => {
+                            Q.notifySuccess("审核成功!");
+                            this.dialogClose();
+                        });
+                    }
+                });
+                buttons.push({
+                    title: "驳回",
+                    icon: "fa-star-o",
+                    cssClass: "reject-button",
+                    onClick: () => {
+                        Stock.ChangeStockService.Reject({
+                            EntityId: this.entityId
+                        }, r => {
+                            Q.notifySuccess("驳回成功!");
+                            this.dialogClose();
+                        });
+                    }
+                });
+            }
+
+            if (Q.Authorization.hasPermission("Stock:ChangeOrder:UnApprove")) {
+                buttons.push({
+                    title: "反审核",
+                    icon: "fa-reply-all",
+                    cssClass: "unAudit-button",
+                    onClick: () => {
+                        Stock.ChangeStockService.UnAudit({
+                            EntityId: this.entityId
+                        }, r => {
+                            Q.notifySuccess("反审核成功!");
+                            this.dialogClose();
+                        });
+                    }
+                });
+            }
             return buttons;
         }
 
@@ -85,6 +104,7 @@ namespace Kun.Stock {
 
                 this.toolbar.findButton('reject-button').hide();
                 this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('unAudit-button').hide();
 
 
             } else if (this.entity.Status == Stock.Enums.BillStatus.Commited) {
@@ -97,6 +117,7 @@ namespace Kun.Stock {
 
                 this.toolbar.findButton('reject-button').show();
                 this.toolbar.findButton('audit-button').show();
+                this.toolbar.findButton('unAudit-button').hide();
             }
             else if (this.entity.Status == Stock.Enums.BillStatus.Audited) {
                 Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
@@ -107,6 +128,7 @@ namespace Kun.Stock {
 
                 this.toolbar.findButton('reject-button').hide();
                 this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('unAudit-button').show();
             }
         }
     }

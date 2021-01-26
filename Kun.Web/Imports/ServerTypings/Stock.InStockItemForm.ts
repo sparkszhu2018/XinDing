@@ -11,6 +11,8 @@
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
         LotId: Serenity.LookupEditor;
+        WarehouseId: Serenity.LookupEditor;
+        PositionId: Serenity.LookupEditor;
     }
 
     export class InStockItemForm extends Serenity.PrefixedContext {
@@ -40,7 +42,9 @@
                     'BuyAmount', w2,
                     'SalePrice', w2,
                     'SaleAmount', w2,
-                    'LotId', w0
+                    'LotId', w0,
+                    'WarehouseId', w0,
+                    'PositionId', w0
                 ]);
             }
         }

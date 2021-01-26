@@ -1445,7 +1445,8 @@ declare namespace Kun.Ops.Enums {
         Edit = 10,
         Reject = 20,
         Commited = 30,
-        Audited = 50
+        Audited = 50,
+        UnAudited = 60
     }
 }
 declare namespace Kun.Ops.Enums {
@@ -1901,7 +1902,8 @@ declare namespace Kun.Sell.Enums {
         Edit = 10,
         Reject = 20,
         Commited = 30,
-        Audited = 50
+        Audited = 50,
+        UnAudited = 60
     }
 }
 declare namespace Kun.Sell.Enums {
@@ -1981,6 +1983,8 @@ declare namespace Kun.Sell {
         BuyPrice?: number;
         BuyAmount?: number;
         HeadDate?: string;
+        CustomerId?: string;
+        CustomerName?: string;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -2015,7 +2019,9 @@ declare namespace Kun.Sell {
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
-            HeadDate = "HeadDate"
+            HeadDate = "HeadDate",
+            CustomerId = "CustomerId",
+            CustomerName = "CustomerName"
         }
     }
 }
@@ -2086,6 +2092,7 @@ declare namespace Kun.Sell {
         function Commit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Audit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Reject(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function UnAudit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Create(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2095,6 +2102,7 @@ declare namespace Kun.Sell {
             Commit = "Sell/SaleOrder/Commit",
             Audit = "Sell/SaleOrder/Audit",
             Reject = "Sell/SaleOrder/Reject",
+            UnAudit = "Sell/SaleOrder/UnAudit",
             Create = "Sell/SaleOrder/Create",
             Update = "Sell/SaleOrder/Update",
             Delete = "Sell/SaleOrder/Delete",
@@ -2306,6 +2314,7 @@ declare namespace Kun.Stock {
         const baseUrl = "Stock/ChangeStock";
         function Commit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Audit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function UnAudit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Reject(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Create(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2315,6 +2324,7 @@ declare namespace Kun.Stock {
         const enum Methods {
             Commit = "Stock/ChangeStock/Commit",
             Audit = "Stock/ChangeStock/Audit",
+            UnAudit = "Stock/ChangeStock/UnAudit",
             Reject = "Stock/ChangeStock/Reject",
             Create = "Stock/ChangeStock/Create",
             Update = "Stock/ChangeStock/Update",
@@ -2329,7 +2339,8 @@ declare namespace Kun.Stock.Enums {
         Edit = 10,
         Reject = 20,
         Commited = 30,
-        Audited = 50
+        Audited = 50,
+        UnAudited = 60
     }
 }
 declare namespace Kun.Stock.Enums {
@@ -2397,6 +2408,8 @@ declare namespace Kun.Stock {
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
         LotId: Serenity.LookupEditor;
+        WarehouseId: Serenity.LookupEditor;
+        PositionId: Serenity.LookupEditor;
     }
     class InStockItemForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -2540,8 +2553,8 @@ declare namespace Kun.Stock {
         const baseUrl = "Stock/InStock";
         function Commit(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Audit(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Reject(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function UnAudit(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Reject(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Create(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<InStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2550,8 +2563,8 @@ declare namespace Kun.Stock {
         const enum Methods {
             Commit = "Stock/InStock/Commit",
             Audit = "Stock/InStock/Audit",
-            Reject = "Stock/InStock/Reject",
             UnAudit = "Stock/InStock/UnAudit",
+            Reject = "Stock/InStock/Reject",
             Create = "Stock/InStock/Create",
             Update = "Stock/InStock/Update",
             Delete = "Stock/InStock/Delete",
@@ -4147,4 +4160,8 @@ declare namespace Kun.Sys {
         protected getService(): string;
         constructor(container: JQuery);
     }
+}
+declare namespace Kun.Sell {
+}
+declare namespace Kun.Stock {
 }

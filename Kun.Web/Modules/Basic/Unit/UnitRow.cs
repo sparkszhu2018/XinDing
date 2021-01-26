@@ -24,7 +24,7 @@ namespace Kun.Basic.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("编码"), Size(50), QuickSearch, NotNull]
+        [DisplayName("编码"), Size(50), QuickSearch, NotNull, Unique]
         public String Code
         {
             get { return Fields.Code[this]; }

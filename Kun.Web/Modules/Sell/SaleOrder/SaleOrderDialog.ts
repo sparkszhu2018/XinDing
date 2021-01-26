@@ -46,7 +46,7 @@ namespace Kun.Sell {
                     });
                 }
             });
-            if (Q.Authorization.hasPermission("Ops:Maintenance:Approve")) {
+            if (Q.Authorization.hasPermission("Sell:SaleOrder:Approve")) {
                 buttons.push({
                     title: "审核",
                     icon: "fa-star",
@@ -74,12 +74,30 @@ namespace Kun.Sell {
                     }
                 });
             }
+            if (Q.Authorization.hasPermission("Sell:SaleOrder:UnApprove")) {
+                buttons.push({
+                    title: "反审核",
+                    icon: "fa-reply-all",
+                    cssClass: "unAudit-button",
+                    onClick: () => {
+                        Sell.SaleOrderService.UnAudit({
+                            EntityId: this.entityId
+                        }, r => {
+                            Q.notifySuccess("反审核成功!");
+                            this.dialogClose();
+                        });
+                    }
+                });
+            }
             return buttons;
         }
 
         protected updateInterface() {
             super.updateInterface();
-            if (this.entity.Status == Sell.Enums.BillStatus.Edit || this.entity.Status == Sell.Enums.BillStatus.Reject) {
+            if (this.entity.Status == Sell.Enums.BillStatus.Edit
+                || this.entity.Status == Sell.Enums.BillStatus.Reject
+                || this.entity.Status == Sell.Enums.BillStatus.UnAudited
+            ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
                 this.toolbar.findButton('submit-button').show();
@@ -88,7 +106,7 @@ namespace Kun.Sell {
 
                 this.toolbar.findButton('reject-button').hide();
                 this.toolbar.findButton('audit-button').hide();
-
+                this.toolbar.findButton('unAudit-button').hide(); 
 
             } else if (this.entity.Status == Sell.Enums.BillStatus.Commited) {
 
@@ -100,6 +118,7 @@ namespace Kun.Sell {
 
                 this.toolbar.findButton('reject-button').show();
                 this.toolbar.findButton('audit-button').show();
+                this.toolbar.findButton('unAudit-button').hide(); 
             }
             else if (this.entity.Status == Sell.Enums.BillStatus.Audited) {
                 Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
@@ -109,7 +128,8 @@ namespace Kun.Sell {
                 this.toolbar.findButton('delete-button').hide();
 
                 this.toolbar.findButton('reject-button').hide();
-                this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('audit-button').hide(); 
+                this.toolbar.findButton('unAudit-button').show(); 
             }
         }
     }

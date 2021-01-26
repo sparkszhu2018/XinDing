@@ -4,6 +4,7 @@
 
         export declare function Commit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Audit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function UnAudit(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Reject(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Create(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<ChangeStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -14,6 +15,7 @@
         export declare const enum Methods {
             Commit = "Stock/ChangeStock/Commit",
             Audit = "Stock/ChangeStock/Audit",
+            UnAudit = "Stock/ChangeStock/UnAudit",
             Reject = "Stock/ChangeStock/Reject",
             Create = "Stock/ChangeStock/Create",
             Update = "Stock/ChangeStock/Update",
@@ -25,6 +27,7 @@
         [
             'Commit', 
             'Audit', 
+            'UnAudit', 
             'Reject', 
             'Create', 
             'Update', 

@@ -24,6 +24,8 @@
         BuyPrice?: number;
         BuyAmount?: number;
         HeadDate?: string;
+        CustomerId?: string;
+        CustomerName?: string;
     }
 
     export namespace SaleOrderItemRow {
@@ -60,7 +62,9 @@
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
-            HeadDate = "HeadDate"
+            HeadDate = "HeadDate",
+            CustomerId = "CustomerId",
+            CustomerName = "CustomerName"
         }
     }
 }

@@ -125,6 +125,45 @@ namespace Kun.Stock.Repositories
                 }
                 n.Entity.Items = items; //反写批号到入库单明细
             }
+            else if (Status == BillStatus.UnAudited) //反审核
+            {
+                //下游单据验证 待开发
+
+
+
+                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+                var stockRep = new StockDataRepository();
+                var moveRep = new MoveRecordRepository();
+                foreach (var m in items)
+                {
+                    if (m.MaterialCode == "10000000") //虚拟物料跳过
+                        continue;
+
+                    // 删除库存记录数据
+                    var movField = MoveRecordRow.Fields;
+                    var mov = uow.Connection.TrySingle<MoveRecordRow>(movField.IsActive == 1
+                        && movField.BizBillId == (Guid)m.HeadId && movField.BizItemId == (Guid)m.Id);
+                    if (mov == null)
+                    {
+                        throw new Exception($"{m.MaterialCode},库存变更记录不存在,反审核失败!");
+                    }
+                    moveRep.Delete(uow, new DeleteRequest { EntityId = mov.Id });
+
+                    //取消增加库存数量
+                    var stock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = mov.ToStockId }).Entity;
+                    stockRep.Update(uow, new SaveRequest<StockDataRow>
+                    {
+                        Entity = new StockDataRow
+                        {
+                            Id = stock.Id,
+                            Qty = stock.Qty - m.ConfirmQty,
+                            AvailableQty = stock.AvailableQty - m.ConfirmQty,
+                            IsActive = Administration.Entities.ActiveStatus.Active
+                        }
+                    });
+
+                }
+            }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }
 

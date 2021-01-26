@@ -72,6 +72,39 @@ namespace Kun.Sell.Repositories
                     moveRep.Create(uow, new SaveRequest<MoveRecordRow> { Entity = mov });
                 }
             }
+            else if (Status == BillStatus.UnAudited) //反审核
+            {
+                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Materials;
+                var stockRep = new StockDataRepository();
+                var moveRep = new MoveRecordRepository();
+                foreach (var m in items)
+                {
+                    if (m.MaterialCode == "10000000") //虚拟物料跳过
+                        continue;
+
+                    //取消扣减库存数量
+                    var stock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.StockDataId }).Entity;
+                    stockRep.Update(uow, new SaveRequest<StockDataRow>
+                    {
+                        Entity = new StockDataRow
+                        {
+                            Id = m.StockDataId,
+                            Qty = stock.Qty + m.Qty,
+                            AvailableQty = stock.AvailableQty + m.Qty,
+                            IsActive = Administration.Entities.ActiveStatus.Active
+                        }
+                    });
+                    // 删除库存记录数据
+                    var movField = MoveRecordRow.Fields;
+                    var mov = uow.Connection.TrySingle<MoveRecordRow>(movField.IsActive == 1
+                        && movField.BizBillId == (Guid)m.HeadId && movField.BizItemId == (Guid)m.Id);
+                    if (mov == null)
+                    {
+                        throw new Exception($"行{m.Serial},库存变更记录不存在,反审核失败!");
+                    }
+                    moveRep.Delete(uow, new DeleteRequest { EntityId = mov.Id });
+                }
+            }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }
          

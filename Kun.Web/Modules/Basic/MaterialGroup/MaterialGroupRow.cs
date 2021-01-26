@@ -23,7 +23,7 @@ namespace Kun.Basic.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("编号"), Size(50), QuickSearch, NotNull]
+        [DisplayName("编号"), Size(50), QuickSearch, NotNull,Unique,SortOrder(1)]
         [MaskedEditor(Mask = "9999")]
         public String Code
         {

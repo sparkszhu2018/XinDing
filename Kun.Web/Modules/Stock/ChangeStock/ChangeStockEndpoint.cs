@@ -25,7 +25,10 @@ namespace Kun.Stock.Endpoints
         {
             return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Audited);
         }
-
+        public SaveResponse UnAudit(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.UnAudited);
+        }
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse Reject(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

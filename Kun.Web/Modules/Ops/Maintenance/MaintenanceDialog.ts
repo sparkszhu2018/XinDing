@@ -92,6 +92,22 @@ namespace Kun.Ops {
                     }
                 });
             }
+
+            if (Q.Authorization.hasPermission("Ops:Maintenance:UnApprove")) {
+                buttons.push({
+                    title: "反审核",
+                    icon: "fa-reply-all",
+                    cssClass: "unAudit-button",
+                    onClick: () => {
+                        Ops.MaintenanceService.UnAudit({
+                            EntityId: this.entityId
+                        }, r => {
+                            Q.notifySuccess("反审核成功!");
+                            this.dialogClose();
+                        });
+                    }
+                }); 
+            }
             return buttons;
         }
 
@@ -106,6 +122,7 @@ namespace Kun.Ops {
 
                 this.toolbar.findButton('reject-button').hide();
                 this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('unAudit-button').hide();
 
 
             } else if (this.entity.Status == Ops.Enums.BillStatus.Commited) {
@@ -118,6 +135,7 @@ namespace Kun.Ops {
 
                 this.toolbar.findButton('reject-button').show();
                 this.toolbar.findButton('audit-button').show();
+                this.toolbar.findButton('unAudit-button').hide();
             }
             else if (this.entity.Status == Ops.Enums.BillStatus.Audited) {
                 Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
@@ -128,6 +146,7 @@ namespace Kun.Ops {
 
                 this.toolbar.findButton('reject-button').hide();
                 this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('unAudit-button').show();
             }
         }
     }

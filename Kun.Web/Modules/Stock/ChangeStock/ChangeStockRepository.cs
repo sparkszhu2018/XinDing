@@ -103,6 +103,48 @@ namespace Kun.Stock.Repositories
 
                 }
             }
+            else if (Status == BillStatus.UnAudited) //反审核
+            {
+                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+                var stockRep = new StockDataRepository();
+                var moveRep = new MoveRecordRepository();
+                foreach (var m in items)
+                {  
+                    //取消移出库存数量
+                    var fromStock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.FromStockId }).Entity;
+                    stockRep.Update(uow, new SaveRequest<StockDataRow>
+                    {
+                        Entity = new StockDataRow
+                        {
+                            Id = m.FromStockId,
+                            Qty = fromStock.Qty + m.Qty,
+                            AvailableQty = fromStock.AvailableQty + m.Qty,
+                            IsActive = Administration.Entities.ActiveStatus.Active
+                        }
+                    });
+                    //取消移入库存数量
+                    var toStock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.ToStockId }).Entity;
+                    stockRep.Update(uow, new SaveRequest<StockDataRow>
+                    {
+                        Entity = new StockDataRow
+                        {
+                            Id = m.ToStockId,
+                            Qty = toStock.Qty - m.Qty,
+                            AvailableQty = toStock.AvailableQty + m.Qty
+                        }
+                    });
+
+                    // 删除库存记录数据
+                    var movField = MoveRecordRow.Fields;
+                    var mov = uow.Connection.TrySingle<MoveRecordRow>(movField.IsActive == 1
+                        && movField.BizBillId == (Guid)m.HeadId && movField.BizItemId == (Guid)m.Id);
+                    if (mov == null)
+                    {
+                        throw new Exception($"行{m.Serial},库存变更记录不存在,反审核失败!");
+                    }
+                    moveRep.Delete(uow, new DeleteRequest { EntityId = mov.Id });
+                }
+            }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }
 

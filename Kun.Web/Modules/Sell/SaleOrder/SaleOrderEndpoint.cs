@@ -31,7 +31,10 @@ namespace Kun.Sell.Endpoints
         {
             return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Reject);
         }
-
+        public SaveResponse UnAudit(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.UnAudited);
+        }
 
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)

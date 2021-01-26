@@ -21,6 +21,8 @@ namespace Kun.Sell.Enums
             Commited = 30,
             [Description("已审核")]
             Audited = 50,
+            [Description("重新审核")]
+            UnAudited = 60,
         }
 
         [EnumKey("SellEnums.SaleOrder")]

@@ -27,6 +27,10 @@ namespace Kun.Stock.Forms
         public Decimal BuyAmount { get; set; }
         public Decimal SalePrice { get; set; }
         public Decimal SaleAmount { get; set; }
-        public Guid LotId { get; set; } 
+        public Guid LotId { get; set; }
+
+        public Guid WarehouseId { get; set; }
+
+        public Guid PositionId { get; set; }
     }
 }

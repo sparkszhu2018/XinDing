@@ -199,7 +199,7 @@ namespace Kun.Stock.Entities
             set { Fields.LotCode[this] = value; }
         } 
 
-        [DisplayName("仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), 
+        [DisplayName("仓库"), LookupEditor(typeof(WarehouseRow)), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), 
             LeftJoin("jWarehouse"), TextualField("WarehouseName")]
         public Guid? WarehouseId
         {
@@ -214,7 +214,7 @@ namespace Kun.Stock.Entities
             set { Fields.WarehouseName[this] = value; }
         }
 
-        [DisplayName("仓位"), ForeignKey("[dbo].[Basic_Position]", "Id"),
+        [DisplayName("仓位"), LookupEditor(typeof(PositionRow), CascadeFrom = "WarehouseId", CascadeField = "WarehouseId"), ForeignKey("[dbo].[Basic_Position]", "Id"),
            LeftJoin("jPosition"), TextualField("PositionName")]
         public Guid? PositionId
         {

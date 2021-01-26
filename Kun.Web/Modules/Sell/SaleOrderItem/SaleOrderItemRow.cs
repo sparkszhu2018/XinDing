@@ -53,7 +53,20 @@ namespace Kun.Sell.Entities
             set { Fields.HeadDate[this] = value; }
         }
 
+        [DisplayName("客户"), Expression("jHead.[CustomerId]"),
+ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName")]
+        public Guid? CustomerId
+        {
+            get { return Fields.CustomerId[this]; }
+            set { Fields.CustomerId[this] = value; }
+        }
 
+        [DisplayName("客户"), Expression("jCustomer.[Name]"), ReadOnly(true)]
+        public String CustomerName
+        {
+            get { return Fields.CustomerName[this]; }
+            set { Fields.CustomerName[this] = value; }
+        }
 
 
         [DisplayName("行号"), NotNull, SortOrder(1)]
@@ -239,7 +252,11 @@ namespace Kun.Sell.Entities
             public DecimalField BuyAmount;
             public DateTimeField HeadDate;
 
-            
+            public GuidField CustomerId;
+
+            public StringField CustomerName;
+
+
         }
     }
 }

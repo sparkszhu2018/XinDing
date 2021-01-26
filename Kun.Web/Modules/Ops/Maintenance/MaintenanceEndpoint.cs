@@ -31,13 +31,12 @@ namespace Kun.Ops.Endpoints
         {
             return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Reject);
         }
-
-        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse UnAudit(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
-
-            return new MyRepository().Update(uow, request);
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.UnAudited);
         }
+
+      
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

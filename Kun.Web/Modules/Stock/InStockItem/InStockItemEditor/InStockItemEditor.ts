@@ -35,7 +35,12 @@ namespace Kun.Stock {
             row.UnitName = Basic.UnitRow.getLookup().itemById[material.UnitId].Name;
             // row.InvoiceType = Serenity.EnumFormatter.format(Stock.Enums.InvoiceType, Q.toId(row.InvoiceType)); 
             row.SupplierName = Basic.SupplierRow.getLookup().itemById[row.SupplierId].Name;
-
+            if (row.WarehouseId != null) {
+                row.WarehouseName = Basic.WarehouseRow.getLookup().itemById[row.WarehouseId].Name;
+            }
+            if (row.PositionId != null) {
+                row.PositionName = Basic.PositionRow.getLookup().itemById[row.PositionId].Name;
+            }
             return true;
         }
 

@@ -5,6 +5,7 @@
         export declare function Commit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Audit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Reject(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function UnAudit(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Create(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<SaleOrderRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -15,6 +16,7 @@
             Commit = "Sell/SaleOrder/Commit",
             Audit = "Sell/SaleOrder/Audit",
             Reject = "Sell/SaleOrder/Reject",
+            UnAudit = "Sell/SaleOrder/UnAudit",
             Create = "Sell/SaleOrder/Create",
             Update = "Sell/SaleOrder/Update",
             Delete = "Sell/SaleOrder/Delete",
@@ -26,6 +28,7 @@
             'Commit', 
             'Audit', 
             'Reject', 
+            'UnAudit', 
             'Create', 
             'Update', 
             'Delete', 

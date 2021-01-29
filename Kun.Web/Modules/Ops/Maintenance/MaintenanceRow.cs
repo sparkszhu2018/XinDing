@@ -80,7 +80,13 @@ namespace Kun.Ops.Entities
             get { return Fields.Reporter[this]; }
             set { Fields.Reporter[this] = value; }
         }
-
+        [DisplayName("报修人电话"), Size(50)]
+        public String ReporterPhone
+        {
+            get { return Fields.ReporterPhone[this]; }
+            set { Fields.ReporterPhone[this] = value; }
+        }
+        
         [DisplayName("报修时间"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? ReportDate
@@ -304,6 +310,7 @@ namespace Kun.Ops.Entities
             public DateTimeField Date;
             public GuidField VendorId;
             public StringField Reporter;
+            public StringField ReporterPhone;
             public DateTimeField ReportDate;
             public GuidField ReportCustomerId;
             public GuidField SettleCustomerId;

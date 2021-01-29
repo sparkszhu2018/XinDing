@@ -41,9 +41,11 @@
                         <td>报修部门:</td>
                         <td>@Model.ReportCustomerName</td>
                     </tr>
-                    <tr> 
+                    <tr>
+                        <td>电话:</td>
+                        <td>@Model.ReporterPhone</td>
                         <td>地址:</td>
-                        <td colspan="5">@Model.Address</td>
+                        <td colspan="3">@Model.Address</td>
                     </tr>
 
                 </tbody>
@@ -94,15 +96,15 @@
                     @if ((bool)Model.ChangeDevice)
                     {
                         <tr>
-                            <td colspan="7">物料列表:</td>
+                            <td colspan="4">物料列表:</td>
                         </tr>
                         <tr>
                             <td style="min-width:200px;">名称</td>
                             <td>规格</td>
                             <td width="65px">数量</td>
                             <td width="55px">单位</td>
-                            <td width="70px">单价</td>
-                            <td width="70px">金额(元)</td>
+                            @*<td width="70px">单价</td>
+                            <td width="70px">金额(元)</td>*@
                         </tr>
                         @foreach (var m in Model.Materials)
                         {
@@ -112,18 +114,18 @@
                                 <td>@m.Specification</td>
                                 <td>@qty</td>
                                 <td>@m.UnitName</td>
-                                <td>@m.SalePrice</td>
-                                <td>@m.SaleAmount</td>
+                                @*<td>@m.SalePrice</td>
+                                <td>@m.SaleAmount</td>*@
                             </tr>
                         }
-                        <tr>
+                        @*<tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>合计:</td>
-                            <td>@materialAmount</td>
-                        </tr>
+                             <td>合计:</td>
+                            <td>@materialAmount</td> 
+                        </tr>*@
                     }
 
                 </tbody>
@@ -133,14 +135,22 @@
         <div class="col-sm-12">
             <table class="table table-bordered">
                 <tbody>
-                    <tr>
-                        <td width="15%">技术服务费:</td>
-                        <td width="35%">@manFee (元)</td>
-                        <td width="15%">总计金额:</td>
-                        <td width="35%">@totalAmount (元)</td>
-                    </tr>
-
-                </tbody>
+                    @*<tr>
+            <td width="15%">技术服务费:</td>
+            <td width="35%">@manFee (元)</td>
+            <td width="15%">总计金额:</td>
+            <td width="35%">@totalAmount (元)</td>
+        </tr>*@
+                    @foreach (var m in Model.Manhours)
+                    {
+                        <tr>
+                            <td width="15%">工时:</td>
+                            <td width="35%">@m.ManhourName</td>
+                            <td width="15%">数量:</td>
+                            <td width="35%">@m.Qty</td>
+                        </tr>
+                    }
+                    </tbody>
             </table>
         </div>
         <div class="col-sm-12">

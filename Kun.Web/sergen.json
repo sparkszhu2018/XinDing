@@ -9,6 +9,12 @@
       "Key": "Kun",
       "Tables": [
         {
+          "Tablename": "dbo.Basic_BizType",
+          "Identifier": "BizType",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.Basic_Customer",
           "Identifier": "Customer",
           "Module": "Basic",
@@ -29,6 +35,12 @@
         {
           "Tablename": "dbo.Basic_Material_Group",
           "Identifier": "MaterialGroup",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Basic_PaymentItem",
+          "Identifier": "PaymentItem",
           "Module": "Basic",
           "PermissionKey": "*"
         },
@@ -90,6 +102,48 @@
           "Tablename": "dbo.OPS_Manhour_Price",
           "Identifier": "ManhourPrice",
           "Module": "Ops",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_BizBill",
+          "Identifier": "BizBill",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_BizItem",
+          "Identifier": "BizItem",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_Info",
+          "Identifier": "ProjectInfo",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_MaterialsBill",
+          "Identifier": "MaterialsBill",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_MaterialsItem",
+          "Identifier": "MaterialsItem",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_ServiceBill",
+          "Identifier": "ServiceBill",
+          "Module": "Project",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Project_ServiceItem",
+          "Identifier": "ServiceItem",
+          "Module": "Project",
           "PermissionKey": "*"
         },
         {

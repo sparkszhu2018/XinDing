@@ -8,11 +8,12 @@
         ApproverDate: Serenity.DateEditor;
         VendorId: Serenity.LookupEditor;
         Reporter: Serenity.StringEditor;
+        ReporterPhone: Serenity.StringEditor;
         ReportDate: Serenity.DateEditor;
         ReportCustomerId: Serenity.LookupEditor;
         SettleCustomerId: Serenity.LookupEditor;
         TypeId: Serenity.LookupEditor;
-        Address: Serenity.TextAreaEditor;
+        Address: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         Content: Serenity.TextAreaEditor;
         ChangeDevice: Serenity.BooleanEditor;
@@ -53,11 +54,12 @@
                     'ApproverDate', w2,
                     'VendorId', w3,
                     'Reporter', w0,
+                    'ReporterPhone', w0,
                     'ReportDate', w2,
                     'ReportCustomerId', w3,
                     'SettleCustomerId', w3,
                     'TypeId', w3,
-                    'Address', w4,
+                    'Address', w0,
                     'Description', w4,
                     'Content', w4,
                     'ChangeDevice', w5,

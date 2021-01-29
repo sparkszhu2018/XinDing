@@ -26,13 +26,13 @@ namespace Kun.Ops.Forms
         [Category("业务信息")]
         public Guid VendorId { get; set; }
         public String Reporter { get; set; }
+        public String ReporterPhone { get; set; }
         public DateTime ReportDate { get; set; }
         public Guid ReportCustomerId { get; set; }
         public Guid SettleCustomerId { get; set; } 
 
         public GuidField TypeId { get; set; }
-
-        [TextAreaEditor(Rows = 2)]
+        [TwoThirdWidth]
         public String Address { get; set; }
         [TextAreaEditor(Rows = 2)]
         public String Description { get; set; }

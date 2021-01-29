@@ -6,7 +6,13 @@
     height: 250px;
 }
 
+.s-Ops-MaintenanceDialog .Materials .s-DataGrid {
+    height: 200px;
+}
 
+.s-Ops-MaintenanceDialog .Manhours .s-DataGrid {
+    height: 150px;
+}
 
 .s-Sell-SaleOrderDialog .s-DataGrid {
     height: 300px;

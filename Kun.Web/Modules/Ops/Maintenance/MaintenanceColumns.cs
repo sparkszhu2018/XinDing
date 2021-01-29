@@ -21,6 +21,8 @@ namespace Kun.Ops.Columns
 
         public String VendorName { get; set; }
         public String Reporter { get; set; }
+        public String ReporterPhone { get; set; } 
+        
         public DateTime ReportDate { get; set; } 
         public String ReportCustomerName { get; set; }
         public String SettleCustomerName { get; set; } 

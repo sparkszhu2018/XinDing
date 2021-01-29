@@ -41,6 +41,11 @@ namespace MVC
 
         public static class Basic
         {
+            public static class BizType
+            {
+                public const string BizTypeIndex = "~/Modules/Basic/BizType/BizTypeIndex.cshtml";
+            }
+
             public static class Customer
             {
                 public const string CustomerIndex = "~/Modules/Basic/Customer/CustomerIndex.cshtml";
@@ -59,6 +64,11 @@ namespace MVC
             public static class MaterialGroup
             {
                 public const string MaterialGroupIndex = "~/Modules/Basic/MaterialGroup/MaterialGroupIndex.cshtml";
+            }
+
+            public static class PaymentItem
+            {
+                public const string PaymentItemIndex = "~/Modules/Basic/PaymentItem/PaymentItemIndex.cshtml";
             }
 
             public static class Position
@@ -175,6 +185,45 @@ namespace MVC
             public static class ManhourPrice
             {
                 public const string ManhourPriceIndex = "~/Modules/Ops/ManhourPrice/ManhourPriceIndex.cshtml";
+            }
+
+        }
+
+        public static class Project
+        {
+            public static class BizBill
+            {
+                public const string BizBillIndex = "~/Modules/Project/BizBill/BizBillIndex.cshtml";
+            }
+
+            public static class BizItem
+            {
+                public const string BizItemIndex = "~/Modules/Project/BizItem/BizItemIndex.cshtml";
+            }
+
+            public static class MaterialsBill
+            {
+                public const string MaterialsBillIndex = "~/Modules/Project/MaterialsBill/MaterialsBillIndex.cshtml";
+            }
+
+            public static class MaterialsItem
+            {
+                public const string MaterialsItemIndex = "~/Modules/Project/MaterialsItem/MaterialsItemIndex.cshtml";
+            }
+
+            public static class ProjectInfo
+            {
+                public const string ProjectInfoIndex = "~/Modules/Project/ProjectInfo/ProjectInfoIndex.cshtml";
+            }
+
+            public static class ServiceBill
+            {
+                public const string ServiceBillIndex = "~/Modules/Project/ServiceBill/ServiceBillIndex.cshtml";
+            }
+
+            public static class ServiceItem
+            {
+                public const string ServiceItemIndex = "~/Modules/Project/ServiceItem/ServiceItemIndex.cshtml";
             }
 
         }

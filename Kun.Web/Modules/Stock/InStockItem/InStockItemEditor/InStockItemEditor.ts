@@ -30,15 +30,18 @@ namespace Kun.Stock {
                 Q.notifyError("不得选择虚拟物料!")
                 return false;
             }
+
             row.MaterialName = material.Name;
-            row.MaterialCode = material.Code;
+            row.MaterialCode = material.Code; 
             row.UnitName = Basic.UnitRow.getLookup().itemById[material.UnitId].Name;
-            // row.InvoiceType = Serenity.EnumFormatter.format(Stock.Enums.InvoiceType, Q.toId(row.InvoiceType)); 
+ 
+            row.InvoiceTypeName = Serenity.EnumFormatter.format(Stock.Enums.InvoiceType, Q.toId(row.InvoiceType)); 
+
             row.SupplierName = Basic.SupplierRow.getLookup().itemById[row.SupplierId].Name;
-            if (row.WarehouseId != null) {
-                row.WarehouseName = Basic.WarehouseRow.getLookup().itemById[row.WarehouseId].Name;
+            if (!Q.isEmptyOrNull(row.WarehouseId)) { 
+                row.WarehouseName = Basic.WarehouseRow.getLookup().itemById[row.WarehouseId].Name; 
             }
-            if (row.PositionId != null) {
+            if (!Q.isEmptyOrNull(row.PositionId)) {
                 row.PositionName = Basic.PositionRow.getLookup().itemById[row.PositionId].Name;
             }
             return true;

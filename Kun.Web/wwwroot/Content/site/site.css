@@ -10204,6 +10204,18 @@ button.ui-button {
 .s-Basic-VendorDialog .caption {
   width: 150px;
 }
+.s-Basic-BizTypeDialog > .size {
+  width: 650px;
+}
+.s-Basic-BizTypeDialog .caption {
+  width: 150px;
+}
+.s-Basic-PaymentItemDialog > .size {
+  width: 650px;
+}
+.s-Basic-PaymentItemDialog .caption {
+  width: 150px;
+}
 .s-Stock-DataDialog > .size {
   width: 650px;
 }
@@ -10292,6 +10304,48 @@ button.ui-button {
   width: 650px;
 }
 .s-Sell-SaleOrderItemDialog .caption {
+  width: 150px;
+}
+.s-Project-BizBillDialog > .size {
+  width: 650px;
+}
+.s-Project-BizBillDialog .caption {
+  width: 150px;
+}
+.s-Project-BizItemDialog > .size {
+  width: 650px;
+}
+.s-Project-BizItemDialog .caption {
+  width: 150px;
+}
+.s-Project-ProjectInfoDialog > .size {
+  width: 650px;
+}
+.s-Project-ProjectInfoDialog .caption {
+  width: 150px;
+}
+.s-Project-MaterialsBillDialog > .size {
+  width: 650px;
+}
+.s-Project-MaterialsBillDialog .caption {
+  width: 150px;
+}
+.s-Project-MaterialsItemDialog > .size {
+  width: 650px;
+}
+.s-Project-MaterialsItemDialog .caption {
+  width: 150px;
+}
+.s-Project-ServiceBillDialog > .size {
+  width: 650px;
+}
+.s-Project-ServiceBillDialog .caption {
+  width: 150px;
+}
+.s-Project-ServiceItemDialog > .size {
+  width: 650px;
+}
+.s-Project-ServiceItemDialog .caption {
   width: 150px;
 }
 .s-Toolbar button .button-inner {

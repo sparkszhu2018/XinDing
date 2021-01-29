@@ -10,3 +10,5 @@ using MyPages = Kun.Basic.Pages;
 [assembly: NavigationLink(int.MaxValue, "基础数据/仓库", typeof(MyPages.WarehouseController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/仓位", typeof(MyPages.PositionController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/服务商", typeof(MyPages.VendorController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "基础数据/商务费用类型", typeof(MyPages.BizTypeController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "基础数据/付款方式", typeof(MyPages.PaymentItemController), icon: null)]

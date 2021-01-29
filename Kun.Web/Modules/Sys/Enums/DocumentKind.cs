@@ -26,7 +26,17 @@ namespace Kun.Sys.Enum
         [Description("客户主数据")]
         Customer = 2,
         [Description("供应商主数据")]
-        Supplier = 3
+        Supplier = 3,
+
+
+        [Description("项目")]
+        ProjectInfo = 50,
+        [Description("项目商品")]
+        ProjectMaterials = 51,
+        [Description("项目服务")]
+        ProjectService = 52,
+        [Description("项目商务")]
+        ProjectBiz = 53,
 
     }
      

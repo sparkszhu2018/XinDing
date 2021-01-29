@@ -7,6 +7,7 @@
         Date?: string;
         VendorId?: string;
         Reporter?: string;
+        ReporterPhone?: string;
         ReportDate?: string;
         ReportCustomerId?: string;
         SettleCustomerId?: string;
@@ -52,6 +53,7 @@
             Date = "Date",
             VendorId = "VendorId",
             Reporter = "Reporter",
+            ReporterPhone = "ReporterPhone",
             ReportDate = "ReportDate",
             ReportCustomerId = "ReportCustomerId",
             SettleCustomerId = "SettleCustomerId",

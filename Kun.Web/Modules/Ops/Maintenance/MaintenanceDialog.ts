@@ -113,7 +113,10 @@ namespace Kun.Ops {
 
         protected updateInterface() {
             super.updateInterface();
-            if (this.entity.Status == Ops.Enums.BillStatus.Edit || this.entity.Status == Ops.Enums.BillStatus.Reject) {
+            if (this.entity.Status == Ops.Enums.BillStatus.Edit
+                || this.entity.Status == Ops.Enums.BillStatus.Reject 
+                || this.entity.Status == Enums.BillStatus.UnAudited
+            ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
                 this.toolbar.findButton('submit-button').show();

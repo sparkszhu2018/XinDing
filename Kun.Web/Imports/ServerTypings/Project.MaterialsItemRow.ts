@@ -18,6 +18,15 @@
         WarehouseId?: string;
         PositionId?: string;
         Specification?: string;
+        BillNo?: string;
+        HeadStatus?: Project.Enums.BillStatus;
+        ProjectName?: string;
+        ProjectBillNo?: string;
+        MaterialCode?: string;
+        LotCode?: string;
+        WarehouseName?: string;
+        PositionName?: string;
+        HeadProjectId?: string;
     }
 
     export namespace MaterialsItemRow {
@@ -48,7 +57,16 @@
             LotId = "LotId",
             WarehouseId = "WarehouseId",
             PositionId = "PositionId",
-            Specification = "Specification"
+            Specification = "Specification",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            ProjectName = "ProjectName",
+            ProjectBillNo = "ProjectBillNo",
+            MaterialCode = "MaterialCode",
+            LotCode = "LotCode",
+            WarehouseName = "WarehouseName",
+            PositionName = "PositionName",
+            HeadProjectId = "HeadProjectId"
         }
     }
 }

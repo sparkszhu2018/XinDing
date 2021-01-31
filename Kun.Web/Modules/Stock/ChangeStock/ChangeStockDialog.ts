@@ -95,7 +95,10 @@ namespace Kun.Stock {
 
         protected updateInterface() {
             super.updateInterface();
-            if (this.entity.Status == Stock.Enums.BillStatus.Edit || this.entity.Status == Stock.Enums.BillStatus.Reject) {
+            if (this.entity.Status == Stock.Enums.BillStatus.Edit
+                || this.entity.Status == Stock.Enums.BillStatus.Reject 
+                || this.entity.Status == Project.Enums.BillStatus.UnAudited
+            ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
                 this.toolbar.findButton('submit-button').show();

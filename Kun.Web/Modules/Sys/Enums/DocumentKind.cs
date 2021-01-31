@@ -21,6 +21,9 @@ namespace Kun.Sys.Enum
         [Description("移库单")]
         ChangeStockBill = 40,
 
+        [Description("项目领料单")]
+        ProjectMaterialsBill = 60,
+
         [Description("物料主数据")]
         Material = 1,
         [Description("客户主数据")]

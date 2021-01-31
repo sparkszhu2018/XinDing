@@ -1,13 +1,14 @@
 ﻿namespace Kun.Project {
     export interface MaterialsBillForm {
         BillNo: Serenity.StringEditor;
-        BillType: Serenity.IntegerEditor;
-        Status: Serenity.IntegerEditor;
+        Status: Serenity.EnumEditor;
         Date: Serenity.DateEditor;
-        ProjectId: Serenity.StringEditor;
-        Note: Serenity.StringEditor;
-        ApproverId: Serenity.StringEditor;
+        InsertUserId: Serenity.LookupEditor;
+        ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
+        ProjectId: Serenity.LookupEditor;
+        Note: Serenity.StringEditor;
+        Materials: MaterialsItemEditor;
     }
 
     export class MaterialsBillForm extends Serenity.PrefixedContext {
@@ -22,18 +23,21 @@
 
                 var s = Serenity;
                 var w0 = s.StringEditor;
-                var w1 = s.IntegerEditor;
+                var w1 = s.EnumEditor;
                 var w2 = s.DateEditor;
+                var w3 = s.LookupEditor;
+                var w4 = MaterialsItemEditor;
 
                 Q.initFormType(MaterialsBillForm, [
                     'BillNo', w0,
-                    'BillType', w1,
                     'Status', w1,
                     'Date', w2,
-                    'ProjectId', w0,
+                    'InsertUserId', w3,
+                    'ApproverId', w3,
+                    'ApproverDate', w2,
+                    'ProjectId', w3,
                     'Note', w0,
-                    'ApproverId', w0,
-                    'ApproverDate', w2
+                    'Materials', w4
                 ]);
             }
         }

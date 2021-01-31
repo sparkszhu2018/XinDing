@@ -5,9 +5,14 @@
         HeadId?: string;
         Serial?: number;
         Name?: string;
-        SalePrice?: number;
+        Price?: number;
         Qty?: number;
-        SaleAmount?: number;
+        Amount?: number;
+        BillNo?: string;
+        HeadStatus?: Project.Enums.BillStatus;
+        ProjectName?: string;
+        ProjectBillNo?: string;
+        HeadProjectId?: string;
     }
 
     export namespace ServiceItemRow {
@@ -26,9 +31,14 @@
             HeadId = "HeadId",
             Serial = "Serial",
             Name = "Name",
-            SalePrice = "SalePrice",
+            Price = "Price",
             Qty = "Qty",
-            SaleAmount = "SaleAmount"
+            Amount = "Amount",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            ProjectName = "ProjectName",
+            ProjectBillNo = "ProjectBillNo",
+            HeadProjectId = "HeadProjectId"
         }
     }
 }

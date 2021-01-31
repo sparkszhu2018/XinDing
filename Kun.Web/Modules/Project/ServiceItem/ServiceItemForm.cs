@@ -12,13 +12,11 @@ namespace Kun.Project.Forms
     [FormScript("Project.ServiceItem")]
     [BasedOnRow(typeof(Entities.ServiceItemRow), CheckNames = true)]
     public class ServiceItemForm
-    {
-        public Guid ProjectId { get; set; }
-        public Guid HeadId { get; set; }
+    { 
         public Int32 Serial { get; set; }
         public String Name { get; set; }
-        public Decimal SalePrice { get; set; }
+        public Decimal Price { get; set; }
         public Decimal Qty { get; set; }
-        public Decimal SaleAmount { get; set; }
+        public Decimal Amount { get; set; }
     }
 }

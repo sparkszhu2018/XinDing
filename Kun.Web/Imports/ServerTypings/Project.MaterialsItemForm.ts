@@ -1,22 +1,19 @@
 ﻿namespace Kun.Project {
     export interface MaterialsItemForm {
-        ProjectId: Serenity.StringEditor;
-        HeadId: Serenity.StringEditor;
-        Serial: Serenity.IntegerEditor;
-        StockDataId: Serenity.StringEditor;
-        MaterialId: Serenity.StringEditor;
+        MaterialId: Serenity.LookupEditor;
         MaterialName: Serenity.StringEditor;
-        UnitId: Serenity.StringEditor;
+        Serial: Serenity.IntegerEditor;
+        UnitId: Serenity.LookupEditor;
         UnitName: Serenity.StringEditor;
         Qty: Serenity.DecimalEditor;
-        BuyPrice: Serenity.DecimalEditor;
-        BuyAmount: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
-        LotId: Serenity.StringEditor;
-        WarehouseId: Serenity.StringEditor;
-        PositionId: Serenity.StringEditor;
+        BuyPrice: Serenity.DecimalEditor;
+        BuyAmount: Serenity.DecimalEditor;
         Specification: Serenity.StringEditor;
+        LotId: Serenity.LookupEditor;
+        WarehouseId: Serenity.LookupEditor;
+        PositionId: Serenity.LookupEditor;
     }
 
     export class MaterialsItemForm extends Serenity.PrefixedContext {
@@ -30,28 +27,26 @@
                 MaterialsItemForm.init = true;
 
                 var s = Serenity;
-                var w0 = s.StringEditor;
-                var w1 = s.IntegerEditor;
-                var w2 = s.DecimalEditor;
+                var w0 = s.LookupEditor;
+                var w1 = s.StringEditor;
+                var w2 = s.IntegerEditor;
+                var w3 = s.DecimalEditor;
 
                 Q.initFormType(MaterialsItemForm, [
-                    'ProjectId', w0,
-                    'HeadId', w0,
-                    'Serial', w1,
-                    'StockDataId', w0,
                     'MaterialId', w0,
-                    'MaterialName', w0,
+                    'MaterialName', w1,
+                    'Serial', w2,
                     'UnitId', w0,
-                    'UnitName', w0,
-                    'Qty', w2,
-                    'BuyPrice', w2,
-                    'BuyAmount', w2,
-                    'SalePrice', w2,
-                    'SaleAmount', w2,
+                    'UnitName', w1,
+                    'Qty', w3,
+                    'SalePrice', w3,
+                    'SaleAmount', w3,
+                    'BuyPrice', w3,
+                    'BuyAmount', w3,
+                    'Specification', w1,
                     'LotId', w0,
                     'WarehouseId', w0,
-                    'PositionId', w0,
-                    'Specification', w0
+                    'PositionId', w0
                 ]);
             }
         }

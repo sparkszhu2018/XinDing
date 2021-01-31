@@ -8,9 +8,10 @@ namespace Kun.Project.Entities
     using System;
     using System.ComponentModel;
     using System.IO;
+    using static Kun.Project.Enums.ProjectEnums;
 
     [ConnectionKey("Kun"), Module("Project"), TableName("[dbo].[Project_ServiceItem]")]
-    [DisplayName("Service Item"), InstanceName("Service Item")]
+    [DisplayName("服务费明细"), InstanceName("服务费明细")]
     [ReadPermission("*")]
     [ModifyPermission("*")]
     public sealed class ServiceItemRow : Kun.Administration.Entities.LoggingAllRow, IIdRow, INameRow
@@ -22,53 +23,89 @@ namespace Kun.Project.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("Project Id"), NotNull]
+        [DisplayName("项目"), LookupEditor(typeof(ProjectInfoRow)),
+            ForeignKey("[dbo].[Project_Info]", "Id"), LeftJoin("jProject")]
         public Guid? ProjectId
         {
             get { return Fields.ProjectId[this]; }
             set { Fields.ProjectId[this] = value; }
         }
 
-        [DisplayName("Head Id"), NotNull]
+        [DisplayName("项目"), Expression("jProject.[Name]")]
+        public String ProjectName
+        {
+            get { return Fields.ProjectName[this]; }
+            set { Fields.ProjectName[this] = value; }
+        }
+
+        [DisplayName("项目编码"), Expression("jProject.[BillNo]")]
+        public String ProjectBillNo
+        {
+            get { return Fields.ProjectBillNo[this]; }
+            set { Fields.ProjectBillNo[this] = value; }
+        }
+
+        [DisplayName("Head Id"), ForeignKey("[dbo].[Project_ServiceBill]", "Id"), LeftJoin("jHead"), Updatable(false)]
         public Guid? HeadId
         {
             get { return Fields.HeadId[this]; }
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("Serial"), NotNull]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        public String BillNo
+        {
+            get { return Fields.BillNo[this]; }
+            set { Fields.BillNo[this] = value; }
+        }
+
+        [DisplayName("状态"), Expression("jHead.[Status]")]
+        public BillStatus? HeadStatus
+        {
+            get { return (BillStatus?)Fields.HeadStatus[this]; }
+            set { Fields.HeadStatus[this] = (Int32)value; }
+        }
+
+        [DisplayName("Head Project Id"),Expression("jHead.[ProjectId]"), MinSelectLevel(SelectLevel.Always)]
+        public Guid? HeadProjectId
+        {
+            get { return Fields.HeadProjectId[this]; }
+            set { Fields.HeadProjectId[this] = value; }
+        }
+
+        [DisplayName("行号"), NotNull, ReadOnly(true)]
         public Int32? Serial
         {
             get { return Fields.Serial[this]; }
             set { Fields.Serial[this] = value; }
         }
 
-        [DisplayName("Name"), Size(200), QuickSearch]
+        [DisplayName("名称"), Size(200), QuickSearch]
         public String Name
         {
             get { return Fields.Name[this]; }
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Sale Price"), Size(18), Scale(2), NotNull]
-        public Decimal? SalePrice
+        [DisplayName("单价"), Size(18), Scale(2), NotNull]
+        public Decimal? Price
         {
-            get { return Fields.SalePrice[this]; }
-            set { Fields.SalePrice[this] = value; }
+            get { return Fields.Price[this]; }
+            set { Fields.Price[this] = value; }
         }
 
-        [DisplayName("Qty"), Size(18), Scale(4), NotNull]
+        [DisplayName("数量"), Size(18), Scale(2), NotNull]
         public Decimal? Qty
         {
             get { return Fields.Qty[this]; }
             set { Fields.Qty[this] = value; }
         }
 
-        [DisplayName("Sale Amount"), Size(18), Scale(2), NotNull]
-        public Decimal? SaleAmount
+        [DisplayName("金额"), Size(18), Scale(2), NotNull, ReadOnly(true)]
+        public Decimal? Amount
         {
-            get { return Fields.SaleAmount[this]; }
-            set { Fields.SaleAmount[this] = value; }
+            get { return Fields.Amount[this]; }
+            set { Fields.Amount[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -95,9 +132,16 @@ namespace Kun.Project.Entities
             public GuidField HeadId;
             public Int32Field Serial;
             public StringField Name;
-            public DecimalField SalePrice;
+            public DecimalField Price;
             public DecimalField Qty;
-            public DecimalField SaleAmount;
+            public DecimalField Amount;
+
+            public StringField BillNo;
+            public Int32Field HeadStatus;
+            public StringField ProjectName;
+            public StringField ProjectBillNo;
+            public GuidField HeadProjectId;
+            
         }
     }
 }

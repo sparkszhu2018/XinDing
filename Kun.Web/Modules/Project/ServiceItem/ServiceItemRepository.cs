@@ -45,7 +45,8 @@ namespace Kun.Project.Repositories
                 if (IsCreate)
                 {
                     Row.Id = Row.Id ?? Guid.NewGuid();
-                }
+                } 
+                Row.ProjectId = Row.HeadProjectId; 
             }
         }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }

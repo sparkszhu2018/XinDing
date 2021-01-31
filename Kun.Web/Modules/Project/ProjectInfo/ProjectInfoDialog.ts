@@ -2,6 +2,7 @@
 namespace Kun.Project {
 
     @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.panel()
     export class ProjectInfoDialog extends Serenity.EntityDialog<ProjectInfoRow, any> {
         protected getFormKey() { return ProjectInfoForm.formKey; }
         protected getIdProperty() { return ProjectInfoRow.idProperty; }

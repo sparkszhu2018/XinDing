@@ -3,7 +3,7 @@
         Id?: string;
         BillNo?: string;
         BillType?: number;
-        Status?: number;
+        Status?: Project.Enums.BillStatus;
         Name?: string;
         BudgetAmount?: number;
         ActualAmount?: number;
@@ -17,12 +17,18 @@
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        CustomerName?: string;
+        PaymentName?: string;
+        ApproverName?: string;
+        Materials?: MaterialsItemRow[];
+        BizItems?: BizItemRow[];
+        ServiceItems?: ServiceItemRow[];
     }
 
     export namespace ProjectInfoRow {
         export const idProperty = 'Id';
         export const isActiveProperty = 'IsActive';
-        export const nameProperty = 'BillNo';
+        export const nameProperty = 'Name';
         export const localTextPrefix = 'Project.ProjectInfo';
         export const lookupKey = 'Project.ProjectInfo';
 
@@ -51,7 +57,13 @@
             Payment = "Payment",
             Note = "Note",
             ApproverId = "ApproverId",
-            ApproverDate = "ApproverDate"
+            ApproverDate = "ApproverDate",
+            CustomerName = "CustomerName",
+            PaymentName = "PaymentName",
+            ApproverName = "ApproverName",
+            Materials = "Materials",
+            BizItems = "BizItems",
+            ServiceItems = "ServiceItems"
         }
     }
 }

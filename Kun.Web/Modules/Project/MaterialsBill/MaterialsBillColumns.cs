@@ -12,17 +12,17 @@ namespace Kun.Project.Columns
     [ColumnsScript("Project.MaterialsBill")]
     [BasedOnRow(typeof(Entities.MaterialsBillRow), CheckNames = true)]
     public class MaterialsBillColumns
-    {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Guid Id { get; set; }
+    { 
         [EditLink]
-        public String BillNo { get; set; }
-        public Int32 BillType { get; set; }
+        public String BillNo { get; set; } 
         public Int32 Status { get; set; }
         public DateTime Date { get; set; }
-        public Guid ProjectId { get; set; }
+        public String ProjectName { get; set; }
         public String Note { get; set; }
-        public Int64 ApproverId { get; set; }
-        public DateTime ApproverDate { get; set; }
+         
+        public String InsertUserName { get; set; }
+        public DateTime? InsertDate { get; set; }
+        public String ApproverName { get; set; }
+        public DateTime? ApproverDate { get; set; }
     }
 }

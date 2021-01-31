@@ -10,7 +10,8 @@
         ProjectInfo = 50,
         ProjectMaterials = 51,
         ProjectService = 52,
-        ProjectBiz = 53
+        ProjectBiz = 53,
+        ProjectMaterialsBill = 60
     }
     Serenity.Decorators.registerEnumType(DocumentKind, 'Kun.Sys.Enum.DocumentKind', 'Sys.DocumentKind');
 }

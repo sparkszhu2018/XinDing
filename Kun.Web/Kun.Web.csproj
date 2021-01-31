@@ -11,6 +11,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\**\*.sql" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
     <None Remove="Modules\AdvancedSamples\Forms\EntityGridDialog\EntityGridDialog.ts" />
+    <None Remove="Modules\Project\BizItem\BizItemEditor\BizItemEditor.ts" />
+    <None Remove="Modules\Project\BizItem\BizItemEditor\BizItemEditorDialog.ts" />
+    <None Remove="Modules\Project\BizItem\BizItemViewEditor\BizItemViewEditor.ts" />
+    <None Remove="Modules\Project\MaterialsItem\MaterialsItemEditor\MaterialsItemEditor.ts" />
+    <None Remove="Modules\Project\MaterialsItem\MaterialsItemEditor\MaterialsItemEditorDialog.ts" />
+    <None Remove="Modules\Project\MaterialsItem\MaterialsItemEditor\MaterialsItemViewEditor.ts" />
+    <None Remove="Modules\Project\ServiceItem\ServiceItemEditor\ServiceItemEditor.ts" />
+    <None Remove="Modules\Project\ServiceItem\ServiceItemEditor\ServiceItemEditorDialog.ts" />
+    <None Remove="Modules\Project\ServiceItem\ServiceItemViewEditor\ServiceItemViewEditor.ts" />
     <None Remove="Modules\Sell\SaleOrderItem\SaleOrderItemEditor\SaleOrderItemEditor.ts" />
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditor.ts" />
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditorDialog.ts" />

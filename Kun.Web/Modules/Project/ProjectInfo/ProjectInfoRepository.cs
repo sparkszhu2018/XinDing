@@ -51,7 +51,7 @@ namespace Kun.Project.Repositories
                     GetNextNumberResponse nextNumber = GetNextNumberHelper.GetNextNumber(Connection, new GetNextNumberRequest
                     {
                         Prefix = prefix,
-                        Length = 9
+                        Length = 11
                     }, fld.BillNo); ;
                     Row.BillNo = nextNumber.Serial;
                 }

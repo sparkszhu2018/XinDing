@@ -3,12 +3,16 @@
         Id?: string;
         BillNo?: string;
         BillType?: number;
-        Status?: number;
+        Status?: Project.Enums.BillStatus;
         Date?: string;
         ProjectId?: string;
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        ApproverName?: string;
+        ProjectName?: string;
+        ProjectBillNo?: string;
+        Items?: BizItemRow[];
     }
 
     export namespace BizBillRow {
@@ -30,7 +34,11 @@
             ProjectId = "ProjectId",
             Note = "Note",
             ApproverId = "ApproverId",
-            ApproverDate = "ApproverDate"
+            ApproverDate = "ApproverDate",
+            ApproverName = "ApproverName",
+            ProjectName = "ProjectName",
+            ProjectBillNo = "ProjectBillNo",
+            Items = "Items"
         }
     }
 }

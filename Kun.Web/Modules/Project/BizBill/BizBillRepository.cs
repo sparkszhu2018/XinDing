@@ -7,11 +7,38 @@ namespace Kun.Project.Repositories
     using Serenity.Services;
     using System;
     using System.Data;
+    using static Kun.Project.Enums.ProjectEnums;
     using MyRow = Entities.BizBillRow;
 
     public class BizBillRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
+
+        public SaveResponse ChangeStatus(IUnitOfWork uow, Guid Id, BillStatus Status)
+        {
+            var n = new SaveRequest<MyRow>()
+            {
+                EntityId = Id,
+                Entity = new MyRow
+                {
+                    Status = Status,
+                    ApproverDate = DateTime.Now,
+                    ApproverId = long.Parse(Authorization.UserId),
+                }
+            };
+            if (Status == BillStatus.Audited) //审核通过
+            {
+                 
+            }
+            else if (Status == BillStatus.UnAudited) //反审核
+            {
+                //下游单据验证 待开发 
+                 
+               
+            }
+            return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
+        }
+
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
@@ -51,10 +78,10 @@ namespace Kun.Project.Repositories
                     GetNextNumberResponse nextNumber = GetNextNumberHelper.GetNextNumber(Connection, new GetNextNumberRequest
                     {
                         Prefix = prefix,
-                        Length = 16
+                        Length = 18
                     }, fld.BillNo); ;
                     Row.BillNo = nextNumber.Serial;
-                }
+                } 
             }
         }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }

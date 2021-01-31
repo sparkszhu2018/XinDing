@@ -7,6 +7,12 @@
         Name?: string;
         BizType?: string;
         Amount?: number;
+        BillNo?: string;
+        HeadStatus?: Project.Enums.BillStatus;
+        ProjectName?: string;
+        ProjectBillNo?: string;
+        BizTypeName?: string;
+        HeadProjectId?: string;
     }
 
     export namespace BizItemRow {
@@ -26,7 +32,13 @@
             Serial = "Serial",
             Name = "Name",
             BizType = "BizType",
-            Amount = "Amount"
+            Amount = "Amount",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            ProjectName = "ProjectName",
+            ProjectBillNo = "ProjectBillNo",
+            BizTypeName = "BizTypeName",
+            HeadProjectId = "HeadProjectId"
         }
     }
 }

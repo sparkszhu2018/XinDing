@@ -13,7 +13,9 @@ namespace Kun.Project {
         set Head(value: MaterialsBillRow) { 
             this._head = value; 
 
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+            if (this._head.Status !== Enums.BillStatus.Edit
+                && this._head.Status !== Enums.BillStatus.Reject
+                && this._head.Status !== Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('add-button').hide(); 
             } else {
                 this.toolbar.findButton('add-button').show(); 

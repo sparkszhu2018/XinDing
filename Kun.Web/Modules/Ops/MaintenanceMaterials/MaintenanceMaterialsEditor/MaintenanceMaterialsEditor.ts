@@ -13,12 +13,13 @@ namespace Kun.Ops {
         set Head(value: MaintenanceRow) { 
             this._head = value; 
 
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
-                this.toolbar.findButton('add-button').hide();
-                this.toolbar.findButton('attach-button').hide();
+            if (this._head.Status !== Enums.BillStatus.Edit
+                && this._head.Status !== Enums.BillStatus.Reject
+                && this._head.Status !== Enums.BillStatus.UnAudited
+            ) {
+                this.toolbar.findButton('add-button').hide(); 
             } else {
-                this.toolbar.findButton('add-button').show();
-                this.toolbar.findButton('attach-button').show();
+                this.toolbar.findButton('add-button').show(); 
             }
         }
 

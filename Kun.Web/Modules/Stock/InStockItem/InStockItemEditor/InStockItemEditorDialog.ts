@@ -7,7 +7,7 @@ namespace Kun.Stock {
         protected getFormKey() { return InStockItemForm.formKey; } 
         protected getLocalTextPrefix() { return InStockItemRow.localTextPrefix; } 
 
-
+        private _serial: number;
         protected form: InStockItemForm;
         private _head: Stock.InStockRow;
         
@@ -41,12 +41,18 @@ namespace Kun.Stock {
             }
            
         } 
+
+        get Serial() { return this._serial; }
+        set Serial(value: number) {
+            this._serial = value;
+            this.form.Serial.value = value;
+        }
+
          
         constructor() {
             super();
 
-            this.form = new InStockItemForm(this.idPrefix);
-
+            this.form = new InStockItemForm(this.idPrefix); 
             this.form.MaterialId.changeSelect2(e => {
                 var materail = Basic.MaterialRow.getLookup().itemById[this.form.MaterialId.value];
                 this.form.UnitId.value = materail.UnitId;
@@ -66,12 +72,22 @@ namespace Kun.Stock {
                     this.form.SaleAmount.value = this.form.SalePrice.value * this.form.ConfirmQty.value;
                 }
             });
+
+            this.form.ConfirmQty.change(e => {
+                if (this.form.BuyPrice.value != null && this.form.ConfirmQty.value > 0) {
+                    this.form.BuyAmount.value = this.form.BuyPrice.value * this.form.ConfirmQty.value;
+                }
+                if (this.form.SalePrice.value != null && this.form.ConfirmQty.value > 0) {
+                    this.form.SaleAmount.value = this.form.SalePrice.value * this.form.ConfirmQty.value;
+                }
+            });
         }
 
         protected updateInterface() {
             super.updateInterface();
             if (this.entity.Id != null) {
-                if (this.entity.HeadStatus == Stock.Enums.BillStatus.Edit || this.entity.HeadStatus == Stock.Enums.BillStatus.Reject) {
+                if (this.entity.HeadStatus == Stock.Enums.BillStatus.Edit || this.entity.HeadStatus == Stock.Enums.BillStatus.Reject
+                    || this.entity.HeadStatus == Stock.Enums.BillStatus.UnAudited) {
                     this.toolbar.findButton('save-and-close-button').show();
                     this.toolbar.findButton('apply-changes-button').show();
                     this.toolbar.findButton('delete-button').show();

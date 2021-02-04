@@ -10348,6 +10348,18 @@ button.ui-button {
 .s-Project-ServiceItemDialog .caption {
   width: 150px;
 }
+.s-Finance-InvoiceDialog > .size {
+  width: 650px;
+}
+.s-Finance-InvoiceDialog .caption {
+  width: 150px;
+}
+.s-Finance-InvoiceItemDialog > .size {
+  width: 650px;
+}
+.s-Finance-InvoiceItemDialog .caption {
+  width: 150px;
+}
 .s-Toolbar button .button-inner {
   display: inline-block;
   min-height: 24px;

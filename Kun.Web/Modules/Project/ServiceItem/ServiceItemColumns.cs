@@ -19,7 +19,8 @@ namespace Kun.Project.Columns
         public Decimal Price { get; set; }
         public Decimal Qty { get; set; }
         public Decimal Amount { get; set; }
+        public String Note { get; set; }
 
-         
+
     }
 }

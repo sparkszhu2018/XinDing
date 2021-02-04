@@ -210,7 +210,13 @@ namespace Kun.Project.Entities
             get { return Fields.PositionName[this]; }
             set { Fields.PositionName[this] = value; }
         }
-         
+
+        [DisplayName("备注"), Size(200), QuickSearch]
+        public String Note
+        {
+            get { return Fields.Note[this]; }
+            set { Fields.Note[this] = value; }
+        }
 
         IIdField IIdRow.IdField
         {
@@ -249,7 +255,7 @@ namespace Kun.Project.Entities
             public GuidField WarehouseId;
             public GuidField PositionId;
             public StringField Specification;
-
+            public StringField Note;
 
             public StringField BillNo;
             public Int32Field HeadStatus;

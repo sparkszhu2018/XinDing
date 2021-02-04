@@ -12,11 +12,12 @@ namespace Kun.Stock.Forms
     [FormScript("Stock.InStockItem")]
     [BasedOnRow(typeof(Entities.InStockItemRow), CheckNames = true)]
     public class InStockItemForm
-    { 
-        [LabelWidth(100, UntilNext = true)]
-        public Guid MaterialId { get; set; }
-
+    {
         [HalfWidth(UntilNext = true)]
+        [LabelWidth(100, UntilNext = true)] 
+        public Int32 Serial { get; set; }
+        public Guid MaterialId { get; set; } 
+       
         public Guid UnitId { get; set; }
         public String Specification { get; set; }
         //public Decimal DeliveryQty { get; set; }

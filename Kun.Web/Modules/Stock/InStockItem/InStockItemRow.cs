@@ -46,6 +46,13 @@ namespace Kun.Stock.Entities
             set { Fields.HeadStatus[this] = (Int32)value; }
         }
 
+        [DisplayName("行号"), NotNull, SortOrder(1), ReadOnly(true)]
+        public Int32? Serial
+        {
+            get { return Fields.Serial[this]; }
+            set { Fields.Serial[this] = value; }
+        }
+
         [DisplayName("单据日期"), Expression("jHead.[Date]")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
@@ -265,6 +272,7 @@ namespace Kun.Stock.Entities
             public GuidField Id;
             public GuidField HeadId;
             public StringField Status;
+            public Int32Field Serial; 
             public GuidField MaterialId;
             public GuidField UnitId;
             public DecimalField DeliveryQty;

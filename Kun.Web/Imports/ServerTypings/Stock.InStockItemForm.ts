@@ -1,5 +1,6 @@
 ﻿namespace Kun.Stock {
     export interface InStockItemForm {
+        Serial: Serenity.IntegerEditor;
         MaterialId: Serenity.LookupEditor;
         UnitId: Serenity.LookupEditor;
         Specification: Serenity.StringEditor;
@@ -26,25 +27,27 @@
                 InStockItemForm.init = true;
 
                 var s = Serenity;
-                var w0 = s.LookupEditor;
-                var w1 = s.StringEditor;
-                var w2 = s.DecimalEditor;
-                var w3 = s.EnumEditor;
+                var w0 = s.IntegerEditor;
+                var w1 = s.LookupEditor;
+                var w2 = s.StringEditor;
+                var w3 = s.DecimalEditor;
+                var w4 = s.EnumEditor;
 
                 Q.initFormType(InStockItemForm, [
-                    'MaterialId', w0,
-                    'UnitId', w0,
-                    'Specification', w1,
-                    'ConfirmQty', w2,
-                    'SupplierId', w0,
-                    'InvoiceType', w3,
-                    'BuyPrice', w2,
-                    'BuyAmount', w2,
-                    'SalePrice', w2,
-                    'SaleAmount', w2,
-                    'LotId', w0,
-                    'WarehouseId', w0,
-                    'PositionId', w0
+                    'Serial', w0,
+                    'MaterialId', w1,
+                    'UnitId', w1,
+                    'Specification', w2,
+                    'ConfirmQty', w3,
+                    'SupplierId', w1,
+                    'InvoiceType', w4,
+                    'BuyPrice', w3,
+                    'BuyAmount', w3,
+                    'SalePrice', w3,
+                    'SaleAmount', w3,
+                    'LotId', w1,
+                    'WarehouseId', w1,
+                    'PositionId', w1
                 ]);
             }
         }

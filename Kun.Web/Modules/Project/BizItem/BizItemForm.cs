@@ -17,6 +17,6 @@ namespace Kun.Project.Forms
         public String Name { get; set; }
         public Guid BizType { get; set; }
         public Decimal Amount { get; set; }
-         
+        public String Note { get; set; }
     }
 }

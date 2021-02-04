@@ -8,6 +8,7 @@
         Price?: number;
         Qty?: number;
         Amount?: number;
+        Note?: string;
         BillNo?: string;
         HeadStatus?: Project.Enums.BillStatus;
         ProjectName?: string;
@@ -34,6 +35,7 @@
             Price = "Price",
             Qty = "Qty",
             Amount = "Amount",
+            Note = "Note",
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             ProjectName = "ProjectName",

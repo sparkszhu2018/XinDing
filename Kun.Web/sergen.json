@@ -75,6 +75,24 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Finance_BillInvoiced",
+          "Identifier": "BillInvoiced",
+          "Module": "Finance",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Finance_Invoice",
+          "Identifier": "Invoice",
+          "Module": "Finance",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Finance_InvoiceItem",
+          "Identifier": "InvoiceItem",
+          "Module": "Finance",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.OPS_Maintenance",
           "Identifier": "Maintenance",
           "Module": "Ops",

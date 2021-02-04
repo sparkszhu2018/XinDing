@@ -38,6 +38,7 @@ namespace Kun.Project.Forms
         public Guid WarehouseId { get; set; }
         [ReadOnly(true)]
         public Guid PositionId { get; set; }
+        public String Note { get; set; }
 
     }
 }

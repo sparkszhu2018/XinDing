@@ -3,6 +3,7 @@
         Id?: string;
         HeadId?: string;
         Status?: string;
+        Serial?: number;
         MaterialId?: string;
         UnitId?: string;
         DeliveryQty?: number;
@@ -47,6 +48,7 @@
             Id = "Id",
             HeadId = "HeadId",
             Status = "Status",
+            Serial = "Serial",
             MaterialId = "MaterialId",
             UnitId = "UnitId",
             DeliveryQty = "DeliveryQty",

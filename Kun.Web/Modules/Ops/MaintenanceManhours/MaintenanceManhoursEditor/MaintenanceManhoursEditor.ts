@@ -12,7 +12,9 @@ namespace Kun.Ops {
         get Head() { return this._head; }
         set Head(value: MaintenanceRow) { 
             this._head = value;
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+            if (this._head.Status !== Enums.BillStatus.Edit
+                && this._head.Status !== Enums.BillStatus.Reject
+                && this._head.Status !== Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('add-button').hide();
             } else {
                 this.toolbar.findButton('add-button').show();

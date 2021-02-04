@@ -30,6 +30,7 @@ namespace Kun.Project.Columns
         public String Specification { get; set; }
         public Decimal BuyPrice { get; set; }
         public Decimal BuyAmount { get; set; }
-          
+        public String Note { get; set; }
+
     }
 }

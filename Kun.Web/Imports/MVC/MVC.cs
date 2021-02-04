@@ -122,6 +122,20 @@ namespace MVC
             public const string ValidationError = "~/Views/Errors/ValidationError.cshtml";
         }
 
+        public static class Finance
+        {
+            public static class Invoice
+            {
+                public const string InvoiceIndex = "~/Modules/Finance/Invoice/InvoiceIndex.cshtml";
+            }
+
+            public static class InvoiceItem
+            {
+                public const string InvoiceItemIndex = "~/Modules/Finance/InvoiceItem/InvoiceItemIndex.cshtml";
+            }
+
+        }
+
         public static class Membership
         {
             public static class Account

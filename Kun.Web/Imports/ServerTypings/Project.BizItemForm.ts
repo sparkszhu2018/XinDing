@@ -4,6 +4,7 @@
         Name: Serenity.StringEditor;
         BizType: Serenity.LookupEditor;
         Amount: Serenity.DecimalEditor;
+        Note: Serenity.StringEditor;
     }
 
     export class BizItemForm extends Serenity.PrefixedContext {
@@ -26,7 +27,8 @@
                     'Serial', w0,
                     'Name', w1,
                     'BizType', w2,
-                    'Amount', w3
+                    'Amount', w3,
+                    'Note', w1
                 ]);
             }
         }

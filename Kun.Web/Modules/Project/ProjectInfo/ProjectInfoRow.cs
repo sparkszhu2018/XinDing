@@ -70,7 +70,7 @@ namespace Kun.Project.Entities
             set { Fields.BudgetAmount[this] = value; }
         }
 
-        [DisplayName("实发金额"), Size(18), Scale(2), NotNull]
+        [DisplayName("中标金额"), Size(18), Scale(2), NotNull]
         public Decimal? ActualAmount
         {
             get { return Fields.ActualAmount[this]; }
@@ -106,7 +106,7 @@ namespace Kun.Project.Entities
             set { Fields.PhoneNo[this] = value; }
         }
 
-        [DisplayName("地址"), Size(20)]
+        [DisplayName("地址"), Size(200)]
         public String Address
         {
             get { return Fields.Address[this]; }

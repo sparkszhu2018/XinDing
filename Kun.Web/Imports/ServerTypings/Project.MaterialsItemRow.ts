@@ -18,6 +18,7 @@
         WarehouseId?: string;
         PositionId?: string;
         Specification?: string;
+        Note?: string;
         BillNo?: string;
         HeadStatus?: Project.Enums.BillStatus;
         ProjectName?: string;
@@ -58,6 +59,7 @@
             WarehouseId = "WarehouseId",
             PositionId = "PositionId",
             Specification = "Specification",
+            Note = "Note",
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             ProjectName = "ProjectName",

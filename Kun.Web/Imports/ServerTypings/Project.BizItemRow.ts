@@ -7,6 +7,7 @@
         Name?: string;
         BizType?: string;
         Amount?: number;
+        Note?: string;
         BillNo?: string;
         HeadStatus?: Project.Enums.BillStatus;
         ProjectName?: string;
@@ -33,6 +34,7 @@
             Name = "Name",
             BizType = "BizType",
             Amount = "Amount",
+            Note = "Note",
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             ProjectName = "ProjectName",

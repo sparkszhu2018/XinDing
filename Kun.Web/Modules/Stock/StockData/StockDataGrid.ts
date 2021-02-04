@@ -36,5 +36,19 @@ namespace Kun.Stock {
             opt.enableTextSelectionOnCells = true;
             return opt;
         }
+
+        protected onViewSubmit() {
+            if (!super.onViewSubmit()) {
+                return false;
+            }
+            var request = this.view.params as Serenity.ListRequest;
+
+            request.Criteria = Serenity.Criteria.and(request.Criteria,
+                [[StockDataRow.Fields.Qty], '>', 0]);
+ 
+            return true;
+        }
+
+        
     }
 }

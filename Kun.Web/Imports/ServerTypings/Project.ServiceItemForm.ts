@@ -5,6 +5,7 @@
         Price: Serenity.DecimalEditor;
         Qty: Serenity.DecimalEditor;
         Amount: Serenity.DecimalEditor;
+        Note: Serenity.StringEditor;
     }
 
     export class ServiceItemForm extends Serenity.PrefixedContext {
@@ -27,7 +28,8 @@
                     'Name', w1,
                     'Price', w2,
                     'Qty', w2,
-                    'Amount', w2
+                    'Amount', w2,
+                    'Note', w1
                 ]);
             }
         }

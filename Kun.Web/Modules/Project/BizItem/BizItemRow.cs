@@ -111,6 +111,14 @@ namespace Kun.Project.Entities
             set { Fields.Amount[this] = value; }
         }
 
+
+        [DisplayName("备注"), Size(200), QuickSearch]
+        public String Note
+        {
+            get { return Fields.Note[this]; }
+            set { Fields.Note[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -137,6 +145,7 @@ namespace Kun.Project.Entities
             public StringField Name;
             public GuidField BizType;
             public DecimalField Amount;
+            public StringField Note;
 
             public StringField BillNo;
             public Int32Field HeadStatus;

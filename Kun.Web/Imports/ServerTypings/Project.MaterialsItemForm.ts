@@ -14,6 +14,7 @@
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
         PositionId: Serenity.LookupEditor;
+        Note: Serenity.StringEditor;
     }
 
     export class MaterialsItemForm extends Serenity.PrefixedContext {
@@ -46,7 +47,8 @@
                     'Specification', w1,
                     'LotId', w0,
                     'WarehouseId', w0,
-                    'PositionId', w0
+                    'PositionId', w0,
+                    'Note', w1
                 ]);
             }
         }

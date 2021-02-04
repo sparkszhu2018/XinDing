@@ -24,6 +24,8 @@ namespace Kun.Stock.Columns
         public String HeadStatus { get; set; } 
         public String HeadDate { get; set; }
         [EditLink]
+        public Int32 Serial { get; set; }
+        [EditLink]
         public String MaterialCode { get; set; }
         public String MaterialName { get; set; }
         public String UnitName { get; set; }

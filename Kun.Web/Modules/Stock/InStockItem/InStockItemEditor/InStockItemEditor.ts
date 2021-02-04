@@ -13,7 +13,8 @@ namespace Kun.Stock {
         get Head() { return this._head; }
         set Head(value: InStockRow) {
             this._head = value; 
-            if (this._head.Status !== Stock.Enums.BillStatus.Edit && this._head.Status !== Stock.Enums.BillStatus.Reject) {
+            if (this._head.Status !== Stock.Enums.BillStatus.Edit && this._head.Status !== Stock.Enums.BillStatus.Reject
+                && this._head.Status !== Stock.Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('add-button').hide();
             } else {
                 this.toolbar.findButton('add-button').show();
@@ -50,15 +51,27 @@ namespace Kun.Stock {
         protected getButtons(): Serenity.ToolButton[] {
             var buttons = super.getButtons();
             buttons[0].onClick = () => {
+                var i = 0;
+                if (this.view.getLength() == 0) {
+                    i = 10;
+                } else {
+                    if (isNaN(this.view.getItems()[this.view.getLength() - 1].Serial)) {
+                        i = 10;
+                    } else {
+                        i = this.view.getItems()[this.view.getLength() - 1].Serial + 10;
+                    }
+                } 
                 this.createEntityDialog(this.getItemType(), dlg => {
                     var dialog = dlg as InStockItemEditorDialog;
                     dialog.Head = this._head;
                     dialog.onSave = (opt, callback) => this.save(opt, callback);
                     var entity = this.getNewEntity() as InStockItemRow;
+                    alert(i);
+                    entity.Serial = i;
                     dialog.loadEntityAndOpenDialog(entity);
                 });
             }
-            return buttons;
+            return buttons; 
         }
 
         //protected onViewSubmit() {

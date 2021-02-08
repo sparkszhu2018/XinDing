@@ -124,6 +124,11 @@ namespace MVC
 
         public static class Finance
         {
+            public static class BillInvoiced
+            {
+                public const string BillInvoicedIndex = "~/Modules/Finance/BillInvoiced/BillInvoicedIndex.cshtml";
+            }
+
             public static class Invoice
             {
                 public const string InvoiceIndex = "~/Modules/Finance/Invoice/InvoiceIndex.cshtml";

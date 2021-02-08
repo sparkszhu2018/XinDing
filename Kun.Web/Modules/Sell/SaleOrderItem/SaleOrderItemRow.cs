@@ -243,14 +243,14 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             public StringField Specification; 
 
             public StringField BillNo;
-            public Int32Field HeadStatus; 
+            public Int32Field HeadStatus;
+            public DateTimeField HeadDate;
             public StringField MaterialCode; 
             public StringField LotCode;
             public StringField WarehouseName;
             public StringField PositionName;
             public DecimalField BuyPrice;
             public DecimalField BuyAmount;
-            public DateTimeField HeadDate;
 
             public GuidField CustomerId;
 

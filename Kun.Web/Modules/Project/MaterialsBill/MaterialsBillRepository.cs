@@ -63,7 +63,7 @@ namespace Kun.Project.Repositories
                         FromWarehouseId = m.WarehouseId,
                         FromPositionId = m.PositionId,
                         FromLotId = m.LotId,
-                        BizBillType = DocumentKind.ProjectMaterialsBill,
+                        BizBillType = DocumentKind.ProjectMaterials,
                         BizBillId = m.HeadId,
                         BizItemId = m.Id,
                         Status = MoveRecordEnums.Status.Normal,

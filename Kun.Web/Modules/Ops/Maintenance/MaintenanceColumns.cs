@@ -34,6 +34,8 @@ namespace Kun.Ops.Columns
         //public String CustomerComment { get; set; }
         //public DateTime CustomerConfirmDate { get; set; }
         public String Note { get; set; }
+        public Decimal TotalCost { get; set; }
+        
         public String ResponsibleName { get; set; }
         public String ApproverName { get; set; }
         public DateTime ApproverDate { get; set; }

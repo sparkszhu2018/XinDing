@@ -65,8 +65,7 @@ namespace Kun.Stock {
                     var dialog = dlg as InStockItemEditorDialog;
                     dialog.Head = this._head;
                     dialog.onSave = (opt, callback) => this.save(opt, callback);
-                    var entity = this.getNewEntity() as InStockItemRow;
-                    alert(i);
+                    var entity = this.getNewEntity() as InStockItemRow; 
                     entity.Serial = i;
                     dialog.loadEntityAndOpenDialog(entity);
                 });

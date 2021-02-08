@@ -10360,6 +10360,12 @@ button.ui-button {
 .s-Finance-InvoiceItemDialog .caption {
   width: 150px;
 }
+.s-Finance-BillInvoicedDialog > .size {
+  width: 650px;
+}
+.s-Finance-BillInvoicedDialog .caption {
+  width: 150px;
+}
 .s-Toolbar button .button-inner {
   display: inline-block;
   min-height: 24px;

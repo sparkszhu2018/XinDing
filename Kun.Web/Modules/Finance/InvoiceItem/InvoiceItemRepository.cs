@@ -37,7 +37,18 @@ namespace Kun.Finance.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        [DefaultHandler]
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void SetInternalFields()
+            {
+                base.SetInternalFields();
+                if (IsCreate)
+                {
+                    Row.Id = Row.Id ?? Guid.NewGuid();
+                }
+            }
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

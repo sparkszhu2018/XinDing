@@ -11,7 +11,7 @@ namespace Kun.Ops.Entities
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
-    using static Kun.Ops.Enums.OpsEnums; 
+    using static Kun.Ops.Enums.OpsEnums;
 
     [ConnectionKey("Kun"), Module("Ops"), TableName("[dbo].[OPS_Maintenance]")]
     [DisplayName("维保单"), InstanceName("维保单")]
@@ -26,7 +26,7 @@ namespace Kun.Ops.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch,ReadOnly(true)]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -49,7 +49,7 @@ namespace Kun.Ops.Entities
             get { return (BillStatus)Fields.Status[this]; }
             set { Fields.Status[this] = (Int32)value; }
         }
-          
+
         [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
@@ -72,7 +72,7 @@ namespace Kun.Ops.Entities
         {
             get { return Fields.VendorName[this]; }
             set { Fields.VendorName[this] = value; }
-        } 
+        }
 
         [DisplayName("报修人"), Size(50)]
         public String Reporter
@@ -86,7 +86,7 @@ namespace Kun.Ops.Entities
             get { return Fields.ReporterPhone[this]; }
             set { Fields.ReporterPhone[this] = value; }
         }
-        
+
         [DisplayName("报修时间"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? ReportDate
@@ -121,7 +121,7 @@ namespace Kun.Ops.Entities
         }
 
         [DisplayName("结算部门"), Expression("jSettleCustomer.[Name]"), ReadOnly(true)]
-        public String SettleCustomerName 
+        public String SettleCustomerName
         {
             get { return Fields.SettleCustomerName[this]; }
             set { Fields.SettleCustomerName[this] = value; }
@@ -141,7 +141,7 @@ namespace Kun.Ops.Entities
         {
             get { return Fields.TypeName[this]; }
             set { Fields.TypeName[this] = value; }
-        } 
+        }
 
 
         [DisplayName("地址"), Size(100)]
@@ -224,7 +224,7 @@ namespace Kun.Ops.Entities
         {
             get { return Fields.ServicerCost[this]; }
             set { Fields.ServicerCost[this] = value; }
-        } 
+        }
 
         [DisplayName("维保人"), LookupEditor(typeof(UserRow)),
              ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jResponsible"), TextualField("ResponsibleName")
@@ -267,8 +267,8 @@ namespace Kun.Ops.Entities
         }
 
 
-        [DisplayName("用料明细"), NotMapped,MasterDetailRelation(foreignKey: "HeadId",
-            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")] 
+        [DisplayName("用料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
+            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")]
         [ReadPermission(PermissionKeys.MaintenanceResponsible)]
         public List<MaintenanceMaterialsRow> Materials
         {
@@ -282,6 +282,14 @@ namespace Kun.Ops.Entities
         {
             get { return Fields.Manhours[this]; }
             set { Fields.Manhours[this] = value; }
+        }
+
+        [DisplayName("总费用"), Expression("(isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 ) " +
+            "+ isnull((select sum(saleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0))")] 
+        public Decimal? TotalCost
+        {
+            get { return Fields.TotalCost[this]; }
+            set { Fields.TotalCost[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -341,7 +349,9 @@ namespace Kun.Ops.Entities
 
             public GuidField TypeId;
             public StringField TypeName;
+            public DecimalField TotalCost; 
             
+
 
 
         }

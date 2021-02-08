@@ -17,13 +17,13 @@
         Specification?: string;
         BillNo?: string;
         HeadStatus?: Sell.Enums.BillStatus;
+        HeadDate?: string;
         MaterialCode?: string;
         LotCode?: string;
         WarehouseName?: string;
         PositionName?: string;
         BuyPrice?: number;
         BuyAmount?: number;
-        HeadDate?: string;
         CustomerId?: string;
         CustomerName?: string;
     }
@@ -56,13 +56,13 @@
             Specification = "Specification",
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
+            HeadDate = "HeadDate",
             MaterialCode = "MaterialCode",
             LotCode = "LotCode",
             WarehouseName = "WarehouseName",
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
-            HeadDate = "HeadDate",
             CustomerId = "CustomerId",
             CustomerName = "CustomerName"
         }

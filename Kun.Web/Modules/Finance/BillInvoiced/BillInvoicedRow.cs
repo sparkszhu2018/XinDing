@@ -8,6 +8,7 @@ namespace Kun.Finance.Entities
     using System;
     using System.ComponentModel;
     using System.IO;
+    using static Kun.Finance.Enums.FinanceEnums;
 
     [ConnectionKey("Kun"), Module("Finance"), TableName("[dbo].[Finance_BillInvoiced]")]
     [DisplayName("Bill Invoiced"), InstanceName("Bill Invoiced")]
@@ -23,10 +24,10 @@ namespace Kun.Finance.Entities
         }
 
         [DisplayName("Source Document Type")]
-        public Int32? SourceDocumentType
+        public InvoiceBillType? SourceDocumentType
         {
-            get { return Fields.SourceDocumentType[this]; }
-            set { Fields.SourceDocumentType[this] = value; }
+            get { return (InvoiceBillType?)Fields.SourceDocumentType[this]; }
+            set { Fields.SourceDocumentType[this] = (Int32)value; }
         }
 
         [DisplayName("Source Document Id")]
@@ -70,6 +71,21 @@ namespace Kun.Finance.Entities
             get { return Fields.InvoiceAmount[this]; }
             set { Fields.InvoiceAmount[this] = value; }
         }
+        [DisplayName("Qty"), Size(18), Scale(4)]
+        public Decimal? Qty
+        {
+            get { return Fields.Qty[this]; }
+            set { Fields.Qty[this] = value; }
+        }
+
+        [DisplayName("Kind")]
+        public InvoiceItemKind? Kind
+        {
+            get { return (InvoiceItemKind?)Fields.Kind[this]; }
+            set { Fields.Kind[this] = (Int32)value; }
+        }
+
+        
 
         IIdField IIdRow.IdField
         {
@@ -98,6 +114,8 @@ namespace Kun.Finance.Entities
             public Int32Field SourceItemSerial;
             public DecimalField Amount;
             public DecimalField InvoiceAmount;
+            public DecimalField Qty;
+            public Int32Field Kind;
         }
     }
 }

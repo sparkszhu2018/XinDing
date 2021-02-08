@@ -1,11 +1,14 @@
 ﻿namespace Kun.Finance {
     export interface InvoiceForm {
         BillNo: Serenity.StringEditor;
-        BillType: Serenity.IntegerEditor;
-        Status: Serenity.IntegerEditor;
-        Note: Serenity.StringEditor;
-        ApproverId: Serenity.StringEditor;
+        Status: Serenity.EnumEditor;
+        Date: Serenity.DateEditor;
+        InsertUserId: Serenity.LookupEditor;
+        ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
+        BillType: Serenity.EnumEditor;
+        Note: Serenity.StringEditor;
+        Items: InvoiceItemEditor;
     }
 
     export class InvoiceForm extends Serenity.PrefixedContext {
@@ -20,16 +23,21 @@
 
                 var s = Serenity;
                 var w0 = s.StringEditor;
-                var w1 = s.IntegerEditor;
+                var w1 = s.EnumEditor;
                 var w2 = s.DateEditor;
+                var w3 = s.LookupEditor;
+                var w4 = InvoiceItemEditor;
 
                 Q.initFormType(InvoiceForm, [
                     'BillNo', w0,
-                    'BillType', w1,
                     'Status', w1,
+                    'Date', w2,
+                    'InsertUserId', w3,
+                    'ApproverId', w3,
+                    'ApproverDate', w2,
+                    'BillType', w1,
                     'Note', w0,
-                    'ApproverId', w0,
-                    'ApproverDate', w2
+                    'Items', w4
                 ]);
             }
         }

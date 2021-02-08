@@ -1,18 +1,20 @@
-﻿
-namespace Kun.Finance {
+﻿namespace Kun.Finance {
     export interface BillInvoicedRow {
         Id?: string;
-        SourceDocumentType?: number;
+        SourceDocumentType?: Finance.Enums.InvoiceBillType;
         SourceDocumentId?: string;
         SourceDocumentNo?: string;
         SourceItemId?: string;
         SourceItemSerial?: number;
         Amount?: number;
         InvoiceAmount?: number;
+        Qty?: number;
+        Kind?: Finance.Enums.InvoiceItemKind;
     }
 
     export namespace BillInvoicedRow {
         export const idProperty = 'Id';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'SourceDocumentNo';
         export const localTextPrefix = 'Finance.BillInvoiced';
         export const deletePermission = '*';
@@ -20,26 +22,17 @@ namespace Kun.Finance {
         export const readPermission = '*';
         export const updatePermission = '*';
 
-        export namespace Fields {
-            export declare const Id;
-            export declare const SourceDocumentType;
-            export declare const SourceDocumentId;
-            export declare const SourceDocumentNo;
-            export declare const SourceItemId;
-            export declare const SourceItemSerial;
-            export declare const Amount;
-            export declare const InvoiceAmount;
+        export declare const enum Fields {
+            Id = "Id",
+            SourceDocumentType = "SourceDocumentType",
+            SourceDocumentId = "SourceDocumentId",
+            SourceDocumentNo = "SourceDocumentNo",
+            SourceItemId = "SourceItemId",
+            SourceItemSerial = "SourceItemSerial",
+            Amount = "Amount",
+            InvoiceAmount = "InvoiceAmount",
+            Qty = "Qty",
+            Kind = "Kind"
         }
-
-        [
-            'Id',
-            'SourceDocumentType',
-            'SourceDocumentId',
-            'SourceDocumentNo',
-            'SourceItemId',
-            'SourceItemSerial',
-            'Amount',
-            'InvoiceAmount'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

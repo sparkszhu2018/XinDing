@@ -2,6 +2,10 @@
     export namespace InvoiceService {
         export const baseUrl = 'Finance/Invoice';
 
+        export declare function Commit(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function Audit(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function Reject(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function UnAudit(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Create(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -9,6 +13,10 @@
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<InvoiceRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
+            Commit = "Finance/Invoice/Commit",
+            Audit = "Finance/Invoice/Audit",
+            Reject = "Finance/Invoice/Reject",
+            UnAudit = "Finance/Invoice/UnAudit",
             Create = "Finance/Invoice/Create",
             Update = "Finance/Invoice/Update",
             Delete = "Finance/Invoice/Delete",
@@ -17,6 +25,10 @@
         }
 
         [
+            'Commit', 
+            'Audit', 
+            'Reject', 
+            'UnAudit', 
             'Create', 
             'Update', 
             'Delete', 

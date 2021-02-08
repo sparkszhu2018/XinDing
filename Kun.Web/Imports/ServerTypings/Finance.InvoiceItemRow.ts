@@ -1,10 +1,9 @@
 ﻿namespace Kun.Finance {
     export interface InvoiceItemRow {
         Id?: string;
-        ProjectId?: string;
         HeadId?: string;
         Serial?: number;
-        SourceDocumentType?: number;
+        SourceDocumentType?: Finance.Enums.InvoiceBillType;
         SourceDocumentId?: string;
         SourceDocumentNo?: string;
         SourceItemId?: string;
@@ -18,6 +17,10 @@
         TaxRate?: number;
         InvoiceNo?: string;
         Note?: string;
+        BillNo?: string;
+        HeadStatus?: Finance.Enums.BillStatus;
+        HeadDate?: string;
+        Kind?: Finance.Enums.InvoiceItemKind;
     }
 
     export namespace InvoiceItemRow {
@@ -32,7 +35,6 @@
 
         export declare const enum Fields {
             Id = "Id",
-            ProjectId = "ProjectId",
             HeadId = "HeadId",
             Serial = "Serial",
             SourceDocumentType = "SourceDocumentType",
@@ -48,7 +50,11 @@
             InvoiceAmount = "InvoiceAmount",
             TaxRate = "TaxRate",
             InvoiceNo = "InvoiceNo",
-            Note = "Note"
+            Note = "Note",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            HeadDate = "HeadDate",
+            Kind = "Kind"
         }
     }
 }

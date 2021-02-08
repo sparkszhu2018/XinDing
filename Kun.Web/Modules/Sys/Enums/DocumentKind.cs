@@ -19,18 +19,16 @@ namespace Kun.Sys.Enum
         [Description("销售订单")]
         SaleOrderBill = 30,
         [Description("移库单")]
-        ChangeStockBill = 40,
-
-        [Description("项目领料单")]
-        ProjectMaterialsBill = 60,
+        ChangeStockBill = 40, 
+        //[Description("项目领料单")]
+        //ProjectMaterialsBill = 60,
 
         [Description("物料主数据")]
         Material = 1,
         [Description("客户主数据")]
         Customer = 2,
         [Description("供应商主数据")]
-        Supplier = 3,
-
+        Supplier = 3, 
 
         [Description("项目")]
         ProjectInfo = 50,
@@ -39,7 +37,10 @@ namespace Kun.Sys.Enum
         [Description("项目服务")]
         ProjectService = 52,
         [Description("项目商务")]
-        ProjectBiz = 53,
+        ProjectBiz = 53, 
+
+        [Description("发票")]
+        InvoiceBill = 60,
 
     }
      

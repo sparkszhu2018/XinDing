@@ -4,7 +4,7 @@ namespace Kun.Finance {
 
     @Serenity.Decorators.registerClass()
     export class InvoiceItemEditor extends Common.GridEditorBase<InvoiceItemRow> {
-        protected getColumnsKey() { return "Finance.InvoiceItem"; }
+        protected getColumnsKey() { return "Finance.InvoiceItemEditor"; }
         protected getDialogType() { return InvoiceItemEditorDialog; }
         protected getLocalTextPrefix() { return InvoiceItemRow.localTextPrefix; }
         private _billType: string;

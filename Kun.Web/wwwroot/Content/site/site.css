@@ -10366,6 +10366,18 @@ button.ui-button {
 .s-Finance-BillInvoicedDialog .caption {
   width: 150px;
 }
+.s-Finance-ReceiptItemDialog > .size {
+  width: 650px;
+}
+.s-Finance-ReceiptItemDialog .caption {
+  width: 150px;
+}
+.s-Finance-ReceiptDialog > .size {
+  width: 650px;
+}
+.s-Finance-ReceiptDialog .caption {
+  width: 150px;
+}
 .s-Toolbar button .button-inner {
   display: inline-block;
   min-height: 24px;

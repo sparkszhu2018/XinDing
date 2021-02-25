@@ -1,5 +1,4 @@
-﻿
-namespace Kun.Finance {
+﻿namespace Kun.Finance {
     export interface ReceiptRow {
         Id?: string;
         BillNo?: string;
@@ -13,6 +12,7 @@ namespace Kun.Finance {
 
     export namespace ReceiptRow {
         export const idProperty = 'Id';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'BillNo';
         export const localTextPrefix = 'Finance.Receipt';
         export const deletePermission = '*';
@@ -20,26 +20,15 @@ namespace Kun.Finance {
         export const readPermission = '*';
         export const updatePermission = '*';
 
-        export namespace Fields {
-            export declare const Id;
-            export declare const BillNo;
-            export declare const Date;
-            export declare const BillType;
-            export declare const Status;
-            export declare const Note;
-            export declare const ApproverId;
-            export declare const ApproverDate;
+        export declare const enum Fields {
+            Id = "Id",
+            BillNo = "BillNo",
+            Date = "Date",
+            BillType = "BillType",
+            Status = "Status",
+            Note = "Note",
+            ApproverId = "ApproverId",
+            ApproverDate = "ApproverDate"
         }
-
-        [
-            'Id',
-            'BillNo',
-            'Date',
-            'BillType',
-            'Status',
-            'Note',
-            'ApproverId',
-            'ApproverDate'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

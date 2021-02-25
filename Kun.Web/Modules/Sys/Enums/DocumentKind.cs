@@ -42,7 +42,10 @@ namespace Kun.Sys.Enum
         [Description("发票")]
         InvoiceBill = 60,
 
+        [Description("回款")]
+        ReceiptBill = 61,
+
     }
-     
+
 
 }

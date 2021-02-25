@@ -139,6 +139,13 @@ namespace Kun.Finance.Entities
             set { Fields.InvoiceAmount[this] = value; }
         }
 
+        [DisplayName("回款金额"), Size(18), Scale(2)]
+        public Decimal? ReceiptAmount
+        {
+            get { return Fields.ReceiptAmount[this]; }
+            set { Fields.ReceiptAmount[this] = value; }
+        } 
+
         [DisplayName("税率"), Size(5), Scale(2)]
         public Decimal? TaxRate
         {
@@ -208,7 +215,9 @@ namespace Kun.Finance.Entities
             public StringField BillNo;
             public Int32Field HeadStatus;
             public DateTimeField HeadDate;
-            public Int32Field Kind;
+            public Int32Field Kind; 
+            public DecimalField ReceiptAmount;
+            
         }
     }
 }

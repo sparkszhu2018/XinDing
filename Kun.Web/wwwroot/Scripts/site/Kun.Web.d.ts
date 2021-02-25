@@ -1599,6 +1599,7 @@ declare namespace Kun.Finance {
         HeadStatus?: Finance.Enums.BillStatus;
         HeadDate?: string;
         Kind?: Finance.Enums.InvoiceItemKind;
+        ReceiptAmount?: number;
     }
     namespace InvoiceItemRow {
         const idProperty = "Id";
@@ -1630,7 +1631,8 @@ declare namespace Kun.Finance {
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
-            Kind = "Kind"
+            Kind = "Kind",
+            ReceiptAmount = "ReceiptAmount"
         }
     }
 }
@@ -5777,4 +5779,203 @@ declare namespace Kun.Sys {
         protected getService(): string;
         constructor(container: JQuery);
     }
+}
+declare namespace Kun.Finance {
+    interface ReceiptItemForm {
+        HeadId: Serenity.StringEditor;
+        Serial: Serenity.IntegerEditor;
+        SourceDocumentType: Serenity.IntegerEditor;
+        SourceDocumentId: Serenity.StringEditor;
+        SourceDocumentNo: Serenity.StringEditor;
+        SourceItemId: Serenity.StringEditor;
+        SourceItemSerial: Serenity.IntegerEditor;
+        Name: Serenity.StringEditor;
+        InvoiceAmount: Serenity.DecimalEditor;
+        BalanceAmount: Serenity.DecimalEditor;
+        ReceiptAmount: Serenity.DecimalEditor;
+        Note: Serenity.StringEditor;
+    }
+    class ReceiptItemForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Finance {
+    interface ReceiptItemRow {
+        Id?: string;
+        HeadId?: string;
+        Serial?: number;
+        SourceDocumentType?: number;
+        SourceDocumentId?: string;
+        SourceDocumentNo?: string;
+        SourceItemId?: string;
+        SourceItemSerial?: number;
+        Name?: string;
+        InvoiceAmount?: number;
+        BalanceAmount?: number;
+        ReceiptAmount?: number;
+        Note?: string;
+    }
+    namespace ReceiptItemRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "SourceDocumentNo";
+        const localTextPrefix = "Finance.ReceiptItem";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            HeadId = "HeadId",
+            Serial = "Serial",
+            SourceDocumentType = "SourceDocumentType",
+            SourceDocumentId = "SourceDocumentId",
+            SourceDocumentNo = "SourceDocumentNo",
+            SourceItemId = "SourceItemId",
+            SourceItemSerial = "SourceItemSerial",
+            Name = "Name",
+            InvoiceAmount = "InvoiceAmount",
+            BalanceAmount = "BalanceAmount",
+            ReceiptAmount = "ReceiptAmount",
+            Note = "Note"
+        }
+    }
+}
+declare namespace Kun.Finance {
+    namespace ReceiptItemService {
+        const baseUrl = "Finance/ReceiptItem";
+        function Create(request: Serenity.SaveRequest<ReceiptItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<ReceiptItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ReceiptItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ReceiptItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Finance/ReceiptItem/Create",
+            Update = "Finance/ReceiptItem/Update",
+            Delete = "Finance/ReceiptItem/Delete",
+            Retrieve = "Finance/ReceiptItem/Retrieve",
+            List = "Finance/ReceiptItem/List"
+        }
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptItemDialog extends Serenity.EntityDialog<ReceiptItemRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: ReceiptItemForm;
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptItemGrid extends Serenity.EntityGrid<ReceiptItemRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ReceiptItemDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Finance {
+    interface ReceiptForm {
+        BillNo: Serenity.StringEditor;
+        Date: Serenity.DateEditor;
+        BillType: Serenity.IntegerEditor;
+        Status: Serenity.IntegerEditor;
+        Note: Serenity.StringEditor;
+        ApproverId: Serenity.StringEditor;
+        ApproverDate: Serenity.DateEditor;
+    }
+    class ReceiptForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Finance {
+    interface ReceiptRow {
+        Id?: string;
+        BillNo?: string;
+        Date?: string;
+        BillType?: number;
+        Status?: number;
+        Note?: string;
+        ApproverId?: number;
+        ApproverDate?: string;
+    }
+    namespace ReceiptRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "BillNo";
+        const localTextPrefix = "Finance.Receipt";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            BillNo = "BillNo",
+            Date = "Date",
+            BillType = "BillType",
+            Status = "Status",
+            Note = "Note",
+            ApproverId = "ApproverId",
+            ApproverDate = "ApproverDate"
+        }
+    }
+}
+declare namespace Kun.Finance {
+    namespace ReceiptService {
+        const baseUrl = "Finance/Receipt";
+        function Create(request: Serenity.SaveRequest<ReceiptRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<ReceiptRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ReceiptRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ReceiptRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Finance/Receipt/Create",
+            Update = "Finance/Receipt/Update",
+            Delete = "Finance/Receipt/Delete",
+            Retrieve = "Finance/Receipt/Retrieve",
+            List = "Finance/Receipt/List"
+        }
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptDialog extends Serenity.EntityDialog<ReceiptRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: ReceiptForm;
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptGrid extends Serenity.EntityGrid<ReceiptRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ReceiptDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Finance {
+}
+declare namespace Kun.Finance {
+}
+declare namespace Kun.Finance {
 }

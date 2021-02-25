@@ -36,8 +36,19 @@ namespace Kun.Finance.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        [DefaultHandler]
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void SetInternalFields()
+            {
+                base.SetInternalFields();
+                if (IsCreate)
+                {
+                    Row.Id = Row.Id ?? Guid.NewGuid();
+                }
+                if (Row.ReceiptAmount < 0) { throw new Exception($"行{Row.Serial}的回款金额不得小于0!"); }
+            }
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

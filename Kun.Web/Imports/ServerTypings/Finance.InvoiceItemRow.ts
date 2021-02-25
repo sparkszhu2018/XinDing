@@ -21,6 +21,7 @@
         HeadStatus?: Finance.Enums.BillStatus;
         HeadDate?: string;
         Kind?: Finance.Enums.InvoiceItemKind;
+        ReceiptAmount?: number;
     }
 
     export namespace InvoiceItemRow {
@@ -54,7 +55,8 @@
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
-            Kind = "Kind"
+            Kind = "Kind",
+            ReceiptAmount = "ReceiptAmount"
         }
     }
 }

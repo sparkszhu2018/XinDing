@@ -139,6 +139,16 @@ namespace MVC
                 public const string InvoiceItemIndex = "~/Modules/Finance/InvoiceItem/InvoiceItemIndex.cshtml";
             }
 
+            public static class Receipt
+            {
+                public const string ReceiptIndex = "~/Modules/Finance/Receipt/ReceiptIndex.cshtml";
+            }
+
+            public static class ReceiptItem
+            {
+                public const string ReceiptItemIndex = "~/Modules/Finance/ReceiptItem/ReceiptItemIndex.cshtml";
+            }
+
         }
 
         public static class Membership

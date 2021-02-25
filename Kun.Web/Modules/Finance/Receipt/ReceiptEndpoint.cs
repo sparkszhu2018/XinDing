@@ -8,11 +8,35 @@ namespace Kun.Finance.Endpoints
     using Microsoft.AspNetCore.Mvc;
     using MyRepository = Repositories.ReceiptRepository;
     using MyRow = Entities.ReceiptRow;
+    using System;
 
     [Route("Services/Finance/Receipt/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class ReceiptController : ServiceEndpoint
     {
+        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
+        public SaveResponse Commit(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Commited);
+        }
+        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
+        public SaveResponse Audit(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Audited);
+        }
+
+        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
+        public SaveResponse Reject(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.Reject);
+        }
+        public SaveResponse UnAudit(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().ChangeStatus(uow, new Guid(request.EntityId.ToString()), BillStatus.UnAudited);
+        }
+
+
+
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

@@ -1,5 +1,4 @@
-﻿
-namespace Kun.Finance {
+﻿namespace Kun.Finance {
     export interface ReceiptItemRow {
         Id?: string;
         HeadId?: string;
@@ -18,6 +17,7 @@ namespace Kun.Finance {
 
     export namespace ReceiptItemRow {
         export const idProperty = 'Id';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'SourceDocumentNo';
         export const localTextPrefix = 'Finance.ReceiptItem';
         export const deletePermission = '*';
@@ -25,36 +25,20 @@ namespace Kun.Finance {
         export const readPermission = '*';
         export const updatePermission = '*';
 
-        export namespace Fields {
-            export declare const Id;
-            export declare const HeadId;
-            export declare const Serial;
-            export declare const SourceDocumentType;
-            export declare const SourceDocumentId;
-            export declare const SourceDocumentNo;
-            export declare const SourceItemId;
-            export declare const SourceItemSerial;
-            export declare const Name;
-            export declare const InvoiceAmount;
-            export declare const BalanceAmount;
-            export declare const ReceiptAmount;
-            export declare const Note;
+        export declare const enum Fields {
+            Id = "Id",
+            HeadId = "HeadId",
+            Serial = "Serial",
+            SourceDocumentType = "SourceDocumentType",
+            SourceDocumentId = "SourceDocumentId",
+            SourceDocumentNo = "SourceDocumentNo",
+            SourceItemId = "SourceItemId",
+            SourceItemSerial = "SourceItemSerial",
+            Name = "Name",
+            InvoiceAmount = "InvoiceAmount",
+            BalanceAmount = "BalanceAmount",
+            ReceiptAmount = "ReceiptAmount",
+            Note = "Note"
         }
-
-        [
-            'Id',
-            'HeadId',
-            'Serial',
-            'SourceDocumentType',
-            'SourceDocumentId',
-            'SourceDocumentNo',
-            'SourceItemId',
-            'SourceItemSerial',
-            'Name',
-            'InvoiceAmount',
-            'BalanceAmount',
-            'ReceiptAmount',
-            'Note'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

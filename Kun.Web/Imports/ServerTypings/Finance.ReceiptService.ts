@@ -1,5 +1,4 @@
-﻿
-namespace Kun.Finance {
+﻿namespace Kun.Finance {
     export namespace ReceiptService {
         export const baseUrl = 'Finance/Receipt';
 
@@ -9,12 +8,12 @@ namespace Kun.Finance {
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ReceiptRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ReceiptRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Retrieve: string;
-            export declare const List: string;
+        export declare const enum Methods {
+            Create = "Finance/Receipt/Create",
+            Update = "Finance/Receipt/Update",
+            Delete = "Finance/Receipt/Delete",
+            Retrieve = "Finance/Receipt/Retrieve",
+            List = "Finance/Receipt/List"
         }
 
         [
@@ -24,10 +23,9 @@ namespace Kun.Finance {
             'Retrieve', 
             'List'
         ].forEach(x => {
-            (<any>ReceiptService)[x] = function (r, s, o) { 
-                return Q.serviceRequest(baseUrl + '/' + x, r, s, o); 
+            (<any>ReceiptService)[x] = function (r, s, o) {
+                return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

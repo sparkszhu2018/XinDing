@@ -3,7 +3,8 @@
 namespace Kun.Project {
 
     export interface ProjectInfoPickerOptions {
-        hideData?: number[];
+        hideData?: number[],
+        criteria?: any[]
     }
 
     @Serenity.Decorators.registerClass()
@@ -57,6 +58,10 @@ namespace Kun.Project {
             //request.Criteria = Serenity.Criteria.and(request.Criteria,
             //    [[ProjectInfoRow.Fields.Status], '=', Enums.BillStatus.Audited]);
 
+
+            if (this.options.criteria != null) {
+                request.Criteria = Serenity.Criteria.and(request.Criteria, this.options.criteria);
+            } 
             return true;
         }
     }

@@ -2075,6 +2075,7 @@ declare namespace Kun.Ops {
         TypeId?: string;
         TypeName?: string;
         TotalCost?: number;
+        InvoicedAmount?: number;
     }
     namespace MaintenanceRow {
         const idProperty = "Id";
@@ -2119,7 +2120,8 @@ declare namespace Kun.Ops {
             ServicerCost = "ServicerCost",
             TypeId = "TypeId",
             TypeName = "TypeName",
-            TotalCost = "TotalCost"
+            TotalCost = "TotalCost",
+            InvoicedAmount = "InvoicedAmount"
         }
     }
 }
@@ -2645,7 +2647,7 @@ declare namespace Kun.Project {
     interface ProjectInfoForm {
         BillNo: Serenity.StringEditor;
         Date: Serenity.DateEditor;
-        Status: Serenity.EnumEditor;
+        IsClosed: Serenity.BooleanEditor;
         InsertUserId: Serenity.LookupEditor;
         ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
@@ -2688,12 +2690,14 @@ declare namespace Kun.Project {
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        IsClosed?: boolean;
         CustomerName?: string;
         PaymentName?: string;
         ApproverName?: string;
         Materials?: MaterialsItemRow[];
         BizItems?: BizItemRow[];
         ServiceItems?: ServiceItemRow[];
+        InvoicedAmount?: number;
     }
     namespace ProjectInfoRow {
         const idProperty = "Id";
@@ -2724,12 +2728,14 @@ declare namespace Kun.Project {
             Note = "Note",
             ApproverId = "ApproverId",
             ApproverDate = "ApproverDate",
+            IsClosed = "IsClosed",
             CustomerName = "CustomerName",
             PaymentName = "PaymentName",
             ApproverName = "ApproverName",
             Materials = "Materials",
             BizItems = "BizItems",
-            ServiceItems = "ServiceItems"
+            ServiceItems = "ServiceItems",
+            InvoicedAmount = "InvoicedAmount"
         }
     }
 }
@@ -3027,6 +3033,8 @@ declare namespace Kun.Sell {
         BuyAmount?: number;
         CustomerId?: string;
         CustomerName?: string;
+        InvoicedAmount?: number;
+        InvoicedQty?: number;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -3063,7 +3071,9 @@ declare namespace Kun.Sell {
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
             CustomerId = "CustomerId",
-            CustomerName = "CustomerName"
+            CustomerName = "CustomerName",
+            InvoicedAmount = "InvoicedAmount",
+            InvoicedQty = "InvoicedQty"
         }
     }
 }
@@ -4893,6 +4903,36 @@ declare namespace Kun.Ops {
     }
 }
 declare namespace Kun.Ops {
+    interface MaintenancePickerOptions {
+        hideData?: number[];
+        criteria?: any[];
+    }
+    class MaintenanceCheckGrid extends Serenity.EntityGrid<MaintenanceRow, MaintenancePickerOptions> {
+        protected getColumnsKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        private rowSelection;
+        constructor(container: JQuery, options: MaintenancePickerOptions);
+        protected getColumns(): Slick.Column[];
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        protected getButtons(): Serenity.ToolButton[];
+        get selectedItems(): MaintenanceRow[];
+        protected onViewSubmit(): boolean;
+    }
+}
+declare namespace Kun.Ops {
+    class MaintenancePickerDialog extends Serenity.TemplatedDialog<MaintenancePickerOptions> {
+        private checkGrid;
+        constructor(opt: MaintenancePickerOptions);
+        protected getTemplate(): string;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        get selectedItems(): MaintenanceRow[];
+        onSuccess: (selected: MaintenanceRow[]) => boolean;
+    }
+}
+declare namespace Kun.Ops {
     class MaintenanceManhoursDialog extends Common.GridEditorDialog<MaintenanceManhoursRow> {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
@@ -5249,6 +5289,36 @@ declare namespace Kun.Project {
     }
 }
 declare namespace Kun.Project {
+    interface ProjectInfoPickerOptions {
+        hideData?: number[];
+        criteria?: any[];
+    }
+    class ProjectInfoCheckGrid extends Serenity.EntityGrid<ProjectInfoRow, ProjectInfoPickerOptions> {
+        protected getColumnsKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        private rowSelection;
+        constructor(container: JQuery, options: ProjectInfoPickerOptions);
+        protected getColumns(): Slick.Column[];
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        protected getButtons(): Serenity.ToolButton[];
+        get selectedItems(): ProjectInfoRow[];
+        protected onViewSubmit(): boolean;
+    }
+}
+declare namespace Kun.Project {
+    class ProjectInfoPickerDialog extends Serenity.TemplatedDialog<ProjectInfoPickerOptions> {
+        private checkGrid;
+        constructor(opt: ProjectInfoPickerOptions);
+        protected getTemplate(): string;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        get selectedItems(): ProjectInfoRow[];
+        onSuccess: (selected: ProjectInfoRow[]) => boolean;
+    }
+}
+declare namespace Kun.Project {
     class ServiceBillDialog extends Serenity.EntityDialog<ServiceBillRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -5414,6 +5484,7 @@ declare namespace Kun.Sell {
 declare namespace Kun.Sell {
     interface SaleOrderItemPickerOptions {
         hideData?: number[];
+        criteria?: any[];
     }
     class SaleOrderItemCheckGrid extends Serenity.EntityGrid<SaleOrderItemRow, SaleOrderItemPickerOptions> {
         protected getColumnsKey(): string;
@@ -5705,63 +5776,5 @@ declare namespace Kun.Sys {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
-    }
-}
-declare namespace Kun.Ops {
-    interface MaintenancePickerOptions {
-        hideData?: number[];
-    }
-    class MaintenanceCheckGrid extends Serenity.EntityGrid<MaintenanceRow, MaintenancePickerOptions> {
-        protected getColumnsKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        private rowSelection;
-        constructor(container: JQuery, options: MaintenancePickerOptions);
-        protected getColumns(): Slick.Column[];
-        protected usePager(): boolean;
-        protected getInitialTitle(): any;
-        protected getButtons(): Serenity.ToolButton[];
-        get selectedItems(): MaintenanceRow[];
-        protected onViewSubmit(): boolean;
-    }
-}
-declare namespace Kun.Ops {
-    class MaintenancePickerDialog extends Serenity.TemplatedDialog<MaintenancePickerOptions> {
-        private checkGrid;
-        constructor(opt: MaintenancePickerOptions);
-        protected getTemplate(): string;
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        get selectedItems(): MaintenanceRow[];
-        onSuccess: (selected: MaintenanceRow[]) => boolean;
-    }
-}
-declare namespace Kun.Project {
-    interface ProjectInfoPickerOptions {
-        hideData?: number[];
-    }
-    class ProjectInfoCheckGrid extends Serenity.EntityGrid<ProjectInfoRow, ProjectInfoPickerOptions> {
-        protected getColumnsKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        private rowSelection;
-        constructor(container: JQuery, options: ProjectInfoPickerOptions);
-        protected getColumns(): Slick.Column[];
-        protected usePager(): boolean;
-        protected getInitialTitle(): any;
-        protected getButtons(): Serenity.ToolButton[];
-        get selectedItems(): ProjectInfoRow[];
-        protected onViewSubmit(): boolean;
-    }
-}
-declare namespace Kun.Project {
-    class ProjectInfoPickerDialog extends Serenity.TemplatedDialog<ProjectInfoPickerOptions> {
-        private checkGrid;
-        constructor(opt: ProjectInfoPickerOptions);
-        protected getTemplate(): string;
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        get selectedItems(): ProjectInfoRow[];
-        onSuccess: (selected: ProjectInfoRow[]) => boolean;
     }
 }

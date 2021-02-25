@@ -2,6 +2,9 @@
 namespace Kun.Finance.Repositories
 {
     using Kun.Finance.Entities;
+    using Kun.Ops.Entities;
+    using Kun.Project.Entities;
+    using Kun.Sell.Entities;
     using Kun.Sys.Repositories;
     using Serenity;
     using Serenity.Data;
@@ -28,9 +31,13 @@ namespace Kun.Finance.Repositories
                     ApproverId = long.Parse(Authorization.UserId),
                 }
             };
-            if (Status == BillStatus.Audited) //审核通过
+            if (Status == BillStatus.Commited) //提交
             {
-                //var head = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
+                CheckInvoiceQtyAmount(uow, Id);
+            }
+            else if (Status == BillStatus.Audited) //审核通过
+            {
+                CheckInvoiceQtyAmount(uow, Id);
                 var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
                 var billInvoicedRep = new BillInvoicedRepository();
                 foreach (var m in items)
@@ -77,7 +84,54 @@ namespace Kun.Finance.Repositories
             }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }
+        /// <summary>
+        /// 检验开票数量和金额是否超额
+        /// </summary>
+        /// <param name="uow"></param>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public bool CheckInvoiceQtyAmount(IUnitOfWork uow, Guid Id)
+        { 
+            var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+            foreach(var i in items)
+            {
+                if(i.Kind == InvoiceItemKind.Maintenance)
+                {
+                    MaintenanceRow maintenanceRow = uow.Connection.Single<MaintenanceRow>(q => 
+                    q.SelectTableFields().Select(MaintenanceRow.Fields.TotalCost).Select(MaintenanceRow.Fields.InvoicedAmount)
+                        .Where(MaintenanceRow.Fields.Id == (Guid)i.SourceDocumentId));
+                    if (maintenanceRow.InvoicedAmount >= maintenanceRow.TotalCost)
+                    {
+                        throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0}已全部开票，无法提交!");
+                    }
 
+                }
+                else if(i.Kind == InvoiceItemKind.Project)
+                {
+             
+                }
+                else if(i.Kind == InvoiceItemKind.SaleOrderItem)
+                {
+                    SaleOrderItemRow saleOrderItemRow = uow.Connection.Single<SaleOrderItemRow>(q =>
+                    q.SelectTableFields() 
+                    .Select(SaleOrderItemRow.Fields.InvoicedQty)
+                    .Select(SaleOrderItemRow.Fields.InvoicedAmount)
+                        .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceDocumentId));
+                    if (saleOrderItemRow.InvoicedAmount >= saleOrderItemRow.SaleAmount)
+                    {
+                        throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},金额{saleOrderItemRow.SaleAmount}已全部开票，无法提交!");
+                    }else if (saleOrderItemRow.InvoicedQty >= saleOrderItemRow.Qty)
+                    {
+                        throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},数量{saleOrderItemRow.Qty}已全部开票，无法提交!");
+                    }
+                    else if (saleOrderItemRow.Qty - saleOrderItemRow.InvoicedQty < i.Qty )
+                    {
+                        throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},本次开票数量{i.Qty}大于可开票数量{saleOrderItemRow.Qty - saleOrderItemRow.InvoicedQty}，无法提交!");
+                    }
+                }
+            }
+            return true;
+        }
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

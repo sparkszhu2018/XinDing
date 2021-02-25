@@ -34,6 +34,7 @@
         TypeId?: string;
         TypeName?: string;
         TotalCost?: number;
+        InvoicedAmount?: number;
     }
 
     export namespace MaintenanceRow {
@@ -80,7 +81,8 @@
             ServicerCost = "ServicerCost",
             TypeId = "TypeId",
             TypeName = "TypeName",
-            TotalCost = "TotalCost"
+            TotalCost = "TotalCost",
+            InvoicedAmount = "InvoicedAmount"
         }
     }
 }

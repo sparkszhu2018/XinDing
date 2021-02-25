@@ -21,6 +21,7 @@ using Kun.AppServices;
 using System;
 using System.Data.SqlClient;
 using System.IO;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Kun
 {
@@ -75,11 +76,14 @@ namespace Kun
                 o.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(o =>
             {
+
+                o.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(@"C:\temp\_sso"));
                 o.Cookie.Name = ".AspNetAuth";
                 o.LoginPath = new PathString("/Account/Login/");
                 o.AccessDeniedPath = new PathString("/Account/AccessDenied");
                 o.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 o.SlidingExpiration = true;
+
             });
 
             services.AddLogging(loggingBuilder =>

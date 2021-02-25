@@ -93,6 +93,18 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Finance_Receipt",
+          "Identifier": "Receipt",
+          "Module": "Finance",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Finance_ReceiptItem",
+          "Identifier": "ReceiptItem",
+          "Module": "Finance",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.OPS_Maintenance",
           "Identifier": "Maintenance",
           "Module": "Ops",

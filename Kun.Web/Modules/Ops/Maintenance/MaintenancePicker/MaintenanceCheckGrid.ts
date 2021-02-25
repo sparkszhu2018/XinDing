@@ -3,7 +3,8 @@
 namespace Kun.Ops {
 
     export interface MaintenancePickerOptions {
-        hideData?: number[];
+        hideData?: number[],
+        criteria?: any[]
     }
 
     @Serenity.Decorators.registerClass()
@@ -56,6 +57,9 @@ namespace Kun.Ops {
             request.Criteria = Serenity.Criteria.and(request.Criteria,
                 [[MaintenanceRow.Fields.Status], '=', Enums.BillStatus.Audited]);
 
+            if (this.options.criteria != null) {
+                request.Criteria = Serenity.Criteria.and(request.Criteria, this.options.criteria);
+            } 
             return true;
         }
     }

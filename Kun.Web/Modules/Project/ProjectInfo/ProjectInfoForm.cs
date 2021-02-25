@@ -18,8 +18,8 @@ namespace Kun.Project.Forms
         [Category("基本信息")]
         [OneThirdWidth(UntilNext = true), LabelWidth(100, UntilNext = true)]
         public String BillNo { get; set; }
-        public DateTime Date { get; set; }
-        public Int32 Status { get; set; }
+        public DateTime Date { get; set; } 
+        public Boolean IsClosed { get; set; }
         [LookupEditor(typeof(UserRow))]
         public Int64 InsertUserId { get; set; }
         public Int64 ApproverId { get; set; }

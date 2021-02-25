@@ -25,7 +25,9 @@ namespace Kun.Project.Columns
         public String PhoneNo { get; set; }
         public String Address { get; set; }
 
+        public Decimal InvoicedAmount { get; set; }
 
+        public Boolean  IsClosed { get; set; }
         public String InsertUserName { get; set; }
         public DateTime? InsertDate { get; set; }
         public String ApproverName { get; set; }

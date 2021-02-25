@@ -26,6 +26,8 @@
         BuyAmount?: number;
         CustomerId?: string;
         CustomerName?: string;
+        InvoicedAmount?: number;
+        InvoicedQty?: number;
     }
 
     export namespace SaleOrderItemRow {
@@ -64,7 +66,9 @@
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
             CustomerId = "CustomerId",
-            CustomerName = "CustomerName"
+            CustomerName = "CustomerName",
+            InvoicedAmount = "InvoicedAmount",
+            InvoicedQty = "InvoicedQty"
         }
     }
 }

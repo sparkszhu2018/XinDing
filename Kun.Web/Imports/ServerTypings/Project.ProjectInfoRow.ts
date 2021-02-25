@@ -17,12 +17,14 @@
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        IsClosed?: boolean;
         CustomerName?: string;
         PaymentName?: string;
         ApproverName?: string;
         Materials?: MaterialsItemRow[];
         BizItems?: BizItemRow[];
         ServiceItems?: ServiceItemRow[];
+        InvoicedAmount?: number;
     }
 
     export namespace ProjectInfoRow {
@@ -58,12 +60,14 @@
             Note = "Note",
             ApproverId = "ApproverId",
             ApproverDate = "ApproverDate",
+            IsClosed = "IsClosed",
             CustomerName = "CustomerName",
             PaymentName = "PaymentName",
             ApproverName = "ApproverName",
             Materials = "Materials",
             BizItems = "BizItems",
-            ServiceItems = "ServiceItems"
+            ServiceItems = "ServiceItems",
+            InvoicedAmount = "InvoicedAmount"
         }
     }
 }

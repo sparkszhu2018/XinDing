@@ -15,9 +15,11 @@ namespace Kun.Finance.Columns
     {
         [EditLink] 
         public Int32 Serial { get; set; }
+        [Hidden]
         public Int32 SourceDocumentType { get; set; } 
         public String SourceDocumentNo { get; set; } 
         public Int32 SourceItemSerial { get; set; }
+        [Hidden]
         public Int32 Kind { get; set; }
         public String Name { get; set; }
         public String UnitName { get; set; }

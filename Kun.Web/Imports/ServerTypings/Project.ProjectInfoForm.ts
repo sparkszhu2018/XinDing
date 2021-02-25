@@ -2,7 +2,7 @@
     export interface ProjectInfoForm {
         BillNo: Serenity.StringEditor;
         Date: Serenity.DateEditor;
-        Status: Serenity.EnumEditor;
+        IsClosed: Serenity.BooleanEditor;
         InsertUserId: Serenity.LookupEditor;
         ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
@@ -34,7 +34,7 @@
                 var s = Serenity;
                 var w0 = s.StringEditor;
                 var w1 = s.DateEditor;
-                var w2 = s.EnumEditor;
+                var w2 = s.BooleanEditor;
                 var w3 = s.LookupEditor;
                 var w4 = s.DecimalEditor;
                 var w5 = MaterialsItemViewEditor;
@@ -44,7 +44,7 @@
                 Q.initFormType(ProjectInfoForm, [
                     'BillNo', w0,
                     'Date', w1,
-                    'Status', w2,
+                    'IsClosed', w2,
                     'InsertUserId', w3,
                     'ApproverId', w3,
                     'ApproverDate', w1,

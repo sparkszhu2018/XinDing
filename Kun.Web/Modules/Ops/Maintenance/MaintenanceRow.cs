@@ -292,6 +292,21 @@ namespace Kun.Ops.Entities
             set { Fields.TotalCost[this] = value; }
         }
 
+        [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+            "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
+        public Decimal? InvoicedAmount
+        {
+            get { return Fields.InvoicedAmount[this]; }
+            set { Fields.InvoicedAmount[this] = value; }
+        }
+        //[DisplayName("已开票数量"), Expression("isnull((select top 1 Qty from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+        //    "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
+        //public Decimal? InvoicedQty
+        //{
+        //    get { return Fields.InvoicedQty[this]; }
+        //    set { Fields.InvoicedQty[this] = value; }
+        //}
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -344,15 +359,12 @@ namespace Kun.Ops.Entities
             public StringField SettleCustomerName;
             public StringField ResponsibleName;
             public StringField ApproverName;
-            public DecimalField ServicerCost;
-
+            public DecimalField ServicerCost; 
 
             public GuidField TypeId;
             public StringField TypeName;
-            public DecimalField TotalCost; 
-            
-
-
+            public DecimalField TotalCost;
+            public DecimalField InvoicedAmount;
 
         }
     }

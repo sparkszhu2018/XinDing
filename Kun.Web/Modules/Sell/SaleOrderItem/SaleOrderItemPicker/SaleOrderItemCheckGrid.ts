@@ -3,7 +3,8 @@
 namespace Kun.Sell {
 
     export interface SaleOrderItemPickerOptions {
-        hideData?: number[];
+        hideData?: number[],
+        criteria?: any[]
     }
 
     @Serenity.Decorators.registerClass()
@@ -59,6 +60,9 @@ namespace Kun.Sell {
             request.Criteria = Serenity.Criteria.and(request.Criteria,
                 [[SaleOrderItemRow.Fields.HeadStatus], '=', Enums.BillStatus.Audited]);
 
+            if (this.options.criteria != null) {
+                request.Criteria = Serenity.Criteria.and(request.Criteria, this.options.criteria);
+            } 
             return true;
         }
     }

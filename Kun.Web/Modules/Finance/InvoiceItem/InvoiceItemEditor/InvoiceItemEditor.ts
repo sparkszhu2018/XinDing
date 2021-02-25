@@ -37,7 +37,7 @@ namespace Kun.Finance {
             //row.MaterialCode = material.Code; 
             //row.UnitName = Basic.UnitRow.getLookup().itemById[material.UnitId].Name;
  
-            //row.InvoiceTypeName = Serenity.EnumFormatter.format(Stock.Enums.InvoiceType, Q.toId(row.InvoiceType)); 
+            //row.Kind = Serenity.EnumFormatter.format(Enums.InvoiceItemKind.SaleOrderItem, Q.toId(row.Kind)); 
 
             //row.SupplierName = Basic.SupplierRow.getLookup().itemById[row.SupplierId].Name;
             //if (!Q.isEmptyOrNull(row.WarehouseId)) { 
@@ -59,18 +59,20 @@ namespace Kun.Finance {
             buttons.push({
                 title: "选择源单",
                 cssClass: "add-button",
-                visible: () => { return false }, 
+                visible: () => { return false },
                 onClick: () => {
                     if (this._billType == Enums.InvoiceBillType.SaleOrder.toString()) {
                         var dlg = new Sell.SaleOrderItemPickerDialog({
-                            hideData: null
+                            hideData: null,
+                            criteria: [[Sell.SaleOrderItemRow.Fields.InvoicedQty], '<', [Sell.SaleOrderItemRow.Fields.Qty]]
                         });
                         dlg.onSuccess = (selected) => {
                             // selected = selected.filter(x => !Q.any(this.view.getItems(), y => y.SourceItemId == x.Id));
                             var i = 10;
                             if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
-                            for (var sel of selected) {
+                            for (var sel of selected) { 
                                 var item = <InvoiceItemRow>{
+                                  
                                     Serial: i,
                                     SourceDocumentType: Enums.InvoiceBillType.SaleOrder,
                                     SourceDocumentId: sel.HeadId,
@@ -80,11 +82,11 @@ namespace Kun.Finance {
                                     Name: sel.MaterialName,
                                     UnitName: sel.UnitName,
                                     Price: sel.SalePrice,
-                                    Qty: sel.Qty,
-                                    Amount: sel.SalePrice * sel.Qty,
-                                    InvoiceAmount: sel.SalePrice * sel.Qty,
+                                    Qty: sel.Qty - sel.InvoicedQty,
+                                    Amount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
+                                    InvoiceAmount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
                                     Kind: Enums.InvoiceItemKind.SaleOrderItem,
-
+                                     
                                     // TaxRate:
                                     //InvoiceNo;
                                     //Note; 
@@ -100,9 +102,10 @@ namespace Kun.Finance {
                         dlg.dialogOpen();
                     } else if (this._billType == Enums.InvoiceBillType.Maintenance.toString()) {
                         var dlg_m = new Ops.MaintenancePickerDialog({
-                            hideData: null
+                            hideData: null,
+                            criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalCost]]
                         });
-                        dlg_m.onSuccess = (selected) => { 
+                        dlg_m.onSuccess = (selected) => {
                             var i = 10;
                             if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
                             for (var sel of selected) {
@@ -110,27 +113,27 @@ namespace Kun.Finance {
                                     Serial: i,
                                     SourceDocumentType: Enums.InvoiceBillType.Maintenance,
                                     SourceDocumentId: sel.Id,
-                                    SourceDocumentNo: sel.BillNo, 
+                                    SourceDocumentNo: sel.BillNo,
                                     Name: sel.Description,
                                     Price: sel.TotalCost,
                                     Qty: 1,
                                     Amount: sel.TotalCost,
                                     InvoiceAmount: sel.TotalCost,
                                     Kind: Enums.InvoiceItemKind.Maintenance,
- 
+
                                 };
                                 var id = this.getNextId();
                                 item[this.getIdProperty()] = id;
                                 this.view.addItem(item);
                                 i = i + 10;
                             }
-
                             return true;
                         };
                         dlg_m.dialogOpen();
                     } else if (this._billType == Enums.InvoiceBillType.Project.toString()) {
                         var dlg_p = new Project.ProjectInfoPickerDialog({
-                            hideData: null
+                            hideData: null,
+                            criteria: [[Project.ProjectInfoRow.Fields.IsClosed], '=', 0]
                         });
                         dlg_p.onSuccess = (selected) => {
                             var i = 10;
@@ -153,10 +156,12 @@ namespace Kun.Finance {
                                 item[this.getIdProperty()] = id;
                                 this.view.addItem(item);
                                 i = i + 10;
-                            } 
+                            }
                             return true;
                         };
                         dlg_p.dialogOpen();
+                    } else {
+                        Q.notifyError("请选择业务类型!");
                     }
                 }
             });  

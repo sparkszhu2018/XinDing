@@ -27,11 +27,11 @@ namespace Kun.Finance.Repositories
             if (list.Count > 0)
             {
                 var exit = list.First();
-                Update(uow, new SaveRequest<MyRow>
+                return Update(uow, new SaveRequest<MyRow>
                 {
                     Entity = new MyRow
                     {
-                        Id = request.Entity.Id,
+                        Id = list[0].Id,
                         InvoiceAmount = exit.InvoiceAmount + request.Entity.InvoiceAmount,
                         Qty = exit.Qty + (request.Entity.Kind == Enums.FinanceEnums.InvoiceItemKind.SaleOrderItem ? request.Entity.Qty : 0) //非销售订单数量不变
                     }
@@ -39,7 +39,7 @@ namespace Kun.Finance.Repositories
             }
             else
             {
-                Create(uow, new SaveRequest<MyRow>
+                return Create(uow, new SaveRequest<MyRow>
                 {
                     Entity = new MyRow
                     {
@@ -53,8 +53,7 @@ namespace Kun.Finance.Repositories
                         Kind = request.Entity.Kind,
                     }
                 });
-            }
-            return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
+            } 
         }
         /// <summary>
         /// 取消开票，扣减数量金额
@@ -76,11 +75,11 @@ namespace Kun.Finance.Repositories
             if (list.Count > 0)
             {
                 var exit = list.First();
-                Update(uow, new SaveRequest<MyRow>
+                return Update(uow, new SaveRequest<MyRow>
                 {
                     Entity = new MyRow
                     {
-                        Id = request.Entity.Id,
+                        Id = list[0].Id,
                         InvoiceAmount = exit.InvoiceAmount - request.Entity.InvoiceAmount,
                         Qty =  request.Entity.Kind == Enums.FinanceEnums.InvoiceItemKind.SaleOrderItem ? (exit.Qty - request.Entity.Qty) : 0  //非销售订单数量不变
                     }
@@ -88,9 +87,8 @@ namespace Kun.Finance.Repositories
             }
             else
             {
-                throw new Exception($"源单{request.Entity.SourceDocumentNo}-{ EnumMapper.GetText(request.Entity.Kind) }-行{request.Entity.SourceItemSerial}找不到已开票数据，无法反审核!");
-            }
-            return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
+                throw new Exception($"源单{request.Entity.SourceDocumentNo}-{ EnumMapper.GetText(request.Entity.Kind) }-行{request.Entity.SourceItemSerial??0}找不到已开票数据，无法反审核!");
+            } 
         }
 
 
@@ -130,7 +128,7 @@ namespace Kun.Finance.Repositories
                 }
                 if (Row.Qty < 0 || Row.InvoiceAmount < 0)
                 {
-                    throw new Exception($"源单{Row.SourceDocumentNo}-{ EnumMapper.GetText(Row.Kind) }-行{Row.SourceItemSerial}开票数量/金额不得为负，操作失败!");
+                    throw new Exception($"源单{Row.SourceDocumentNo}-{ EnumMapper.GetText(Row.Kind) }-行{Row.SourceItemSerial??0}开票数量/金额不得为负，操作失败!");
                 }
             }
         }

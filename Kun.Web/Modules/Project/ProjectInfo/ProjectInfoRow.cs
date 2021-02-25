@@ -167,6 +167,13 @@ namespace Kun.Project.Entities
             set { Fields.ApproverDate[this] = value; }
         }
 
+        [DisplayName("是否关闭"), DefaultValue(false),ReadOnly(true)]
+        public Boolean? IsClosed
+        {
+            get { return Fields.IsClosed[this]; }
+            set { Fields.IsClosed[this] = value; }
+        }
+
         [DisplayName("物料明细"), NotMapped, 
             MasterDetailRelation(foreignKey: "ProjectId",
             IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus,BillNo")
@@ -189,6 +196,14 @@ namespace Kun.Project.Entities
         {
             get { return Fields.ServiceItems[this]; }
             set { Fields.ServiceItems[this] = value; }
+        }
+
+        [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+           "and Kind = 30 and SourceDocumentId = t0.Id),0)")]
+        public Decimal? InvoicedAmount
+        {
+            get { return Fields.InvoicedAmount[this]; }
+            set { Fields.InvoicedAmount[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -227,6 +242,7 @@ namespace Kun.Project.Entities
             public StringField Note;
             public Int64Field ApproverId;
             public DateTimeField ApproverDate;
+            public BooleanField IsClosed;
 
             public StringField CustomerName;
             public StringField PaymentName;
@@ -235,6 +251,7 @@ namespace Kun.Project.Entities
             public RowListField<MaterialsItemRow> Materials;
             public RowListField<BizItemRow> BizItems;
             public RowListField<ServiceItemRow> ServiceItems;
+            public DecimalField InvoicedAmount;
         }
     }
 }

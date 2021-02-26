@@ -30,14 +30,14 @@ namespace Kun.Ops.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]")]
+        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }

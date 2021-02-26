@@ -26,7 +26,7 @@ namespace Kun.Sell.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -41,14 +41,14 @@ namespace Kun.Sell.Entities
             set { Fields.BillType[this] = (Int32)value; }
         }
 
-        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true)]
+        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true), QuickFilter]
         public BillStatus? Status
         {
             get { return (BillStatus?)Fields.Status[this]; }
             set { Fields.Status[this] = (Int32)value; }
         } 
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -56,7 +56,7 @@ namespace Kun.Sell.Entities
             set { Fields.Date[this] = value; }
         }
 
-        [DisplayName("客户"), NotNull, LookupEditor(typeof(CustomerRow)),
+        [DisplayName("客户"), NotNull, LookupEditor(typeof(CustomerRow)), QuickFilter,
      ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName") ]
         public Guid? CustomerId
         {
@@ -71,7 +71,7 @@ namespace Kun.Sell.Entities
             set { Fields.CustomerName[this] = value; }
         }
 
-        [DisplayName("结算客户"), NotNull, LookupEditor(typeof(CustomerRow)),
+        [DisplayName("结算客户"), NotNull, LookupEditor(typeof(CustomerRow)), QuickFilter,
     ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jSettleCustomer"), TextualField("SettleCustomerName")]
         public Guid? SettleCustomerId
         {

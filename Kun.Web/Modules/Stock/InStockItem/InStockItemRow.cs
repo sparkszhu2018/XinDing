@@ -32,14 +32,14 @@ namespace Kun.Stock.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }  
 
-        [DisplayName("状态"), Expression("jHead.[Status]")]
+        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
@@ -53,7 +53,7 @@ namespace Kun.Stock.Entities
             set { Fields.Serial[this] = value; }
         }
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]")]
+        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -91,7 +91,7 @@ namespace Kun.Stock.Entities
             set { Fields.Status[this] = value; }
         }
          
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), 
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter, 
             ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {
@@ -106,7 +106,7 @@ namespace Kun.Stock.Entities
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), Expression("jMaterial.[Name]"), ReadOnly(true)]
+        [DisplayName("物料名称"), QuickFilter, Expression("jMaterial.[Name]"), ReadOnly(true)]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }
@@ -149,7 +149,7 @@ namespace Kun.Stock.Entities
             set { Fields.ConfirmQty[this] = value; }
         }
 
-        [DisplayName("供应商"), NotNull, LookupEditor(typeof(SupplierRow)),
+        [DisplayName("供应商"), NotNull, LookupEditor(typeof(SupplierRow)), QuickFilter,
                    ForeignKey("[dbo].[Basic_Supplier]", "Id"), LeftJoin("jSupplier"), TextualField("SupplierName")]
         public Guid? SupplierId
         {
@@ -206,7 +206,7 @@ namespace Kun.Stock.Entities
             set { Fields.LotCode[this] = value; }
         } 
 
-        [DisplayName("仓库"), LookupEditor(typeof(WarehouseRow)), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), 
+        [DisplayName("仓库"), LookupEditor(typeof(WarehouseRow)), QuickFilter, ForeignKey("[dbo].[Basic_Warehouse]", "Id"), 
             LeftJoin("jWarehouse"), TextualField("WarehouseName")]
         public Guid? WarehouseId
         {

@@ -25,28 +25,28 @@ namespace Kun.Project.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("Bill Type"), DefaultValue(0)]
+        [DisplayName("Bill Type"), DefaultValue(0), QuickFilter]
         public Int32? BillType
         {
             get { return Fields.BillType[this]; }
             set { Fields.BillType[this] = value; }
         }
 
-        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true)]
+        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true), QuickFilter]
         public BillStatus? Status
         {
             get { return (BillStatus?)Fields.Status[this]; }
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -55,7 +55,7 @@ namespace Kun.Project.Entities
         }
 
         [DisplayName("所属项目"), NotNull, LookupEditor(typeof(ProjectInfoRow)), ForeignKey("[dbo].[Project_Info]", "Id"),
-            LeftJoin("jProjectInfo"), TextualField("ProjectName")]
+            LeftJoin("jProjectInfo"), TextualField("ProjectName"), QuickFilter]
         public Guid? ProjectId
         {
             get { return Fields.ProjectId[this]; }

@@ -33,21 +33,21 @@ namespace Kun.Finance.Entities
         }
 
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]")]
+        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]")]
+        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -62,7 +62,7 @@ namespace Kun.Finance.Entities
             set { Fields.Serial[this] = value; }
         } 
 
-        [DisplayName("源单类型")]
+        [DisplayName("源单类型"), QuickFilter]
         public InvoiceBillType? SourceDocumentType
         {
             get { return (InvoiceBillType?)Fields.SourceDocumentType[this]; }
@@ -76,7 +76,7 @@ namespace Kun.Finance.Entities
             set { Fields.SourceDocumentId[this] = value; }
         }
 
-        [DisplayName("源单单号"), Size(50), QuickSearch]
+        [DisplayName("源单单号"), Size(50), QuickSearch, QuickFilter]
         public String SourceDocumentNo
         {
             get { return Fields.SourceDocumentNo[this]; }

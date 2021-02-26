@@ -31,21 +31,21 @@ namespace Kun.Sell.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]")]
+        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
         } 
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]")]
+        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -53,7 +53,7 @@ namespace Kun.Sell.Entities
             set { Fields.HeadDate[this] = value; }
         }
 
-        [DisplayName("客户"), Expression("jHead.[CustomerId]"),
+        [DisplayName("客户"), Expression("jHead.[CustomerId]"), QuickFilter,
 ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName")]
         public Guid? CustomerId
         {
@@ -83,7 +83,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.StockDataId[this] = value; }
         }
 
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)),
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter,
            ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {
@@ -98,7 +98,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称")]
+        [DisplayName("物料名称"), QuickFilter]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }
@@ -178,7 +178,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
         }
 
         [DisplayName("仓库"), ReadOnly(true), LookupEditor(typeof(WarehouseRow)), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
-            LeftJoin("jWarehouse"), TextualField("WarehouseName")]
+            LeftJoin("jWarehouse"), TextualField("WarehouseName"), QuickFilter]
         public Guid? WarehouseId
         {
             get { return Fields.WarehouseId[this]; }

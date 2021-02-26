@@ -24,7 +24,7 @@ namespace Kun.Project.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("项目"), LookupEditor(typeof(ProjectInfoRow)), 
+        [DisplayName("项目"), LookupEditor(typeof(ProjectInfoRow)), QuickFilter, 
             ForeignKey("[dbo].[Project_Info]", "Id"), LeftJoin("jProject")]
         public Guid? ProjectId
         {
@@ -53,7 +53,7 @@ namespace Kun.Project.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -67,7 +67,7 @@ namespace Kun.Project.Entities
             set { Fields.HeadProjectId[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]")]
+        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
@@ -96,14 +96,14 @@ namespace Kun.Project.Entities
             set { Fields.MaterialId[this] = value; }
         }
 
-        [DisplayName("物料号"), Expression("jMaterial.[Code]"), ReadOnly(true)]
+        [DisplayName("物料号"), Expression("jMaterial.[Code]"), ReadOnly(true), QuickFilter]
         public String MaterialCode
         {
             get { return Fields.MaterialCode[this]; }
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称")]
+        [DisplayName("物料名称"), QuickFilter]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }
@@ -182,7 +182,7 @@ namespace Kun.Project.Entities
         }
 
         [DisplayName("仓库"), ReadOnly(true), LookupEditor(typeof(WarehouseRow)), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
-            LeftJoin("jWarehouse"), TextualField("WarehouseName")]
+            LeftJoin("jWarehouse"), TextualField("WarehouseName"), QuickFilter]
         public Guid? WarehouseId
         {
             get { return Fields.WarehouseId[this]; }

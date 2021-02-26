@@ -31,21 +31,21 @@ namespace Kun.Stock.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]"),MinSelectLevel(SelectLevel.Always)]
+        [DisplayName("状态"), Expression("jHead.[Status]"),MinSelectLevel(SelectLevel.Always), QuickFilter]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]")]
+        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -83,7 +83,7 @@ namespace Kun.Stock.Entities
             set { Fields.FromStockId[this] = value; }
         }
 
-        [DisplayName("原物料号"), LookupEditor(typeof(MaterialLookup)),
+        [DisplayName("原物料号"), LookupEditor(typeof(MaterialLookup)), QuickFilter,
           ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jFromMaterial"), TextualField("FromMaterialName")]
         public Guid? FromMaterialId
         {
@@ -120,7 +120,7 @@ namespace Kun.Stock.Entities
             set { Fields.FromUnitName[this] = value; }
         }
 
-        [DisplayName("原仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
+        [DisplayName("原仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), QuickFilter,
                     LeftJoin("jFromWarehouse"), TextualField("FromWarehouseName"), LookupEditor(typeof(WarehouseRow))]
         public Guid? FromWarehouseId
         {
@@ -182,7 +182,7 @@ namespace Kun.Stock.Entities
         }
 
 
-        [DisplayName("现物料号"), LookupEditor(typeof(MaterialLookup)),
+        [DisplayName("现物料号"), LookupEditor(typeof(MaterialLookup)), QuickFilter,
           ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jToMaterial"), TextualField("ToMaterialName")]
         public Guid? ToMaterialId
         {
@@ -219,7 +219,7 @@ namespace Kun.Stock.Entities
             set { Fields.ToUnitName[this] = value; }
         }
 
-        [DisplayName("现仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
+        [DisplayName("现仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), QuickFilter,
                     LeftJoin("jToWarehouse"), TextualField("ToWarehouseName"), LookupEditor(typeof(WarehouseRow))]
         public Guid? ToWarehouseId
         {

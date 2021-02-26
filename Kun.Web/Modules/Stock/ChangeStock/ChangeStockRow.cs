@@ -25,7 +25,7 @@ namespace Kun.Stock.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch]
+        [DisplayName("单据编号"), Size(50), QuickSearch, QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -39,7 +39,7 @@ namespace Kun.Stock.Entities
             set { Fields.BillType[this] = value; }
         }
 
-        [DisplayName("状态"), Size(50),
+        [DisplayName("状态"), Size(50), QuickFilter,
           DefaultValue(BillStatus.Edit), NotNull, ReadOnly(true)]
         public BillStatus? Status
         {
@@ -47,7 +47,7 @@ namespace Kun.Stock.Entities
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {

@@ -26,14 +26,14 @@ namespace Kun.Ops.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("业务类型"), NotNull]
+        [DisplayName("业务类型"), NotNull, QuickFilter]
 
         [DefaultValue(MaintenanceBillType.NormalMaintenance)]
         public MaintenanceBillType? BillType
@@ -42,7 +42,7 @@ namespace Kun.Ops.Entities
             set { Fields.BillType[this] = (Int32)value; }
         }
 
-        [DisplayName("状态"), Size(50),
+        [DisplayName("状态"), Size(50), QuickFilter,
           DefaultValue(BillStatus.Edit), NotNull, ReadOnly(true)]
         public BillStatus? Status
         {
@@ -50,7 +50,7 @@ namespace Kun.Ops.Entities
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -58,7 +58,7 @@ namespace Kun.Ops.Entities
             set { Fields.Date[this] = value; }
         }
 
-        [DisplayName("服务商"), NotNull, LookupEditor(typeof(VendorRow)),
+        [DisplayName("服务商"), NotNull, LookupEditor(typeof(VendorRow)), QuickFilter,
              ForeignKey("[dbo].[Basic_Vendor]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
            ]
         public Guid? VendorId
@@ -127,7 +127,7 @@ namespace Kun.Ops.Entities
             set { Fields.SettleCustomerName[this] = value; }
         }
 
-        [DisplayName("维保分类"), NotNull, LookupEditor(typeof(MaintenanceTypeRow)),
+        [DisplayName("维保分类"), NotNull, LookupEditor(typeof(MaintenanceTypeRow)), QuickFilter,
             ForeignKey("[dbo].[OPS_Maintenance_Type]", "Id"), LeftJoin("jType"), TextualField("TypeName")
           ]
         public Guid? TypeId
@@ -226,7 +226,7 @@ namespace Kun.Ops.Entities
             set { Fields.ServicerCost[this] = value; }
         }
 
-        [DisplayName("维保人"), LookupEditor(typeof(UserRow)),
+        [DisplayName("维保人"), LookupEditor(typeof(UserRow)), QuickFilter,
              ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jResponsible"), TextualField("ResponsibleName")
            ]
         public Int32? ResponsibleId

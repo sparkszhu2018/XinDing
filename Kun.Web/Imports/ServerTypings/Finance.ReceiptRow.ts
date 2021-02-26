@@ -1,13 +1,14 @@
 ﻿namespace Kun.Finance {
     export interface ReceiptRow {
         Id?: string;
-        BillNo?: string;
         Date?: string;
-        BillType?: number;
-        Status?: number;
+        BillNo?: string;
+        Status?: Finance.Enums.BillStatus;
         Note?: string;
         ApproverId?: number;
         ApproverDate?: string;
+        ApproverName?: string;
+        Items?: ReceiptItemRow[];
     }
 
     export namespace ReceiptRow {
@@ -22,13 +23,14 @@
 
         export declare const enum Fields {
             Id = "Id",
-            BillNo = "BillNo",
             Date = "Date",
-            BillType = "BillType",
+            BillNo = "BillNo",
             Status = "Status",
             Note = "Note",
             ApproverId = "ApproverId",
-            ApproverDate = "ApproverDate"
+            ApproverDate = "ApproverDate",
+            ApproverName = "ApproverName",
+            Items = "Items"
         }
     }
 }

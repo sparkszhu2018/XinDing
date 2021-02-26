@@ -31,7 +31,7 @@ namespace Kun.Finance.Forms
         public String Note { get; set; }
 
         [Category("明细信息")]
-        [FullWidth, InvoiceItemEditor]
+        [FullWidth, ReceiptItemEditor]
         public List<ReceiptItemRow> Items { get; set; }
 
 

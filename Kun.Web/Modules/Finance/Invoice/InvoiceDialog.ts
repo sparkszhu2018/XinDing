@@ -65,7 +65,7 @@ namespace Kun.Finance {
                     });
                 }
             });
-            if (Q.Authorization.hasPermission("Sell:SaleOrder:Approve")) {
+            if (Q.Authorization.hasPermission("Finance:Invoice:Approve")) {
                 buttons.push({
                     title: "审核",
                     icon: "fa-star",
@@ -93,7 +93,7 @@ namespace Kun.Finance {
                     }
                 });
             }
-            if (Q.Authorization.hasPermission("Sell:SaleOrder:UnApprove")) {
+            if (Q.Authorization.hasPermission("Finance:Invoice:UnApprove")) {
                 buttons.push({
                     title: "反审核",
                     icon: "fa-reply-all",

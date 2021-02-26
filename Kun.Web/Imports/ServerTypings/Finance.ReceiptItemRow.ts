@@ -3,7 +3,6 @@
         Id?: string;
         HeadId?: string;
         Serial?: number;
-        SourceDocumentType?: number;
         SourceDocumentId?: string;
         SourceDocumentNo?: string;
         SourceItemId?: string;
@@ -13,6 +12,9 @@
         BalanceAmount?: number;
         ReceiptAmount?: number;
         Note?: string;
+        BillNo?: string;
+        HeadStatus?: Finance.Enums.BillStatus;
+        HeadDate?: string;
     }
 
     export namespace ReceiptItemRow {
@@ -29,7 +31,6 @@
             Id = "Id",
             HeadId = "HeadId",
             Serial = "Serial",
-            SourceDocumentType = "SourceDocumentType",
             SourceDocumentId = "SourceDocumentId",
             SourceDocumentNo = "SourceDocumentNo",
             SourceItemId = "SourceItemId",
@@ -38,7 +39,10 @@
             InvoiceAmount = "InvoiceAmount",
             BalanceAmount = "BalanceAmount",
             ReceiptAmount = "ReceiptAmount",
-            Note = "Note"
+            Note = "Note",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            HeadDate = "HeadDate"
         }
     }
 }

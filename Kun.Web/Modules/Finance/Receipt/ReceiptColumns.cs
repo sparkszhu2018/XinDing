@@ -17,8 +17,10 @@ namespace Kun.Finance.Columns
         public String BillNo { get; set; }
         public DateTime Date { get; set; } 
         public Int32 Status { get; set; }
-        public String Note { get; set; }
-        public Int64 ApproverId { get; set; }
+        public String Note { get; set; } 
+        public String InsertUserName { get; set; }
+        public DateTime InsertDate { get; set; }
+        public String ApproverName { get; set; }
         public DateTime ApproverDate { get; set; }
     }
 }

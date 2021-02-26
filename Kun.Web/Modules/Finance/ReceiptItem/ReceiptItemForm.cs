@@ -13,15 +13,17 @@ namespace Kun.Finance.Forms
     [BasedOnRow(typeof(Entities.ReceiptItemRow), CheckNames = true)]
     public class ReceiptItemForm
     {
-        public Guid HeadId { get; set; }
+        [LabelWidth(100, UntilNext = true), ReadOnly(true)]
+        [HalfWidth(UntilNext = true)]
         public Int32 Serial { get; set; }
-        public Int32 SourceDocumentType { get; set; }
-        public Guid SourceDocumentId { get; set; }
+        [ReadOnly(true)]
         public String SourceDocumentNo { get; set; }
-        public Guid SourceItemId { get; set; }
+        [ReadOnly(true)]
         public Int32 SourceItemSerial { get; set; }
         public String Name { get; set; }
+        [ReadOnly(true)]
         public Decimal InvoiceAmount { get; set; }
+        [ReadOnly(true)]
         public Decimal BalanceAmount { get; set; }
         public Decimal ReceiptAmount { get; set; }
         public String Note { get; set; }

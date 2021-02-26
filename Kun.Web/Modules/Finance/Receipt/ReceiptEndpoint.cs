@@ -9,6 +9,7 @@ namespace Kun.Finance.Endpoints
     using MyRepository = Repositories.ReceiptRepository;
     using MyRow = Entities.ReceiptRow;
     using System;
+    using static Kun.Finance.Enums.FinanceEnums;
 
     [Route("Services/Finance/Receipt/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]

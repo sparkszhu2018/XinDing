@@ -29,8 +29,7 @@ namespace Kun.Finance.Entities
         {
             get { return Fields.HeadId[this]; }
             set { Fields.HeadId[this] = value; }
-        }
-
+        } 
 
         [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
         public String BillNo
@@ -147,8 +146,7 @@ namespace Kun.Finance.Entities
         {
             public GuidField Id;
             public GuidField HeadId;
-            public Int32Field Serial;
-            public Int32Field SourceDocumentType;
+            public Int32Field Serial; 
             public GuidField SourceDocumentId;
             public StringField SourceDocumentNo;
             public GuidField SourceItemId;

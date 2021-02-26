@@ -13,6 +13,8 @@
     <None Remove="Modules\AdvancedSamples\Forms\EntityGridDialog\EntityGridDialog.ts" />
     <None Remove="Modules\Finance\InvoiceItem\InvoiceItemEditor\InvoiceItemEditor.ts" />
     <None Remove="Modules\Finance\InvoiceItem\InvoiceItemEditor\InvoiceItemEditorDialog.ts" />
+    <None Remove="Modules\Finance\ReceiptItem\ReceiptItemEditor\ReceiptItemEditor.ts" />
+    <None Remove="Modules\Finance\ReceiptItem\ReceiptItemEditor\ReceiptItemEditorDialog.ts" />
     <None Remove="Modules\Project\BizItem\BizItemEditor\BizItemEditor.ts" />
     <None Remove="Modules\Project\BizItem\BizItemEditor\BizItemEditorDialog.ts" />
     <None Remove="Modules\Project\BizItem\BizItemViewEditor\BizItemViewEditor.ts" />
@@ -28,6 +30,8 @@
     <None Remove="Modules\Stock\InStockItem\InStockItemEditor\InStockItemEditorDialog.ts" />
     <TypeScriptCompile Remove="Modules\Basic\Material\MaterialImportDialog.ts" />
     <TypeScriptCompile Remove="Modules\Common\Scripts\DefaultNotifyOptions.ts" />
+    <TypeScriptCompile Remove="Modules\Finance\InvoiceItem\InvoiceItemPicker\InvoiceItemCheckGrid.ts" />
+    <TypeScriptCompile Remove="Modules\Finance\InvoiceItem\InvoiceItemPicker\InvoiceItemPickerDialog.ts" />
     <TypeScriptCompile Remove="Modules\Ops\Maintenance\MaintenancePicker\MaintenanceCheckGrid.ts" />
     <TypeScriptCompile Remove="Modules\Ops\Maintenance\MaintenancePicker\MaintenancePickerDialog.ts" />
     <TypeScriptCompile Remove="Modules\Project\ProjectInfo\ProjectInfoPicker\ProjectInfoCheckGrid.ts" />

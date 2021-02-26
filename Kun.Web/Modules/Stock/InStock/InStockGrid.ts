@@ -18,6 +18,7 @@ namespace Kun.Stock {
             });
         }
 
+
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.enableTextSelectionOnCells = true;

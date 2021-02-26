@@ -13,5 +13,6 @@ namespace Kun.Administration
 
         [Description("Languages and Translations")]
         public const string Translation = "Administration:Translation";
+
     }
 }

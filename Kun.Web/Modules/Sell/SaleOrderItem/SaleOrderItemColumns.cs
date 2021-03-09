@@ -33,7 +33,9 @@ namespace Kun.Sell.Columns
         public Decimal BuyPrice { get; set; }
         public Decimal BuyAmount { get; set; }
         public Decimal InvoicedAmount { get; set; }
-        public Decimal InvoicedQty { get; set; } 
+        public Decimal InvoicedQty { get; set; }  
+        
+        public Guid? CustomerId { get; set; }
 
     }
 }

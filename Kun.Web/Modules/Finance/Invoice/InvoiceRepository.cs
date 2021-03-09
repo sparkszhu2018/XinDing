@@ -26,11 +26,14 @@ namespace Kun.Finance.Repositories
                 EntityId = Id,
                 Entity = new MyRow
                 {
-                    Status = Status,
-                    ApproverDate = DateTime.Now,
-                    ApproverId = long.Parse(Authorization.UserId),
+                    Status = Status, 
                 }
             };
+            if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
+            {
+                n.Entity.ApproverDate = DateTime.Now;
+                n.Entity.ApproverId = long.Parse(Authorization.UserId);
+            }
             if (Status == BillStatus.Commited) //提交
             {
                 CheckInvoiceQtyAmount(uow, Id);
@@ -116,7 +119,7 @@ namespace Kun.Finance.Repositories
                     q.SelectTableFields() 
                     .Select(SaleOrderItemRow.Fields.InvoicedQty)
                     .Select(SaleOrderItemRow.Fields.InvoicedAmount)
-                        .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceDocumentId));
+                        .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceItemId));
                     if (saleOrderItemRow.InvoicedAmount >= saleOrderItemRow.SaleAmount)
                     {
                         throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},金额{saleOrderItemRow.SaleAmount}已全部开票，无法提交!");

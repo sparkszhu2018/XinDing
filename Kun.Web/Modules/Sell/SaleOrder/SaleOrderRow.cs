@@ -119,7 +119,7 @@ namespace Kun.Sell.Entities
 
 
         [DisplayName("销售明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
-            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")] 
+            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus,BillNo")] 
         public List<SaleOrderItemRow> Materials
         {
             get { return Fields.Materials[this]; }

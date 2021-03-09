@@ -9,7 +9,7 @@
             super(opt);
 
             this.checkGrid = new ProjectInfoCheckGrid(this.byId("CheckGrid"), opt);
-            this.dialogTitle = "选择维项目";
+            this.dialogTitle = "选择项目";
         }
 
         protected getTemplate() {

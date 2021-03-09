@@ -268,7 +268,7 @@ namespace Kun.Ops.Entities
 
 
         [DisplayName("用料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
-            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")]
+            IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus,BillNo")]
         [ReadPermission(PermissionKeys.MaintenanceResponsible)]
         public List<MaintenanceMaterialsRow> Materials
         {

@@ -35,7 +35,7 @@ namespace Kun.Stock.Columns
         public String LotCode { get; set; }
         public String WarehouseName { get; set; }
         public String PositionName { get; set; }
-        public String InvoiceTypeName { get; set; }
+        public String InvoiceType { get; set; }
         public String Specification { get; set; }
         public Decimal BuyPrice { get; set; }
         public Decimal BuyAmount { get; set; }

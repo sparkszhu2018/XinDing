@@ -25,3 +25,29 @@
 .s-Stock-StockDataCheckGrid   {
     height: 300px;
 }
+
+.s-SaleOrderItemCheckGrid  
+{
+    height: 380px;
+}
+
+.s-Finance-InvoiceItemEditor {
+    height: 350px;
+} 
+ 
+.s-ProjectInfoCheckGrid  {
+    height: 380px;
+}
+
+
+.s-MaterialsItemViewEditor   {
+    height: 350px;
+}
+
+.s-BizItemViewEditor {
+    height: 350px;
+}
+
+.s-ServiceItemViewEditor {
+    height: 350px;
+}

@@ -1,6 +1,7 @@
 ﻿
 namespace Kun.Finance.Entities
 {
+    using Kun.Basic.Entities;
     using Serenity;
     using Serenity.ComponentModel;
     using Serenity.Data;
@@ -173,7 +174,23 @@ namespace Kun.Finance.Entities
             get { return (InvoiceItemKind?)Fields.Kind[this]; }
             set { Fields.Kind[this] = (Int32)value; }
         }
-         
+
+        [DisplayName("开票单位"), LookupEditor(typeof(VendorRow)),
+           ForeignKey("[dbo].[Basic_Vendor]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
+         ]
+        public Guid? VendorId
+        {
+            get { return Fields.VendorId[this]; }
+            set { Fields.VendorId[this] = value; }
+        }
+
+        [DisplayName("开票单位"), Expression("jVendor.[Name]"), ReadOnly(true)]
+        public String VendorName
+        {
+            get { return Fields.VendorName[this]; }
+            set { Fields.VendorName[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -217,7 +234,9 @@ namespace Kun.Finance.Entities
             public DateTimeField HeadDate;
             public Int32Field Kind; 
             public DecimalField ReceiptAmount;
-            
+
+            public GuidField VendorId;
+            public StringField VendorName;
         }
     }
 }

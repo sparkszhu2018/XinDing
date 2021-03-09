@@ -12,6 +12,7 @@
         Amount: Serenity.DecimalEditor;
         InvoiceAmount: Serenity.DecimalEditor;
         InvoiceNo: Serenity.StringEditor;
+        VendorId: Serenity.LookupEditor;
         Note: Serenity.StringEditor;
     }
 
@@ -30,6 +31,7 @@
                 var w1 = s.EnumEditor;
                 var w2 = s.StringEditor;
                 var w3 = s.DecimalEditor;
+                var w4 = s.LookupEditor;
 
                 Q.initFormType(InvoiceItemForm, [
                     'Serial', w0,
@@ -44,6 +46,7 @@
                     'Amount', w3,
                     'InvoiceAmount', w3,
                     'InvoiceNo', w2,
+                    'VendorId', w4,
                     'Note', w2
                 ]);
             }

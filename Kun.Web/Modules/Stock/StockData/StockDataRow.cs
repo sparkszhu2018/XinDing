@@ -13,8 +13,8 @@ namespace Kun.Stock.Entities
     [ConnectionKey("Kun"), Module("Stock"), TableName("[dbo].[Stock_Data]")]
     [DisplayName("即时库存"), InstanceName("即时库存")]
     [ReadPermission("*")]
-    [ModifyPermission("*")]
-
+    [ModifyPermission("*")] 
+    [LookupScript]
     public sealed class StockDataRow : Kun.Administration.Entities.LoggingAllRow, IIdRow, INameRow
     {
         [DisplayName("Id"), PrimaryKey]
@@ -61,7 +61,7 @@ namespace Kun.Stock.Entities
             set { Fields.ReservedQty[this] = value; }
         }
 
-        [DisplayName("可用数量"), Size(18), Scale(4)]
+        [DisplayName("可用数量"), Size(18), Scale(4), LookupInclude]
         public Decimal? AvailableQty
         {
             get { return Fields.AvailableQty[this]; }

@@ -12,7 +12,7 @@ namespace Kun.Sell {
         get Head() { return this._head; }
         set Head(value: SaleOrderRow) {
             this._head = value; 
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject && this._head.Status !== Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('add-button').hide();
                 this.toolbar.findButton('attach-button').hide();
             } else {

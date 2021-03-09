@@ -91,7 +91,7 @@ namespace Kun.Stock.Entities
 
         [DisplayName("物料明细"), NotMapped, 
          MasterDetailRelation(foreignKey: "HeadId"
-            ,IncludeColumns = "MaterialCode,MaterialName,UnitName,SupplierName,LotCode,HeadStatus")]
+            ,IncludeColumns = "BillNo,MaterialCode,MaterialName,UnitName,SupplierName,LotCode,HeadStatus")]
         public List<InStockItemRow> Items
         {
             get { return Fields.Items[this]; }

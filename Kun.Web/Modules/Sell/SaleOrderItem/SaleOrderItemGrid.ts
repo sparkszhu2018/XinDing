@@ -21,6 +21,12 @@ namespace Kun.Sell {
             var buttons = super.getButtons();
             buttons.splice(Q.indexOf(buttons, x => x.cssClass == "add-button"), 1);
 
+            buttons.push(Common.ExcelExportHelper.createToolButton({
+                grid: this,
+                service: SaleOrderItemService.baseUrl + '/ListExcel',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true
+            }));
             return buttons;
         }
         protected getSlickOptions() {
@@ -28,7 +34,9 @@ namespace Kun.Sell {
             opt.enableTextSelectionOnCells = true;
             return opt;
         }
-         
+
+ 
+
 
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             // super.onClick(e, row, cell);

@@ -10,6 +10,8 @@ namespace Kun.Ops.Endpoints
     using MyRow = Entities.MaintenanceRow;
     using System;
     using static Kun.Ops.Enums.OpsEnums;
+    using Serenity.Reporting;
+    using Serenity.Web;
 
     [Route("Services/Ops/Maintenance/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
@@ -65,6 +67,16 @@ namespace Kun.Ops.Endpoints
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)
         {
             return new MyRepository().List(connection, request);
+        }
+
+        public FileContentResult ListExcel(ListRequest request)
+        {
+            var connection = SqlConnections.NewFor<MyRow>();
+            var data = new MyRepository().List(connection, request).Entities;
+            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.MaintenanceColumns));
+            var bytes = new ReportRepository().Render(report);
+            return ExcelContentResult.Create(bytes, "维保单_" +
+                DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }
 }

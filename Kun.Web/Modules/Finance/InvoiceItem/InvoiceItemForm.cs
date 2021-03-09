@@ -39,6 +39,8 @@ namespace Kun.Finance.Forms
         public Decimal InvoiceAmount { get; set; }
         //public Decimal TaxRate { get; set; }
         public String InvoiceNo { get; set; }
+        public Int32 VendorId { get; set; }
+
         public String Note { get; set; }
     }
 }

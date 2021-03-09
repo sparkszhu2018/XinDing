@@ -59,5 +59,15 @@ namespace Kun.Stock {
 
             }
         }
+
+
+        protected getColumns() {
+            var columns = super.getColumns(); 
+            Q.first(columns, x => x.field === InStockItemRow.Fields.InvoiceType).format = ctx => { 
+
+                return Serenity.EnumFormatter.format(Enums.InvoiceType, Q.toId(ctx.value));
+            }; 
+            return columns;
+        }
     }
 }

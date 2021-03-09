@@ -23,6 +23,9 @@ namespace Kun.Sell.Forms
         public Guid UnitId { get; set; } 
         public String UnitName { get; set; }
         public Decimal Qty { get; set; }
+        [ReadOnly(true)]
+        public Decimal StockQty { get; set; }
+        
         public Decimal SalePrice { get; set; }
         [ReadOnly(true)]
         public Decimal SaleAmount { get; set; }

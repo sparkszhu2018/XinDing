@@ -25,6 +25,17 @@ namespace Kun.Ops {
             return opt;
         }
 
+        protected getButtons(): Serenity.ToolButton[] {
+            var buttons = super.getButtons(); 
+
+            buttons.push(Common.ExcelExportHelper.createToolButton({
+                grid: this,
+                service: MaintenanceService.baseUrl + '/ListExcel',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true
+            }));
+            return buttons;
+        }
 
 
         protected getColumns() {

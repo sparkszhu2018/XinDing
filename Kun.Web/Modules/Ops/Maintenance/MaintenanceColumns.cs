@@ -37,10 +37,12 @@ namespace Kun.Ops.Columns
         public Decimal TotalCost { get; set; }  
         public Decimal InvoicedAmount { get; set; } 
         public String ResponsibleName { get; set; }
+
+        public String Address { get; set; }
+        public String InsertUserDisplayName { get; set; }
+        public DateTime? InsertDate { get; set; }
         public String ApproverName { get; set; }
-        public DateTime ApproverDate { get; set; }
-
-
+        public DateTime ApproverDate { get; set; } 
          
     }
 }

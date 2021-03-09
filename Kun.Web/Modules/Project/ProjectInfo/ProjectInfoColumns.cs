@@ -28,7 +28,7 @@ namespace Kun.Project.Columns
         public Decimal InvoicedAmount { get; set; }
 
         public Boolean  IsClosed { get; set; }
-        public String InsertUserName { get; set; }
+        public String InsertUserDisplayName { get; set; }
         public DateTime? InsertDate { get; set; }
         public String ApproverName { get; set; }
         public DateTime? ApproverDate { get; set; }

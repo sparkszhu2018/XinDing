@@ -89,7 +89,7 @@ namespace Kun.Stock.Entities
         [DisplayName("移库明细"), NotMapped,
         MasterDetailRelation(foreignKey: "HeadId"
            , IncludeColumns = "FromMaterialCode,FromMaterialName,FromUnitName,FromLotCode,FromWarehouseName,FromPositionName," +
-            "ToMaterialCode,ToMaterialName,ToUnitName,ToLotCode,ToWarehouseName,ToPositionName,HeadStatus")]
+            "ToMaterialCode,ToMaterialName,ToUnitName,ToLotCode,ToWarehouseName,ToPositionName,HeadStatus,BillNo")]
         public List<ChangeStockItemRow> Items
         {
             get { return Fields.Items[this]; }

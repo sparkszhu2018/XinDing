@@ -27,7 +27,7 @@ namespace Kun.Project.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true)]
+        [DisplayName("项目编号"), Size(50), QuickSearch, ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -41,7 +41,7 @@ namespace Kun.Project.Entities
             set { Fields.BillType[this] = value; }
         }
 
-        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true)]
+        [DisplayName("状态"), DefaultValue(BillStatus.Edit), ReadOnly(true)]
         public BillStatus? Status
         {
             get { return (BillStatus?)Fields.Status[this]; }

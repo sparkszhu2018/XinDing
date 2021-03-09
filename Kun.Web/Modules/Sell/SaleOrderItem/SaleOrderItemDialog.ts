@@ -19,7 +19,7 @@ namespace Kun.Sell {
         get Head() { return this._head; }
         set Head(value: SaleOrderRow) {
             this._head = value;
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) {
+            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject && this._head.Status !== Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('save-and-close-button').hide();
                 this.toolbar.findButton('apply-changes-button').hide();
                 this.toolbar.findButton('delete-button').hide();
@@ -42,12 +42,18 @@ namespace Kun.Sell {
                     this.form.SaleAmount.value = this.form.Qty.value * this.form.SalePrice.value;
                 }
             });
+
+          
         }
 
         protected updateInterface() {
-            super.updateInterface();
+            super.updateInterface(); 
+            this.form.StockQty.value = Stock.StockDataRow.getLookup().itemById[this.entity.StockDataId].AvailableQty;
             if (this.entity.Id != null) {
-                if (this.entity.HeadStatus == Enums.BillStatus.Edit || this.entity.HeadStatus == Enums.BillStatus.Reject) {
+
+                if (this.entity.HeadStatus == Enums.BillStatus.Edit
+                    || this.entity.HeadStatus == Enums.BillStatus.Reject
+                    || this.entity.HeadStatus == Enums.BillStatus.UnAudited) {
                     this.toolbar.findButton('save-and-close-button').show();
                     this.toolbar.findButton('apply-changes-button').show();
                     this.toolbar.findButton('delete-button').show();

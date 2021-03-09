@@ -49,5 +49,29 @@ namespace Kun.Project {
             return buttons;
         }
          
+
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid();
+
+            // need to register this plugin for grouping or you'll have errors
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+
+            this.view.setSummaryOptions({
+                aggregators: [
+                    new Slick.Aggregators.Sum('SaleAmount'),
+                    new Slick.Aggregators.Sum('BuyAmount'),
+                ]
+            });
+
+            return grid;
+        }
+
+        protected getSlickOptions() {
+            var opt = super.getSlickOptions();
+            // opt.groupingPanel = true;
+            opt.showFooterRow = true;
+            return opt;
+        }
+         
     }
 }

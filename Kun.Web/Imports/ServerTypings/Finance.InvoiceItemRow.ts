@@ -22,6 +22,8 @@
         HeadDate?: string;
         Kind?: Finance.Enums.InvoiceItemKind;
         ReceiptAmount?: number;
+        VendorId?: string;
+        VendorName?: string;
     }
 
     export namespace InvoiceItemRow {
@@ -56,7 +58,9 @@
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
             Kind = "Kind",
-            ReceiptAmount = "ReceiptAmount"
+            ReceiptAmount = "ReceiptAmount",
+            VendorId = "VendorId",
+            VendorName = "VendorName"
         }
     }
 }

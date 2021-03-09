@@ -26,11 +26,15 @@ namespace Kun.Ops.Repositories
                 EntityId = Id,
                 Entity = new MyRow
                 {
-                    Status = Status,
-                    ApproverDate = DateTime.Now,
-                    ApproverId = long.Parse(Authorization.UserId),
+                    Status = Status, 
                 }
             };
+            if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
+            {
+                n.Entity.ApproverDate = DateTime.Now;
+                n.Entity.ApproverId = long.Parse(Authorization.UserId);
+            }
+
             if (Status == BillStatus.Audited) //审核通过
             {
                 var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Materials;

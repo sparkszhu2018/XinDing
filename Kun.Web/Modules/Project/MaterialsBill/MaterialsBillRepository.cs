@@ -26,11 +26,14 @@ namespace Kun.Project.Repositories
                 EntityId = Id,
                 Entity = new MyRow
                 {
-                    Status = Status,
-                    ApproverDate = DateTime.Now,
-                    ApproverId = long.Parse(Authorization.UserId),
+                    Status = Status, 
                 }
             };
+            if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
+            {
+                n.Entity.ApproverDate = DateTime.Now;
+                n.Entity.ApproverId = long.Parse(Authorization.UserId);
+            }
             if (Status == BillStatus.Audited) //审核通过
             {
                 var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Materials;
@@ -43,6 +46,10 @@ namespace Kun.Project.Repositories
 
                     //扣减库存数量
                     var stock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.StockDataId }).Entity;
+                    if(stock.AvailableQty < m.Qty)
+                    {
+                        throw new Exception($"物料{m.MaterialCode},批次{m.LotCode} 库存不足,请检查!");
+                    }
                     stockRep.Update(uow, new SaveRequest<StockDataRow>
                     {
                         Entity = new StockDataRow

@@ -119,6 +119,8 @@ namespace Kun.Ops {
                         SalePrice: 0,
                         SaleAmount: 0, 
                         MaterialCode: '1000000', 
+                        BuyPrice: 0,
+                        BuyAmount: 0,
                     };
                     var id = this.getNextId();
                     item[this.getIdProperty()] = id;

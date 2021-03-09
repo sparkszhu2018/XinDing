@@ -1570,6 +1570,7 @@ declare namespace Kun.Finance {
         Amount: Serenity.DecimalEditor;
         InvoiceAmount: Serenity.DecimalEditor;
         InvoiceNo: Serenity.StringEditor;
+        VendorId: Serenity.LookupEditor;
         Note: Serenity.StringEditor;
     }
     class InvoiceItemForm extends Serenity.PrefixedContext {
@@ -1602,6 +1603,8 @@ declare namespace Kun.Finance {
         HeadDate?: string;
         Kind?: Finance.Enums.InvoiceItemKind;
         ReceiptAmount?: number;
+        VendorId?: string;
+        VendorName?: string;
     }
     namespace InvoiceItemRow {
         const idProperty = "Id";
@@ -1634,7 +1637,9 @@ declare namespace Kun.Finance {
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
             Kind = "Kind",
-            ReceiptAmount = "ReceiptAmount"
+            ReceiptAmount = "ReceiptAmount",
+            VendorId = "VendorId",
+            VendorName = "VendorName"
         }
     }
 }
@@ -1719,6 +1724,8 @@ declare namespace Kun.Finance {
 declare namespace Kun.Finance {
 }
 declare namespace Kun.Finance {
+}
+declare namespace Kun.Finance {
     interface ReceiptForm {
         BillNo: Serenity.StringEditor;
         Status: Serenity.EnumEditor;
@@ -1734,6 +1741,8 @@ declare namespace Kun.Finance {
         private static init;
         constructor(prefix: string);
     }
+}
+declare namespace Kun.Finance {
 }
 declare namespace Kun.Finance {
 }
@@ -3154,6 +3163,7 @@ declare namespace Kun.Sell {
         UnitId: Serenity.LookupEditor;
         UnitName: Serenity.StringEditor;
         Qty: Serenity.DecimalEditor;
+        StockQty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
         BuyPrice: Serenity.DecimalEditor;
@@ -3199,6 +3209,7 @@ declare namespace Kun.Sell {
         CustomerName?: string;
         InvoicedAmount?: number;
         InvoicedQty?: number;
+        StockQty?: number;
     }
     namespace SaleOrderItemRow {
         const idProperty = "Id";
@@ -3237,7 +3248,8 @@ declare namespace Kun.Sell {
             CustomerId = "CustomerId",
             CustomerName = "CustomerName",
             InvoicedAmount = "InvoicedAmount",
-            InvoicedQty = "InvoicedQty"
+            InvoicedQty = "InvoicedQty",
+            StockQty = "StockQty"
         }
     }
 }
@@ -3971,6 +3983,8 @@ declare namespace Kun.Stock {
         const isActiveProperty = "IsActive";
         const nameProperty = "Specification";
         const localTextPrefix = "Stock.StockData";
+        const lookupKey = "Stock.StockData";
+        function getLookup(): Q.Lookup<StockDataRow>;
         const deletePermission = "*";
         const insertPermission = "*";
         const readPermission = "*";
@@ -5001,6 +5015,36 @@ declare namespace Kun.Finance {
     }
 }
 declare namespace Kun.Finance {
+    interface InvoiceItemPickerOptions {
+        hideData?: number[];
+        criteria?: any[];
+    }
+    class InvoiceItemCheckGrid extends Serenity.EntityGrid<InvoiceItemRow, InvoiceItemPickerOptions> {
+        protected getColumnsKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        private rowSelection;
+        constructor(container: JQuery, options: InvoiceItemPickerOptions);
+        protected getColumns(): Slick.Column[];
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        protected getButtons(): Serenity.ToolButton[];
+        get selectedItems(): InvoiceItemRow[];
+        protected onViewSubmit(): boolean;
+    }
+}
+declare namespace Kun.Finance {
+    class InvoiceItemPickerDialog extends Serenity.TemplatedDialog<InvoiceItemPickerOptions> {
+        private checkGrid;
+        constructor(opt: InvoiceItemPickerOptions);
+        protected getTemplate(): string;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        get selectedItems(): InvoiceItemRow[];
+        onSuccess: (selected: InvoiceItemRow[]) => boolean;
+    }
+}
+declare namespace Kun.Finance {
     class ReceiptDialog extends Serenity.EntityDialog<ReceiptRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -5050,6 +5094,38 @@ declare namespace Kun.Finance {
         protected getService(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptItemEditor extends Common.GridEditorBase<ReceiptItemRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ReceiptItemEditorDialog;
+        protected getLocalTextPrefix(): string;
+        private _billType;
+        protected status: Finance.Enums.BillStatus;
+        private _head;
+        get Head(): ReceiptRow;
+        set Head(value: ReceiptRow);
+        constructor(container: JQuery);
+        validateEntity(row: any, id: any): boolean;
+        setButtons(BillType: string): void;
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace Kun.Finance {
+    class ReceiptItemEditorDialog extends Common.GridEditorDialog<ReceiptItemRow> {
+        protected getFormKey(): string;
+        protected getLocalTextPrefix(): string;
+        private _serial;
+        protected form: ReceiptItemForm;
+        private _head;
+        get Head(): ReceiptRow;
+        set Head(value: ReceiptRow);
+        get Serial(): number;
+        set Serial(value: number);
+        constructor();
+        protected updateInterface(): void;
+        protected save(): void;
     }
 }
 declare namespace Kun.Membership {
@@ -5116,6 +5192,7 @@ declare namespace Kun.Ops {
         protected getService(): string;
         constructor(container: JQuery);
         protected getSlickOptions(): Slick.GridOptions;
+        protected getButtons(): Serenity.ToolButton[];
         protected getColumns(): Slick.Column[];
         protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
@@ -5389,6 +5466,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -5480,6 +5559,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -5628,6 +5709,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Sell {
@@ -5860,6 +5943,7 @@ declare namespace Kun.Stock {
         protected getButtons(): Serenity.ToolButton[];
         protected getSlickOptions(): Slick.GridOptions;
         protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+        protected getColumns(): Slick.Column[];
     }
 }
 declare namespace Kun.Stock {
@@ -5995,70 +6079,4 @@ declare namespace Kun.Sys {
         protected getService(): string;
         constructor(container: JQuery);
     }
-}
-declare namespace Kun.Finance {
-    class ReceiptItemEditor extends Common.GridEditorBase<ReceiptItemRow> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof ReceiptItemEditorDialog;
-        protected getLocalTextPrefix(): string;
-        private _billType;
-        protected status: Finance.Enums.BillStatus;
-        private _head;
-        get Head(): ReceiptRow;
-        set Head(value: ReceiptRow);
-        constructor(container: JQuery);
-        validateEntity(row: any, id: any): boolean;
-        setButtons(BillType: string): void;
-        protected getButtons(): Serenity.ToolButton[];
-    }
-}
-declare namespace Kun.Finance {
-    class ReceiptItemEditorDialog extends Common.GridEditorDialog<ReceiptItemRow> {
-        protected getFormKey(): string;
-        protected getLocalTextPrefix(): string;
-        private _serial;
-        protected form: ReceiptItemForm;
-        private _head;
-        get Head(): ReceiptRow;
-        set Head(value: ReceiptRow);
-        get Serial(): number;
-        set Serial(value: number);
-        constructor();
-        protected updateInterface(): void;
-        protected save(): void;
-    }
-}
-declare namespace Kun.Finance {
-    interface InvoiceItemPickerOptions {
-        hideData?: number[];
-        criteria?: any[];
-    }
-    class InvoiceItemCheckGrid extends Serenity.EntityGrid<InvoiceItemRow, InvoiceItemPickerOptions> {
-        protected getColumnsKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        private rowSelection;
-        constructor(container: JQuery, options: InvoiceItemPickerOptions);
-        protected getColumns(): Slick.Column[];
-        protected usePager(): boolean;
-        protected getInitialTitle(): any;
-        protected getButtons(): Serenity.ToolButton[];
-        get selectedItems(): InvoiceItemRow[];
-        protected onViewSubmit(): boolean;
-    }
-}
-declare namespace Kun.Finance {
-    class InvoiceItemPickerDialog extends Serenity.TemplatedDialog<InvoiceItemPickerOptions> {
-        private checkGrid;
-        constructor(opt: InvoiceItemPickerOptions);
-        protected getTemplate(): string;
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        get selectedItems(): InvoiceItemRow[];
-        onSuccess: (selected: InvoiceItemRow[]) => boolean;
-    }
-}
-declare namespace Kun.Finance {
-}
-declare namespace Kun.Finance {
 }

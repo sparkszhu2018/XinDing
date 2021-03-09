@@ -20,6 +20,9 @@ namespace Kun.Stock.Columns
         public String Status { get; set; }
         public DateTime Date { get; set; }
         public String Note { get; set; }
+
+        public String InsertUserDisplayName { get; set; }
+        public DateTime? InsertDate { get; set; }
         public String ApproverName { get; set; }
         public DateTime ApproverDate { get; set; }
     }

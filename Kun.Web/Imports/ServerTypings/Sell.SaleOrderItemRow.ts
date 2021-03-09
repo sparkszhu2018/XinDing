@@ -28,6 +28,7 @@
         CustomerName?: string;
         InvoicedAmount?: number;
         InvoicedQty?: number;
+        StockQty?: number;
     }
 
     export namespace SaleOrderItemRow {
@@ -68,7 +69,8 @@
             CustomerId = "CustomerId",
             CustomerName = "CustomerName",
             InvoicedAmount = "InvoicedAmount",
-            InvoicedQty = "InvoicedQty"
+            InvoicedQty = "InvoicedQty",
+            StockQty = "StockQty"
         }
     }
 }

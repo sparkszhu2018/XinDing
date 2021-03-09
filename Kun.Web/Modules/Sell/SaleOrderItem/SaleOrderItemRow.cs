@@ -53,7 +53,7 @@ namespace Kun.Sell.Entities
             set { Fields.HeadDate[this] = value; }
         }
 
-        [DisplayName("客户"), Expression("jHead.[CustomerId]"), QuickFilter,
+        [DisplayName("客户"), Expression("jHead.[CustomerId]"), LookupEditor(typeof(CustomerRow)), QuickFilter,
 ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName")]
         public Guid? CustomerId
         {
@@ -61,7 +61,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.CustomerId[this] = value; }
         }
 
-        [DisplayName("客户"), Expression("jCustomer.[Name]"), ReadOnly(true)]
+        [DisplayName("客户"), Expression("jCustomer.[Name]"), ReadOnly(true),QuickSearch]
         public String CustomerName
         {
             get { return Fields.CustomerName[this]; }
@@ -222,6 +222,13 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.InvoicedQty[this] = value; }
         }
 
+        [DisplayName("库存数量"), NotMapped]
+        public Decimal? StockQty
+        {
+            get { return Fields.StockQty[this]; }
+            set { Fields.StockQty[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -272,6 +279,9 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             public StringField CustomerName;
             public DecimalField InvoicedAmount;
             public DecimalField InvoicedQty;
+
+            public DecimalField StockQty;
+            
 
 
         }

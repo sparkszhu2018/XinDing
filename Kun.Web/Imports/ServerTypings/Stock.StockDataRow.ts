@@ -27,6 +27,11 @@
         export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Specification';
         export const localTextPrefix = 'Stock.StockData';
+        export const lookupKey = 'Stock.StockData';
+
+        export function getLookup(): Q.Lookup<StockDataRow> {
+            return Q.getLookup<StockDataRow>('Stock.StockData');
+        }
         export const deletePermission = '*';
         export const insertPermission = '*';
         export const readPermission = '*';

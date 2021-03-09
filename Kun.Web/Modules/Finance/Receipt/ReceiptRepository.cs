@@ -23,10 +23,14 @@ namespace Kun.Finance.Repositories
                 Entity = new MyRow
                 {
                     Status = Status,
-                    ApproverDate = DateTime.Now,
-                    ApproverId = long.Parse(Authorization.UserId),
+                    
                 }
             };
+            if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
+            {
+                n.Entity.ApproverDate = DateTime.Now;
+                n.Entity.ApproverId = long.Parse(Authorization.UserId);
+            }
             if (Status == BillStatus.Commited) //提交
             {
                 //CheckInvoiceQtyAmount(uow, Id);

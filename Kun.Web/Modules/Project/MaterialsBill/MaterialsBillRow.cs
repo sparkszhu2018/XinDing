@@ -109,7 +109,7 @@ namespace Kun.Project.Entities
         }
 
         [DisplayName("物料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
-    IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus")] 
+    IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus,BillNo")] 
         public List<MaterialsItemRow> Materials
         {
             get { return Fields.Materials[this]; }

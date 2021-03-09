@@ -6,6 +6,7 @@
         UnitId: Serenity.LookupEditor;
         UnitName: Serenity.StringEditor;
         Qty: Serenity.DecimalEditor;
+        StockQty: Serenity.DecimalEditor;
         SalePrice: Serenity.DecimalEditor;
         SaleAmount: Serenity.DecimalEditor;
         BuyPrice: Serenity.DecimalEditor;
@@ -39,6 +40,7 @@
                     'UnitId', w0,
                     'UnitName', w1,
                     'Qty', w3,
+                    'StockQty', w3,
                     'SalePrice', w3,
                     'SaleAmount', w3,
                     'BuyPrice', w3,

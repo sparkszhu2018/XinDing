@@ -8,6 +8,9 @@ namespace Kun.Sell.Endpoints
     using Microsoft.AspNetCore.Mvc;
     using MyRepository = Repositories.SaleOrderItemRepository;
     using MyRow = Entities.SaleOrderItemRow;
+    using Serenity.Reporting;
+    using Serenity.Web;
+    using System;
 
     [Route("Services/Sell/SaleOrderItem/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
@@ -41,6 +44,17 @@ namespace Kun.Sell.Endpoints
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)
         {
             return new MyRepository().List(connection, request);
+        }
+
+
+        public FileContentResult ListExcel(ListRequest request)
+        {
+            var connection = SqlConnections.NewFor<MyRow>();
+            var data = new MyRepository().List(connection, request).Entities;
+            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.SaleOrderItemColumns));
+            var bytes = new ReportRepository().Render(report);
+            return ExcelContentResult.Create(bytes, "销售订单明细_" +
+                DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }
 }

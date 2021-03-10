@@ -284,13 +284,24 @@ namespace Kun.Ops.Entities
             set { Fields.Manhours[this] = value; }
         }
 
-        [DisplayName("总费用"), Expression("(isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 ) " +
-            "+ isnull((select sum(saleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0))")] 
+        [DisplayName("总成本"), Expression("(isnull(t0.ServicerCost,0 ) " +
+            "+ isnull((select sum(BuyAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0))")] 
         public Decimal? TotalCost
         {
             get { return Fields.TotalCost[this]; }
             set { Fields.TotalCost[this] = value; }
         }
+
+
+        [DisplayName("总金额"), Expression("(isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 ) " +
+            "+ isnull((select sum(SaleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0))")]
+        public Decimal? TotalSales
+        {
+            get { return Fields.TotalCost[this]; }
+            set { Fields.TotalCost[this] = value; }
+        }
+
+
 
         [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
             "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
@@ -364,6 +375,7 @@ namespace Kun.Ops.Entities
             public GuidField TypeId;
             public StringField TypeName;
             public DecimalField TotalCost;
+            public DecimalField TotalSales;
             public DecimalField InvoicedAmount;
 
         }

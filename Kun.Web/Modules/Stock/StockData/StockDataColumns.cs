@@ -27,6 +27,7 @@ namespace Kun.Stock.Columns
         public String PositionId { get; set; }
         public String PositionName { get; set; }
         public String WarehouseName { get; set; }
+        public String Applicant { get; set; }
 
 
 

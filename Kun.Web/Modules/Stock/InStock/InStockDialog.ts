@@ -1,7 +1,7 @@
 ﻿
 namespace Kun.Stock {
 
-    @Serenity.Decorators.registerClass() 
+    @Serenity.Decorators.registerClass()
     @Serenity.Decorators.panel()
     export class InStockDialog extends Serenity.EntityDialog<InStockRow, any> {
         protected getFormKey() { return InStockForm.formKey; }
@@ -17,10 +17,10 @@ namespace Kun.Stock {
 
         constructor() {
             super();
-            this.form.BillType.change(e => { 
+            this.form.BillType.change(e => {
                 this.entity.BillType = Q.toId(this.form.BillType.value);
                 this.form.Items.Head = this.entity;
-            });  
+            });
         }
 
         protected afterLoadEntity() {
@@ -38,14 +38,14 @@ namespace Kun.Stock {
                 onClick: () => {
                     this.save((r) => {
                         this.entityId = r.EntityId;
-                        if (!this.validateBeforeSave()) return; 
+                        if (!this.validateBeforeSave()) return;
                         Stock.InStockService.Commit({
                             EntityId: this.entityId
-                        }, r => { 
-                            Q.notifySuccess("提交成功!"); 
+                        }, r => {
+                            Q.notifySuccess("提交成功!");
                             this.dialogClose();
                         });
-                    }); 
+                    });
                 }
             });
 
@@ -55,11 +55,16 @@ namespace Kun.Stock {
                     icon: "fa-star",
                     cssClass: "audit-button",
                     onClick: () => {
-                        Stock.InStockService.Audit({
-                            EntityId: this.entityId
-                        }, r => {
-                            Q.notifySuccess("审核成功!");
-                            this.dialogClose();
+                        this.save((r) => {
+                            this.entityId = r.EntityId;
+                            if (!this.validateBeforeSave()) return;
+
+                            Stock.InStockService.Audit({
+                                EntityId: this.entityId
+                            }, r => {
+                                Q.notifySuccess("审核成功!");
+                                this.dialogClose();
+                            });
                         });
                     }
                 });
@@ -96,47 +101,47 @@ namespace Kun.Stock {
             }
             return buttons;
         }
-      
-        protected updateInterface() { 
-            super.updateInterface(); 
+
+        protected updateInterface() {
+            super.updateInterface();
             if (this.entity.Status == Stock.Enums.BillStatus.Edit
                 || this.entity.Status == Stock.Enums.BillStatus.Reject
                 || this.entity.Status == Project.Enums.BillStatus.UnAudited
             ) {
 
-                    this.toolbar.findButton('save-and-close-button').show();
-                    this.toolbar.findButton('submit-button').show();
-                    this.toolbar.findButton('apply-changes-button').show();
-                    this.toolbar.findButton('delete-button').show();
+                this.toolbar.findButton('save-and-close-button').show();
+                this.toolbar.findButton('submit-button').show();
+                this.toolbar.findButton('apply-changes-button').show();
+                this.toolbar.findButton('delete-button').show();
 
-                    this.toolbar.findButton('reject-button').hide();
-                    this.toolbar.findButton('audit-button').hide();
-                    this.toolbar.findButton('unAudit-button').hide();
+                this.toolbar.findButton('reject-button').hide();
+                this.toolbar.findButton('audit-button').show();
+                this.toolbar.findButton('unAudit-button').hide();
 
 
-                } else if (this.entity.Status == Stock.Enums.BillStatus.Commited) {
+            } else if (this.entity.Status == Stock.Enums.BillStatus.Commited) {
 
-                    Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
-                    this.toolbar.findButton('save-and-close-button').hide();
-                    this.toolbar.findButton('submit-button').hide();
-                    this.toolbar.findButton('apply-changes-button').hide();
-                    this.toolbar.findButton('delete-button').hide();
+                Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
+                this.toolbar.findButton('save-and-close-button').hide();
+                this.toolbar.findButton('submit-button').hide();
+                this.toolbar.findButton('apply-changes-button').hide();
+                this.toolbar.findButton('delete-button').hide();
 
-                    this.toolbar.findButton('reject-button').show();
-                    this.toolbar.findButton('audit-button').show();
-                    this.toolbar.findButton('unAudit-button').hide();
-                }
-                else if (this.entity.Status == Stock.Enums.BillStatus.Audited) {
-                    Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
-                    this.toolbar.findButton('save-and-close-button').hide();
-                    this.toolbar.findButton('submit-button').hide();
-                    this.toolbar.findButton('apply-changes-button').hide();
-                    this.toolbar.findButton('delete-button').hide();
+                this.toolbar.findButton('reject-button').show();
+                this.toolbar.findButton('audit-button').show();
+                this.toolbar.findButton('unAudit-button').hide();
+            }
+            else if (this.entity.Status == Stock.Enums.BillStatus.Audited) {
+                Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
+                this.toolbar.findButton('save-and-close-button').hide();
+                this.toolbar.findButton('submit-button').hide();
+                this.toolbar.findButton('apply-changes-button').hide();
+                this.toolbar.findButton('delete-button').hide();
 
-                    this.toolbar.findButton('reject-button').hide();
-                    this.toolbar.findButton('audit-button').hide();
-                    this.toolbar.findButton('unAudit-button').show();
-                } 
+                this.toolbar.findButton('reject-button').hide();
+                this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('unAudit-button').show();
+            }
         }
     }
 }

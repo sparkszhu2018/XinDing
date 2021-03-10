@@ -31,7 +31,7 @@ namespace Kun.Sell.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -208,14 +208,14 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
         }
 
         [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
-           "and Kind = 10 and SourceDocumentId = t0.Id),0)")]
+           "and Kind = 10 and SourceItemId = t0.Id),0)")]
         public Decimal? InvoicedAmount
         {
             get { return Fields.InvoicedAmount[this]; }
             set { Fields.InvoicedAmount[this] = value; }
         }
         [DisplayName("已开票数量"), Expression("isnull((select top 1 Qty from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
-            "and Kind = 10 and SourceDocumentId = t0.Id),0)")]
+            "and Kind = 10 and SourceItemId = t0.Id),0)")]
         public Decimal? InvoicedQty
         {
             get { return Fields.InvoicedQty[this]; }

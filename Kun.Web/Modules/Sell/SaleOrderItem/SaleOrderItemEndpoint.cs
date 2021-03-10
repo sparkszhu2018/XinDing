@@ -11,6 +11,7 @@ namespace Kun.Sell.Endpoints
     using Serenity.Reporting;
     using Serenity.Web;
     using System;
+    using Kun.Sell.Enums;
 
     [Route("Services/Sell/SaleOrderItem/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
@@ -49,7 +50,7 @@ namespace Kun.Sell.Endpoints
 
         public FileContentResult ListExcel(ListRequest request)
         {
-            var connection = SqlConnections.NewFor<MyRow>();
+            var connection = SqlConnections.NewFor<MyRow>(); 
             var data = new MyRepository().List(connection, request).Entities;
             var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.SaleOrderItemColumns));
             var bytes = new ReportRepository().Render(report);

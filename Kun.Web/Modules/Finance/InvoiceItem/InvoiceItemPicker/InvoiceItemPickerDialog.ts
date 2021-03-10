@@ -9,7 +9,7 @@
             super(opt);
 
             this.checkGrid = new InvoiceItemCheckGrid(this.byId("CheckGrid"), opt);
-            this.dialogTitle = "选择销发票";
+            this.dialogTitle = "选择发票";
         }
 
         protected getTemplate() {

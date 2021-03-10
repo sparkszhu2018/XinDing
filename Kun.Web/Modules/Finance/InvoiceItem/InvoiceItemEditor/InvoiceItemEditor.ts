@@ -50,7 +50,7 @@ namespace Kun.Finance {
 
             
             if (!Q.isEmptyOrNull(row.VendorId)) {
-                row.VendorName = Basic.VendorRow.getLookup().itemById[row.VendorId].Name;
+                row.VendorName = Basic.CustomerRow.getLookup().itemById[row.VendorId].Name;
             }
             return true;
         }

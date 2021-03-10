@@ -477,7 +477,7 @@ declare namespace Kun.Administration {
     namespace UserRow {
         const idProperty = "UserId";
         const isActiveProperty = "IsActive";
-        const nameProperty = "Username";
+        const nameProperty = "DisplayName";
         const localTextPrefix = "Administration.User";
         const lookupKey = "Administration.User";
         function getLookup(): Q.Lookup<UserRow>;
@@ -2248,6 +2248,7 @@ declare namespace Kun.Ops {
         TypeId?: string;
         TypeName?: string;
         TotalCost?: number;
+        TotalSales?: number;
         InvoicedAmount?: number;
     }
     namespace MaintenanceRow {
@@ -2294,6 +2295,7 @@ declare namespace Kun.Ops {
             TypeId = "TypeId",
             TypeName = "TypeName",
             TotalCost = "TotalCost",
+            TotalSales = "TotalSales",
             InvoicedAmount = "InvoicedAmount"
         }
     }
@@ -3640,6 +3642,7 @@ declare namespace Kun.Stock {
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
         PositionId: Serenity.LookupEditor;
+        Applicant: Serenity.StringEditor;
     }
     class InStockItemForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -3681,6 +3684,7 @@ declare namespace Kun.Stock {
         InvoiceTypeName?: string;
         PositionId?: string;
         PositionName?: string;
+        Applicant?: string;
     }
     namespace InStockItemRow {
         const idProperty = "Id";
@@ -3723,7 +3727,8 @@ declare namespace Kun.Stock {
             ApproverName = "ApproverName",
             InvoiceTypeName = "InvoiceTypeName",
             PositionId = "PositionId",
-            PositionName = "PositionName"
+            PositionName = "PositionName",
+            Applicant = "Applicant"
         }
     }
 }
@@ -3977,6 +3982,7 @@ declare namespace Kun.Stock {
         PositionId?: string;
         PositionName?: string;
         WarehouseName?: string;
+        Applicant?: string;
     }
     namespace StockDataRow {
         const idProperty = "Id";
@@ -4009,7 +4015,8 @@ declare namespace Kun.Stock {
             LotCode = "LotCode",
             PositionId = "PositionId",
             PositionName = "PositionName",
-            WarehouseName = "WarehouseName"
+            WarehouseName = "WarehouseName",
+            Applicant = "Applicant"
         }
     }
 }

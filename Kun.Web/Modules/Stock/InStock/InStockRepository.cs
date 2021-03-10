@@ -64,7 +64,8 @@ namespace Kun.Stock.Repositories
                             Specification = m.Specification,
                             WarehouseId = m.WarehouseId,
                             PositionId = m.PositionId,
-                            LotId = lotRep.GetLot(uow, m.MaterialId).Entity.Id
+                            LotId = lotRep.GetLot(uow, m.MaterialId).Entity.Id,
+                            Applicant = m.Applicant
                         };
                         stockRep.Create(uow, new SaveRequest<StockDataRow> { Entity = stock });
 

@@ -32,7 +32,7 @@ namespace Kun.Stock.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true), QuickFilter]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -119,6 +119,14 @@ namespace Kun.Stock.Entities
             get { return Fields.Specification[this]; }
             set { Fields.Specification[this] = value; }
         }
+
+        [DisplayName("申请人"),NotNull, Size(50)]
+        public String Applicant
+        {
+            get { return Fields.Applicant[this]; }
+            set { Fields.Applicant[this] = value; }
+        }
+        
 
         [DisplayName("单位"), NotNull, LookupEditor(typeof(UnitRow)), ReadOnly(true),
                    ForeignKey("[dbo].[Basic_Unit]", "Id"), LeftJoin("jUnit"), TextualField("UnitName")]
@@ -305,6 +313,9 @@ namespace Kun.Stock.Entities
 
             public GuidField PositionId;
             public StringField PositionName;
+
+            public StringField Applicant;
+
 
 
 

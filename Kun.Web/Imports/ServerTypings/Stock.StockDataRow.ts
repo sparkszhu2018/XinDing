@@ -20,6 +20,7 @@
         PositionId?: string;
         PositionName?: string;
         WarehouseName?: string;
+        Applicant?: string;
     }
 
     export namespace StockDataRow {
@@ -57,7 +58,8 @@
             LotCode = "LotCode",
             PositionId = "PositionId",
             PositionName = "PositionName",
-            WarehouseName = "WarehouseName"
+            WarehouseName = "WarehouseName",
+            Applicant = "Applicant"
         }
     }
 }

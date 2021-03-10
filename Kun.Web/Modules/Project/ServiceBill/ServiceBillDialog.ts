@@ -48,11 +48,15 @@ namespace Kun.Project {
                     icon: "fa-star",
                     cssClass: "audit-button",
                     onClick: () => {
+                        this.save((r) => {
+                            this.entityId = r.EntityId;
+                            if (!this.validateBeforeSave()) return;
                         Project.ServiceBillService.Audit({
                             EntityId: this.entityId
                         }, r => {
                             Q.notifySuccess("审核成功!");
                             this.dialogClose();
+                        });
                         });
                     }
                 });
@@ -102,7 +106,7 @@ namespace Kun.Project {
                 this.toolbar.findButton('delete-button').show();
 
                 this.toolbar.findButton('reject-button').hide();
-                this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('audit-button').show();
                 this.toolbar.findButton('unAudit-button').hide();
 
 

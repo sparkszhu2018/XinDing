@@ -161,6 +161,12 @@ namespace Kun.Stock.Entities
             set { Fields.Specification[this] = value; }
         }
 
+        [DisplayName("申请人"), Size(50)]
+        public String Applicant
+        {
+            get { return Fields.Applicant[this]; }
+            set { Fields.Applicant[this] = value; }
+        }
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -204,6 +210,7 @@ namespace Kun.Stock.Entities
             public GuidField PositionId;
             public StringField PositionName;
             public StringField WarehouseName;
+            public StringField Applicant;
         }
     }
 }

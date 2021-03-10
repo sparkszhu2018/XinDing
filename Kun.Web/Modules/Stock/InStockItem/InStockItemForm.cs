@@ -33,5 +33,7 @@ namespace Kun.Stock.Forms
         public Guid WarehouseId { get; set; }
 
         public Guid PositionId { get; set; }
+
+        public String Applicant { get; set; }
     }
 }

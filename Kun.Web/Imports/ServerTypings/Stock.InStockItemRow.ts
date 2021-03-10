@@ -32,6 +32,7 @@
         InvoiceTypeName?: string;
         PositionId?: string;
         PositionName?: string;
+        Applicant?: string;
     }
 
     export namespace InStockItemRow {
@@ -76,7 +77,8 @@
             ApproverName = "ApproverName",
             InvoiceTypeName = "InvoiceTypeName",
             PositionId = "PositionId",
-            PositionName = "PositionName"
+            PositionName = "PositionName",
+            Applicant = "Applicant"
         }
     }
 }

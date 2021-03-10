@@ -46,6 +46,7 @@ namespace Kun.Finance.Repositories
                 if (IsCreate)
                 {
                     Row.Id = Row.Id ?? Guid.NewGuid();
+                    Row.ReceiptAmount = 0;
                 }
             }
         }

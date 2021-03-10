@@ -45,11 +45,15 @@ namespace Kun.Finance {
                     icon: "fa-star",
                     cssClass: "audit-button",
                     onClick: () => {
-                        Finance.ReceiptService.Audit({
-                            EntityId: this.entityId
-                        }, r => {
-                            Q.notifySuccess("审核成功!");
-                            this.dialogClose();
+                        this.save((r) => {
+                            this.entityId = r.EntityId;
+                            if (!this.validateBeforeSave()) return;
+                            Finance.ReceiptService.Audit({
+                                EntityId: this.entityId
+                            }, r => {
+                                Q.notifySuccess("审核成功!");
+                                this.dialogClose();
+                            });
                         });
                     }
                 });
@@ -98,7 +102,7 @@ namespace Kun.Finance {
                 this.toolbar.findButton('delete-button').show();
 
                 this.toolbar.findButton('reject-button').hide();
-                this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('audit-button').show();
                 this.toolbar.findButton('unAudit-button').hide();
 
             } else if (this.entity.Status == Finance.Enums.BillStatus.Commited) {

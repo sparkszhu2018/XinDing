@@ -67,7 +67,7 @@ namespace Kun.Finance.Entities
             set { Fields.SourceDocumentId[this] = value; }
         }
 
-        [DisplayName("源单单号"), Size(50), QuickSearch, QuickFilter]
+        [DisplayName("源单单号"), Size(50), QuickSearch]
         public String SourceDocumentNo
         {
             get { return Fields.SourceDocumentNo[this]; }

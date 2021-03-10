@@ -70,11 +70,15 @@ namespace Kun.Ops {
                     icon: "fa-star",
                     cssClass: "audit-button",
                     onClick: () => {
-                        Ops.MaintenanceService.Audit({
-                            EntityId: this.entityId
-                        }, r => {
-                            Q.notifySuccess("审核成功!");
-                            this.dialogClose();
+                        this.save((r) => {
+                            this.entityId = r.EntityId;
+                            if (!this.validateBeforeSave()) return;
+                            Ops.MaintenanceService.Audit({
+                                EntityId: this.entityId
+                            }, r => {
+                                Q.notifySuccess("审核成功!");
+                                this.dialogClose();
+                            });
                         });
                     }
                 });
@@ -124,7 +128,7 @@ namespace Kun.Ops {
                 this.toolbar.findButton('delete-button').show();
 
                 this.toolbar.findButton('reject-button').hide();
-                this.toolbar.findButton('audit-button').hide();
+                this.toolbar.findButton('audit-button').show();
                 this.toolbar.findButton('unAudit-button').hide();
 
 

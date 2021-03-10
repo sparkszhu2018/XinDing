@@ -34,6 +34,7 @@
         TypeId?: string;
         TypeName?: string;
         TotalCost?: number;
+        TotalSales?: number;
         InvoicedAmount?: number;
     }
 
@@ -82,6 +83,7 @@
             TypeId = "TypeId",
             TypeName = "TypeName",
             TotalCost = "TotalCost",
+            TotalSales = "TotalSales",
             InvoicedAmount = "InvoicedAmount"
         }
     }

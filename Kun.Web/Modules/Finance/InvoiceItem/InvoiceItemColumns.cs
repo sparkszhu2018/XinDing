@@ -27,7 +27,7 @@ namespace Kun.Finance.Columns
         public Decimal? ReceiptAmount { get; set; }
         public String InvoiceNo { get; set; }
         public String Note { get; set; }
-
+        public String VendorName { get; set; }
         public String SourceDocumentNo { get; set; }
         public Int32 SourceItemSerial { get; set; }
     }

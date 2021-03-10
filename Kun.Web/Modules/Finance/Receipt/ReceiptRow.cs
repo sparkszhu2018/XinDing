@@ -40,7 +40,7 @@ namespace Kun.Finance.Entities
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
+        [DisplayName("回款日期"), NotNull, DefaultValue("Now"), QuickFilter]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {

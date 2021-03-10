@@ -175,8 +175,8 @@ namespace Kun.Finance.Entities
             set { Fields.Kind[this] = (Int32)value; }
         }
 
-        [DisplayName("开票单位"), LookupEditor(typeof(VendorRow)),
-           ForeignKey("[dbo].[Basic_Vendor]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
+        [DisplayName("开票单位"), LookupEditor(typeof(CustomerRow)),
+           ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
          ]
         public Guid? VendorId
         {

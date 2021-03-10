@@ -39,7 +39,7 @@ namespace Kun.Finance {
             var buttons = super.getButtons();
             buttons.splice(Q.indexOf(buttons, x => x.cssClass == "add-button"), 1);
             buttons.push({
-                title: "选择源单",
+                title: "选择发票",
                 cssClass: "add-button",
                 visible: () => { return false },
                 onClick: () => {

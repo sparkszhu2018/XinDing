@@ -25,5 +25,7 @@ namespace Kun.Stock.Forms
         public Decimal SalePrice { get; set; }
         public Decimal SaleAmount { get; set; }
         public String Specification { get; set; }
+
+        public StringField Applicant;
     }
 }

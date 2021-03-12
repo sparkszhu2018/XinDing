@@ -120,12 +120,27 @@ namespace Kun.Stock.Entities
             set { Fields.Specification[this] = value; }
         }
 
-        [DisplayName("申请人"),NotNull, Size(50)]
-        public String Applicant
+        [DisplayName("申请人"), LookupEditor(typeof(UserRow)),
+         ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jApplicant"), TextualField("ApplicantName")]
+        public Int64? ApplicantId
         {
-            get { return Fields.Applicant[this]; }
-            set { Fields.Applicant[this] = value; }
+            get { return Fields.ApplicantId[this]; }
+            set { Fields.ApplicantId[this] = value; }
         }
+
+        [DisplayName("申请人"), Expression("jApplicant.[DisplayName]"), ReadOnly(true)]
+        public String ApplicantName
+        {
+            get { return Fields.ApplicantName[this]; }
+            set { Fields.ApplicantName[this] = value; }
+        }
+
+        //[DisplayName("申请人"),NotNull, Size(50)]
+        //public String Applicant
+        //{
+        //    get { return Fields.Applicant[this]; }
+        //    set { Fields.Applicant[this] = value; }
+        //}
         
 
         [DisplayName("单位"), NotNull, LookupEditor(typeof(UnitRow)), ReadOnly(true),
@@ -314,7 +329,8 @@ namespace Kun.Stock.Entities
             public GuidField PositionId;
             public StringField PositionName;
 
-            public StringField Applicant;
+            public Int64Field ApplicantId;
+            public StringField ApplicantName;
 
 
 

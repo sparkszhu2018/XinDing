@@ -42,6 +42,7 @@ namespace Kun.Stock.Columns
         public Decimal SalePrice { get; set; }
         public Decimal SaleAmount { get; set; }
 
-        public String Applicant { get; set; }
+        public Int64 ApplicantId;
+        public String ApplicantName;
     }
 }

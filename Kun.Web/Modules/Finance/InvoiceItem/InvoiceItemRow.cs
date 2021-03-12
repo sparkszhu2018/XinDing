@@ -63,7 +63,7 @@ namespace Kun.Finance.Entities
             set { Fields.Serial[this] = value; }
         } 
 
-        [DisplayName("源单类型"), QuickFilter]
+        [DisplayName("源单类型"), NotNull, QuickFilter]
         public InvoiceBillType? SourceDocumentType
         {
             get { return (InvoiceBillType?)Fields.SourceDocumentType[this]; }
@@ -168,7 +168,7 @@ namespace Kun.Finance.Entities
             set { Fields.Note[this] = value; }
         }
 
-        [DisplayName("类别")]
+        [DisplayName("类别"), NotNull]
         public InvoiceItemKind? Kind
         {
             get { return (InvoiceItemKind?)Fields.Kind[this]; }

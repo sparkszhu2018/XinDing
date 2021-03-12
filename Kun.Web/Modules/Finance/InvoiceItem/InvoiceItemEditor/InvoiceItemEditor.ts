@@ -45,8 +45,8 @@ namespace Kun.Finance {
             //    row.PositionName = Basic.PositionRow.getLookup().itemById[row.PositionId].Name;
             //}
 
-            row.Kind = Serenity.EnumFormatter.format(Enums.InvoiceItemKind, Q.toId(row.Kind));
-            row.SourceDocumentType = Serenity.EnumFormatter.format(Enums.InvoiceBillType, Q.toId(row.SourceDocumentType));
+            //row.Kind = Serenity.EnumFormatter.format(Enums.InvoiceItemKind, Q.toId(row.Kind));
+            //row.SourceDocumentType = Serenity.EnumFormatter.format(Enums.InvoiceBillType, Q.toId(row.SourceDocumentType));
 
             
             if (!Q.isEmptyOrNull(row.VendorId)) {
@@ -174,18 +174,19 @@ namespace Kun.Finance {
             return buttons; 
         }
 
-        //protected getColumns() {
-        //    var columns = super.getColumns();
-        //    var vendor = Q.tryFirst(columns, x => x.field === InvoiceItemRow.Fields.VendorId);
-        //    if (vendor != null) {
-        //        alert(JSON.stringify(vendor));
-        //        vendor.format = ctx => {
-        //            return Basic.VendorRow.getLookup().itemById[Q.toId(ctx.value)].Name;
-        //            //return Serenity.EnumFormatter.format(Enums.InvoiceItemRow, Q.toId(ctx.value));
-        //        };
-        //    }
-        //    return columns;
-        //}
+        protected getColumns() { 
+            var columns = super.getColumns();
+            Q.first(columns, x => x.field === InvoiceItemRow.Fields.Kind).format = ctx => {
+
+                return Serenity.EnumFormatter.format(Enums.InvoiceItemKind, Q.toId(ctx.value));
+            };
+
+            Q.first(columns, x => x.field === InvoiceItemRow.Fields.SourceDocumentType).format = ctx => {
+
+                return Serenity.EnumFormatter.format(Enums.InvoiceBillType, Q.toId(ctx.value));
+            };
+            return columns;
+        }
          
     }
 }

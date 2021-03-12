@@ -3642,7 +3642,7 @@ declare namespace Kun.Stock {
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
         PositionId: Serenity.LookupEditor;
-        Applicant: Serenity.StringEditor;
+        ApplicantId: Serenity.LookupEditor;
     }
     class InStockItemForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -3684,7 +3684,8 @@ declare namespace Kun.Stock {
         InvoiceTypeName?: string;
         PositionId?: string;
         PositionName?: string;
-        Applicant?: string;
+        ApplicantId?: number;
+        ApplicantName?: string;
     }
     namespace InStockItemRow {
         const idProperty = "Id";
@@ -3728,7 +3729,8 @@ declare namespace Kun.Stock {
             InvoiceTypeName = "InvoiceTypeName",
             PositionId = "PositionId",
             PositionName = "PositionName",
-            Applicant = "Applicant"
+            ApplicantId = "ApplicantId",
+            ApplicantName = "ApplicantName"
         }
     }
 }
@@ -5003,6 +5005,7 @@ declare namespace Kun.Finance {
         validateEntity(row: any, id: any): boolean;
         setButtons(BillType: string): void;
         protected getButtons(): Serenity.ToolButton[];
+        protected getColumns(): Slick.Column[];
     }
 }
 declare namespace Kun.Finance {

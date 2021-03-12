@@ -17,6 +17,8 @@ namespace Kun.Ops.Columns
         public String BillNo { get; set; }
         public Int32 BillType { get; set; }
         public Int32 Status { get; set; }
+
+        [DisplayFormat("yyyy-MM-dd")]
         public DateTime Date { get; set; }
 
         public String VendorName { get; set; }

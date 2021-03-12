@@ -34,6 +34,6 @@ namespace Kun.Stock.Forms
 
         public Guid PositionId { get; set; }
 
-        public String Applicant { get; set; }
+        public Int64 ApplicantId { get; set; }
     }
 }

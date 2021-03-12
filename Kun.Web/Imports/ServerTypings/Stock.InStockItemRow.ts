@@ -32,7 +32,8 @@
         InvoiceTypeName?: string;
         PositionId?: string;
         PositionName?: string;
-        Applicant?: string;
+        ApplicantId?: number;
+        ApplicantName?: string;
     }
 
     export namespace InStockItemRow {
@@ -78,7 +79,8 @@
             InvoiceTypeName = "InvoiceTypeName",
             PositionId = "PositionId",
             PositionName = "PositionName",
-            Applicant = "Applicant"
+            ApplicantId = "ApplicantId",
+            ApplicantName = "ApplicantName"
         }
     }
 }

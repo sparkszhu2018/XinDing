@@ -20,7 +20,7 @@ namespace Kun.Finance.Columns
         public String SourceDocumentNo { get; set; } 
         public Int32 SourceItemSerial { get; set; }
         [Hidden]
-        public Int32 Kind { get; set; }
+        public String Kind { get; set; }
         public String Name { get; set; }
         public String UnitName { get; set; }
         public Decimal Price { get; set; }

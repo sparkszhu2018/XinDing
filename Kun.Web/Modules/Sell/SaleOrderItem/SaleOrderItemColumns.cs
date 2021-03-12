@@ -13,8 +13,8 @@ namespace Kun.Sell.Columns
     [BasedOnRow(typeof(Entities.SaleOrderItemRow), CheckNames = true)]
     public class SaleOrderItemColumns
     {
-        public StringField BillNo { get; set; }
-        [DateFormatter(DisplayFormat ="yyyy-MM-dd") ]
+        public StringField BillNo { get; set; } 
+        [DisplayFormat("yyyy-MM-dd")]
         public DateTime HeadDate { get; set; }
         public String  HeadStatus { get; set; }
         public String CustomerName { get; set; }

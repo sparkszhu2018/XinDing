@@ -150,11 +150,11 @@ namespace Kun.Sell.Entities
             public Int32Field BillType;
             public Int32Field Status;
             public DateTimeField Date;
-            public GuidField CustomerId;
             public GuidField SettleCustomerId;
             public StringField Note;
             public Int64Field ApproverId;
             public DateTimeField ApproverDate;
+            public GuidField CustomerId;
             public StringField CustomerName;
             public StringField SettleCustomerName;
             public StringField ApproverName;

@@ -13,7 +13,8 @@ namespace Kun.Stock {
         get Head() { return this._head; }
         set Head(value: ChangeStockRow) {
             this._head = value; 
-            if (this._head.Status !== Stock.Enums.BillStatus.Edit && this._head.Status !== Stock.Enums.BillStatus.Reject) {
+            if (this._head.Status !== Stock.Enums.BillStatus.Edit && this._head.Status !== Stock.Enums.BillStatus.Reject
+                && this._head.Status !== Stock.Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('add-button').hide();
             } else {
                 this.toolbar.findButton('add-button').show();

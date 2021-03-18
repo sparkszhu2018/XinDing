@@ -91,7 +91,7 @@ namespace Kun.Stock.Entities
             set { Fields.Status[this] = value; }
         }
          
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter, 
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)),  
             ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {
@@ -106,7 +106,7 @@ namespace Kun.Stock.Entities
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), QuickFilter, Expression("jMaterial.[Name]"), ReadOnly(true)]
+        [DisplayName("物料名称"), Expression("jMaterial.[Name]"), ReadOnly(true)]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }

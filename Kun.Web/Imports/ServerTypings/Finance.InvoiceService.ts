@@ -2,6 +2,7 @@
     export namespace InvoiceService {
         export const baseUrl = 'Finance/Invoice';
 
+        export declare function FetchInvoiceNo(request: InvoiceNoRequest, onSuccess?: (response: InvoiceNoResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Commit(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Audit(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Reject(request: Serenity.SaveRequest<InvoiceRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -13,6 +14,7 @@
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<InvoiceRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
+            FetchInvoiceNo = "Finance/Invoice/FetchInvoiceNo",
             Commit = "Finance/Invoice/Commit",
             Audit = "Finance/Invoice/Audit",
             Reject = "Finance/Invoice/Reject",
@@ -25,6 +27,7 @@
         }
 
         [
+            'FetchInvoiceNo', 
             'Commit', 
             'Audit', 
             'Reject', 

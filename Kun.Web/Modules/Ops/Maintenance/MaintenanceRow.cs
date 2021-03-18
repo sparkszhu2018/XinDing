@@ -26,14 +26,14 @@ namespace Kun.Ops.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true) ]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("业务类型"), NotNull, QuickFilter]
+        [DisplayName("业务类型"), NotNull ]
 
         [DefaultValue(MaintenanceBillType.NormalMaintenance)]
         public MaintenanceBillType? BillType
@@ -111,7 +111,7 @@ namespace Kun.Ops.Entities
             set { Fields.ReportCustomerName[this] = value; }
         }
 
-        [DisplayName("结算部门"), NotNull, LookupEditor(typeof(CustomerRow)),
+        [DisplayName("结算部门"), NotNull, LookupEditor(typeof(CustomerRow)), QuickFilter,
              ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jSettleCustomer"), TextualField("SettleCustomerName")
            ]
         public Guid? SettleCustomerId
@@ -144,7 +144,7 @@ namespace Kun.Ops.Entities
         }
 
 
-        [DisplayName("地址"), Size(100)]
+        [DisplayName("地址"), Size(100), NotNull]
         public String Address
         {
             get { return Fields.Address[this]; }
@@ -165,7 +165,7 @@ namespace Kun.Ops.Entities
             set { Fields.Description[this] = value; }
         }
 
-        [DisplayName("处理结果"), Size(500)]
+        [DisplayName("处理结果"), Size(500), NotNull]
         public String Content
         {
             get { return Fields.Content[this]; }
@@ -266,7 +266,6 @@ namespace Kun.Ops.Entities
             set { Fields.ApproverDate[this] = value; }
         }
 
-
         [DisplayName("用料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId",
             IncludeColumns = "MaterialCode,MaterialName,UnitName,WarehouseName,PositionName,LotCode,HeadStatus,BillNo")]
         [ReadPermission(PermissionKeys.MaintenanceResponsible)]
@@ -292,17 +291,14 @@ namespace Kun.Ops.Entities
             set { Fields.TotalCost[this] = value; }
         }
 
-
         [DisplayName("总金额"), Expression("(isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 ) " +
             "+ isnull((select sum(SaleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0))")]
         public Decimal? TotalSales
         {
-            get { return Fields.TotalCost[this]; }
-            set { Fields.TotalCost[this] = value; }
+            get { return Fields.TotalSales[this]; }
+            set { Fields.TotalSales[this] = value; }
         }
-
-
-
+         
         [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
             "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
         public Decimal? InvoicedAmount
@@ -310,13 +306,15 @@ namespace Kun.Ops.Entities
             get { return Fields.InvoicedAmount[this]; }
             set { Fields.InvoicedAmount[this] = value; }
         }
-        //[DisplayName("已开票数量"), Expression("isnull((select top 1 Qty from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
-        //    "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
-        //public Decimal? InvoicedQty
-        //{
-        //    get { return Fields.InvoicedQty[this]; }
-        //    set { Fields.InvoicedQty[this] = value; }
-        //}
+
+        [DisplayName("未开票金额"), Expression("(isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 ) " +
+            "+ isnull((select sum(SaleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0)- isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+            "and Kind = 20 and SourceDocumentId = t0.Id),0))")]
+        public Decimal? UnInvoicedAmount
+        {
+            get { return Fields.UnInvoicedAmount[this]; }
+            set { Fields.UnInvoicedAmount[this] = value; }
+        }
 
         IIdField IIdRow.IdField
         {
@@ -373,10 +371,12 @@ namespace Kun.Ops.Entities
             public DecimalField ServicerCost; 
 
             public GuidField TypeId;
-            public StringField TypeName;
+            public StringField TypeName; 
+
             public DecimalField TotalCost;
             public DecimalField TotalSales;
             public DecimalField InvoicedAmount;
+            public DecimalField UnInvoicedAmount;
 
         }
     }

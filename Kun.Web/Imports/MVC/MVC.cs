@@ -46,6 +46,11 @@ namespace MVC
                 public const string BizTypeIndex = "~/Modules/Basic/BizType/BizTypeIndex.cshtml";
             }
 
+            public static class Company
+            {
+                public const string CompanyIndex = "~/Modules/Basic/Company/CompanyIndex.cshtml";
+            }
+
             public static class Customer
             {
                 public const string CustomerIndex = "~/Modules/Basic/Customer/CustomerIndex.cshtml";
@@ -283,6 +288,16 @@ namespace MVC
 
         public static class Stock
         {
+            public static class Assemble
+            {
+                public const string AssembleIndex = "~/Modules/Stock/Assemble/AssembleIndex.cshtml";
+            }
+
+            public static class AssembleItem
+            {
+                public const string AssembleItemIndex = "~/Modules/Stock/AssembleItem/AssembleItemIndex.cshtml";
+            }
+
             public static class ChangeStock
             {
                 public const string ChangeStockIndex = "~/Modules/Stock/ChangeStock/ChangeStockIndex.cshtml";

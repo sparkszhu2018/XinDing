@@ -12,7 +12,8 @@
         ProjectService = 52,
         ProjectBiz = 53,
         InvoiceBill = 60,
-        ReceiptBill = 61
+        ReceiptBill = 61,
+        AssembleBill = 70
     }
     Serenity.Decorators.registerEnumType(DocumentKind, 'Kun.Sys.Enum.DocumentKind', 'Sys.DocumentKind');
 }

@@ -133,10 +133,7 @@ namespace Kun.Stock.Repositories
             }
             else if (Status == BillStatus.UnAudited) //反审核
             {
-                //下游单据验证 待开发
-
-
-
+                
                 var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
                 var stockRep = new StockDataRepository();
                 var moveRep = new MoveRecordRepository();

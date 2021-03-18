@@ -54,12 +54,9 @@ namespace Kun.Stock {
                         this.refresh();
                         dlg = null;
                     });
-                }, { async: false });
-
-
+                }, { async: false }); 
             }
         }
-
 
         protected getColumns() {
             var columns = super.getColumns(); 

@@ -10,6 +10,14 @@
         ApproverDate?: string;
         ApproverName?: string;
         Items?: InvoiceItemRow[];
+        CompanyId?: string;
+        CompanyName?: string;
+        InvoiceNo?: string;
+        InvoiceAmount?: number;
+        ReceiptAmount?: number;
+        UnReceiptAmount?: number;
+        CustomerId?: string;
+        CustomerName?: string;
     }
 
     export namespace InvoiceRow {
@@ -32,7 +40,15 @@
             ApproverId = "ApproverId",
             ApproverDate = "ApproverDate",
             ApproverName = "ApproverName",
-            Items = "Items"
+            Items = "Items",
+            CompanyId = "CompanyId",
+            CompanyName = "CompanyName",
+            InvoiceNo = "InvoiceNo",
+            InvoiceAmount = "InvoiceAmount",
+            ReceiptAmount = "ReceiptAmount",
+            UnReceiptAmount = "UnReceiptAmount",
+            CustomerId = "CustomerId",
+            CustomerName = "CustomerName"
         }
     }
 }

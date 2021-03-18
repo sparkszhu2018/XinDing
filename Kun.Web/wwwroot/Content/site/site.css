@@ -10216,6 +10216,12 @@ button.ui-button {
 .s-Basic-PaymentItemDialog .caption {
   width: 150px;
 }
+.s-Basic-CompanyDialog > .size {
+  width: 650px;
+}
+.s-Basic-CompanyDialog .caption {
+  width: 150px;
+}
 .s-Stock-DataDialog > .size {
   width: 650px;
 }
@@ -10256,6 +10262,18 @@ button.ui-button {
   width: 650px;
 }
 .s-Stock-ChangeStockItemDialog .caption {
+  width: 150px;
+}
+.s-Stock-AssembleDialog > .size {
+  width: 650px;
+}
+.s-Stock-AssembleDialog .caption {
+  width: 150px;
+}
+.s-Stock-AssembleItemDialog > .size {
+  width: 650px;
+}
+.s-Stock-AssembleItemDialog .caption {
   width: 150px;
 }
 .s-Sys-DocumentCodeConfigDialog > .size {

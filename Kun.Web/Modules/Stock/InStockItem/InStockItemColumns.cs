@@ -19,9 +19,11 @@ namespace Kun.Stock.Columns
         //[EditLink]
         //public String Status { get; set; }
         //public Guid MaterialId { get; set; }
-        //[EditLink] 
+        [EditLink] 
         public String BillNo { get; set; }
-        public String HeadStatus { get; set; } 
+        [QuickFilter]
+        public String HeadStatus { get; set; }
+        [QuickFilter]
         public String HeadDate { get; set; }
         [EditLink]
         public Int32 Serial { get; set; }
@@ -41,7 +43,7 @@ namespace Kun.Stock.Columns
         public Decimal BuyAmount { get; set; }
         public Decimal SalePrice { get; set; }
         public Decimal SaleAmount { get; set; }
-
+        [QuickFilter,Hidden]
         public Int64 ApplicantId;
         public String ApplicantName;
     }

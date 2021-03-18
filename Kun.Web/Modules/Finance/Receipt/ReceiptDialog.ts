@@ -17,7 +17,15 @@ namespace Kun.Finance {
 
         protected afterLoadEntity() {
             super.afterLoadEntity();
-            this.form.Items.Head = this.entity; 
+            //this.form.Items.Head = this.entity;  
+            this.form.InvoiceNo.changeSelect2(e => {
+                Finance.InvoiceService.FetchInvoiceNo({
+                    InvoiceNo: this.form.InvoiceNo.value
+                }, r => {
+                    this.form.InvoiceAmount.value = r.InvoiceAmount;
+                    this.form.BalanceAmount.value = r.UnReceiptAmount;
+                });
+            });
         }
 
         protected getToolbarButtons() {
@@ -97,7 +105,7 @@ namespace Kun.Finance {
             ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
-                this.toolbar.findButton('submit-button').show();
+                this.toolbar.findButton('submit-button').hide();
                 this.toolbar.findButton('apply-changes-button').show();
                 this.toolbar.findButton('delete-button').show();
 

@@ -124,7 +124,7 @@ namespace Kun.Finance {
             ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
-                this.toolbar.findButton('submit-button').show();
+                this.toolbar.findButton('submit-button').hide();
                 this.toolbar.findButton('apply-changes-button').show();
                 this.toolbar.findButton('delete-button').show();
 

@@ -51,7 +51,7 @@ namespace Kun.Basic.Entities
             set { Fields.OldCode[this] = value; }
         }
 
-        [DisplayName("单位"), NotNull, LookupEditor(typeof(UnitRow)),
+        [DisplayName("单位"), NotNull, LookupEditor(typeof(UnitRow)),LookupInclude,
             ForeignKey("[dbo].[Basic_Unit]", "Id"), LeftJoin("jUnit"), TextualField("UnitCode")]
         public Guid? UnitId
         {

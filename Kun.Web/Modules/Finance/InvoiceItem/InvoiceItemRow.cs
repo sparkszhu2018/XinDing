@@ -34,21 +34,21 @@ namespace Kun.Finance.Entities
         }
 
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
+        [DisplayName("状态"), Expression("jHead.[Status]")]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
+        [DisplayName("单据日期"), Expression("jHead.[Date]")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -63,7 +63,7 @@ namespace Kun.Finance.Entities
             set { Fields.Serial[this] = value; }
         } 
 
-        [DisplayName("源单类型"), NotNull, QuickFilter]
+        [DisplayName("源单类型"), NotNull]
         public InvoiceBillType? SourceDocumentType
         {
             get { return (InvoiceBillType?)Fields.SourceDocumentType[this]; }
@@ -77,7 +77,7 @@ namespace Kun.Finance.Entities
             set { Fields.SourceDocumentId[this] = value; }
         }
 
-        [DisplayName("源单单号"), Size(50), QuickSearch, QuickFilter]
+        [DisplayName("源单单号"), Size(50), QuickSearch]
         public String SourceDocumentNo
         {
             get { return Fields.SourceDocumentNo[this]; }
@@ -154,12 +154,7 @@ namespace Kun.Finance.Entities
             set { Fields.TaxRate[this] = value; }
         }
 
-        [DisplayName("发票编号"), Size(50)]
-        public String InvoiceNo
-        {
-            get { return Fields.InvoiceNo[this]; }
-            set { Fields.InvoiceNo[this] = value; }
-        }
+      
 
         [DisplayName("备注"), Size(200)]
         public String Note
@@ -173,23 +168,8 @@ namespace Kun.Finance.Entities
         {
             get { return (InvoiceItemKind?)Fields.Kind[this]; }
             set { Fields.Kind[this] = (Int32)value; }
-        }
-
-        [DisplayName("开票单位"), LookupEditor(typeof(CustomerRow)),
-           ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
-         ]
-        public Guid? VendorId
-        {
-            get { return Fields.VendorId[this]; }
-            set { Fields.VendorId[this] = value; }
-        }
-
-        [DisplayName("开票单位"), Expression("jVendor.[Name]"), ReadOnly(true)]
-        public String VendorName
-        {
-            get { return Fields.VendorName[this]; }
-            set { Fields.VendorName[this] = value; }
-        }
+        } 
+     
 
         IIdField IIdRow.IdField
         {
@@ -224,8 +204,7 @@ namespace Kun.Finance.Entities
             public DecimalField Qty;
             public DecimalField Amount;
             public DecimalField InvoiceAmount;
-            public DecimalField TaxRate;
-            public StringField InvoiceNo;
+            public DecimalField TaxRate; 
             public StringField Note;
 
 
@@ -235,8 +214,6 @@ namespace Kun.Finance.Entities
             public Int32Field Kind; 
             public DecimalField ReceiptAmount;
 
-            public GuidField VendorId;
-            public StringField VendorName;
         }
     }
 }

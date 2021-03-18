@@ -16,6 +16,10 @@ namespace Kun.Stock
         public const string ChangeStockApprove = "Stock:ChangeStock:Approve";
         [Description("移库单反审核")]
         public const string ChangeStockUnApprove = "Stock:ChangeStock:UnApprove";
+        [Description("组装单审核")]
+        public const string AssembleApprove = "Stock:Assemble:Approve";
+        [Description("组装单反审核")]
+        public const string AssembleUnApprove = "Stock:Assemble:UnApprove";
 
     }
 }

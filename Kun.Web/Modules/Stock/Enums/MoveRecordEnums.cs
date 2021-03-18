@@ -17,7 +17,12 @@ namespace Kun.Stock.Enums
             [Description("移库")]
             ChangeStock = 50,
             [Description("项目领料")]
-            ProjectOut = 60
+            ProjectOut = 60,
+
+            [Description("组装入库")]
+            AssembleIn = 70,
+            [Description("组装出库")]
+            AssembleOut = 71
         }
 
         [EnumKey("MoveRecordEnums.Status")]

@@ -86,8 +86,7 @@ namespace Kun.Stock.Entities
         {
             get { return Fields.ApproverDate[this]; }
             set { Fields.ApproverDate[this] = value; }
-        }
-
+        } 
 
         [DisplayName("物料明细"), NotMapped, 
          MasterDetailRelation(foreignKey: "HeadId"

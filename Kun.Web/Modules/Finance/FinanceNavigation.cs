@@ -5,4 +5,4 @@ using MyPages = Kun.Finance.Pages;
 [assembly: NavigationLink(int.MaxValue, "财务管理/开票明细", typeof(MyPages.InvoiceItemController), icon: null)]
 //[assembly: NavigationLink(int.MaxValue, "财务管理/Bill Invoiced", typeof(MyPages.BillInvoicedController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "财务管理/回款单", typeof(MyPages.ReceiptController), icon: null)]
-[assembly: NavigationLink(int.MaxValue, "财务管理/回款明细", typeof(MyPages.ReceiptItemController), icon: null)]
+//[assembly: NavigationLink(int.MaxValue, "财务管理/回款明细", typeof(MyPages.ReceiptItemController), icon: null)]

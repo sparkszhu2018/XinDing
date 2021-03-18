@@ -12,6 +12,9 @@ namespace Kun.Stock {
 
         constructor(container: JQuery) {
             super(container);
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            });
         }
 
         protected getButtons(): Serenity.ToolButton[] {

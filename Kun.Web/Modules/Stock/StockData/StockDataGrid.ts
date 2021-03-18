@@ -34,6 +34,7 @@ namespace Kun.Stock {
         protected getSlickOptions() {
             let opt = super.getSlickOptions();
             opt.enableTextSelectionOnCells = true;
+            opt.showFooterRow = true;
             return opt;
         }
 
@@ -49,6 +50,20 @@ namespace Kun.Stock {
             return true;
         }
 
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid(); 
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider()); 
+            this.view.setSummaryOptions({
+                aggregators: [
+                    new Slick.Aggregators.Sum('BuyAmount'),
+                    new Slick.Aggregators.Sum('Qty'),
+                    new Slick.Aggregators.Sum('SaleAmount'),  
+                ]
+            });
+
+            return grid;
+        }
+         
         
     }
 }

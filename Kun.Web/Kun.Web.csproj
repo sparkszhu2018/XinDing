@@ -25,6 +25,8 @@
     <None Remove="Modules\Project\ServiceItem\ServiceItemEditor\ServiceItemEditorDialog.ts" />
     <None Remove="Modules\Project\ServiceItem\ServiceItemViewEditor\ServiceItemViewEditor.ts" />
     <None Remove="Modules\Sell\SaleOrderItem\SaleOrderItemEditor\SaleOrderItemEditor.ts" />
+    <None Remove="Modules\Stock\AssembleItem\AssembleItemEditor\AssembleItemEditor.ts" />
+    <None Remove="Modules\Stock\AssembleItem\AssembleItemEditor\AssembleItemEditorDialog.ts" />
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditor.ts" />
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditorDialog.ts" />
     <None Remove="Modules\Stock\InStockItem\InStockItemEditor\InStockItemEditorDialog.ts" />

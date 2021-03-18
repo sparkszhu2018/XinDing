@@ -28,7 +28,16 @@ namespace Kun.Finance.Forms
 
         [Category("业务信息")]
         public Int32Field BillType { get; set; }
-        [TwoThirdWidth(UntilNext = true)]
+
+        public Guid CompanyId { get; set; }
+
+        public String InvoiceNo { get; set; } 
+
+        public Guid CustomerId { get; set; }
+        [ReadOnly(true)]
+        public Decimal InvoiceAmount { get; set; }
+        
+        [FullWidth]
         public String Note { get; set; }
 
         [Category("开票明细")]

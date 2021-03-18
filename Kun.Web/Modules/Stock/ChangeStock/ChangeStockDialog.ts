@@ -46,7 +46,7 @@ namespace Kun.Stock {
                 }
             });
 
-            if (Q.Authorization.hasPermission("Stock:ChangeOrder:Approve")) {
+            if (Q.Authorization.hasPermission("Stock:ChangeStock:Approve")) {
                 buttons.push({
                     title: "审核",
                     icon: "fa-star",
@@ -79,7 +79,7 @@ namespace Kun.Stock {
                 });
             }
 
-            if (Q.Authorization.hasPermission("Stock:ChangeOrder:UnApprove")) {
+            if (Q.Authorization.hasPermission("Stock:ChangeStock:UnApprove")) {
                 buttons.push({
                     title: "反审核",
                     icon: "fa-reply-all",
@@ -101,11 +101,11 @@ namespace Kun.Stock {
             super.updateInterface();
             if (this.entity.Status == Stock.Enums.BillStatus.Edit
                 || this.entity.Status == Stock.Enums.BillStatus.Reject 
-                || this.entity.Status == Project.Enums.BillStatus.UnAudited
+                || this.entity.Status == Stock.Enums.BillStatus.UnAudited
             ) {
 
                 this.toolbar.findButton('save-and-close-button').show();
-                this.toolbar.findButton('submit-button').show();
+                this.toolbar.findButton('submit-button').hide();
                 this.toolbar.findButton('apply-changes-button').show();
                 this.toolbar.findButton('delete-button').show();
 

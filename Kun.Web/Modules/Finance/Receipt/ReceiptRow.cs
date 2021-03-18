@@ -25,7 +25,7 @@ namespace Kun.Finance.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter,SortOrder(1,true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -79,14 +79,42 @@ namespace Kun.Finance.Entities
             set { Fields.ApproverDate[this] = value; }
         }
 
-        [DisplayName("回款明细"), NotMapped,
-        MasterDetailRelation(foreignKey: "HeadId"
-           , IncludeColumns = "HeadStatus")]
-        public List<ReceiptItemRow> Items
+        [DisplayName("发票号"), LookupEditor(typeof(InvoiceNoLookup))]
+        public String  InvoiceNo
         {
-            get { return Fields.Items[this]; }
-            set { Fields.Items[this] = value; }
+            get { return Fields.InvoiceNo[this]; }
+            set { Fields.InvoiceNo[this] = value; }
         }
+
+        [DisplayName("本次回款"), Size(18), Scale(2)]
+        public Decimal? ReceiptAmount
+        {
+            get { return Fields.ReceiptAmount[this]; }
+            set { Fields.ReceiptAmount[this] = value; }
+        }
+
+        [DisplayName("发票金额"), Size(18), Scale(2)]
+        public Decimal? InvoiceAmount
+        {
+            get { return Fields.InvoiceAmount[this]; }
+            set { Fields.InvoiceAmount[this] = value; }
+        }
+
+        [DisplayName("待收金额"), Size(18), Scale(2)]
+        public Decimal? BalanceAmount
+        {
+            get { return Fields.BalanceAmount[this]; }
+            set { Fields.BalanceAmount[this] = value; }
+        }
+
+        //[DisplayName("回款明细"), NotMapped,
+        //MasterDetailRelation(foreignKey: "HeadId"
+        //   , IncludeColumns = "HeadStatus")]
+        //public List<ReceiptItemRow> Items
+        //{
+        //    get { return Fields.Items[this]; }
+        //    set { Fields.Items[this] = value; }
+        //}
 
         IIdField IIdRow.IdField
         {
@@ -115,7 +143,16 @@ namespace Kun.Finance.Entities
             public Int64Field ApproverId;
             public DateTimeField ApproverDate;
             public StringField ApproverName;
-            public RowListField<ReceiptItemRow> Items;
+            // public RowListField<ReceiptItemRow> Items;
+
+            public StringField InvoiceNo;
+            
+            public DecimalField InvoiceAmount;
+            public DecimalField BalanceAmount;
+            public DecimalField ReceiptAmount;
+
+
+
         }
     }
 }

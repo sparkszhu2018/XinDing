@@ -12,3 +12,4 @@ using MyPages = Kun.Basic.Pages;
 [assembly: NavigationLink(int.MaxValue, "基础数据/服务商", typeof(MyPages.VendorController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/商务费用类型", typeof(MyPages.BizTypeController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/付款方式", typeof(MyPages.PaymentItemController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "基础数据/公司", typeof(MyPages.CompanyController), icon: null)]

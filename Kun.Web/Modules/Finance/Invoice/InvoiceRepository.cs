@@ -1,6 +1,7 @@
 ﻿
 namespace Kun.Finance.Repositories
 {
+    using Kun.Finance.Endpoints;
     using Kun.Finance.Entities;
     using Kun.Ops.Entities;
     using Kun.Project.Entities;
@@ -10,7 +11,9 @@ namespace Kun.Finance.Repositories
     using Serenity.Data;
     using Serenity.Services;
     using System;
+    using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using static Kun.Finance.Enums.FinanceEnums;
     using MyRow = Entities.InvoiceRow;
 
@@ -18,6 +21,26 @@ namespace Kun.Finance.Repositories
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
+        public InvoiceNoResponse FetchInvoiceNo(IUnitOfWork uow, InvoiceNoRequest request)
+        {
+
+            var invoices = List(uow.Connection, new ListRequest
+            {
+                IncludeColumns = new HashSet<string> { "InvoiceAmount", "UnReceiptAmount", "ReceiptAmount" },
+                EqualityFilter = new Dictionary<string, object> { { "InvoiceNo", request.InvoiceNo }, { "Status", BillStatus.Audited } }
+            }).Entities;
+            var invoiceAmount = invoices.Sum(c => c.InvoiceAmount);
+            var unReceiptAmount = invoices.Sum(c => c.UnReceiptAmount);
+            var receiptAmount = invoices.Sum(c => c.ReceiptAmount);
+
+            return new InvoiceNoResponse
+            {
+                InvoiceNo = request.InvoiceNo,
+                InvoiceAmount = invoiceAmount,
+                ReceiptAmount = receiptAmount,
+                UnReceiptAmount = unReceiptAmount
+            };
+        }
 
         public SaveResponse ChangeStatus(IUnitOfWork uow, Guid Id, BillStatus Status)
         {
@@ -120,10 +143,10 @@ namespace Kun.Finance.Repositories
                     .Select(SaleOrderItemRow.Fields.InvoicedQty)
                     .Select(SaleOrderItemRow.Fields.InvoicedAmount)
                         .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceItemId));
-                    if (saleOrderItemRow.InvoicedAmount >= saleOrderItemRow.SaleAmount)
+                    if (saleOrderItemRow.InvoicedAmount >  saleOrderItemRow.SaleAmount)
                     {
                         throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},金额{saleOrderItemRow.SaleAmount}已全部开票，无法提交!");
-                    }else if (saleOrderItemRow.InvoicedQty >= saleOrderItemRow.Qty)
+                    }else if (saleOrderItemRow.InvoicedQty >  saleOrderItemRow.Qty)
                     {
                         throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},数量{saleOrderItemRow.Qty}已全部开票，无法提交!");
                     }

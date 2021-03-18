@@ -12,6 +12,33 @@ namespace Kun.Finance {
 
         constructor(container: JQuery) {
             super(container);
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            });
+        }
+
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid();
+
+            // need to register this plugin for grouping or you'll have errors
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+
+            this.view.setSummaryOptions({
+                aggregators: [
+                    new Slick.Aggregators.Sum('ReceiptAmount'), 
+                ]
+            });
+
+            return grid;
+        }
+
+        protected getSlickOptions() {
+            var opt = super.getSlickOptions();
+            // opt.groupingPanel = true;
+            opt.showFooterRow = true;
+            return opt;
         }
     }
+
+
 }

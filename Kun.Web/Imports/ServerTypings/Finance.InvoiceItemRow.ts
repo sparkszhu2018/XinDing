@@ -15,15 +15,12 @@
         Amount?: number;
         InvoiceAmount?: number;
         TaxRate?: number;
-        InvoiceNo?: string;
         Note?: string;
         BillNo?: string;
         HeadStatus?: Finance.Enums.BillStatus;
         HeadDate?: string;
         Kind?: Finance.Enums.InvoiceItemKind;
         ReceiptAmount?: number;
-        VendorId?: string;
-        VendorName?: string;
     }
 
     export namespace InvoiceItemRow {
@@ -52,15 +49,12 @@
             Amount = "Amount",
             InvoiceAmount = "InvoiceAmount",
             TaxRate = "TaxRate",
-            InvoiceNo = "InvoiceNo",
             Note = "Note",
             BillNo = "BillNo",
             HeadStatus = "HeadStatus",
             HeadDate = "HeadDate",
             Kind = "Kind",
-            ReceiptAmount = "ReceiptAmount",
-            VendorId = "VendorId",
-            VendorName = "VendorName"
+            ReceiptAmount = "ReceiptAmount"
         }
     }
 }

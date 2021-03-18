@@ -162,6 +162,13 @@ namespace Kun.Ops.Repositories
                     }, fld.BillNo); ;
                     Row.BillNo = nextNumber.Serial;
                 }
+                else
+                {
+                    if (Row.BillNo.IsEmptyOrNull())
+                    {
+                        throw new Exception("单据号不得为空,请检查!");
+                    }
+                }
             }
         }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }

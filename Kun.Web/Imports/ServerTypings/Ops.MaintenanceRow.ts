@@ -36,6 +36,7 @@
         TotalCost?: number;
         TotalSales?: number;
         InvoicedAmount?: number;
+        UnInvoicedAmount?: number;
     }
 
     export namespace MaintenanceRow {
@@ -84,7 +85,8 @@
             TypeName = "TypeName",
             TotalCost = "TotalCost",
             TotalSales = "TotalSales",
-            InvoicedAmount = "InvoicedAmount"
+            InvoicedAmount = "InvoicedAmount",
+            UnInvoicedAmount = "UnInvoicedAmount"
         }
     }
 }

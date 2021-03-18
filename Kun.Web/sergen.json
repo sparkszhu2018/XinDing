@@ -15,6 +15,12 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Basic_Company",
+          "Identifier": "Company",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.Basic_Customer",
           "Identifier": "Customer",
           "Module": "Basic",
@@ -186,6 +192,18 @@
           "Tablename": "dbo.Sell_SaleOrder_Item",
           "Identifier": "SaleOrderItem",
           "Module": "Sell",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_Assemble",
+          "Identifier": "Assemble",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_Assemble_Item",
+          "Identifier": "AssembleItem",
+          "Module": "Stock",
           "PermissionKey": "*"
         },
         {

@@ -2,6 +2,7 @@
 namespace Kun.Finance.Entities
 {
     using Kun.Administration.Entities;
+    using Kun.Basic.Entities;
     using Serenity;
     using Serenity.ComponentModel;
     using Serenity.Data;
@@ -25,28 +26,28 @@ namespace Kun.Finance.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Size(50), QuickSearch, ReadOnly(true),]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("业务类型"), NotNull, QuickFilter] 
+        [DisplayName("业务类型"), NotNull] 
         public InvoiceBillType? BillType
         {
             get { return (InvoiceBillType?)Fields.BillType[this]; }
             set { Fields.BillType[this] = (Int32)value; }
         }
 
-        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true), QuickFilter]
+        [DisplayName("状态"), NotNull, DefaultValue(BillStatus.Edit), ReadOnly(true)]
         public BillStatus? Status
         {
             get { return (BillStatus?)Fields.Status[this]; }
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -94,6 +95,67 @@ namespace Kun.Finance.Entities
             set { Fields.Items[this] = value; }
         }
 
+
+        [DisplayName("开票公司"), LookupEditor(typeof(CompanyRow)),NotNull,
+        ForeignKey("[dbo].[Basic_Company]", "Id"), LeftJoin("jCompany"), TextualField("CompanyName")]
+        public Guid? CompanyId
+        {
+            get { return Fields.CompanyId[this]; }
+            set { Fields.CompanyId[this] = value; }
+        }
+
+        [DisplayName("开票公司"), Expression("jCompany.[Name]"), ReadOnly(true)]
+        public String CompanyName
+        {
+            get { return Fields.CompanyName[this]; }
+            set { Fields.CompanyName[this] = value; }
+        }
+
+        [DisplayName("发票编号"), NotNull, Size(50)]
+        public String InvoiceNo
+        {
+            get { return Fields.InvoiceNo[this]; }
+            set { Fields.InvoiceNo[this] = value; }
+        } 
+         
+        [DisplayName("开票金额"), Expression("isnull((select sum(InvoiceAmount) from Finance_InvoiceItem where isActive = 1 and headId = t0.Id),0)")]
+        public Decimal? InvoiceAmount
+        {
+            get { return Fields.InvoiceAmount[this]; }
+            set { Fields.InvoiceAmount[this] = value; }
+        }
+
+        [DisplayName("回款金额"), Expression("isnull((select sum(ReceiptAmount) from Finance_Receipt where isActive =1 and InvoiceNo = t0.InvoiceNo),0)")]
+        public Decimal? ReceiptAmount
+        {
+            get { return Fields.ReceiptAmount[this]; }
+            set { Fields.ReceiptAmount[this] = value; }
+        }
+
+        [DisplayName("待回款额"), Expression("(isnull((select sum(InvoiceAmount) from Finance_InvoiceItem where isActive =1 and headId = t0.Id),0) " +
+            "- isnull((select sum(ReceiptAmount) from Finance_Receipt where isActive =1 and InvoiceNo = t0.InvoiceNo),0))")]
+        public Decimal? UnReceiptAmount
+        {
+            get { return Fields.UnReceiptAmount[this]; }
+            set { Fields.UnReceiptAmount[this] = value; }
+        }
+
+
+        [DisplayName("客户"), NotNull, LookupEditor(typeof(CustomerRow)), ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName")]
+        public Guid? CustomerId
+        {
+            get { return Fields.CustomerId[this]; }
+            set { Fields.CustomerId[this] = value; }
+        }
+
+        [DisplayName("客户"), Expression("jCustomer.[Name]"), ReadOnly(true)]
+        public String CustomerName
+        {
+            get { return Fields.CustomerName[this]; }
+            set { Fields.CustomerName[this] = value; }
+        }
+
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -123,6 +185,19 @@ namespace Kun.Finance.Entities
             public DateTimeField ApproverDate;
             public StringField ApproverName;
             public RowListField<InvoiceItemRow> Items;
+
+            public GuidField CompanyId;
+            public StringField CompanyName;
+            public StringField InvoiceNo; 
+            public DecimalField InvoiceAmount;
+            public DecimalField ReceiptAmount;
+            public DecimalField UnReceiptAmount;
+
+            public GuidField CustomerId;
+            public StringField CustomerName;
+
+
+
         }
     }
 }

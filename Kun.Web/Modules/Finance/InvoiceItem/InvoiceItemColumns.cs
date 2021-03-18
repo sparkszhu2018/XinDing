@@ -14,8 +14,10 @@ namespace Kun.Finance.Columns
     public class InvoiceItemColumns
     {
         [EditLink]
+        [QuickFilter]
         public String BillNo { get; set; }
-        public Int32 Serial { get; set; } 
+        public Int32 Serial { get; set; }
+        [QuickFilter]
         public DateTime HeadDate { get; set; }  
        
         public String Name { get; set; }
@@ -24,10 +26,9 @@ namespace Kun.Finance.Columns
         public Decimal Qty { get; set; }
         public Decimal Amount { get; set; }
         public Decimal InvoiceAmount { get; set; }
-        public Decimal? ReceiptAmount { get; set; }
-        public String InvoiceNo { get; set; }
+        // public Decimal? ReceiptAmount { get; set; } 
         public String Note { get; set; }
-        public String VendorName { get; set; }
+        [QuickFilter]
         public String SourceDocumentNo { get; set; }
         public Int32 SourceItemSerial { get; set; }
     }

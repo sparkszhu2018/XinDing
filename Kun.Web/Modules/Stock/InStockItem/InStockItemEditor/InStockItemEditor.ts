@@ -4,7 +4,7 @@ namespace Kun.Stock {
 
     @Serenity.Decorators.registerClass()
     export class InStockItemEditor extends Common.GridEditorBase<InStockItemRow> {
-        protected getColumnsKey() { return "Stock.InStockItem"; }
+        protected getColumnsKey() { return "Stock.InStockItemEditorColumns"; }
         protected getDialogType() { return InStockItemEditorDialog; }
         protected getLocalTextPrefix() { return InStockItemRow.localTextPrefix; }
 
@@ -72,21 +72,26 @@ namespace Kun.Stock {
             }
             return buttons; 
         }
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid();
 
-        //protected onViewSubmit() {
-        //    if (!super.onViewSubmit()) {
-        //        return false;
-        //    }
-        //    var request = this.view.params as Serenity.ListRequest; 
-        //    return true;
-        //} 
+            // need to register this plugin for grouping or you'll have errors
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
 
-        //protected getInitialTitle() {
-        //    return "";
-        //}
+            this.view.setSummaryOptions({
+                aggregators: [
+                    new Slick.Aggregators.Sum('BuyAmount'),
+                ]
+            });
 
-        //protected getAddButtonCaption() {
-        //    return "添加明细"
-        //} 
+            return grid;
+        }
+
+        protected getSlickOptions() {
+            var opt = super.getSlickOptions();
+            // opt.groupingPanel = true;
+            opt.showFooterRow = true;
+            return opt;
+        }
     }
 }

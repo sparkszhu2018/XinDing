@@ -45,6 +45,9 @@ namespace Kun.Sys.Enum
         [Description("回款")]
         ReceiptBill = 61,
 
+        [Description("组装单")]
+        AssembleBill = 70,
+
     }
 
 

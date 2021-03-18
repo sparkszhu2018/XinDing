@@ -7,6 +7,10 @@
         ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
         BillType: Serenity.EnumEditor;
+        CompanyId: Serenity.LookupEditor;
+        InvoiceNo: Serenity.StringEditor;
+        CustomerId: Serenity.LookupEditor;
+        InvoiceAmount: Serenity.DecimalEditor;
         Note: Serenity.StringEditor;
         Items: InvoiceItemEditor;
     }
@@ -26,7 +30,8 @@
                 var w1 = s.EnumEditor;
                 var w2 = s.DateEditor;
                 var w3 = s.LookupEditor;
-                var w4 = InvoiceItemEditor;
+                var w4 = s.DecimalEditor;
+                var w5 = InvoiceItemEditor;
 
                 Q.initFormType(InvoiceForm, [
                     'BillNo', w0,
@@ -36,8 +41,12 @@
                     'ApproverId', w3,
                     'ApproverDate', w2,
                     'BillType', w1,
+                    'CompanyId', w3,
+                    'InvoiceNo', w0,
+                    'CustomerId', w3,
+                    'InvoiceAmount', w4,
                     'Note', w0,
-                    'Items', w4
+                    'Items', w5
                 ]);
             }
         }

@@ -222,6 +222,14 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.InvoicedQty[this] = value; }
         }
 
+        [DisplayName("未开票金额"), Expression("(t0.SaleAmount - isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+            "and Kind = 10 and SourceItemId = t0.Id),0))")]
+        public Decimal? UnInvoicedAmount
+        {
+            get { return Fields.UnInvoicedAmount[this]; }
+            set { Fields.UnInvoicedAmount[this] = value; }
+        }
+
         [DisplayName("库存数量"), NotMapped]
         public Decimal? StockQty
         {
@@ -279,6 +287,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             public StringField CustomerName;
             public DecimalField InvoicedAmount;
             public DecimalField InvoicedQty;
+            public DecimalField UnInvoicedAmount; 
 
             public DecimalField StockQty;
             

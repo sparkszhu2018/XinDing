@@ -39,39 +39,43 @@ namespace Kun.Finance.Repositories
             {
                 //CheckInvoiceQtyAmount(uow, Id);
                 //更新发票的已回款金额
-                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
-                var invoiceItemRepository = new InvoiceItemRepository();
-                foreach(var i in items)
-                {
-                    var invoiceItem = invoiceItemRepository.Retrieve(uow.Connection, new RetrieveRequest { EntityId = i.SourceItemId }).Entity;
-                    invoiceItemRepository.Update(uow, new SaveRequest<Entities.InvoiceItemRow>
-                    {
-                        Entity = new Entities.InvoiceItemRow
-                        {
-                            Id = invoiceItem.Id,
-                            ReceiptAmount = invoiceItem.ReceiptAmount + i.ReceiptAmount
-                        }
-                    }) ;
-                } 
+                //var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+                //var invoiceItemRepository = new InvoiceItemRepository();
+                //foreach(var i in items)
+                //{
+                //    var invoiceItem = invoiceItemRepository.Retrieve(uow.Connection, new RetrieveRequest { EntityId = i.SourceItemId }).Entity;
+                //    invoiceItemRepository.Update(uow, new SaveRequest<Entities.InvoiceItemRow>
+                //    {
+                //        Entity = new Entities.InvoiceItemRow
+                //        {
+                //            Id = invoiceItem.Id,
+                //            ReceiptAmount = invoiceItem.ReceiptAmount + i.ReceiptAmount
+                //        }
+                //    }) ;
+                //} 
+
+                //更新发票的已回款金额
+ 
+
             }
             else if (Status == BillStatus.UnAudited) //反审核
             {
-                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
-                var invoiceItemRepository = new InvoiceItemRepository();
-                foreach (var i in items)
-                {
-                    var invoiceItem = invoiceItemRepository.Retrieve(uow.Connection, new RetrieveRequest { EntityId = i.SourceItemId }).Entity;
+                //var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+                //var invoiceItemRepository = new InvoiceItemRepository();
+                //foreach (var i in items)
+                //{
+                //    var invoiceItem = invoiceItemRepository.Retrieve(uow.Connection, new RetrieveRequest { EntityId = i.SourceItemId }).Entity;
 
-                    if (invoiceItem.ReceiptAmount - i.ReceiptAmount < 0) { throw new Exception($"行{i.Serial}对应的发票回款金额不得小于0!"); }
-                    invoiceItemRepository.Update(uow, new SaveRequest<Entities.InvoiceItemRow>
-                    {
-                        Entity = new Entities.InvoiceItemRow
-                        {
-                            Id = invoiceItem.Id,
-                            ReceiptAmount = invoiceItem.ReceiptAmount - i.ReceiptAmount
-                        }
-                    });
-                }
+                //    if (invoiceItem.ReceiptAmount - i.ReceiptAmount < 0) { throw new Exception($"行{i.Serial}对应的发票回款金额不得小于0!"); }
+                //    invoiceItemRepository.Update(uow, new SaveRequest<Entities.InvoiceItemRow>
+                //    {
+                //        Entity = new Entities.InvoiceItemRow
+                //        {
+                //            Id = invoiceItem.Id,
+                //            ReceiptAmount = invoiceItem.ReceiptAmount - i.ReceiptAmount
+                //        }
+                //    });
+                //}
             }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }

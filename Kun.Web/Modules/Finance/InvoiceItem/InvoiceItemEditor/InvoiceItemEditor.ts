@@ -3,6 +3,7 @@
 namespace Kun.Finance {
 
     @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.filterable()
     export class InvoiceItemEditor extends Common.GridEditorBase<InvoiceItemRow> {
         protected getColumnsKey() { return "Finance.InvoiceItemEditor"; }
         protected getDialogType() { return InvoiceItemEditorDialog; }
@@ -109,7 +110,7 @@ namespace Kun.Finance {
                     } else if (this._billType == Enums.InvoiceBillType.Maintenance.toString()) {
                         var dlg_m = new Ops.MaintenancePickerDialog({
                             hideData: null,
-                            criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalCost]]
+                            criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalSales]]
                         });
                         dlg_m.onSuccess = (selected) => {
                             var i = 10;
@@ -121,10 +122,10 @@ namespace Kun.Finance {
                                     SourceDocumentId: sel.Id,
                                     SourceDocumentNo: sel.BillNo,
                                     Name: sel.Description,
-                                    Price: sel.TotalCost,
+                                    Price: sel.TotalSales,
                                     Qty: 1,
-                                    Amount: sel.TotalCost,
-                                    InvoiceAmount: sel.TotalCost,
+                                    Amount: sel.TotalSales,
+                                    InvoiceAmount: sel.TotalSales,
                                     Kind: Enums.InvoiceItemKind.Maintenance,
 
                                 };
@@ -187,6 +188,28 @@ namespace Kun.Finance {
             };
             return columns;
         }
-         
+
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid();
+
+            // need to register this plugin for grouping or you'll have errors
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+
+            this.view.setSummaryOptions({
+                aggregators: [
+                    new Slick.Aggregators.Sum('Amount'),
+                    new Slick.Aggregators.Sum('InvoiceAmount'), 
+                ]
+            });
+
+            return grid;
+        }
+
+        protected getSlickOptions() {
+            var opt = super.getSlickOptions();
+            // opt.groupingPanel = true;
+            opt.showFooterRow = true;
+            return opt;
+        }
     }
 }

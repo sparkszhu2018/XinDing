@@ -28,6 +28,7 @@
         CustomerName?: string;
         InvoicedAmount?: number;
         InvoicedQty?: number;
+        UnInvoicedAmount?: number;
         StockQty?: number;
     }
 
@@ -70,6 +71,7 @@
             CustomerName = "CustomerName",
             InvoicedAmount = "InvoicedAmount",
             InvoicedQty = "InvoicedQty",
+            UnInvoicedAmount = "UnInvoicedAmount",
             StockQty = "StockQty"
         }
     }

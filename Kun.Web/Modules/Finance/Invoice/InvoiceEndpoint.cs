@@ -15,6 +15,17 @@ namespace Kun.Finance.Endpoints
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class InvoiceController : ServiceEndpoint
     {
+        /// <summary>
+        /// 根据发票号 获取发票金额
+        /// </summary>
+        /// <param name="uow"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
+        public InvoiceNoResponse FetchInvoiceNo(IUnitOfWork uow, InvoiceNoRequest request)
+        { 
+            return new MyRepository().FetchInvoiceNo(uow, request);
+        }
 
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse Commit(IUnitOfWork uow, SaveRequest<MyRow> request)

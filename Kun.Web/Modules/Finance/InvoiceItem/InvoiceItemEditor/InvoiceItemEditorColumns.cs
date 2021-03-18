@@ -27,9 +27,7 @@ namespace Kun.Finance.Columns
         public Decimal Qty { get; set; }
         public Decimal Amount { get; set; }
         public Decimal InvoiceAmount { get; set; }
-       // public Decimal TaxRate { get; set; }
-        public String InvoiceNo { get; set; }
-        public String Note { get; set; }
-        public String VendorName { get; set; }
+       // public Decimal TaxRate { get; set; } 
+        public String Note { get; set; } 
     }
 }

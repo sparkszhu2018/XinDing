@@ -32,14 +32,13 @@ namespace Kun.Finance.Forms
         public String Name { get; set; }
         [ReadOnly(true)]
         public String UnitName { get; set; }
+        [ReadOnly(true)]
         public Decimal Price { get; set; }
         public Decimal Qty { get; set; }
         [ReadOnly(true)]
         public Decimal Amount { get; set; }
         public Decimal InvoiceAmount { get; set; }
-        //public Decimal TaxRate { get; set; }
-        public String InvoiceNo { get; set; }
-        public Int32 VendorId { get; set; }
+        //public Decimal TaxRate { get; set; } 
 
         public String Note { get; set; }
     }

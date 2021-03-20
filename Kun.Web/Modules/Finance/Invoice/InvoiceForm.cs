@@ -27,16 +27,18 @@ namespace Kun.Finance.Forms
         public DateTime ApproverDate { get; set; }
 
         [Category("业务信息")]
-        public Int32Field BillType { get; set; }
+        //public Int32Field BillType { get; set; }
 
+
+        public String InvoiceNo { get; set; }
         public Guid CompanyId { get; set; }
 
-        public String InvoiceNo { get; set; } 
-
         public Guid CustomerId { get; set; }
-        [ReadOnly(true)]
-        public Decimal InvoiceAmount { get; set; }
         
+        public Decimal InvoiceAmount { get; set; }
+        [ReadOnly(true)]
+        public Decimal ItemInvoiceAmount { get; set; }
+
         [FullWidth]
         public String Note { get; set; }
 

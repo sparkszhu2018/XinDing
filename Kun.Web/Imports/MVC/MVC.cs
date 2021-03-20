@@ -46,6 +46,11 @@ namespace MVC
                 public const string BizTypeIndex = "~/Modules/Basic/BizType/BizTypeIndex.cshtml";
             }
 
+            public static class CommonExpression
+            {
+                public const string CommonExpressionIndex = "~/Modules/Basic/CommonExpression/CommonExpressionIndex.cshtml";
+            }
+
             public static class Company
             {
                 public const string CompanyIndex = "~/Modules/Basic/Company/CompanyIndex.cshtml";

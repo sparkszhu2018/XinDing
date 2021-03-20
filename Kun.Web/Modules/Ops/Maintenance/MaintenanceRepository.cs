@@ -26,13 +26,26 @@ namespace Kun.Ops.Repositories
                 EntityId = Id,
                 Entity = new MyRow
                 {
-                    Status = Status, 
+                    Status = Status,
                 }
             };
             if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
             {
                 n.Entity.ApproverDate = DateTime.Now;
                 n.Entity.ApproverId = long.Parse(Authorization.UserId);
+            }
+
+            if (Status == BillStatus.Audited || Status == BillStatus.Commited)
+            {
+                var row = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
+                //验证勾选换配件，是否有明细
+                if (row.ChangeDevice??false)
+                {
+                    if(row.Materials.Count == 0)
+                    {
+                        throw new Exception("勾选更换配件，请输入用料明细!");
+                    }
+                }
             }
 
             if (Status == BillStatus.Audited) //审核通过
@@ -56,12 +69,12 @@ namespace Kun.Ops.Repositories
                             Qty = stock.Qty - m.Qty,
                             AvailableQty = stock.AvailableQty - m.Qty,
                         }
-                    }); 
+                    });
                     // 记录移库数据
                     var mov = new MoveRecordRow
                     {
                         MovCode = MoveType.Maint,
-                        Qty =  m.Qty,
+                        Qty = m.Qty,
                         FromStockId = stock.Id,
                         FromMaterialId = m.MaterialId,
                         FromUnitId = m.UnitId,
@@ -74,19 +87,15 @@ namespace Kun.Ops.Repositories
                         Status = MoveRecordEnums.Status.Normal,
                         BizBillCode = m.BillNo,
                     };
-                    moveRep.Create(uow, new SaveRequest<MoveRecordRow> { Entity = mov }); 
+                    moveRep.Create(uow, new SaveRequest<MoveRecordRow> { Entity = mov });
                 }
             }
             else if (Status == BillStatus.UnAudited) //反审核
             {
-                //下游单据验证 待开发
-
-
-
-
+                //下游单据验证 待开发 
 
                 var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Materials;
-                var stockRep = new StockDataRepository(); 
+                var stockRep = new StockDataRepository();
                 var moveRep = new MoveRecordRepository();
                 foreach (var m in items)
                 {
@@ -102,14 +111,14 @@ namespace Kun.Ops.Repositories
                             Id = m.StockDataId,
                             Qty = stock.Qty + m.Qty,
                             AvailableQty = stock.AvailableQty + m.Qty,
-                            IsActive =  Administration.Entities.ActiveStatus.Active
+                            IsActive = Administration.Entities.ActiveStatus.Active
                         }
                     });
                     // 删除库存记录数据
                     var movField = MoveRecordRow.Fields;
                     var mov = uow.Connection.TrySingle<MoveRecordRow>(movField.IsActive == 1
                         && movField.BizBillId == (Guid)m.HeadId && movField.BizItemId == (Guid)m.Id);
-                    if(mov == null)
+                    if (mov == null)
                     {
                         throw new Exception($"行{m.Serial},库存变更记录不存在,反审核失败!");
                     }
@@ -120,12 +129,20 @@ namespace Kun.Ops.Repositories
         }
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
-        {
+        { 
+            if((Boolean)request.Entity.ChangeDevice == false)
+            {
+                request.Entity.Materials.Clear();
+            }
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 
         public SaveResponse Update(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            if ((Boolean)request.Entity.ChangeDevice == false)
+            {
+                request.Entity.Materials.Clear();
+            }
             return new MySaveHandler().Process(uow, request, SaveRequestType.Update);
         }
 

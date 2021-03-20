@@ -84,7 +84,6 @@ namespace Kun.Ops {
             }
         }
 
-
         protected createSlickGrid() {
             var grid = super.createSlickGrid();
 
@@ -97,9 +96,11 @@ namespace Kun.Ops {
                     new Slick.Aggregators.Sum('TotalSales'),
                     new Slick.Aggregators.Sum('InvoicedAmount'),
                     new Slick.Aggregators.Sum('UnInvoicedAmount'),
+                    new Slick.Aggregators.Sum('MaterialsAmount'),
+                    new Slick.Aggregators.Sum('ManAmount'), 
+                    
                 ]
-            });
-
+            }); 
             return grid;
         }
          

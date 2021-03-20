@@ -9,22 +9,12 @@ namespace Kun.Sell.Columns
     using System.Collections.Generic;
     using System.IO;
 
-    [ColumnsScript("Sell.SaleOrderItem")]
+    [ColumnsScript("Sell.SaleOrderItemEditorColumns")]
     [BasedOnRow(typeof(Entities.SaleOrderItemRow), CheckNames = true)]
-    public class SaleOrderItemColumns
-    {
-        [QuickFilter]
-        public StringField BillNo { get; set; }
-        [QuickFilter]
-        [DisplayFormat("yyyy-MM-dd")]
-        public DateTime HeadDate { get; set; }
-        [QuickFilter]
-        public String  HeadStatus { get; set; }
-        public String CustomerName { get; set; }
-        
+    public class SaleOrderItemEditorColumns
+    { 
         public Int32Field Serial { get; set; }
         [EditLink]
-        [QuickFilter]
         public String MaterialCode { get; set; }
         public String MaterialName { get; set; }
         public String UnitName { get; set; }
@@ -40,8 +30,8 @@ namespace Kun.Sell.Columns
         public Decimal InvoicedAmount { get; set; }
 
         public Decimal InvoicedQty { get; set; }
-        public Decimal UnInvoicedAmount { get; set; }
-        [QuickFilter,Hidden]
+        public Decimal UnInvoicedAmount { get; set; } 
+
         public Guid? CustomerId { get; set; }
 
     }

@@ -1,6 +1,7 @@
 ﻿using Serenity.Navigation;
 using MyPages = Kun.Stock.Pages;
- 
+
+[assembly: NavigationMenu(1800, "库存管理", icon: "fa-cubes")]
 [assembly: NavigationLink(int.MaxValue, "库存管理/入库单", typeof(MyPages.InStockController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "库存管理/入库明细", typeof(MyPages.InStockItemController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "库存管理/即时库存", typeof(MyPages.StockDataController), icon: null)]

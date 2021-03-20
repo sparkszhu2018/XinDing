@@ -10222,6 +10222,12 @@ button.ui-button {
 .s-Basic-CompanyDialog .caption {
   width: 150px;
 }
+.s-Basic-CommonExpressionDialog > .size {
+  width: 650px;
+}
+.s-Basic-CommonExpressionDialog .caption {
+  width: 150px;
+}
 .s-Stock-DataDialog > .size {
   width: 650px;
 }

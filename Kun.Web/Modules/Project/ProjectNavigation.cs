@@ -1,6 +1,8 @@
 ﻿using Serenity.Navigation;
 using MyPages = Kun.Project.Pages;
 
+
+[assembly: NavigationMenu(1600, "项目管理", icon: "fa-product-hunt")]
 [assembly: NavigationLink(int.MaxValue, "项目管理/项目列表", typeof(MyPages.ProjectInfoController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "项目管理/产品领用单", typeof(MyPages.MaterialsBillController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "项目管理/商务费用单", typeof(MyPages.BizBillController), icon: null)]

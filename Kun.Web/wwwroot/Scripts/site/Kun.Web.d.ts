@@ -1599,11 +1599,11 @@ declare namespace Kun.Finance {
         InsertUserId: Serenity.LookupEditor;
         ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
-        BillType: Serenity.EnumEditor;
-        CompanyId: Serenity.LookupEditor;
         InvoiceNo: Serenity.StringEditor;
+        CompanyId: Serenity.LookupEditor;
         CustomerId: Serenity.LookupEditor;
         InvoiceAmount: Serenity.DecimalEditor;
+        ItemInvoiceAmount: Serenity.DecimalEditor;
         Note: Serenity.StringEditor;
         Items: InvoiceItemEditor;
     }
@@ -1714,6 +1714,19 @@ declare namespace Kun.Finance {
     }
 }
 declare namespace Kun.Finance {
+    interface InvoiceNoRequest extends Serenity.ServiceRequest {
+        InvoiceNo?: string;
+    }
+}
+declare namespace Kun.Finance {
+    interface InvoiceNoResponse extends Serenity.ServiceResponse {
+        InvoiceNo?: string;
+        InvoiceAmount?: number;
+        ReceiptAmount?: number;
+        UnReceiptAmount?: number;
+    }
+}
+declare namespace Kun.Finance {
     interface InvoiceRow {
         Id?: string;
         Date?: string;
@@ -1731,8 +1744,10 @@ declare namespace Kun.Finance {
         InvoiceAmount?: number;
         ReceiptAmount?: number;
         UnReceiptAmount?: number;
+        ItemInvoiceAmount?: number;
         CustomerId?: string;
         CustomerName?: string;
+        InvoiceNoWthAmount?: string;
     }
     namespace InvoiceRow {
         const idProperty = "Id";
@@ -1760,8 +1775,10 @@ declare namespace Kun.Finance {
             InvoiceAmount = "InvoiceAmount",
             ReceiptAmount = "ReceiptAmount",
             UnReceiptAmount = "UnReceiptAmount",
+            ItemInvoiceAmount = "ItemInvoiceAmount",
             CustomerId = "CustomerId",
-            CustomerName = "CustomerName"
+            CustomerName = "CustomerName",
+            InvoiceNoWthAmount = "InvoiceNoWthAmount"
         }
     }
 }
@@ -2103,6 +2120,7 @@ declare namespace Kun.Ops {
         Address: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         Content: Serenity.TextAreaEditor;
+        CommonExpression: Serenity.LookupEditor;
         ChangeDevice: Serenity.BooleanEditor;
         Materials: MaintenanceMaterialsEditor;
         Manhours: MaintenanceManhoursEditor;
@@ -2331,6 +2349,10 @@ declare namespace Kun.Ops {
         TotalSales?: number;
         InvoicedAmount?: number;
         UnInvoicedAmount?: number;
+        MaterialsAmount?: number;
+        ManAmount?: number;
+        MateiralDetail?: string;
+        CommonExpression?: string;
     }
     namespace MaintenanceRow {
         const idProperty = "Id";
@@ -2378,7 +2400,11 @@ declare namespace Kun.Ops {
             TotalCost = "TotalCost",
             TotalSales = "TotalSales",
             InvoicedAmount = "InvoicedAmount",
-            UnInvoicedAmount = "UnInvoicedAmount"
+            UnInvoicedAmount = "UnInvoicedAmount",
+            MaterialsAmount = "MaterialsAmount",
+            ManAmount = "ManAmount",
+            MateiralDetail = "MateiralDetail",
+            CommonExpression = "CommonExpression"
         }
     }
 }
@@ -3930,6 +3956,8 @@ declare namespace Kun.Stock {
         private static init;
         constructor(prefix: string);
     }
+}
+declare namespace Kun.Stock {
 }
 declare namespace Kun.Stock {
 }
@@ -5647,6 +5675,8 @@ declare namespace Kun.Ops {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Ops {
@@ -5786,6 +5816,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -5882,6 +5914,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -5934,6 +5968,8 @@ declare namespace Kun.Project {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -6029,6 +6065,8 @@ declare namespace Kun.Project {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Project {
@@ -6129,6 +6167,8 @@ declare namespace Kun.Sell {
         constructor(container: JQuery);
         validateEntity(row: any, id: any): boolean;
         protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
     }
 }
 declare namespace Kun.Sell {
@@ -6512,18 +6552,82 @@ declare namespace Kun.Sys {
         constructor(container: JQuery);
     }
 }
-declare namespace Kun.Finance {
-    interface InvoiceNoRequest extends Serenity.ServiceRequest {
-        InvoiceNo?: string;
+declare namespace Kun.Project {
+}
+declare namespace Kun.Sell {
+}
+declare namespace Kun.Basic {
+    interface CommonExpressionForm {
+        Content: Serenity.StringEditor;
+    }
+    class CommonExpressionForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
     }
 }
-declare namespace Kun.Finance {
-    interface InvoiceNoResponse extends Serenity.ServiceResponse {
-        InvoiceNo?: string;
-        InvoiceAmount?: number;
-        ReceiptAmount?: number;
-        UnReceiptAmount?: number;
+declare namespace Kun.Basic {
+    interface CommonExpressionRow {
+        Id?: string;
+        Content?: string;
+    }
+    namespace CommonExpressionRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Content";
+        const localTextPrefix = "Basic.CommonExpression";
+        const lookupKey = "Basic.CommonExpression";
+        function getLookup(): Q.Lookup<CommonExpressionRow>;
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            Content = "Content"
+        }
     }
 }
-declare namespace Kun.Stock {
+declare namespace Kun.Basic {
+    namespace CommonExpressionService {
+        const baseUrl = "Basic/CommonExpression";
+        function Create(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Basic/CommonExpression/Create",
+            Update = "Basic/CommonExpression/Update",
+            Delete = "Basic/CommonExpression/Delete",
+            Retrieve = "Basic/CommonExpression/Retrieve",
+            List = "Basic/CommonExpression/List"
+        }
+    }
+}
+declare namespace Kun.Basic {
+    class CommonExpressionDialog extends Serenity.EntityDialog<CommonExpressionRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: CommonExpressionForm;
+    }
+}
+declare namespace Kun.Basic {
+    class CommonExpressionGrid extends Serenity.EntityGrid<CommonExpressionRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CommonExpressionDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Basic {
 }

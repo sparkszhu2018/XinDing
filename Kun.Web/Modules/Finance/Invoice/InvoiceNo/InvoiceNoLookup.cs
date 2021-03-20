@@ -15,14 +15,14 @@ namespace Kun.Finance.Entities
         public InvoiceNoLookup()
         {
             IdField = InvoiceRow.Fields.InvoiceNo.Name;
-            TextField = InvoiceRow.Fields.InvoiceNo.Name;           
+            TextField = InvoiceRow.Fields.InvoiceNoWthAmount.Name;           
         }
 
         protected override void PrepareQuery(SqlQuery query)
         {
             var fld = InvoiceRow.Fields;
-            query.Select(fld.InvoiceNo).Distinct(true) 
-                .Where(new Criteria(fld.IsActive) ==1);
+            query.Select(fld.InvoiceNo).Select(fld.InvoiceNoWthAmount)
+                .Where(new Criteria(fld.IsActive) == 1 && new Criteria(fld.UnReceiptAmount) <= 0);
         }
 
         protected override void ApplyOrder(SqlQuery query)

@@ -37,6 +37,10 @@
         TotalSales?: number;
         InvoicedAmount?: number;
         UnInvoicedAmount?: number;
+        MaterialsAmount?: number;
+        ManAmount?: number;
+        MateiralDetail?: string;
+        CommonExpression?: string;
     }
 
     export namespace MaintenanceRow {
@@ -86,7 +90,11 @@
             TotalCost = "TotalCost",
             TotalSales = "TotalSales",
             InvoicedAmount = "InvoicedAmount",
-            UnInvoicedAmount = "UnInvoicedAmount"
+            UnInvoicedAmount = "UnInvoicedAmount",
+            MaterialsAmount = "MaterialsAmount",
+            ManAmount = "ManAmount",
+            MateiralDetail = "MateiralDetail",
+            CommonExpression = "CommonExpression"
         }
     }
 }

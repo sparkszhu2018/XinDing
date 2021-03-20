@@ -24,7 +24,7 @@ namespace Kun.Project.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("项目"), LookupEditor(typeof(ProjectInfoRow)), QuickFilter, 
+        [DisplayName("项目"), LookupEditor(typeof(ProjectInfoRow)),
             ForeignKey("[dbo].[Project_Info]", "Id"), LeftJoin("jProject")]
         public Guid? ProjectId
         {
@@ -53,7 +53,7 @@ namespace Kun.Project.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -67,7 +67,7 @@ namespace Kun.Project.Entities
             set { Fields.HeadProjectId[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
+        [DisplayName("状态"), Expression("jHead.[Status]")]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
@@ -96,14 +96,14 @@ namespace Kun.Project.Entities
             set { Fields.MaterialId[this] = value; }
         }
 
-        [DisplayName("物料号"), Expression("jMaterial.[Code]"), ReadOnly(true), QuickFilter]
+        [DisplayName("物料号"), Expression("jMaterial.[Code]"), ReadOnly(true)]
         public String MaterialCode
         {
             get { return Fields.MaterialCode[this]; }
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), QuickFilter]
+        [DisplayName("物料名称")]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }

@@ -34,13 +34,16 @@ namespace Kun.Ops.Columns
         public Boolean ChangeDevice { get; set; } 
         public String Note { get; set; } 
         public Decimal TotalCost { get; set; } 
-        public Decimal TotalSales { get; set; } 
+        public Decimal TotalSales { get; set; }
+        public Decimal  MaterialsAmount { get; set; }
+        public Decimal  ManAmount { get; set; }
+
         public Decimal InvoicedAmount { get; set; }  
         public Decimal UnInvoicedAmount { get; set; }
+        public String MateiralDetail { get; set; } 
 
         [Hidden]
-        public Guid SettleCustomerId { get; set; } 
-
+        public Guid SettleCustomerId { get; set; }  
         public String ResponsibleName { get; set; }
 
         public String Address { get; set; }

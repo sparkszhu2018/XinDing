@@ -37,6 +37,8 @@ namespace Kun.Finance {
         protected getSlickOptions() {
             var opt = super.getSlickOptions();
             // opt.groupingPanel = true;
+
+            opt.enableTextSelectionOnCells = true;
             opt.showFooterRow = true;
             return opt;
         }

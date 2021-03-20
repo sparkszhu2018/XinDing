@@ -16,6 +16,7 @@
         Address: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         Content: Serenity.TextAreaEditor;
+        CommonExpression: Serenity.LookupEditor;
         ChangeDevice: Serenity.BooleanEditor;
         Materials: MaintenanceMaterialsEditor;
         Manhours: MaintenanceManhoursEditor;
@@ -62,6 +63,7 @@
                     'Address', w0,
                     'Description', w4,
                     'Content', w4,
+                    'CommonExpression', w3,
                     'ChangeDevice', w5,
                     'Materials', w6,
                     'Manhours', w7,

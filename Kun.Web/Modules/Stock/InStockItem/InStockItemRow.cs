@@ -120,7 +120,7 @@ namespace Kun.Stock.Entities
             set { Fields.Specification[this] = value; }
         }
 
-        [DisplayName("申请人"), LookupEditor(typeof(UserRow)),
+        [DisplayName("申请人"), LookupEditor(typeof(UserRow)),NotNull,
          ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jApplicant"), TextualField("ApplicantName")]
         public Int64? ApplicantId
         {
@@ -201,14 +201,14 @@ namespace Kun.Stock.Entities
             set { Fields.BuyAmount[this] = value; }
         }
 
-        [DisplayName("销售单价"), Size(18), Scale(2)]
+        [DisplayName("销售单价"), Size(18), NotNull, Scale(2)]
         public Decimal? SalePrice
         {
             get { return Fields.SalePrice[this]; }
             set { Fields.SalePrice[this] = value; }
         }
 
-        [DisplayName("销售金额"), Size(18), Scale(2)]
+        [DisplayName("销售金额"), Size(18), NotNull, Scale(2)]
         public Decimal? SaleAmount
         {
             get { return Fields.SaleAmount[this]; }

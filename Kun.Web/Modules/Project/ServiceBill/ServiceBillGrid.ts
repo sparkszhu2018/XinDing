@@ -12,6 +12,9 @@ namespace Kun.Project {
 
         constructor(container: JQuery) {
             super(container);
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            });
         }
     }
 }

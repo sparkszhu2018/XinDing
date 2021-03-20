@@ -158,7 +158,7 @@ namespace Kun.Ops.Entities
         //    set { Fields.Classify[this] = (Int32)value; }
         //}
 
-        [DisplayName("故障描述"), Size(500)]
+        [DisplayName("报修内容"), NotNull, Size(500)]
         public String Description
         {
             get { return Fields.Description[this]; }
@@ -173,7 +173,7 @@ namespace Kun.Ops.Entities
         }
 
 
-        [DisplayName("更换硬件"), NotNull, DefaultValue(true)]
+        [DisplayName("更换配件"), NotNull, DefaultValue(true)]
         [ReadPermission(PermissionKeys.MaintenanceResponsible)]
         public Boolean? ChangeDevice
         {
@@ -226,13 +226,20 @@ namespace Kun.Ops.Entities
             set { Fields.ServicerCost[this] = value; }
         }
 
-        [DisplayName("维保人"), LookupEditor(typeof(UserRow)), QuickFilter,
+        [DisplayName("维保人"), LookupEditor(typeof(UserRow)), NotNull, QuickFilter,
              ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jResponsible"), TextualField("ResponsibleName")
            ]
         public Int32? ResponsibleId
         {
             get { return Fields.ResponsibleId[this]; }
             set { Fields.ResponsibleId[this] = value; }
+        }
+
+        [DisplayName("参考用语"), LookupEditor(typeof(CommonExpressionRow)),  NotMapped]
+        public Guid? CommonExpression
+        {
+            get { return Fields.CommonExpression[this]; }
+            set { Fields.CommonExpression[this] = value; }
         }
 
         [DisplayName("维保人"), Expression("jResponsible.[DisplayName]"), ReadOnly(true)]
@@ -298,7 +305,21 @@ namespace Kun.Ops.Entities
             get { return Fields.TotalSales[this]; }
             set { Fields.TotalSales[this] = value; }
         }
-         
+
+        [DisplayName("配件费"), Expression("isnull((select sum(SaleAmount) from OPS_Maintenance_Materials where isActive =1 and headId = t0.Id),0)")]
+        public Decimal? MaterialsAmount
+        {
+            get { return Fields.MaterialsAmount[this]; }
+            set { Fields.MaterialsAmount[this] = value; }
+        }
+
+        [DisplayName("人工费"), Expression("isnull((select sum(price * qty) from OPS_Maintenance_Manhours where isActive =1 and headId = t0.Id),0 )")]
+        public Decimal? ManAmount
+        {
+            get { return Fields.ManAmount[this]; }
+            set { Fields.ManAmount[this] = value; }
+        }
+
         [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
             "and Kind = 20 and SourceDocumentId = t0.Id),0)")]
         public Decimal? InvoicedAmount
@@ -315,6 +336,14 @@ namespace Kun.Ops.Entities
             get { return Fields.UnInvoicedAmount[this]; }
             set { Fields.UnInvoicedAmount[this] = value; }
         }
+
+        [DisplayName("配件明细"), Expression("stuff((select distinct ','+MaterialName+'('+convert(varchar(30),Convert(float , Qty))+UnitName+')' from OPS_Maintenance_Materials where IsActive = 1 and HeadId = t0.Id for xml path('')),1,1,'')")]
+        public String MateiralDetail
+        {
+            get { return Fields.MateiralDetail[this]; }
+            set { Fields.MateiralDetail[this] = value; }
+        }
+        
 
         IIdField IIdRow.IdField
         {
@@ -377,6 +406,14 @@ namespace Kun.Ops.Entities
             public DecimalField TotalSales;
             public DecimalField InvoicedAmount;
             public DecimalField UnInvoicedAmount;
+
+            public DecimalField MaterialsAmount;
+            public DecimalField ManAmount;
+            public StringField MateiralDetail;
+
+            public GuidField CommonExpression;
+            
+
 
         }
     }

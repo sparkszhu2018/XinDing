@@ -31,14 +31,14 @@ namespace Kun.Ops.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }  
 
-        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
+        [DisplayName("状态"), Expression("jHead.[Status]")]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
@@ -59,7 +59,7 @@ namespace Kun.Ops.Entities
             set { Fields.StockDataId[this] = value; }
         }
 
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter,
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)),
             ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {
@@ -74,7 +74,7 @@ namespace Kun.Ops.Entities
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), QuickFilter]
+        [DisplayName("物料名称"),NotNull]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }

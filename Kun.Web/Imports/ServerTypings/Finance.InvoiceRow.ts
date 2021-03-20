@@ -16,8 +16,10 @@
         InvoiceAmount?: number;
         ReceiptAmount?: number;
         UnReceiptAmount?: number;
+        ItemInvoiceAmount?: number;
         CustomerId?: string;
         CustomerName?: string;
+        InvoiceNoWthAmount?: string;
     }
 
     export namespace InvoiceRow {
@@ -47,8 +49,10 @@
             InvoiceAmount = "InvoiceAmount",
             ReceiptAmount = "ReceiptAmount",
             UnReceiptAmount = "UnReceiptAmount",
+            ItemInvoiceAmount = "ItemInvoiceAmount",
             CustomerId = "CustomerId",
-            CustomerName = "CustomerName"
+            CustomerName = "CustomerName",
+            InvoiceNoWthAmount = "InvoiceNoWthAmount"
         }
     }
 }

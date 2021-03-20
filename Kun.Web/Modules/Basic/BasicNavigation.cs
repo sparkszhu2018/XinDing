@@ -1,6 +1,8 @@
 ﻿using Serenity.Navigation;
 using MyPages = Kun.Basic.Pages;
 
+
+[assembly: NavigationMenu(8000, "基础数据", icon: "fa-database")]
 [assembly: NavigationLink(int.MaxValue, "基础数据/物料组", typeof(MyPages.MaterialGroupController), icon: null)]
 //[assembly: NavigationLink(int.MaxValue, "基础数据/批次", typeof(MyPages.LotController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/物料主数据", typeof(MyPages.MaterialController), icon: null)]
@@ -13,3 +15,4 @@ using MyPages = Kun.Basic.Pages;
 [assembly: NavigationLink(int.MaxValue, "基础数据/商务费用类型", typeof(MyPages.BizTypeController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/付款方式", typeof(MyPages.PaymentItemController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "基础数据/公司", typeof(MyPages.CompanyController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "基础数据/常用语", typeof(MyPages.CommonExpressionController), icon: null)]

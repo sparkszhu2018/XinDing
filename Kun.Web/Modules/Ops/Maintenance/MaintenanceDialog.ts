@@ -36,6 +36,12 @@ namespace Kun.Ops {
                 } 
             }); 
 
+            this.form.CommonExpression.changeSelect2(e => {
+                if (Q.isEmptyOrNull(this.form.Content.value) && !Q.isEmptyOrNull(this.form.CommonExpression.value)) {
+                    this.form.Content.value = this.form.CommonExpression.selectedItem.Content;
+                } 
+            });
+
         }
 
         protected afterLoadEntity() {
@@ -43,6 +49,7 @@ namespace Kun.Ops {
              
             this.form.Manhours.Head = this.entity;
             this.form.Materials.Head = this.entity;
+          
         }
 
         protected getToolbarButtons() {
@@ -52,6 +59,9 @@ namespace Kun.Ops {
                 icon: "glyphicon-ok",
                 cssClass: "submit-button",
                 onClick: () => {
+                     
+
+
                     this.save((r) => {
                         this.entityId = r.EntityId;
                         if (!this.validateBeforeSave()) return;
@@ -117,6 +127,18 @@ namespace Kun.Ops {
 
         protected updateInterface() {
             super.updateInterface();
+
+            if (this.form.ChangeDevice.value == true) {
+                 
+            } else {
+                var self = this;
+                setTimeout(function () {
+                    self.byId('Materials').parent().css({
+                        display: 'none'
+                    });
+                }, 100); 
+            }
+
             if (this.entity.Status == Ops.Enums.BillStatus.Edit
                 || this.entity.Status == Ops.Enums.BillStatus.Reject 
                 || this.entity.Status == Enums.BillStatus.UnAudited

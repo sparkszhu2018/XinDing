@@ -33,7 +33,7 @@ namespace Kun.Finance.Entities
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("业务类型"), NotNull] 
+        [DisplayName("业务类型")] 
         public InvoiceBillType? BillType
         {
             get { return (InvoiceBillType?)Fields.BillType[this]; }
@@ -118,11 +118,25 @@ namespace Kun.Finance.Entities
             set { Fields.InvoiceNo[this] = value; }
         } 
          
-        [DisplayName("开票金额"), Expression("isnull((select sum(InvoiceAmount) from Finance_InvoiceItem where isActive = 1 and headId = t0.Id),0)")]
+        [DisplayName("开票金额"),NotNull]
         public Decimal? InvoiceAmount
         {
             get { return Fields.InvoiceAmount[this]; }
             set { Fields.InvoiceAmount[this] = value; }
+        }
+
+        [DisplayName("开票编号金额"), Expression("(  T0.InvoiceNo + ' (' +　Convert(varchar(20),Convert(float,isnull(T0.InvoiceAmount,0))) + ')' )")]
+        public String InvoiceNoWthAmount
+        {
+            get { return Fields.InvoiceNoWthAmount[this]; }
+            set { Fields.InvoiceNoWthAmount[this] = value; }
+        }
+
+        [DisplayName("子项金额"), Expression("isnull((select sum(InvoiceAmount) from Finance_InvoiceItem where isActive = 1 and headId = t0.Id),0)")]
+        public Decimal? ItemInvoiceAmount
+        {
+            get { return Fields.ItemInvoiceAmount[this]; }
+            set { Fields.ItemInvoiceAmount[this] = value; }
         }
 
         [DisplayName("回款金额"), Expression("isnull((select sum(ReceiptAmount) from Finance_Receipt where isActive =1 and InvoiceNo = t0.InvoiceNo),0)")]
@@ -192,11 +206,11 @@ namespace Kun.Finance.Entities
             public DecimalField InvoiceAmount;
             public DecimalField ReceiptAmount;
             public DecimalField UnReceiptAmount;
-
+            public DecimalField ItemInvoiceAmount;
+            
             public GuidField CustomerId;
             public StringField CustomerName;
-
-
+            public StringField InvoiceNoWthAmount; 
 
         }
     }

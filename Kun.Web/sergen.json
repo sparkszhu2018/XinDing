@@ -15,6 +15,12 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Basic_CommonExpression",
+          "Identifier": "CommonExpression",
+          "Module": "Basic",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.Basic_Company",
           "Identifier": "Company",
           "Module": "Basic",

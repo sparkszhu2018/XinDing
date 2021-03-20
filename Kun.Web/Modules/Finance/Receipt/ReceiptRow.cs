@@ -86,7 +86,7 @@ namespace Kun.Finance.Entities
             set { Fields.InvoiceNo[this] = value; }
         }
 
-        [DisplayName("本次回款"), Size(18), Scale(2)]
+        [DisplayName("本次回款"), Size(18), Scale(2),NotNull]
         public Decimal? ReceiptAmount
         {
             get { return Fields.ReceiptAmount[this]; }

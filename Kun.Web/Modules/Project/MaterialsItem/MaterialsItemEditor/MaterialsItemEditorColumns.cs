@@ -9,15 +9,13 @@ namespace Kun.Project.Columns
     using System.Collections.Generic;
     using System.IO;
 
-    [ColumnsScript("Project.MaterialsItem")]
+    [ColumnsScript("Project.MaterialsItemEditorColumns")]
     [BasedOnRow(typeof(Entities.MaterialsItemRow), CheckNames = true)]
-    public class MaterialsItemColumns
+    public class MaterialsItemEditorColumns
     {
         [EditLink]
         public Int32  Serial { get; set; }
-        [QuickFilter]
         public String  MaterialCode { get; set; }
-        [QuickFilter]
         public String MaterialName { get; set; }
         public String UnitName { get; set; }
         public Decimal Qty { get; set; }

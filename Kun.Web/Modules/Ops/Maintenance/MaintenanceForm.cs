@@ -37,7 +37,9 @@ namespace Kun.Ops.Forms
         [TextAreaEditor(Rows = 2)]
         public String Description { get; set; }
         [TextAreaEditor(Rows = 2)]
-        public String Content { get; set; } 
+        public String Content { get; set; }
+        [OneThirdWidth]
+        public Guid CommonExpression { get; set; } 
 
         [Category("用料信息")] 
         public Boolean ChangeDevice { get; set; }

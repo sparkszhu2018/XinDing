@@ -1,14 +1,14 @@
 ﻿
-namespace Kun.Ops.Repositories
+namespace Kun.Basic.Repositories
 {
     using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System;
     using System.Data;
-    using MyRow = Entities.MaintenanceMaterialsRow;
+    using MyRow = Entities.CommonExpressionRow;
 
-    public class MaintenanceMaterialsRepository
+    public class CommonExpressionRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -36,7 +36,7 @@ namespace Kun.Ops.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-        [DefaultHandler]
+
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void SetInternalFields()
@@ -46,13 +46,8 @@ namespace Kun.Ops.Repositories
                 {
                     Row.Id = Row.Id ?? Guid.NewGuid();
                 }
-                if(Row.MaterialCode == "10000000" && Row.SalePrice == 0)
-                {
-                    throw new Exception("自定义物料单价不得为0!");
-                }
             }
         }
-
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

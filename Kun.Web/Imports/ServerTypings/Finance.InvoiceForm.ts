@@ -6,11 +6,11 @@
         InsertUserId: Serenity.LookupEditor;
         ApproverId: Serenity.LookupEditor;
         ApproverDate: Serenity.DateEditor;
-        BillType: Serenity.EnumEditor;
-        CompanyId: Serenity.LookupEditor;
         InvoiceNo: Serenity.StringEditor;
+        CompanyId: Serenity.LookupEditor;
         CustomerId: Serenity.LookupEditor;
         InvoiceAmount: Serenity.DecimalEditor;
+        ItemInvoiceAmount: Serenity.DecimalEditor;
         Note: Serenity.StringEditor;
         Items: InvoiceItemEditor;
     }
@@ -40,11 +40,11 @@
                     'InsertUserId', w3,
                     'ApproverId', w3,
                     'ApproverDate', w2,
-                    'BillType', w1,
-                    'CompanyId', w3,
                     'InvoiceNo', w0,
+                    'CompanyId', w3,
                     'CustomerId', w3,
                     'InvoiceAmount', w4,
+                    'ItemInvoiceAmount', w4,
                     'Note', w0,
                     'Items', w5
                 ]);

@@ -31,21 +31,21 @@ namespace Kun.Sell.Entities
             set { Fields.HeadId[this] = value; }
         }
 
-        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true), QuickFilter]
+        [DisplayName("单据编号"), Expression("jHead.[BillNo]"), MinSelectLevel(SelectLevel.Always), ReadOnly(true)]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
             set { Fields.BillNo[this] = value; }
         }
 
-        [DisplayName("状态"), Expression("jHead.[Status]"), QuickFilter]
+        [DisplayName("状态"), Expression("jHead.[Status]")]
         public BillStatus? HeadStatus
         {
             get { return (BillStatus?)Fields.HeadStatus[this]; }
             set { Fields.HeadStatus[this] = (Int32)value; }
         } 
 
-        [DisplayName("单据日期"), Expression("jHead.[Date]"), QuickFilter]
+        [DisplayName("单据日期"), Expression("jHead.[Date]")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? HeadDate
         {
@@ -53,7 +53,7 @@ namespace Kun.Sell.Entities
             set { Fields.HeadDate[this] = value; }
         }
 
-        [DisplayName("客户"), Expression("jHead.[CustomerId]"), LookupEditor(typeof(CustomerRow)), QuickFilter,
+        [DisplayName("客户"), Expression("jHead.[CustomerId]"), LookupEditor(typeof(CustomerRow)),
 ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerName")]
         public Guid? CustomerId
         {
@@ -83,7 +83,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.StockDataId[this] = value; }
         }
 
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter,
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)),
            ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {

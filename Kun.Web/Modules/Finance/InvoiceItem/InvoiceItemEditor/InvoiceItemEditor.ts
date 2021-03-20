@@ -2,8 +2,7 @@
 
 namespace Kun.Finance {
 
-    @Serenity.Decorators.registerClass()
-    @Serenity.Decorators.filterable()
+    @Serenity.Decorators.registerClass() 
     export class InvoiceItemEditor extends Common.GridEditorBase<InvoiceItemRow> {
         protected getColumnsKey() { return "Finance.InvoiceItemEditor"; }
         protected getDialogType() { return InvoiceItemEditorDialog; }
@@ -60,85 +59,212 @@ namespace Kun.Finance {
             this._billType = BillType
         }
 
+        //protected getButtons(): Serenity.ToolButton[] {
+        //    var buttons = super.getButtons();
+        //    buttons.splice(Q.indexOf(buttons, x => x.cssClass == "add-button"), 1);
+        //    buttons.push({
+        //        title: "选择源单",
+        //        cssClass: "add-button",
+        //        visible: () => { return false },
+        //        onClick: () => {
+        //            if (this._billType == Enums.InvoiceBillType.SaleOrder.toString()) {
+        //                var dlg = new Sell.SaleOrderItemPickerDialog({
+        //                    hideData: null,
+        //                    criteria: [[Sell.SaleOrderItemRow.Fields.InvoicedQty], '<', [Sell.SaleOrderItemRow.Fields.Qty]]
+        //                });
+        //                dlg.onSuccess = (selected) => {
+        //                    // selected = selected.filter(x => !Q.any(this.view.getItems(), y => y.SourceItemId == x.Id));
+        //                    var i = 10;
+        //                    if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
+        //                    for (var sel of selected) { 
+        //                        var item = <InvoiceItemRow>{
+                                  
+        //                            Serial: i,
+        //                            SourceDocumentType: Enums.InvoiceBillType.SaleOrder,
+        //                            SourceDocumentId: sel.HeadId,
+        //                            SourceDocumentNo: sel.BillNo,
+        //                            SourceItemId: sel.Id,
+        //                            SourceItemSerial: sel.Serial,
+        //                            Name: sel.MaterialName,
+        //                            UnitName: sel.UnitName,
+        //                            Price: sel.SalePrice,
+        //                            Qty: sel.Qty - sel.InvoicedQty,
+        //                            Amount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
+        //                            InvoiceAmount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
+        //                            Kind: Enums.InvoiceItemKind.SaleOrderItem,
+                                     
+        //                            // TaxRate:
+        //                            //InvoiceNo;
+        //                            //Note; 
+        //                        };
+        //                        var id = this.getNextId();
+        //                        item[this.getIdProperty()] = id;
+        //                        this.view.addItem(item);
+        //                        i = i + 10;
+        //                    }
+
+        //                    return true;
+        //                };
+        //                dlg.dialogOpen();
+        //            } else if (this._billType == Enums.InvoiceBillType.Maintenance.toString()) {
+        //                var dlg_m = new Ops.MaintenancePickerDialog({
+        //                    hideData: null,
+        //                    criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalSales]]
+        //                });
+        //                dlg_m.onSuccess = (selected) => {
+        //                    var i = 10;
+        //                    if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
+        //                    for (var sel of selected) {
+        //                        var item = <InvoiceItemRow>{
+        //                            Serial: i,
+        //                            SourceDocumentType: Enums.InvoiceBillType.Maintenance,
+        //                            SourceDocumentId: sel.Id,
+        //                            SourceDocumentNo: sel.BillNo,
+        //                            Name: sel.Description,
+        //                            Price: sel.TotalSales,
+        //                            Qty: 1,
+        //                            Amount: sel.TotalSales,
+        //                            InvoiceAmount: sel.TotalSales,
+        //                            Kind: Enums.InvoiceItemKind.Maintenance,
+
+        //                        };
+        //                        var id = this.getNextId();
+        //                        item[this.getIdProperty()] = id;
+        //                        this.view.addItem(item);
+        //                        i = i + 10;
+        //                    }
+        //                    return true;
+        //                };
+        //                dlg_m.dialogOpen();
+        //            } else if (this._billType == Enums.InvoiceBillType.Project.toString()) {
+        //                var dlg_p = new Project.ProjectInfoPickerDialog({
+        //                    hideData: null,
+        //                    criteria: [[Project.ProjectInfoRow.Fields.IsClosed], '=', 0]
+        //                });
+        //                dlg_p.onSuccess = (selected) => {
+        //                    var i = 10;
+        //                    if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
+        //                    for (var sel of selected) {
+        //                        var item = <InvoiceItemRow>{
+        //                            Serial: i,
+        //                            SourceDocumentType: Enums.InvoiceBillType.Project,
+        //                            SourceDocumentId: sel.Id,
+        //                            SourceDocumentNo: sel.BillNo,
+        //                            Name: sel.Name,
+        //                            Price: 0,
+        //                            Qty: 0,
+        //                            Amount: 0,
+        //                            InvoiceAmount: 0,
+        //                            Kind: Enums.InvoiceItemKind.Project,
+
+        //                        };
+        //                        var id = this.getNextId();
+        //                        item[this.getIdProperty()] = id;
+        //                        this.view.addItem(item);
+        //                        i = i + 10;
+        //                    }
+        //                    return true;
+        //                };
+        //                dlg_p.dialogOpen();
+        //            } else {
+        //                Q.notifyError("请选择业务类型!");
+        //            }
+        //        }
+        //    });  
+        //    return buttons; 
+        //}
+
+
         protected getButtons(): Serenity.ToolButton[] {
             var buttons = super.getButtons();
             buttons.splice(Q.indexOf(buttons, x => x.cssClass == "add-button"), 1);
             buttons.push({
-                title: "选择源单",
+                title: "销售订单",
                 cssClass: "add-button",
-                visible: () => { return false },
                 onClick: () => {
-                    if (this._billType == Enums.InvoiceBillType.SaleOrder.toString()) {
-                        var dlg = new Sell.SaleOrderItemPickerDialog({
-                            hideData: null,
-                            criteria: [[Sell.SaleOrderItemRow.Fields.InvoicedQty], '<', [Sell.SaleOrderItemRow.Fields.Qty]]
-                        });
-                        dlg.onSuccess = (selected) => {
-                            // selected = selected.filter(x => !Q.any(this.view.getItems(), y => y.SourceItemId == x.Id));
-                            var i = 10;
-                            if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
-                            for (var sel of selected) { 
-                                var item = <InvoiceItemRow>{
-                                  
-                                    Serial: i,
-                                    SourceDocumentType: Enums.InvoiceBillType.SaleOrder,
-                                    SourceDocumentId: sel.HeadId,
-                                    SourceDocumentNo: sel.BillNo,
-                                    SourceItemId: sel.Id,
-                                    SourceItemSerial: sel.Serial,
-                                    Name: sel.MaterialName,
-                                    UnitName: sel.UnitName,
-                                    Price: sel.SalePrice,
-                                    Qty: sel.Qty - sel.InvoicedQty,
-                                    Amount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
-                                    InvoiceAmount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
-                                    Kind: Enums.InvoiceItemKind.SaleOrderItem,
-                                     
-                                    // TaxRate:
-                                    //InvoiceNo;
-                                    //Note; 
-                                };
-                                var id = this.getNextId();
-                                item[this.getIdProperty()] = id;
-                                this.view.addItem(item);
-                                i = i + 10;
-                            }
 
-                            return true;
-                        };
-                        dlg.dialogOpen();
-                    } else if (this._billType == Enums.InvoiceBillType.Maintenance.toString()) {
-                        var dlg_m = new Ops.MaintenancePickerDialog({
-                            hideData: null,
-                            criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalSales]]
-                        });
-                        dlg_m.onSuccess = (selected) => {
-                            var i = 10;
-                            if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
-                            for (var sel of selected) {
-                                var item = <InvoiceItemRow>{
-                                    Serial: i,
-                                    SourceDocumentType: Enums.InvoiceBillType.Maintenance,
-                                    SourceDocumentId: sel.Id,
-                                    SourceDocumentNo: sel.BillNo,
-                                    Name: sel.Description,
-                                    Price: sel.TotalSales,
-                                    Qty: 1,
-                                    Amount: sel.TotalSales,
-                                    InvoiceAmount: sel.TotalSales,
-                                    Kind: Enums.InvoiceItemKind.Maintenance,
+                    var dlg = new Sell.SaleOrderItemPickerDialog({
+                        hideData: null,
+                        criteria: [[Sell.SaleOrderItemRow.Fields.InvoicedQty], '<', [Sell.SaleOrderItemRow.Fields.Qty]]
+                    });
+                    dlg.onSuccess = (selected) => {
+                        // selected = selected.filter(x => !Q.any(this.view.getItems(), y => y.SourceItemId == x.Id));
+                        var i = 10;
+                        if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
+                        for (var sel of selected) {
+                            var item = <InvoiceItemRow>{
 
-                                };
-                                var id = this.getNextId();
-                                item[this.getIdProperty()] = id;
-                                this.view.addItem(item);
-                                i = i + 10;
-                            }
-                            return true;
-                        };
-                        dlg_m.dialogOpen();
-                    } else if (this._billType == Enums.InvoiceBillType.Project.toString()) {
-                        var dlg_p = new Project.ProjectInfoPickerDialog({
+                                Serial: i,
+                                SourceDocumentType: Enums.InvoiceBillType.SaleOrder,
+                                SourceDocumentId: sel.HeadId,
+                                SourceDocumentNo: sel.BillNo,
+                                SourceItemId: sel.Id,
+                                SourceItemSerial: sel.Serial,
+                                Name: sel.MaterialName,
+                                UnitName: sel.UnitName,
+                                Price: sel.SalePrice,
+                                Qty: sel.Qty - sel.InvoicedQty,
+                                Amount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
+                                InvoiceAmount: sel.SaleAmount - (sel.InvoicedQty) * sel.SalePrice,
+                                Kind: Enums.InvoiceItemKind.SaleOrderItem,
+
+                                // TaxRate:
+                                //InvoiceNo;
+                                //Note; 
+                            };
+                            var id = this.getNextId();
+                            item[this.getIdProperty()] = id;
+                            this.view.addItem(item);
+                            i = i + 10;
+                        }
+
+                        return true;
+                    };
+                    dlg.dialogOpen();
+                }
+            });
+
+            buttons.push({
+                title: "维保单",
+                cssClass: "add-button",
+                onClick: () => { 
+                    var dlg_m = new Ops.MaintenancePickerDialog({
+                        hideData: null,
+                        criteria: [[Ops.MaintenanceRow.Fields.InvoicedAmount], '<', [Ops.MaintenanceRow.Fields.TotalSales]]
+                    });
+                    dlg_m.onSuccess = (selected) => {
+                        var i = 10;
+                        if (this.view.getLength() > 0) { i = this.view.getItems()[this.view.getLength() - 1].Serial + 10; }
+                        for (var sel of selected) {
+                            var item = <InvoiceItemRow>{
+                                Serial: i,
+                                SourceDocumentType: Enums.InvoiceBillType.Maintenance,
+                                SourceDocumentId: sel.Id,
+                                SourceDocumentNo: sel.BillNo,
+                                Name: sel.Description,
+                                Price: sel.TotalSales,
+                                Qty: 1,
+                                Amount: sel.TotalSales,
+                                InvoiceAmount: sel.TotalSales,
+                                Kind: Enums.InvoiceItemKind.Maintenance,
+
+                            };
+                            var id = this.getNextId();
+                            item[this.getIdProperty()] = id;
+                            this.view.addItem(item);
+                            i = i + 10;
+                        }
+                        return true;
+                    };
+                    dlg_m.dialogOpen();
+                }
+            });
+
+            buttons.push({
+                title: "项目",
+                cssClass: "add-button",
+                onClick: () => {
+                    var dlg_p = new Project.ProjectInfoPickerDialog({
                             hideData: null,
                             criteria: [[Project.ProjectInfoRow.Fields.IsClosed], '=', 0]
                         });
@@ -167,12 +293,11 @@ namespace Kun.Finance {
                             return true;
                         };
                         dlg_p.dialogOpen();
-                    } else {
-                        Q.notifyError("请选择业务类型!");
-                    }
                 }
-            });  
-            return buttons; 
+            });
+
+
+            return buttons;
         }
 
         protected getColumns() { 

@@ -18,32 +18,32 @@ namespace Kun.Finance {
 
         constructor() {
             super();   
-            this.form.BillType.changeSelect2(e => { 
-                if (this.form.Items.rowCount() > 0 && !Q.isEmptyOrNull(this._billType)) {
-                    Q.confirm("改变业务类型,明细数据将全部清空，确定继续?", () => {
-                        this.form.Items.view.setItems([], true);
-                        this._billType = this.form.BillType.value;
-                        this.form.Items.setButtons(this._billType); 
-                    },
-                        {
-                            onNo: () => {
-                                if (!Q.isEmptyOrNull(this._billType)) {
-                                    this.form.BillType.set_value(this._billType);
-                                }
-                            }
-                        });
-                } else {
-                    this._billType = this.form.BillType.value; 
-                    this.form.Items.setButtons(this._billType);  
-                }
-            });
+            //this.form.BillType.changeSelect2(e => { 
+            //    if (this.form.Items.rowCount() > 0 && !Q.isEmptyOrNull(this._billType)) {
+            //        Q.confirm("改变业务类型,明细数据将全部清空，确定继续?", () => {
+            //            this.form.Items.view.setItems([], true);
+            //            this._billType = this.form.BillType.value;
+            //            this.form.Items.setButtons(this._billType); 
+            //        },
+            //            {
+            //                onNo: () => {
+            //                    if (!Q.isEmptyOrNull(this._billType)) {
+            //                        this.form.BillType.set_value(this._billType);
+            //                    }
+            //                }
+            //            });
+            //    } else {
+            //        this._billType = this.form.BillType.value; 
+            //        this.form.Items.setButtons(this._billType);  
+            //    }
+            //});
         }
 
         protected afterLoadEntity() {
             super.afterLoadEntity();
             this.form.Items.Head = this.entity;
-            this._billType = this.form.BillType.value;
-            this.form.Items.setButtons(this._billType);  
+            //this._billType = this.form.BillType.value;
+            //this.form.Items.setButtons(this._billType);  
         }
 
         protected getToolbarButtons() {

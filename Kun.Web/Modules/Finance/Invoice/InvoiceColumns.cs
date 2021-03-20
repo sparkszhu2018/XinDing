@@ -15,7 +15,7 @@ namespace Kun.Finance.Columns
     {
         [EditLink]
         public String BillNo { get; set; }
-        public Int32 BillType { get; set; }
+        //public Int32 BillType { get; set; }
         [QuickFilter]
         public Int32 Status { get; set; }
         [QuickFilter]
@@ -26,6 +26,8 @@ namespace Kun.Finance.Columns
         public String InvoiceNo { get; set; } 
 
         public Decimal  InvoiceAmount { get; set; }
+        public Decimal ItemInvoiceAmount { get; set; }
+        
         public Decimal  ReceiptAmount { get; set; }
         public Decimal  UnReceiptAmount { get; set; }
 

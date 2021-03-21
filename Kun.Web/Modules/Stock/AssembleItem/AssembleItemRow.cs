@@ -25,7 +25,7 @@ namespace Kun.Stock.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("Head Id"), NotNull, ForeignKey("[dbo].[Stock_InStock]", "Id"), LeftJoin("jHead"), Updatable(false)]
+        [DisplayName("Head Id"), NotNull, ForeignKey("[dbo].[Stock_Assemble]", "Id"), LeftJoin("jHead"), Updatable(false)]
         public Guid? HeadId
         {
             get { return Fields.HeadId[this]; }
@@ -83,7 +83,7 @@ namespace Kun.Stock.Entities
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), QuickFilter, Expression("jMaterial.[Name]"), ReadOnly(true)]
+        [DisplayName("物料名称"), Expression("jMaterial.[Name]"), ReadOnly(true)]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }

@@ -7,10 +7,10 @@ namespace Kun.Ops {
         criteria?: any[]
     }
 
-    @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.registerClass() 
     export class MaintenanceCheckGrid extends Serenity.EntityGrid<MaintenanceRow, MaintenancePickerOptions> {
 
-        protected getColumnsKey() { return 'Ops.Maintenance'; } 
+        protected getColumnsKey() { return 'Ops.MaintenanceCheckColumns'; } 
         protected getIdProperty() { return MaintenanceRow.idProperty; }
         protected getLocalTextPrefix() { return MaintenanceRow.localTextPrefix; }
         protected getService() { return MaintenanceService.baseUrl; }
@@ -19,6 +19,9 @@ namespace Kun.Ops {
         constructor(container: JQuery, options: MaintenancePickerOptions) {
             super(container, options); 
             this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            });
         }
 
         protected getColumns() {
@@ -32,7 +35,8 @@ namespace Kun.Ops {
         }
 
         protected getInitialTitle() {
-            return null;
+
+            return "已选择金额:";
         }
 
         protected getButtons() {
@@ -61,6 +65,23 @@ namespace Kun.Ops {
                 request.Criteria = Serenity.Criteria.and(request.Criteria, this.options.criteria);
             } 
             return true;
+        }
+
+
+        protected onClick(e: JQueryEventObject, row: number, cell: number) {
+            super.onClick(e, row, cell);
+            if (e.isDefaultPrevented())
+                return;
+
+            //var item = this.itemAt(row);
+            //var target = $(e.target);
+
+            var self = this;
+            setTimeout(function () {
+                var selects = self.selectedItems.map(function (v) { return v.UnInvoicedAmount; });
+                var sum = eval(selects.join("+"));
+                self.element.find('.title-text').html("已选择金额:" + sum);
+            }, 200);
         }
     }
 }

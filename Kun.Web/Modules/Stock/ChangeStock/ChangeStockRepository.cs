@@ -37,7 +37,8 @@ namespace Kun.Stock.Repositories
             }
             if (Status == BillStatus.Audited) //审核通过
             {
-                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Items;
+                var row = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
+                var items = row.Items;
                 var stockRep = new StockDataRepository();
                 var moveRep = new MoveRecordRepository();
                 foreach (var m in items)
@@ -92,7 +93,7 @@ namespace Kun.Stock.Repositories
                         BizBillId = m.HeadId,
                         BizItemId = m.Id, 
                         Status = MoveRecordEnums.Status.Normal,
-                        BizBillCode = m.BillNo,
+                        BizBillCode = row.BillNo,
 
                         ToStockId = toStock.Id,
                         ToMaterialId = m.ToMaterialId,

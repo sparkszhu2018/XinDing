@@ -20,6 +20,12 @@ namespace Kun.Sell.Columns
         public DateTime Date { get; set; } 
         public String CustomerName { get; set; }
 
+        public Decimal TotalCost { get; set; }
+        public Decimal TotalSales { get; set; } 
+
+        public Decimal InvoicedAmount { get; set; }
+        public Decimal UnInvoicedAmount { get; set; }
+
         public String InsertUserDisplayName { get; set; }
         public DateTime? InsertDate { get; set; }
         public String ApproverName { get; set; }

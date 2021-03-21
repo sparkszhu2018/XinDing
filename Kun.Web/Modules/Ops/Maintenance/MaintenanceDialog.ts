@@ -113,11 +113,14 @@ namespace Kun.Ops {
                     icon: "fa-reply-all",
                     cssClass: "unAudit-button",
                     onClick: () => {
+
+                        Q.confirm("确定反审核吗?", () => {
                         Ops.MaintenanceService.UnAudit({
                             EntityId: this.entityId
                         }, r => {
                             Q.notifySuccess("反审核成功!");
                             this.dialogClose();
+                        });
                         });
                     }
                 }); 

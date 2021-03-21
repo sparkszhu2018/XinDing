@@ -7,7 +7,7 @@ namespace Kun.Project {
         criteria?: any[]
     }
 
-    @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.registerClass() 
     export class ProjectInfoCheckGrid extends Serenity.EntityGrid<ProjectInfoRow, ProjectInfoPickerOptions> {
 
         protected getColumnsKey() { return 'Project.ProjectInfo'; } 
@@ -19,6 +19,9 @@ namespace Kun.Project {
         constructor(container: JQuery, options: ProjectInfoPickerOptions) {
             super(container, options); 
             this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            });
         }
 
         protected getColumns() {

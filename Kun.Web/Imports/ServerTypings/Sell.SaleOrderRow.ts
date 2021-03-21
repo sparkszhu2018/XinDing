@@ -14,6 +14,10 @@
         SettleCustomerName?: string;
         ApproverName?: string;
         Materials?: SaleOrderItemRow[];
+        TotalSales?: number;
+        TotalCost?: number;
+        InvoicedAmount?: number;
+        UnInvoicedAmount?: number;
     }
 
     export namespace SaleOrderRow {
@@ -40,7 +44,11 @@
             CustomerName = "CustomerName",
             SettleCustomerName = "SettleCustomerName",
             ApproverName = "ApproverName",
-            Materials = "Materials"
+            Materials = "Materials",
+            TotalSales = "TotalSales",
+            TotalCost = "TotalCost",
+            InvoicedAmount = "InvoicedAmount",
+            UnInvoicedAmount = "UnInvoicedAmount"
         }
     }
 }

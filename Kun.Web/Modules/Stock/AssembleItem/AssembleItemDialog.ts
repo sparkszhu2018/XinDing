@@ -1,23 +1,21 @@
-﻿
-/// <reference path="../../Common/Helpers/GridEditorDialog.ts" />
+﻿/// <reference path="../../Common/Helpers/GridEditorDialog.ts" />
 namespace Kun.Stock {
 
     @Serenity.Decorators.registerClass()
     export class AssembleItemDialog extends Common.GridEditorDialog<AssembleItemRow> {
-        protected getFormKey() { return AssembleItemForm.formKey; }
-       
+        protected getFormKey() { return AssembleItemForm.formKey; }       
         protected getLocalTextPrefix() { return AssembleItemRow.localTextPrefix; }
-       
-
         protected form = new AssembleItemForm(this.idPrefix);
- 
-         
 
         private _head: AssembleRow;
+
         get Head() { return this._head; }
         set Head(value: AssembleRow) {
             this._head = value;
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject && this._head.Status !== Enums.BillStatus.UnAudited) {
+
+            if (this._head.Status !== Enums.BillStatus.Edit
+                && this._head.Status !== Enums.BillStatus.Reject
+                && this._head.Status !== Enums.BillStatus.UnAudited) {
                 this.toolbar.findButton('save-and-close-button').hide();
                 this.toolbar.findButton('apply-changes-button').hide();
                 this.toolbar.findButton('delete-button').hide();
@@ -35,11 +33,13 @@ namespace Kun.Stock {
                 }
 
             }); 
-
+             
         }
 
         protected updateInterface() {
             super.updateInterface();
+            alert(23);
+
             //this.form.StockQty.value = Stock.StockDataRow.getLookup().itemById[this.entity.StockDataId].AvailableQty;
             if (this.entity.Id != null) {
 

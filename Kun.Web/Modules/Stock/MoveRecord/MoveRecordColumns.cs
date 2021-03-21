@@ -22,6 +22,7 @@ namespace Kun.Stock.Columns
         public String ToMaterialName { get; set; }
         public Decimal Qty { get; set; }
         public Int32 BizBillType { get; set; }
+        [EditLink]
         public String BizBillCode { get; set; }
         public String FromUnitName { get; set; }
         public String FromWarehouseName { get; set; }

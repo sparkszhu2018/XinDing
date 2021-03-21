@@ -90,11 +90,13 @@ namespace Kun.Stock {
                     icon: "fa-reply-all",
                     cssClass: "unAudit-button",
                     onClick: () => {
-                        Stock.InStockService.UnAudit({
-                            EntityId: this.entityId
-                        }, r => {
-                            Q.notifySuccess("反审核成功!");
-                            this.dialogClose();
+                        Q.confirm("确定反审核吗?", () => {
+                            Stock.InStockService.UnAudit({
+                                EntityId: this.entityId
+                            }, r => { 
+                                Q.notifySuccess("反审核成功!");
+                                this.dialogClose();
+                            });
                         });
                     }
                 });

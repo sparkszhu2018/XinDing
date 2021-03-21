@@ -7,10 +7,10 @@ namespace Kun.Sell {
         criteria?: any[]
     }
 
-    @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.registerClass() 
     export class SaleOrderItemCheckGrid extends Serenity.EntityGrid<SaleOrderItemRow, SaleOrderItemPickerOptions> {
 
-        protected getColumnsKey() { return 'Sell.SaleOrderItem'; }
+        protected getColumnsKey() { return 'Sell.SaleOrderItemPickerColumns'; }
         // protected getDialogType() { return <any>Northwind.ProductDialog; }
         protected getIdProperty() { return SaleOrderItemRow.idProperty; }
         protected getLocalTextPrefix() { return SaleOrderItemRow.localTextPrefix; }
@@ -19,9 +19,12 @@ namespace Kun.Sell {
         private rowSelection: Serenity.GridRowSelectionMixin;
 
         constructor(container: JQuery, options: SaleOrderItemPickerOptions) {
-            super(container, options);
+            super(container, options); 
 
-            this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            this.rowSelection = new Serenity.GridRowSelectionMixin(this);           
+            new Serenity.HeaderFiltersMixin({
+                grid: this
+            }); 
         }
 
         protected getColumns() {
@@ -35,7 +38,8 @@ namespace Kun.Sell {
         }
 
         protected getInitialTitle() {
-            return null;
+              
+            return "已选择金额:" ;
         }
 
         protected getButtons() {
@@ -47,7 +51,7 @@ namespace Kun.Sell {
         get selectedItems() {
             return this.rowSelection.getSelectedKeys().map(x => this.view.getItemById(x));
            //  return this.rowSelection.getSelectedAsInt32().map(x => this.view.getItemById(x));
-        }
+        } 
 
         protected onViewSubmit() {
             if (!super.onViewSubmit())
@@ -65,5 +69,24 @@ namespace Kun.Sell {
             } 
             return true;
         }
+
+        protected onClick(e: JQueryEventObject, row: number, cell: number) {
+            super.onClick(e, row, cell);
+            if (e.isDefaultPrevented())
+                return;
+
+            //var item = this.itemAt(row);
+            //var target = $(e.target);
+
+            var self = this;
+            setTimeout(function () {
+                var selects = self.selectedItems.map(function (v) { return v.UnInvoicedAmount; });
+                var sum = eval(selects.join("+"));
+                self.element.find('.title-text').html("已选择金额:" + sum);
+            }, 200);
+        }
+
+
+ 
     }
 }

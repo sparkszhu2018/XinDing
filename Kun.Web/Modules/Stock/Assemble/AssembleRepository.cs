@@ -37,7 +37,7 @@ namespace Kun.Stock.Repositories
                 n.Entity.ApproverId = long.Parse(Authorization.UserId);
             }
             if (Status == StockEnums.BillStatus.Audited) //审核通过
-            {
+            { 
                 var assemble = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
                 var items = assemble.Items;
                 var buyAmount = items.Sum(c => c.BuyAmount);
@@ -117,7 +117,7 @@ namespace Kun.Stock.Repositories
                         BizBillId = m.HeadId,
                         BizItemId = m.Id,
                         Status = MoveRecordEnums.Status.Normal,
-                        BizBillCode = m.BillNo,
+                        BizBillCode = assemble.BillNo,
                     };
                     moveRep.Create(uow, new SaveRequest<MoveRecordRow> { Entity = mov_out });
                 }
@@ -237,6 +237,10 @@ namespace Kun.Stock.Repositories
                         Length = 16
                     }, fld.BillNo); ;
                     Row.BillNo = nextNumber.Serial;
+                }
+                if(Row.Qty <= 0)
+                {
+                    throw new Exception("组装数量必须大于0！");
                 }
             }
         }

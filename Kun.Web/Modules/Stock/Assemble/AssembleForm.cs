@@ -32,9 +32,8 @@ namespace Kun.Stock.Forms
         public DateTime ApproverDate { get; set; }
 
         [Category("成品信息")]
-        [TwoThirdWidth]
-        public Guid ToMaterialId { get; set; }
-        [OneThirdWidth(UntilNext = true)]
+       
+        public Guid ToMaterialId { get; set; } 
         public Guid UnitId { get; set; }
 
         public Decimal Qty { get; set; }

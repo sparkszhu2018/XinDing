@@ -98,7 +98,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), QuickFilter]
+        [DisplayName("物料名称")]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }
@@ -178,7 +178,7 @@ ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jCustomer"), TextualField(
         }
 
         [DisplayName("仓库"), ReadOnly(true), LookupEditor(typeof(WarehouseRow)), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
-            LeftJoin("jWarehouse"), TextualField("WarehouseName"), QuickFilter]
+            LeftJoin("jWarehouse"), TextualField("WarehouseName")]
         public Guid? WarehouseId
         {
             get { return Fields.WarehouseId[this]; }

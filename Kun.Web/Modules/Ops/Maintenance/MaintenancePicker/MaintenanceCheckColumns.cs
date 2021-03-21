@@ -9,18 +9,15 @@ namespace Kun.Ops.Columns
     using System.Collections.Generic;
     using System.IO;
 
-    [ColumnsScript("Ops.Maintenance")]
+    [ColumnsScript("Ops.MaintenanceCheckColumns")]
     [BasedOnRow(typeof(Entities.MaintenanceRow), CheckNames = true)]
-    public class MaintenanceColumns
-    {
-        [EditLink]
+    public class MaintenanceCheckColumns
+    { 
         public String BillNo { get; set; }
         public Int32 BillType { get; set; }
-        [QuickFilter]
         public Int32 Status { get; set; }
 
         [DisplayFormat("yyyy-MM-dd")]
-        [QuickFilter]
         public DateTime Date { get; set; }
 
         public String VendorName { get; set; }
@@ -43,17 +40,9 @@ namespace Kun.Ops.Columns
         public Decimal InvoicedAmount { get; set; }  
         public Decimal UnInvoicedAmount { get; set; }
         public String MateiralDetail { get; set; } 
-
-        [Hidden]
-        [QuickFilter]
-        public Guid SettleCustomerId { get; set; }  
+         
         public String ResponsibleName { get; set; }
-
-        public String Address { get; set; }
-        public String InsertUserDisplayName { get; set; }
-        public DateTime? InsertDate { get; set; }
-        public String ApproverName { get; set; }
-        public DateTime ApproverDate { get; set; }
+         
 
     }
 }

@@ -24,7 +24,7 @@ namespace Kun.Stock.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)), QuickFilter,
+        [DisplayName("物料"), NotNull, LookupEditor(typeof(MaterialLookup)),
             ForeignKey("[dbo].[Basic_Material]", "Id"), LeftJoin("jMaterial"), TextualField("MaterialName")]
         public Guid? MaterialId
         {
@@ -32,14 +32,14 @@ namespace Kun.Stock.Entities
             set { Fields.MaterialId[this] = value; }
         }
 
-        [DisplayName("物料号"), Expression("jMaterial.[Code]"), QuickFilter, ReadOnly(true), QuickSearch]
+        [DisplayName("物料号"), Expression("jMaterial.[Code]"), ReadOnly(true), QuickSearch]
         public String MaterialCode
         {
             get { return Fields.MaterialCode[this]; }
             set { Fields.MaterialCode[this] = value; }
         }
 
-        [DisplayName("物料名称"), Expression("jMaterial.[Name]"), QuickFilter, ReadOnly(true), QuickSearch]
+        [DisplayName("物料名称"), Expression("jMaterial.[Name]"), ReadOnly(true), QuickSearch]
         public String MaterialName
         {
             get { return Fields.MaterialName[this]; }
@@ -96,7 +96,7 @@ namespace Kun.Stock.Entities
             set { Fields.LotCode[this] = value; }
         }
 
-        [DisplayName("仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"), QuickFilter,
+        [DisplayName("仓库"), ForeignKey("[dbo].[Basic_Warehouse]", "Id"),
             LeftJoin("jWarehouse"), TextualField("WarehouseName")]
         public Guid? WarehouseId
         {

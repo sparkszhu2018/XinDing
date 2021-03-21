@@ -9,33 +9,34 @@ namespace Kun.Finance {
 
         private _serial: number;
         protected form: InvoiceItemForm;
-        private _head: InvoiceRow;
-        
 
-        get Head() {
-            return this._head;
-        }
+        //private _head: InvoiceRow; 
+        //get Head() {
+        //    return this._head;
+        //}
 
-        set Head(value: InvoiceRow) { 
-            this._head = value;
+        //set Head(value: InvoiceRow) { 
+        //    this._head = value;
 
-            if (this._head.BillType === Enums.InvoiceBillType.Maintenance) {
+        //    //if (this._head.BillType === Enums.InvoiceBillType.Maintenance) {
                
 
-            } else if (this._head.BillType === Enums.InvoiceBillType.Project) {
+        //    //} else if (this._head.BillType === Enums.InvoiceBillType.Project) {
                 
-            }
-            else if (this._head.BillType === Enums.InvoiceBillType.SaleOrder) {
+        //    //}
+        //    //else if (this._head.BillType === Enums.InvoiceBillType.SaleOrder) {
 
-            }
+        //    //}
 
-            if (this._head.Status !== Enums.BillStatus.Edit && this._head.Status !== Enums.BillStatus.Reject) { 
-                this.toolbar.findButton('save-and-close-button').hide();
-                this.toolbar.findButton('apply-changes-button').hide();
-                this.toolbar.findButton('delete-button').hide();
-            }
+        //    if (this._head.Status !== Enums.BillStatus.Edit
+        //        && this._head.Status !== Enums.BillStatus.Reject
+        //        && this._head.Status !== Enums.BillStatus.UnAudited) {  
+        //        this.toolbar.findButton('save-and-close-button').hide();
+        //        this.toolbar.findButton('apply-changes-button').hide();
+        //        this.toolbar.findButton('delete-button').hide();
+        //    }
            
-        } 
+        //} 
 
         get Serial() { return this._serial; }
         set Serial(value: number) {
@@ -68,11 +69,12 @@ namespace Kun.Finance {
             if (this.entity.Id != null) {
                 if (this.entity.HeadStatus == Enums.BillStatus.Edit || this.entity.HeadStatus == Enums.BillStatus.Reject
                     || this.entity.HeadStatus == Enums.BillStatus.UnAudited) {
+                  
                     this.toolbar.findButton('save-and-close-button').show();
                     this.toolbar.findButton('apply-changes-button').show();
                     this.toolbar.findButton('delete-button').show();
                 }
-                else {
+                else { 
                     Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
                     this.toolbar.findButton('save-and-close-button').hide();
                     this.toolbar.findButton('apply-changes-button').hide();

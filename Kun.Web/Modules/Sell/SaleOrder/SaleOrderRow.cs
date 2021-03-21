@@ -126,6 +126,36 @@ namespace Kun.Sell.Entities
             set { Fields.Materials[this] = value; }
         }
 
+        [DisplayName("总成本"), Expression("isnull((select sum(BuyAmount) from Sell_SaleOrder_Item where isActive =1 and headId = t0.Id),0)")]
+        public Decimal? TotalCost
+        {
+            get { return Fields.TotalCost[this]; }
+            set { Fields.TotalCost[this] = value; }
+        } 
+
+        [DisplayName("总金额"), Expression("isnull((select sum(SaleAmount) from Sell_SaleOrder_Item where isActive =1 and headId = t0.Id),0)")]
+        public Decimal? TotalSales
+        {
+            get { return Fields.TotalSales[this]; }
+            set { Fields.TotalSales[this] = value; }
+        }
+
+        [DisplayName("已开票金额"), Expression("isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 " +
+           "and Kind = 10 and SourceDocumentId = t0.Id),0)")]
+        public Decimal? InvoicedAmount
+        {
+            get { return Fields.InvoicedAmount[this]; }
+            set { Fields.InvoicedAmount[this] = value; }
+        }
+
+        [DisplayName("未开票金额"), Expression("(isnull((select sum(SaleAmount) from Sell_SaleOrder_Item where isActive =1 and headId = t0.Id),0) - " +
+            "isnull((select top 1 InvoiceAmount from [dbo].[Finance_BillInvoiced] where isActive = 1 and Kind = 10 and SourceDocumentId = t0.Id),0) )")]
+        public Decimal? UnInvoicedAmount
+        {
+            get { return Fields.UnInvoicedAmount[this]; }
+            set { Fields.UnInvoicedAmount[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -159,10 +189,10 @@ namespace Kun.Sell.Entities
             public StringField SettleCustomerName;
             public StringField ApproverName;
             public RowListField<SaleOrderItemRow> Materials;
-
-
-
-
+            public DecimalField TotalSales;
+            public DecimalField TotalCost;            
+            public DecimalField InvoicedAmount;
+            public DecimalField UnInvoicedAmount; 
 
 
         }

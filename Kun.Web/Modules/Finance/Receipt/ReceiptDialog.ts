@@ -85,11 +85,13 @@ namespace Kun.Finance {
                     icon: "fa-reply-all",
                     cssClass: "unAudit-button",
                     onClick: () => {
+                        Q.confirm("确定反审核吗?", () => {
                         Finance.ReceiptService.UnAudit({
                             EntityId: this.entityId
                         }, r => {
                             Q.notifySuccess("反审核成功!");
                             this.dialogClose();
+                        });
                         });
                     }
                 });

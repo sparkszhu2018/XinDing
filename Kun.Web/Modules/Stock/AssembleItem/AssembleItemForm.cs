@@ -15,7 +15,7 @@ namespace Kun.Stock.Forms
     {
         [LabelWidth(100, UntilNext = true), ReadOnly(true)]
         public Guid MaterialId { get; set; }
-        public String MaterialName { get; set; }
+       
         [HalfWidth(UntilNext = true), ReadOnly(true)]
         public Int32 Serial { get; set; }
         [Hidden]

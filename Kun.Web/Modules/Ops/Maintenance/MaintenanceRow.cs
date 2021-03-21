@@ -42,7 +42,7 @@ namespace Kun.Ops.Entities
             set { Fields.BillType[this] = (Int32)value; }
         }
 
-        [DisplayName("状态"), Size(50), QuickFilter,
+        [DisplayName("状态"), Size(50), 
           DefaultValue(BillStatus.Edit), NotNull, ReadOnly(true)]
         public BillStatus? Status
         {
@@ -50,7 +50,7 @@ namespace Kun.Ops.Entities
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now"), QuickFilter]
+        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -58,7 +58,7 @@ namespace Kun.Ops.Entities
             set { Fields.Date[this] = value; }
         }
 
-        [DisplayName("服务商"), NotNull, LookupEditor(typeof(VendorRow)), QuickFilter,
+        [DisplayName("服务商"), NotNull, LookupEditor(typeof(VendorRow)),
              ForeignKey("[dbo].[Basic_Vendor]", "Id"), LeftJoin("jVendor"), TextualField("VendorName")
            ]
         public Guid? VendorId
@@ -111,7 +111,7 @@ namespace Kun.Ops.Entities
             set { Fields.ReportCustomerName[this] = value; }
         }
 
-        [DisplayName("结算部门"), NotNull, LookupEditor(typeof(CustomerRow)), QuickFilter,
+        [DisplayName("结算部门"), NotNull, LookupEditor(typeof(CustomerRow)),
              ForeignKey("[dbo].[Basic_Customer]", "Id"), LeftJoin("jSettleCustomer"), TextualField("SettleCustomerName")
            ]
         public Guid? SettleCustomerId
@@ -127,7 +127,7 @@ namespace Kun.Ops.Entities
             set { Fields.SettleCustomerName[this] = value; }
         }
 
-        [DisplayName("维保分类"), NotNull, LookupEditor(typeof(MaintenanceTypeRow)), QuickFilter,
+        [DisplayName("维保分类"), NotNull, LookupEditor(typeof(MaintenanceTypeRow)),
             ForeignKey("[dbo].[OPS_Maintenance_Type]", "Id"), LeftJoin("jType"), TextualField("TypeName")
           ]
         public Guid? TypeId
@@ -226,7 +226,7 @@ namespace Kun.Ops.Entities
             set { Fields.ServicerCost[this] = value; }
         }
 
-        [DisplayName("维保人"), LookupEditor(typeof(UserRow)), NotNull, QuickFilter,
+        [DisplayName("维保人"), LookupEditor(typeof(UserRow)), NotNull,
              ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jResponsible"), TextualField("ResponsibleName")
            ]
         public Int32? ResponsibleId

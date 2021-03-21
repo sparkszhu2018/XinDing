@@ -31,13 +31,11 @@ namespace Kun.Stock {
                 Q.notifyError("不得选择虚拟物料!")
                 return false;
             }
-
             row.MaterialName = material.Name;
             row.MaterialCode = material.Code; 
             row.UnitName = Basic.UnitRow.getLookup().itemById[material.UnitId].Name;
  
             row.InvoiceTypeName = Serenity.EnumFormatter.format(Stock.Enums.InvoiceType, Q.toId(row.InvoiceType)); 
-
             row.SupplierName = Basic.SupplierRow.getLookup().itemById[row.SupplierId].Name;
             if (!Q.isEmptyOrNull(row.WarehouseId)) { 
                 row.WarehouseName = Basic.WarehouseRow.getLookup().itemById[row.WarehouseId].Name; 

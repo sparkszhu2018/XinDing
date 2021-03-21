@@ -39,8 +39,11 @@
     height: 380px;
 }
 
+.s-MaintenanceCheckGrid {
+    height: 380px;
+}
 
-.s-MaterialsItemViewEditor   {
+.s-MaterialsItemViewEditor {
     height: 350px;
 }
 

@@ -50,7 +50,8 @@ namespace Kun.Ops.Repositories
 
             if (Status == BillStatus.Audited) //审核通过
             {
-                var items = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity.Materials;
+                var row = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
+                var items = row.Materials;
                 var stockRep = new StockDataRepository();
                 //var lotRep = new LotRepository();
                 var moveRep = new MoveRecordRepository();
@@ -85,7 +86,7 @@ namespace Kun.Ops.Repositories
                         BizBillId = m.HeadId,
                         BizItemId = m.Id,
                         Status = MoveRecordEnums.Status.Normal,
-                        BizBillCode = m.BillNo,
+                        BizBillCode = row.BillNo,
                     };
                     moveRep.Create(uow, new SaveRequest<MoveRecordRow> { Entity = mov });
                 }

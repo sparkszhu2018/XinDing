@@ -26,7 +26,7 @@ namespace Kun.Stock.Entities
             set { Fields.Id[this] = value; }
         }
 
-        [DisplayName("单据编号"), Size(50), ReadOnly(true), QuickSearch, QuickFilter]
+        [DisplayName("单据编号"), Size(50), ReadOnly(true), QuickSearch]
         public String BillNo
         {
             get { return Fields.BillNo[this]; }
@@ -119,7 +119,7 @@ namespace Kun.Stock.Entities
             set { Fields.UnitName[this] = value; }
         }
          
-        [DisplayName("数量"), Size(18), Scale(4)]
+        [DisplayName("数量"), Size(18), Scale(2),NotNull]
         public Decimal? Qty
         {
             get { return Fields.Qty[this]; }
@@ -191,7 +191,8 @@ namespace Kun.Stock.Entities
             set { Fields.PositionName[this] = value; }
         }
 
-        [DisplayName("用料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId", IncludeColumns = "BillNo,ToMaterialCode,ToMaterialName,UnitName,HeadStatus")]
+        [DisplayName("用料明细"), NotMapped, MasterDetailRelation(foreignKey: "HeadId", 
+            IncludeColumns = "HeadStatus,MaterialCode,MaterialName,LotCode,WarehouseName,PositionName,UnitName")]
         public List<AssembleItemRow> Items
         {
             get { return Fields.Items[this]; }

@@ -84,11 +84,13 @@ namespace Kun.Sell {
                     icon: "fa-reply-all",
                     cssClass: "unAudit-button",
                     onClick: () => {
+                        Q.confirm("确定反审核吗?", () => {
                         Sell.SaleOrderService.UnAudit({
                             EntityId: this.entityId
                         }, r => {
                             Q.notifySuccess("反审核成功!");
                             this.dialogClose();
+                        });
                         });
                     }
                 });

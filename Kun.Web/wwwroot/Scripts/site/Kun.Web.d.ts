@@ -3398,6 +3398,10 @@ declare namespace Kun.Sell {
         SettleCustomerName?: string;
         ApproverName?: string;
         Materials?: SaleOrderItemRow[];
+        TotalSales?: number;
+        TotalCost?: number;
+        InvoicedAmount?: number;
+        UnInvoicedAmount?: number;
     }
     namespace SaleOrderRow {
         const idProperty = "Id";
@@ -3422,7 +3426,11 @@ declare namespace Kun.Sell {
             CustomerName = "CustomerName",
             SettleCustomerName = "SettleCustomerName",
             ApproverName = "ApproverName",
-            Materials = "Materials"
+            Materials = "Materials",
+            TotalSales = "TotalSales",
+            TotalCost = "TotalCost",
+            InvoicedAmount = "InvoicedAmount",
+            UnInvoicedAmount = "UnInvoicedAmount"
         }
     }
 }
@@ -3486,7 +3494,6 @@ declare namespace Kun.Stock {
 declare namespace Kun.Stock {
     interface AssembleItemForm {
         MaterialId: Serenity.LookupEditor;
-        MaterialName: Serenity.StringEditor;
         Serial: Serenity.IntegerEditor;
         UnitId: Serenity.LookupEditor;
         UnitName: Serenity.StringEditor;
@@ -5378,9 +5385,6 @@ declare namespace Kun.Finance {
         protected getLocalTextPrefix(): string;
         private _serial;
         protected form: InvoiceItemForm;
-        private _head;
-        get Head(): InvoiceRow;
-        set Head(value: InvoiceRow);
         get Serial(): number;
         set Serial(value: number);
         constructor();
@@ -5588,10 +5592,11 @@ declare namespace Kun.Ops {
         constructor(container: JQuery, options: MaintenancePickerOptions);
         protected getColumns(): Slick.Column[];
         protected usePager(): boolean;
-        protected getInitialTitle(): any;
+        protected getInitialTitle(): string;
         protected getButtons(): Serenity.ToolButton[];
         get selectedItems(): MaintenanceRow[];
         protected onViewSubmit(): boolean;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Ops {
@@ -6127,6 +6132,7 @@ declare namespace Kun.Sell {
         protected getService(): string;
         constructor(container: JQuery);
         protected getSlickOptions(): Slick.GridOptions;
+        protected createSlickGrid(): Slick.Grid;
     }
 }
 declare namespace Kun.Sell {
@@ -6185,10 +6191,11 @@ declare namespace Kun.Sell {
         constructor(container: JQuery, options: SaleOrderItemPickerOptions);
         protected getColumns(): Slick.Column[];
         protected usePager(): boolean;
-        protected getInitialTitle(): any;
+        protected getInitialTitle(): string;
         protected getButtons(): Serenity.ToolButton[];
         get selectedItems(): SaleOrderItemRow[];
         protected onViewSubmit(): boolean;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Sell {
@@ -6273,9 +6280,6 @@ declare namespace Kun.Stock {
         protected getFormKey(): string;
         protected getLocalTextPrefix(): string;
         protected form: AssembleItemForm;
-        private _head;
-        get Head(): AssembleItemRow;
-        set Head(value: AssembleItemRow);
         constructor();
         protected updateInterface(): void;
         protected save(): boolean;
@@ -6469,6 +6473,7 @@ declare namespace Kun.Stock {
         protected getService(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Kun.Stock {
@@ -6630,4 +6635,12 @@ declare namespace Kun.Basic {
     }
 }
 declare namespace Kun.Basic {
+}
+declare namespace Kun.Sell {
+}
+declare namespace Kun.Ops {
+}
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
 }

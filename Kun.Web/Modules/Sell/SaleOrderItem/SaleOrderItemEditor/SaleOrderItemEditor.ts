@@ -4,7 +4,7 @@ namespace Kun.Sell {
 
     @Serenity.Decorators.registerClass()
     export class SaleOrderItemEditor extends Common.GridEditorBase<SaleOrderItemRow> {
-        protected getColumnsKey() { return "Sell.SaleOrderItem"; } 
+        protected getColumnsKey() { return "Sell.SaleOrderItemEditorColumns"; } 
         protected getDialogType() { return SaleOrderItemDialog; }
         protected getLocalTextPrefix() { return SaleOrderItemRow.localTextPrefix; }
 

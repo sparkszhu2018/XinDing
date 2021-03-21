@@ -9,7 +9,7 @@ namespace Kun.Stock {
     @Serenity.Decorators.registerClass()
     export class StockDataCheckGrid extends Serenity.EntityGrid<StockDataRow, StockDataPickerOptions> {
 
-        protected getColumnsKey() { return 'Stock.StockData'; }
+        protected getColumnsKey() { return 'Stock.StockDataPickerColumns'; }
         // protected getDialogType() { return <any>Northwind.ProductDialog; }
         protected getIdProperty() { return StockDataRow.idProperty; }
         protected getLocalTextPrefix() { return StockDataRow.localTextPrefix; }

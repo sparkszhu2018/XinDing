@@ -4,12 +4,13 @@ namespace Kun.Stock {
 
     @Serenity.Decorators.registerClass()
     export class AssembleItemEditor extends Common.GridEditorBase<AssembleItemRow> {
-        protected getColumnsKey() { return "Stock.AssembleItem"; }
+        protected getColumnsKey() { return "Stock.AssembleItemEditorColumns"; }
         protected getDialogType() { return AssembleItemEditorDialog; }
         protected getLocalTextPrefix() { return AssembleItemRow.localTextPrefix; }
 
         protected status: Stock.Enums.BillStatus;
         private _head: Stock.AssembleRow;
+
         get Head() { return this._head; }
         set Head(value: AssembleRow) {
             this._head = value; 

@@ -19,7 +19,10 @@ namespace Kun.Sys.Enum
         [Description("销售订单")]
         SaleOrderBill = 30,
         [Description("移库单")]
-        ChangeStockBill = 40, 
+        ChangeStockBill = 40,
+
+        [Description("其他出库单")]
+        OutStockBill = 45,
         //[Description("项目领料单")]
         //ProjectMaterialsBill = 60,
 

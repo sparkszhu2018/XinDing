@@ -40,7 +40,7 @@ namespace Kun.Ops.Columns
         public Decimal  MaterialsAmount { get; set; }
         public Decimal  ManAmount { get; set; }
 
-        public Decimal InvoicedAmount { get; set; }  
+        public Decimal InvoicedAmount { get; set; }   
         public Decimal UnInvoicedAmount { get; set; }
         public String MateiralDetail { get; set; } 
 

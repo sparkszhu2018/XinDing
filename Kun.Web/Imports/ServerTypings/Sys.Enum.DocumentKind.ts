@@ -7,6 +7,7 @@
         MaintBill = 20,
         SaleOrderBill = 30,
         ChangeStockBill = 40,
+        OutStockBill = 45,
         ProjectInfo = 50,
         ProjectMaterials = 51,
         ProjectService = 52,

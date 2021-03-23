@@ -30,6 +30,7 @@
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditor.ts" />
     <None Remove="Modules\Stock\ChangeStockItem\ChangeStockItemEditor\ChangeStockItemEditorDialog.ts" />
     <None Remove="Modules\Stock\InStockItem\InStockItemEditor\InStockItemEditorDialog.ts" />
+    <None Remove="Modules\Stock\OutStockItem\OutStockItemEditor\OutStockItemEditor.ts" />
     <TypeScriptCompile Remove="Modules\Basic\Material\MaterialImportDialog.ts" />
     <TypeScriptCompile Remove="Modules\Common\Scripts\DefaultNotifyOptions.ts" />
     <TypeScriptCompile Remove="Modules\Finance\InvoiceItem\InvoiceItemPicker\InvoiceItemCheckGrid.ts" />

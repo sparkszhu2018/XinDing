@@ -328,6 +328,16 @@ namespace MVC
                 public const string MoveRecordIndex = "~/Modules/Stock/MoveRecord/MoveRecordIndex.cshtml";
             }
 
+            public static class OutStock
+            {
+                public const string OutStockIndex = "~/Modules/Stock/OutStock/OutStockIndex.cshtml";
+            }
+
+            public static class OutStockItem
+            {
+                public const string OutStockItemIndex = "~/Modules/Stock/OutStockItem/OutStockItemIndex.cshtml";
+            }
+
             public static class StockData
             {
                 public const string StockDataIndex = "~/Modules/Stock/StockData/StockDataIndex.cshtml";

@@ -124,9 +124,9 @@ namespace Kun.Finance.Repositories
                 if(i.Kind == InvoiceItemKind.Maintenance)
                 {
                     MaintenanceRow maintenanceRow = uow.Connection.Single<MaintenanceRow>(q => 
-                    q.SelectTableFields().Select(MaintenanceRow.Fields.TotalCost).Select(MaintenanceRow.Fields.InvoicedAmount)
-                        .Where(MaintenanceRow.Fields.Id == (Guid)i.SourceDocumentId));
-                    if (maintenanceRow.InvoicedAmount >= maintenanceRow.TotalCost)
+                    q.SelectTableFields().Select(MaintenanceRow.Fields.TotalSales).Select(MaintenanceRow.Fields.InvoicedAmount)
+                        .Where(MaintenanceRow.Fields.Id == (Guid)i.SourceDocumentId && MaintenanceRow.Fields.IsActive == 1));
+                    if (maintenanceRow.InvoicedAmount >= maintenanceRow.TotalSales)
                     {
                         throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0}已全部开票，无法提交!");
                     }
@@ -142,7 +142,7 @@ namespace Kun.Finance.Repositories
                     q.SelectTableFields() 
                     .Select(SaleOrderItemRow.Fields.InvoicedQty)
                     .Select(SaleOrderItemRow.Fields.InvoicedAmount)
-                        .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceItemId));
+                        .Where(SaleOrderItemRow.Fields.Id == (Guid)i.SourceItemId && SaleOrderItemRow.Fields.IsActive == 1));
                     if (saleOrderItemRow.InvoicedAmount >  saleOrderItemRow.SaleAmount)
                     {
                         throw new Exception($"源单{i.SourceDocumentNo}-{ EnumMapper.GetText(i.Kind) }-行{i.SourceItemSerial ?? 0},金额{saleOrderItemRow.SaleAmount}已全部开票，无法提交!");

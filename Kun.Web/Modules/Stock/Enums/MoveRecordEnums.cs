@@ -14,6 +14,8 @@ namespace Kun.Stock.Enums
             Sale = 30,
             [Description("维保领料")]
             Maint = 31,
+            [Description("其他出库")]
+            OutStock = 35,
             [Description("移库")]
             ChangeStock = 50,
             [Description("项目领料")]

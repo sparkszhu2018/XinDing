@@ -10282,6 +10282,18 @@ button.ui-button {
 .s-Stock-AssembleItemDialog .caption {
   width: 150px;
 }
+.s-Stock-OutStockDialog > .size {
+  width: 650px;
+}
+.s-Stock-OutStockDialog .caption {
+  width: 150px;
+}
+.s-Stock-OutStockItemDialog > .size {
+  width: 650px;
+}
+.s-Stock-OutStockItemDialog .caption {
+  width: 150px;
+}
 .s-Sys-DocumentCodeConfigDialog > .size {
   width: 650px;
 }

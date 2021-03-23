@@ -47,7 +47,7 @@ namespace Kun.Finance.Entities
             set { Fields.Status[this] = (Int32)value; }
         }
 
-        [DisplayName("单据日期"), NotNull, DefaultValue("Now")]
+        [DisplayName("开票日期"), NotNull, DefaultValue("Now")]
         [DateTimeFormatter(DisplayFormat = "yyyy-MM-dd")]
         public DateTime? Date
         {
@@ -146,7 +146,7 @@ namespace Kun.Finance.Entities
             set { Fields.ReceiptAmount[this] = value; }
         }
 
-        [DisplayName("待回款额"), Expression("(isnull((select sum(InvoiceAmount) from Finance_InvoiceItem where isActive =1 and headId = t0.Id),0) " +
+        [DisplayName("待回款额"), Expression("(isnull(t0.InvoiceAmount,0) " +
             "- isnull((select sum(ReceiptAmount) from Finance_Receipt where isActive =1 and InvoiceNo = t0.InvoiceNo),0))")]
         public Decimal? UnReceiptAmount
         {

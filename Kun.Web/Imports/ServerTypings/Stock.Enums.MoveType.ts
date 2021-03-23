@@ -3,6 +3,7 @@
         Purchase = 10,
         Sale = 30,
         Maint = 31,
+        OutStock = 35,
         ChangeStock = 50,
         ProjectOut = 60,
         AssembleIn = 70,

@@ -1,15 +1,14 @@
 ﻿
 namespace Kun.Stock.Repositories
 {
-    using Kun.Basic.Repositories;
     using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System;
     using System.Data;
-    using MyRow = Entities.StockDataRow;
+    using MyRow = Entities.OutStockItemRow;
 
-    public class StockDataRepository
+    public class OutStockItemRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -38,6 +37,7 @@ namespace Kun.Stock.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
+        [DefaultHandler]
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void SetInternalFields()
@@ -46,11 +46,6 @@ namespace Kun.Stock.Repositories
                 if (IsCreate)
                 {
                     Row.Id = Row.Id ?? Guid.NewGuid();
-                }
-                if (Row.Qty < 0 || Row.AvailableQty < 0)
-                {
-                    var matRep = new MaterialRepository().Retrieve(Connection, new RetrieveRequest { EntityId = Row.MaterialId }).Entity;
-                    throw new Exception($"物料{matRep.Code}-{matRep.Name}库存不足,请检查!");
                 }
             }
         }

@@ -54,3 +54,7 @@
 .s-ServiceItemViewEditor {
     height: 350px;
 }
+
+.s-Stock-OutStockDialog .s-DataGrid {
+    height: 300px;
+}

@@ -21,5 +21,11 @@ namespace Kun.Stock
         [Description("组装单反审核")]
         public const string AssembleUnApprove = "Stock:Assemble:UnApprove";
 
+        [Description("其他出库单审核")]
+        public const string OutStockApprove = "Stock:OutStock:Approve";
+        [Description("其他出库单反审核")]
+        public const string OutStockUnApprove = "Stock:OutStock:UnApprove";
+
+
     }
 }

@@ -68,7 +68,9 @@ namespace Kun.Ops.Repositories
                         {
                             Id = m.StockDataId,
                             Qty = stock.Qty - m.Qty,
-                            AvailableQty = stock.AvailableQty - m.Qty,
+                            AvailableQty = stock.AvailableQty - m.Qty, 
+                            BuyPrice = (stock.Qty - m.Qty) * stock.BuyPrice,
+                            SalePrice = (stock.Qty - m.Qty) * stock.SalePrice,
                         }
                     });
                     // 记录移库数据
@@ -112,6 +114,9 @@ namespace Kun.Ops.Repositories
                             Id = m.StockDataId,
                             Qty = stock.Qty + m.Qty,
                             AvailableQty = stock.AvailableQty + m.Qty,
+                            BuyPrice = (stock.AvailableQty + m.Qty) * stock.BuyPrice,
+                            SalePrice = (stock.AvailableQty + m.Qty) * stock.SalePrice,
+
                             IsActive = Administration.Entities.ActiveStatus.Active
                         }
                     });

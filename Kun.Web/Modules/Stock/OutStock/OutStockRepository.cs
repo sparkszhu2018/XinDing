@@ -1,21 +1,20 @@
 ﻿
-namespace Kun.Sell.Repositories
+namespace Kun.Stock.Repositories
 {
-    using Kun.Stock.Entities;
-    using Kun.Stock.Enums;
-    using Kun.Stock.Repositories;
-    using Kun.Sys.Enum;
     using Kun.Sys.Repositories;
     using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System;
     using System.Data;
-    using static Kun.Sell.Enums.SellEnums;
+    using MyRow = Entities.OutStockRow;
+    using static Kun.Stock.Enums.StockEnums;
+    using Kun.Stock.Entities;
     using static Kun.Stock.Enums.MoveRecordEnums;
-    using MyRow = Entities.SaleOrderRow;
+    using Kun.Sys.Enum;
+    using Kun.Stock.Enums;
 
-    public class SaleOrderRepository
+    public class OutStockRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -26,7 +25,7 @@ namespace Kun.Sell.Repositories
                 EntityId = Id,
                 Entity = new MyRow
                 {
-                    Status = Status, 
+                    Status = Status,
                 }
             };
             if (Status == BillStatus.Reject || Status == BillStatus.Audited || Status == BillStatus.UnAudited)
@@ -38,13 +37,10 @@ namespace Kun.Sell.Repositories
             {
                 var row = Retrieve(uow.Connection, new RetrieveRequest { EntityId = Id }).Entity;
                 var items = row.Materials;
-                var stockRep = new StockDataRepository(); 
+                var stockRep = new StockDataRepository();
                 var moveRep = new MoveRecordRepository();
                 foreach (var m in items)
-                {
-                    if (m.MaterialCode == "10000000") //虚拟物料跳过
-                        continue;
-
+                {  
                     //扣减库存数量
                     var stock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.StockDataId }).Entity;
                     stockRep.Update(uow, new SaveRequest<StockDataRow>
@@ -61,7 +57,7 @@ namespace Kun.Sell.Repositories
                     // 记录移库数据
                     var mov = new MoveRecordRow
                     {
-                        MovCode = MoveType.Sale,
+                        MovCode = MoveType.OutStock,
                         Qty = m.Qty,
                         FromStockId = stock.Id,
                         FromMaterialId = m.MaterialId,
@@ -69,7 +65,7 @@ namespace Kun.Sell.Repositories
                         FromWarehouseId = m.WarehouseId,
                         FromPositionId = m.PositionId,
                         FromLotId = m.LotId,
-                        BizBillType = DocumentKind.SaleOrderBill,
+                        BizBillType = DocumentKind.OutStockBill,
                         BizBillId = m.HeadId,
                         BizItemId = m.Id,
                         Status = MoveRecordEnums.Status.Normal,
@@ -84,10 +80,7 @@ namespace Kun.Sell.Repositories
                 var stockRep = new StockDataRepository();
                 var moveRep = new MoveRecordRepository();
                 foreach (var m in items)
-                {
-                    if (m.MaterialCode == "10000000") //虚拟物料跳过
-                        continue;
-
+                { 
                     //取消扣减库存数量
                     var stock = stockRep.Retrieve(uow.Connection, new RetrieveRequest { EntityId = m.StockDataId }).Entity;
                     stockRep.Update(uow, new SaveRequest<StockDataRow>
@@ -96,9 +89,9 @@ namespace Kun.Sell.Repositories
                         {
                             Id = m.StockDataId,
                             Qty = stock.Qty + m.Qty,
-                            AvailableQty = stock.AvailableQty + m.Qty, 
+                            AvailableQty = stock.AvailableQty + m.Qty,
                             BuyPrice = (stock.AvailableQty + m.Qty) * stock.BuyPrice,
-                            SalePrice = (stock.AvailableQty + m.Qty) * stock.SalePrice, 
+                            SalePrice = (stock.AvailableQty + m.Qty) * stock.SalePrice,
                             IsActive = Administration.Entities.ActiveStatus.Active
                         }
                     });
@@ -115,7 +108,8 @@ namespace Kun.Sell.Repositories
             }
             return new MySaveHandler().Process(uow, n, SaveRequestType.Update);
         }
-         
+
+
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
@@ -140,7 +134,6 @@ namespace Kun.Sell.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void SetInternalFields()
@@ -149,7 +142,7 @@ namespace Kun.Sell.Repositories
                 if (IsCreate)
                 {
                     Row.Id = Row.Id ?? Guid.NewGuid();
-                    var prefix = new DocumentCodeConfigRepository().GetDocumentCodePrefix(Connection, Sys.Enum.DocumentKind.SaleOrderBill);
+                    var prefix = new DocumentCodeConfigRepository().GetDocumentCodePrefix(Connection, Sys.Enum.DocumentKind.OutStockBill);
                     var today = DateTime.Today;
                     prefix = prefix + today.Year.ToString() + today.Month.ToString("00") + today.Day.ToString("00") + "-";
                     GetNextNumberResponse nextNumber = GetNextNumberHelper.GetNextNumber(Connection, new GetNextNumberRequest

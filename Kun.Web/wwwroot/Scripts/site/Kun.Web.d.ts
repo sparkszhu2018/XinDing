@@ -582,6 +582,57 @@ declare namespace Kun.Basic {
 declare namespace Kun.Basic {
 }
 declare namespace Kun.Basic {
+    interface CommonExpressionForm {
+        Content: Serenity.StringEditor;
+    }
+    class CommonExpressionForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Basic {
+    interface CommonExpressionRow {
+        Id?: string;
+        Content?: string;
+    }
+    namespace CommonExpressionRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Content";
+        const localTextPrefix = "Basic.CommonExpression";
+        const lookupKey = "Basic.CommonExpression";
+        function getLookup(): Q.Lookup<CommonExpressionRow>;
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            Content = "Content"
+        }
+    }
+}
+declare namespace Kun.Basic {
+    namespace CommonExpressionService {
+        const baseUrl = "Basic/CommonExpression";
+        function Create(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Basic/CommonExpression/Create",
+            Update = "Basic/CommonExpression/Update",
+            Delete = "Basic/CommonExpression/Delete",
+            Retrieve = "Basic/CommonExpression/Retrieve",
+            List = "Basic/CommonExpression/List"
+        }
+    }
+}
+declare namespace Kun.Basic {
+}
+declare namespace Kun.Basic {
     interface CompanyForm {
         Code: Serenity.StringEditor;
         Name: Serenity.StringEditor;
@@ -2103,6 +2154,8 @@ declare namespace Kun.Ops.Enums {
 declare namespace Kun.Ops {
 }
 declare namespace Kun.Ops {
+}
+declare namespace Kun.Ops {
     interface MaintenanceForm {
         BillNo: Serenity.StringEditor;
         BillType: Serenity.EnumEditor;
@@ -2808,6 +2861,8 @@ declare namespace Kun.Project {
 declare namespace Kun.Project {
 }
 declare namespace Kun.Project {
+}
+declare namespace Kun.Project {
     interface MaterialsItemForm {
         MaterialId: Serenity.LookupEditor;
         MaterialName: Serenity.StringEditor;
@@ -3266,6 +3321,8 @@ declare namespace Kun.Sell {
 declare namespace Kun.Sell {
 }
 declare namespace Kun.Sell {
+}
+declare namespace Kun.Sell {
     interface SaleOrderItemForm {
         MaterialId: Serenity.LookupEditor;
         MaterialName: Serenity.StringEditor;
@@ -3288,6 +3345,8 @@ declare namespace Kun.Sell {
         private static init;
         constructor(prefix: string);
     }
+}
+declare namespace Kun.Sell {
 }
 declare namespace Kun.Sell {
     interface SaleOrderItemRow {
@@ -3488,6 +3547,8 @@ declare namespace Kun.Stock {
         private static init;
         constructor(prefix: string);
     }
+}
+declare namespace Kun.Stock {
 }
 declare namespace Kun.Stock {
 }
@@ -3930,6 +3991,7 @@ declare namespace Kun.Stock.Enums {
         Purchase = 10,
         Sale = 30,
         Maint = 31,
+        OutStock = 35,
         ChangeStock = 50,
         ProjectOut = 60,
         AssembleIn = 70,
@@ -4282,6 +4344,189 @@ declare namespace Kun.Stock {
 declare namespace Kun.Stock {
 }
 declare namespace Kun.Stock {
+    interface OutStockForm {
+        BillNo: Serenity.StringEditor;
+        Status: Serenity.EnumEditor;
+        Date: Serenity.DateEditor;
+        InsertDate: Serenity.DateEditor;
+        ApproverId: Serenity.LookupEditor;
+        ApproverDate: Serenity.DateEditor;
+        Note: Serenity.StringEditor;
+        Materials: OutStockItemEditor;
+    }
+    class OutStockForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
+    interface OutStockItemForm {
+        MaterialId: Serenity.LookupEditor;
+        MaterialName: Serenity.StringEditor;
+        Serial: Serenity.IntegerEditor;
+        UnitId: Serenity.LookupEditor;
+        UnitName: Serenity.StringEditor;
+        Qty: Serenity.DecimalEditor;
+        StockQty: Serenity.DecimalEditor;
+        BuyPrice: Serenity.DecimalEditor;
+        BuyAmount: Serenity.DecimalEditor;
+        Specification: Serenity.StringEditor;
+        LotId: Serenity.LookupEditor;
+        WarehouseId: Serenity.LookupEditor;
+        PositionId: Serenity.LookupEditor;
+    }
+    class OutStockItemForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace Kun.Stock {
+    interface OutStockItemRow {
+        Id?: string;
+        HeadId?: string;
+        Serial?: number;
+        StockDataId?: string;
+        MaterialId?: string;
+        MaterialName?: string;
+        UnitId?: string;
+        UnitName?: string;
+        Qty?: number;
+        LotId?: string;
+        WarehouseId?: string;
+        PositionId?: string;
+        Specification?: string;
+        BillNo?: string;
+        HeadStatus?: Stock.Enums.BillStatus;
+        HeadDate?: string;
+        MaterialCode?: string;
+        LotCode?: string;
+        WarehouseName?: string;
+        PositionName?: string;
+        BuyPrice?: number;
+        BuyAmount?: number;
+        StockQty?: number;
+    }
+    namespace OutStockItemRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "MaterialName";
+        const localTextPrefix = "Stock.OutStockItem";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            HeadId = "HeadId",
+            Serial = "Serial",
+            StockDataId = "StockDataId",
+            MaterialId = "MaterialId",
+            MaterialName = "MaterialName",
+            UnitId = "UnitId",
+            UnitName = "UnitName",
+            Qty = "Qty",
+            LotId = "LotId",
+            WarehouseId = "WarehouseId",
+            PositionId = "PositionId",
+            Specification = "Specification",
+            BillNo = "BillNo",
+            HeadStatus = "HeadStatus",
+            HeadDate = "HeadDate",
+            MaterialCode = "MaterialCode",
+            LotCode = "LotCode",
+            WarehouseName = "WarehouseName",
+            PositionName = "PositionName",
+            BuyPrice = "BuyPrice",
+            BuyAmount = "BuyAmount",
+            StockQty = "StockQty"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    namespace OutStockItemService {
+        const baseUrl = "Stock/OutStockItem";
+        function Create(request: Serenity.SaveRequest<OutStockItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<OutStockItemRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<OutStockItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<OutStockItemRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "Stock/OutStockItem/Create",
+            Update = "Stock/OutStockItem/Update",
+            Delete = "Stock/OutStockItem/Delete",
+            Retrieve = "Stock/OutStockItem/Retrieve",
+            List = "Stock/OutStockItem/List"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    interface OutStockRow {
+        Id?: string;
+        BillNo?: string;
+        Status?: Stock.Enums.BillStatus;
+        Date?: string;
+        Note?: string;
+        ApproverId?: number;
+        ApproverDate?: string;
+        ApproverName?: string;
+        Materials?: OutStockItemRow[];
+    }
+    namespace OutStockRow {
+        const idProperty = "Id";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "BillNo";
+        const localTextPrefix = "Stock.OutStock";
+        const deletePermission = "*";
+        const insertPermission = "*";
+        const readPermission = "*";
+        const updatePermission = "*";
+        const enum Fields {
+            Id = "Id",
+            BillNo = "BillNo",
+            Status = "Status",
+            Date = "Date",
+            Note = "Note",
+            ApproverId = "ApproverId",
+            ApproverDate = "ApproverDate",
+            ApproverName = "ApproverName",
+            Materials = "Materials"
+        }
+    }
+}
+declare namespace Kun.Stock {
+    namespace OutStockService {
+        const baseUrl = "Stock/OutStock";
+        function Commit(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Audit(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Reject(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function UnAudit(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Create(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<OutStockRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<OutStockRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<OutStockRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Commit = "Stock/OutStock/Commit",
+            Audit = "Stock/OutStock/Audit",
+            Reject = "Stock/OutStock/Reject",
+            UnAudit = "Stock/OutStock/UnAudit",
+            Create = "Stock/OutStock/Create",
+            Update = "Stock/OutStock/Update",
+            Delete = "Stock/OutStock/Delete",
+            Retrieve = "Stock/OutStock/Retrieve",
+            List = "Stock/OutStock/List"
+        }
+    }
+}
+declare namespace Kun.Stock {
+}
+declare namespace Kun.Stock {
 }
 declare namespace Kun.Stock {
     interface StockDataForm {
@@ -4303,6 +4548,8 @@ declare namespace Kun.Stock {
         private static init;
         constructor(prefix: string);
     }
+}
+declare namespace Kun.Stock {
 }
 declare namespace Kun.Stock {
     interface StockDataRow {
@@ -4442,6 +4689,7 @@ declare namespace Kun.Sys.Enum {
         MaintBill = 20,
         SaleOrderBill = 30,
         ChangeStockBill = 40,
+        OutStockBill = 45,
         ProjectInfo = 50,
         ProjectMaterials = 51,
         ProjectService = 52,
@@ -4683,6 +4931,30 @@ declare namespace Kun.Basic {
     class BizTypeGrid extends Serenity.EntityGrid<BizTypeRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof BizTypeDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Basic {
+    class CommonExpressionDialog extends Serenity.EntityDialog<CommonExpressionRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: CommonExpressionForm;
+    }
+}
+declare namespace Kun.Basic {
+    class CommonExpressionGrid extends Serenity.EntityGrid<CommonExpressionRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CommonExpressionDialog;
         protected getIdProperty(): string;
         protected getInsertPermission(): string;
         protected getLocalTextPrefix(): string;
@@ -6477,6 +6749,74 @@ declare namespace Kun.Stock {
     }
 }
 declare namespace Kun.Stock {
+    class OutStockDialog extends Serenity.EntityDialog<OutStockRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected getDeletePermission(): string;
+        protected getInsertPermission(): string;
+        protected getUpdatePermission(): string;
+        protected form: OutStockForm;
+        constructor();
+        protected afterLoadEntity(): void;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected updateInterface(): void;
+    }
+}
+declare namespace Kun.Stock {
+    class OutStockGrid extends Serenity.EntityGrid<OutStockRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OutStockDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getSlickOptions(): Slick.GridOptions;
+    }
+}
+declare namespace Kun.Stock {
+    class OutStockItemDialog extends Common.GridEditorDialog<OutStockItemRow> {
+        protected getFormKey(): string;
+        protected getLocalTextPrefix(): string;
+        protected form: OutStockItemForm;
+        private _head;
+        get Head(): OutStockRow;
+        set Head(value: OutStockRow);
+        constructor();
+        protected updateInterface(): void;
+        protected save(): boolean;
+    }
+}
+declare namespace Kun.Stock {
+    class OutStockItemGrid extends Serenity.EntityGrid<OutStockItemRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OutStockItemDialog;
+        protected getIdProperty(): string;
+        protected getInsertPermission(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace Kun.Stock {
+    class OutStockItemEditor extends Common.GridEditorBase<OutStockItemRow> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OutStockItemDialog;
+        protected getLocalTextPrefix(): string;
+        private _head;
+        get Head(): OutStockRow;
+        set Head(value: OutStockRow);
+        constructor(container: JQuery);
+        validateEntity(row: any, id: any): boolean;
+        protected getButtons(): Serenity.ToolButton[];
+        protected createSlickGrid(): Slick.Grid;
+        protected getSlickOptions(): Slick.GridOptions;
+    }
+}
+declare namespace Kun.Stock {
     class StockDataDialog extends Serenity.EntityDialog<StockDataRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -6556,91 +6896,4 @@ declare namespace Kun.Sys {
         protected getService(): string;
         constructor(container: JQuery);
     }
-}
-declare namespace Kun.Project {
-}
-declare namespace Kun.Sell {
-}
-declare namespace Kun.Basic {
-    interface CommonExpressionForm {
-        Content: Serenity.StringEditor;
-    }
-    class CommonExpressionForm extends Serenity.PrefixedContext {
-        static formKey: string;
-        private static init;
-        constructor(prefix: string);
-    }
-}
-declare namespace Kun.Basic {
-    interface CommonExpressionRow {
-        Id?: string;
-        Content?: string;
-    }
-    namespace CommonExpressionRow {
-        const idProperty = "Id";
-        const isActiveProperty = "IsActive";
-        const nameProperty = "Content";
-        const localTextPrefix = "Basic.CommonExpression";
-        const lookupKey = "Basic.CommonExpression";
-        function getLookup(): Q.Lookup<CommonExpressionRow>;
-        const deletePermission = "*";
-        const insertPermission = "*";
-        const readPermission = "*";
-        const updatePermission = "*";
-        const enum Fields {
-            Id = "Id",
-            Content = "Content"
-        }
-    }
-}
-declare namespace Kun.Basic {
-    namespace CommonExpressionService {
-        const baseUrl = "Basic/CommonExpression";
-        function Create(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<CommonExpressionRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CommonExpressionRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            Create = "Basic/CommonExpression/Create",
-            Update = "Basic/CommonExpression/Update",
-            Delete = "Basic/CommonExpression/Delete",
-            Retrieve = "Basic/CommonExpression/Retrieve",
-            List = "Basic/CommonExpression/List"
-        }
-    }
-}
-declare namespace Kun.Basic {
-    class CommonExpressionDialog extends Serenity.EntityDialog<CommonExpressionRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected getDeletePermission(): string;
-        protected getInsertPermission(): string;
-        protected getUpdatePermission(): string;
-        protected form: CommonExpressionForm;
-    }
-}
-declare namespace Kun.Basic {
-    class CommonExpressionGrid extends Serenity.EntityGrid<CommonExpressionRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof CommonExpressionDialog;
-        protected getIdProperty(): string;
-        protected getInsertPermission(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace Kun.Basic {
-}
-declare namespace Kun.Sell {
-}
-declare namespace Kun.Ops {
-}
-declare namespace Kun.Stock {
-}
-declare namespace Kun.Stock {
 }

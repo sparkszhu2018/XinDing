@@ -249,6 +249,18 @@
           "PermissionKey": "*"
         },
         {
+          "Tablename": "dbo.Stock_OutStock",
+          "Identifier": "OutStock",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
+          "Tablename": "dbo.Stock_OutStock_Item",
+          "Identifier": "OutStockItem",
+          "Module": "Stock",
+          "PermissionKey": "*"
+        },
+        {
           "Tablename": "dbo.Sys_DocumentCodeConfig",
           "Identifier": "DocumentCodeConfig",
           "Module": "Sys",

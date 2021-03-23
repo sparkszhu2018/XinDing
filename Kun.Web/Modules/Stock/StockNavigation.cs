@@ -10,3 +10,5 @@ using MyPages = Kun.Stock.Pages;
 [assembly: NavigationLink(int.MaxValue, "库存管理/移库明细", typeof(MyPages.ChangeStockItemController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "库存管理/组装单", typeof(MyPages.AssembleController), icon: null)]
 [assembly: NavigationLink(int.MaxValue, "库存管理/组装单明细", typeof(MyPages.AssembleItemController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "库存管理/其他出库单", typeof(MyPages.OutStockController), icon: null)]
+[assembly: NavigationLink(int.MaxValue, "库存管理/其他出库明细", typeof(MyPages.OutStockItemController), icon: null)]

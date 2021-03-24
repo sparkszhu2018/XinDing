@@ -1,6 +1,7 @@
 ﻿
 namespace Kun.Stock.Entities
 {
+    using Kun.Administration.Entities;
     using Kun.Basic.Entities;
     using Serenity;
     using Serenity.ComponentModel;
@@ -183,6 +184,26 @@ namespace Kun.Stock.Entities
             set { Fields.StockQty[this] = value; }
         }
 
+        [DisplayName("领用人"), LookupEditor(typeof(UserRow)), NotNull,
+        ForeignKey("[dbo].[Users]", "UserId"), LeftJoin("jApplicant"), TextualField("ApplicantName")]
+        public Int64? ApplicantId
+        {
+            get { return Fields.ApplicantId[this]; }
+            set { Fields.ApplicantId[this] = value; }
+        }
+
+        [DisplayName("领用人"), Expression("jApplicant.[DisplayName]"), ReadOnly(true)]
+        public String ApplicantName
+        {
+            get { return Fields.ApplicantName[this]; }
+            set { Fields.ApplicantName[this] = value; }
+        }
+        [DisplayName("用途"),NotNull]
+        public String Usage
+        {
+            get { return Fields.Usage[this]; }
+            set { Fields.Usage[this] = value; }
+        } 
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -228,6 +249,9 @@ namespace Kun.Stock.Entities
             public DecimalField BuyAmount; 
 
             public DecimalField StockQty;
+            public Int64Field ApplicantId;
+            public StringField ApplicantName;
+            public StringField Usage;
 
 
 

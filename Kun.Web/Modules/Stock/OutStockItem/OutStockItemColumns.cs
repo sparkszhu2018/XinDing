@@ -30,5 +30,9 @@ namespace Kun.Stock.Columns
         public Guid WarehouseId { get; set; }
         public Guid PositionId { get; set; }
         public String Specification { get; set; }
+        [QuickFilter, Hidden]
+        public Int64 ApplicantId; 
+        public String ApplicantName;
+        public String Usage;
     }
 }

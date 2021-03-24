@@ -4379,6 +4379,8 @@ declare namespace Kun.Stock {
         LotId: Serenity.LookupEditor;
         WarehouseId: Serenity.LookupEditor;
         PositionId: Serenity.LookupEditor;
+        ApplicantId: Serenity.LookupEditor;
+        Usage: Serenity.StringEditor;
     }
     class OutStockItemForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -4411,6 +4413,9 @@ declare namespace Kun.Stock {
         BuyPrice?: number;
         BuyAmount?: number;
         StockQty?: number;
+        ApplicantId?: number;
+        ApplicantName?: string;
+        Usage?: string;
     }
     namespace OutStockItemRow {
         const idProperty = "Id";
@@ -4444,7 +4449,10 @@ declare namespace Kun.Stock {
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
-            StockQty = "StockQty"
+            StockQty = "StockQty",
+            ApplicantId = "ApplicantId",
+            ApplicantName = "ApplicantName",
+            Usage = "Usage"
         }
     }
 }

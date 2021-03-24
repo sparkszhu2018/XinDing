@@ -55,6 +55,8 @@ namespace Kun.Stock.Repositories
                             Id = m.FromStockId,
                             Qty = stock.Qty - m.Qty,
                             AvailableQty = stock.AvailableQty - m.Qty,
+                            BuyPrice = (stock.Qty - m.Qty) * stock.BuyPrice,
+                            SalePrice = (stock.Qty - m.Qty) * stock.SalePrice,
                         }
                     });
 
@@ -122,7 +124,9 @@ namespace Kun.Stock.Repositories
                         {
                             Id = m.FromStockId,
                             Qty = fromStock.Qty + m.Qty,
-                            AvailableQty = fromStock.AvailableQty + m.Qty,
+                            AvailableQty = fromStock.AvailableQty + m.Qty, 
+                            BuyPrice = (fromStock.Qty + m.Qty) * fromStock.BuyPrice,
+                            SalePrice = (fromStock.Qty + m.Qty) * fromStock.SalePrice,
                             IsActive = Administration.Entities.ActiveStatus.Active
                         }
                     });
@@ -134,7 +138,9 @@ namespace Kun.Stock.Repositories
                         {
                             Id = m.ToStockId,
                             Qty = toStock.Qty - m.Qty,
-                            AvailableQty = toStock.AvailableQty + m.Qty
+                            AvailableQty = toStock.AvailableQty - m.Qty,
+                            BuyPrice = (toStock.Qty - m.Qty) * toStock.BuyPrice,
+                            SalePrice = (toStock.Qty - m.Qty) * toStock.SalePrice,
                         }
                     });
 

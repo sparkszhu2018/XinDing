@@ -37,5 +37,10 @@ namespace Kun.Stock.Forms
         public Guid WarehouseId { get; set; }
         [ReadOnly(true)]
         public Guid PositionId { get; set; }
+
+
+        public Int64 ApplicantId { get; set; }
+        public String Usage { get; set; }
+
     }
 }

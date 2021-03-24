@@ -12,7 +12,8 @@ namespace Kun.Stock.Columns
     [ColumnsScript("Stock.OutStockItemEditorColumns")]
     [BasedOnRow(typeof(Entities.OutStockItemRow), CheckNames = true)]
     public class OutStockItemEditorColumns
-    { 
+    {
+        [EditLink]
         public Int32Field Serial { get; set; }
         [EditLink]
         public String MaterialCode { get; set; }
@@ -25,8 +26,11 @@ namespace Kun.Stock.Columns
 
         public String Specification { get; set; } 
         public Decimal BuyPrice { get; set; }
-        public Decimal BuyAmount { get; set; } 
-         
+        public Decimal BuyAmount { get; set; }
+
+        public String ApplicantName;
+        public String Usage;
+
 
     }
 }

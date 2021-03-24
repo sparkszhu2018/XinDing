@@ -99,7 +99,9 @@ namespace Kun.Stock.Repositories
                         {
                             Id = m.StockDataId,
                             Qty = stock.Qty - m.Qty,
-                            AvailableQty = stock.AvailableQty - m.Qty,
+                            AvailableQty = stock.AvailableQty - m.Qty, 
+                            BuyPrice = (stock.Qty - m.Qty) * stock.BuyPrice,
+                            SalePrice = (stock.Qty - m.Qty) * stock.SalePrice,
                         }
                     });
                     // 记录扣减移库数据
@@ -146,11 +148,11 @@ namespace Kun.Stock.Repositories
                     {
                         Id = stock.Id,
                         Qty = stock.Qty - assemble.Qty,
-                        AvailableQty = stock.AvailableQty - assemble.Qty,
+                        AvailableQty = stock.AvailableQty - assemble.Qty, 
+                        BuyPrice = (stock.Qty - assemble.Qty) * assemble.BuyPrice, 
                         IsActive = Administration.Entities.ActiveStatus.Active
                     }
                 });
-
 
                 //取消扣减组件物料库存 
                 foreach (var m in items)
@@ -166,7 +168,10 @@ namespace Kun.Stock.Repositories
                         {
                             Id = m.StockDataId,
                             Qty = stock_out.Qty + m.Qty,
-                            AvailableQty = stock_out.AvailableQty + m.Qty,
+                            AvailableQty = stock_out.AvailableQty + m.Qty, 
+                            BuyPrice = (stock_out.Qty + m.Qty) * stock_out.BuyPrice,
+                            SalePrice = (stock_out.Qty + m.Qty) * stock_out.SalePrice,
+
                             IsActive = Administration.Entities.ActiveStatus.Active
                         }
                     });

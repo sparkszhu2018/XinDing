@@ -125,7 +125,8 @@ namespace Kun.Finance.Entities
             set { Fields.InvoiceAmount[this] = value; }
         }
 
-        [DisplayName("开票编号金额"), Expression("(  T0.InvoiceNo + ' (' +　Convert(varchar(20),Convert(float,isnull(T0.InvoiceAmount,0))) + ')' )")]
+        [DisplayName("开票编号待回金额"), Expression("(  T0.InvoiceNo + ' (' +　Convert(varchar(20),Convert(decimal(15,2),(isnull(t0.InvoiceAmount,0) " +
+            "- isnull((select sum(ReceiptAmount) from Finance_Receipt where isActive =1 and InvoiceNo = t0.InvoiceNo),0)))) + ')' )")]
         public String InvoiceNoWthAmount
         {
             get { return Fields.InvoiceNoWthAmount[this]; }

@@ -21,8 +21,8 @@ namespace Kun.Finance.Entities
         protected override void PrepareQuery(SqlQuery query)
         {
             var fld = InvoiceRow.Fields;
-            query.Select(fld.InvoiceNo).Select(fld.InvoiceNoWthAmount)
-                .Where(new Criteria(fld.IsActive) == 1 && new Criteria(fld.UnReceiptAmount) <= 0);
+            query.Select(fld.InvoiceNo).Select(fld.UnReceiptAmount).Select(fld.InvoiceNoWthAmount)
+                .Where(new Criteria(fld.IsActive.Name) == 1 && new Criteria(fld.UnReceiptAmount.Expression) > 0);  
         }
 
         protected override void ApplyOrder(SqlQuery query)

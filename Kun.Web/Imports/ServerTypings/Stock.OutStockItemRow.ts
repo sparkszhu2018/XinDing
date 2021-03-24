@@ -23,6 +23,9 @@
         BuyPrice?: number;
         BuyAmount?: number;
         StockQty?: number;
+        ApplicantId?: number;
+        ApplicantName?: string;
+        Usage?: string;
     }
 
     export namespace OutStockItemRow {
@@ -58,7 +61,10 @@
             PositionName = "PositionName",
             BuyPrice = "BuyPrice",
             BuyAmount = "BuyAmount",
-            StockQty = "StockQty"
+            StockQty = "StockQty",
+            ApplicantId = "ApplicantId",
+            ApplicantName = "ApplicantName",
+            Usage = "Usage"
         }
     }
 }
